@@ -25,7 +25,7 @@ async function getUser(req, res) {
 
   } catch (e) {
     console.error(e);
-    res.status(500).json({errore: "Connessione al server fallita"}}); 
+    res.status(500).json({errore: "Connessione al server fallita"}); 
     throw new Error(e).message;
   }  
 

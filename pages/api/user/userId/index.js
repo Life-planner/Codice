@@ -17,8 +17,6 @@ async function postUser(req, res) {
     const collection = client.db("PlanIt").collection("user");
 
     const {userId, email, username} = req.query
-    
-    async function getUser(req, res) {
 
     const user = await collection.find({userId: parseInt(userId)}).toArray();
 
@@ -36,7 +34,7 @@ async function postUser(req, res) {
     }
   } catch (e) {
     console.error(e);
-    res.status(500).json({error: "Connessione al server fallita"}}); 
+    res.status(500).json({error: "Connessione al server fallita"}); 
     throw new Error(e).message;
   }  
 }
@@ -60,7 +58,7 @@ async function putUser(req, res) {
 
   } catch (e) {
     console.error(e);
-    res.status(500).json({errore: "Connessione al server fallita"}}); 
+    res.status(500).json({errore: "Connessione al server fallita"}); 
     throw new Error(e).message;
   }  
 }
@@ -77,7 +75,7 @@ async function deleteUser(req, res) {
 
   } catch (e) {
     console.error(e);
-    res.status(500).json({errore: "Connessione al server fallita"}}); 
+    res.status(500).json({errore: "Connessione al server fallita"}); 
     throw new Error(e).message;
   }  
 }
