@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "2.0.1",
     "daisyui": "^2.42.1",
+    "mongodb": "3.5.9",
+    "net": "^1.0.2",
     "next": "13.0.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
