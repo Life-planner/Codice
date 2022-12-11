@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  margin: var(--bigGap);
+  padding: var(--smallGap);
+  background-color: var(--base);
+  border-radius: var(--borderRadius);
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--mediumGap);
+}
+
+.logo {
+  margin-left: var(--smallGap);
+  margin-right: auto;
+}
