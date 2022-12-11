@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import styles from "../styles/navbar.module.css";
 import Button from "./Button";
-import LoginButton from "./LoginButton";
 
 export default function Navbar() {
   return (
@@ -14,7 +13,7 @@ export default function Navbar() {
         className={styles.logo}
       />
       <Button text="Try Demo" type="secondary" />
-      <LoginButton />
+      <Button text="Login" type="primary" link="calendario" />
     </div>
   );
 }
