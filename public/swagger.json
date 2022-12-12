@@ -4,7 +4,544 @@
     "title": "PlanIt documentazione API",
     "version": "1.0"
   },
-  "paths": {},
-  "components": {},
+  "paths": {
+    "/api/user/email/[email]": {
+      "get": {
+        "description": "Ritorna userId, email, username di un utente dato l'email",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Email",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trovato un unico account, verra restituito userId, email e username",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string",
+                      "example": "qwerasdfvxzcvz"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "prova@prova.it"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "ilMostro"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Se e' stato trovato piu di un account con la stessa email, verra restituito \"More than one user with that email\" <br>Se non e' stato trovato nessun account con l'email, verra restituito \"No such user\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/troppiUser"
+                    },
+                    {
+                      "$ref": "#/components/schemas/nessunUser"
+                    }
+                  ]
+                },
+                "examples": {
+                  "troppiUser": {
+                    "summary": "Piu di un utente con la stessa enail",
+                    "value": {
+                      "error": "More than one user with that email"
+                    }
+                  },
+                  "nessunUser": {
+                    "summary": "Nessun utente con l'email indicata",
+                    "value": {
+                      "error": "No such user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error di connessione al database, verra restituito \"Connection error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Connection error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/": {
+      "post": {
+        "description": "Crea un utente dati userId, email, e username",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "UserId",
+            "required": true
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email",
+            "required": true
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utente inserito con successo, verra restituito \"User inserted correctly\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "User inserted correctly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parameter missing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Se e' stato trovato piu di un account con la stessa email o userId, verra restituito \"There is alrady one user with that id or email\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "There is alrady one user with that id or email"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errore di inserimento nel database, verra restituito \"Not inserted\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Not inserted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Errore generico, verra restituito \"Generic error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Generic error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Modifica l'username di un utente dato l'userId e username",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "UserId",
+            "required": true
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Username aggiornato con successo, verra restituito \"User updated correctly\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "User updated correctly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parameter missing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Errore1"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Errore2"
+                    }
+                  ]
+                },
+                "examples": {
+                  "Errore1": {
+                    "summary": "Piu utenti con lo stesso userId",
+                    "value": {
+                      "error": "There are too many users with that userId"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Neanche un utente con l'userId specificato",
+                    "value": {
+                      "error": "There is no user with that userId"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errore di modifica nel database, verra restituito \"Not edited\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Not edited"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Errore generico, verra restituito \"Generic error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Generic error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Elimina un utente dato l'userId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "UserId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Username eliminato con successo, verra restituito \"User deleted correctly\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "User deleted correctly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parameter missing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Errore1"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Errore2"
+                    }
+                  ]
+                },
+                "examples": {
+                  "Errore1": {
+                    "summary": "Piu utenti con lo stesso userId",
+                    "value": {
+                      "error": "There are too many users with that userId"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Neanche un utente con l'userId specificato",
+                    "value": {
+                      "error": "There is no user with that userId"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Errore di eliminazione nel database, verra restituito \"User not deleted\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Errore generico, verra restituito \"Generic error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Generic error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/userId/[userId]": {
+      "get": {
+        "description": "Ritorna userId, email, username di un utente dato l'userId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trovato un unico account, verra restituito userId, email e username",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string",
+                      "example": "qwerasdfvxzcvz"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "prova@prova.it"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "ilMostro"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"More than one user with that id\" <br>Se non e' stato trovato nessun account con l'userId trovato, verra restituito \"No such user\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/troppiUser"
+                    },
+                    {
+                      "$ref": "#/components/schemas/nessunUser"
+                    }
+                  ]
+                },
+                "examples": {
+                  "troppiUser": {
+                    "summary": "Piu di un utente con lo stesso userId",
+                    "value": {
+                      "error": "More than one user with that id"
+                    }
+                  },
+                  "nessunUser": {
+                    "summary": "Nessun utente con l'userId indicato",
+                    "value": {
+                      "error": "No such user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error di connessione al database, verra restituito \"Connection error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Connection error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "troppiUser": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "nessunUser": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Errore1": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Errore2": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
   "tags": []
 }
