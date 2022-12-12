@@ -1,4 +1,5 @@
-import clientPromise from "../../../../lib/mongodb";
+import dbConnect from "../../../../lib/dbConnect";
+import UtenteAutenticato from "../../../../models/UtenteAutenticato";
 
 export default function handler(req, res) {
   if (req.method === "GET") {
@@ -10,7 +11,7 @@ export default function handler(req, res) {
  * @swagger
  * /api/user/email/[email]:
  *   get:
- *     description: Ritorna userId, email, username di un utente dato l'email
+ *     description: Ritorna userId, email, username di un utente data l'email
  *     parameters:
  *       - name: email
  *         in: path
@@ -33,26 +34,26 @@ export default function handler(req, res) {
  *               example: prova@prova.it
  *             username:
  *               type: string
- *               example: ilMostro
- *       202 :
- *         description: Se e' stato trovato piu di un account con la stessa email, verra restituito "More than one user with that email" <br>Se non e' stato trovato nessun account con l'email, verra restituito "No such user"
+ *               example: usernameProva
+ *       409:
+ *         description: Se non e' stato trovato neanche un account con l'email data, verra restituito "There is no user with that email" <br>Se e' stato trovato piu di un account con la stessa email, verra restituito "There are too many users with that email"
  *         content:
  *          application/json:
  *           schema:
- *            oneOf:
- *             - $ref: '#/components/schemas/troppiUser'
- *             - $ref: '#/components/schemas/nessunUser'
+ *            anyOf:
+ *             - $ref: '#/components/schemas/Errore1'
+ *             - $ref: '#/components/schemas/Errore2'
  *           examples:
- *            troppiUser:
- *             summary: Piu di un utente con la stessa enail
+ *            Errore1:
+ *             summary: Neanche un utente con l'email specificata
  *             value:
- *              error: More than one user with that email
- *            nessunUser:
- *             summary: Nessun utente con l'email indicata
+ *              error: There is no user with that email
+ *            Errore2:
+ *             summary: Piu utenti con la stessa email
  *             value:
- *              error: No such user
- *       500:
- *         description: error di connessione al database, verra restituito "Connection error"
+ *              error: There are too many users with that email
+ *       501:
+ *         description: Errore generico, verra restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -60,43 +61,36 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Connection error
- * components:
- *  schemas:
- *    troppiUser:
- *      type: object
- *      properties:
- *        error:
- *          type: string
- *    nessunUser:
- *      type: object
- *      properties:
- *        error:
- *          type: string
+ *               example: Generic error
  */
 
 async function getUser(req, res) {
+  await dbConnect();
   try {
-    const client = await clientPromise;
-    const collection = client.db("PlanIt").collection("user");
-
     const { email } = req.query;
-    const emailDB = await collection.find({ email: email }).toArray();
+    const emailDB = await UtenteAutenticato.find({
+      email: email,
+    });
 
-    if (Object.keys(emailDB).length == 1) {
-      res.status(200).json({
-        userId: emailDB[0].userId,
-        email: emailDB[0].email,
-        username: emailDB[0].username,
-      });
+    if (Object.keys(emailDB).length == 0) {
+      res.status(409).json({ error: "There is no user with that email" });
+      return;
     } else if (Object.keys(emailDB).length > 1) {
-      res.status(202).json({ error: "More than one user with that email" });
-    } else {
-      res.status(202).json({ error: "No such user" });
+      res
+        .status(409)
+        .json({ error: "There are too many users with that email" });
+      return;
     }
+
+    res.status(200).json({
+      userId: emailDB[0].userId,
+      email: emailDB[0].email,
+      username: emailDB[0].username,
+    });
+    return;
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Connection error" });
+    res.status(501).json({ error: "Generic error" });
     throw new Error(e).message;
   }
 }

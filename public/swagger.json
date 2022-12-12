@@ -7,7 +7,7 @@
   "paths": {
     "/api/user/email/[email]": {
       "get": {
-        "description": "Ritorna userId, email, username di un utente dato l'email",
+        "description": "Ritorna userId, email, username di un utente data l'email",
         "parameters": [
           {
             "name": "email",
@@ -34,46 +34,46 @@
                     },
                     "username": {
                       "type": "string",
-                      "example": "ilMostro"
+                      "example": "usernameProva"
                     }
                   }
                 }
               }
             }
           },
-          "202": {
-            "description": "Se e' stato trovato piu di un account con la stessa email, verra restituito \"More than one user with that email\" <br>Se non e' stato trovato nessun account con l'email, verra restituito \"No such user\"",
+          "409": {
+            "description": "Se non e' stato trovato neanche un account con l'email data, verra restituito \"There is no user with that email\" <br>Se e' stato trovato piu di un account con la stessa email, verra restituito \"There are too many users with that email\"",
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                  "anyOf": [
                     {
-                      "$ref": "#/components/schemas/troppiUser"
+                      "$ref": "#/components/schemas/Errore1"
                     },
                     {
-                      "$ref": "#/components/schemas/nessunUser"
+                      "$ref": "#/components/schemas/Errore2"
                     }
                   ]
                 },
                 "examples": {
-                  "troppiUser": {
-                    "summary": "Piu di un utente con la stessa enail",
+                  "Errore1": {
+                    "summary": "Neanche un utente con l'email specificata",
                     "value": {
-                      "error": "More than one user with that email"
+                      "error": "There is no user with that email"
                     }
                   },
-                  "nessunUser": {
-                    "summary": "Nessun utente con l'email indicata",
+                  "Errore2": {
+                    "summary": "Piu utenti con la stessa email",
                     "value": {
-                      "error": "No such user"
+                      "error": "There are too many users with that email"
                     }
                   }
                 }
               }
             }
           },
-          "500": {
-            "description": "error di connessione al database, verra restituito \"Connection error\"",
+          "501": {
+            "description": "Errore generico, verra restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -81,7 +81,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
-                      "example": "Connection error"
+                      "example": "Generic error"
                     }
                   }
                 }
@@ -370,15 +370,15 @@
                 },
                 "examples": {
                   "Errore1": {
-                    "summary": "Piu utenti con lo stesso userId",
-                    "value": {
-                      "error": "There are too many users with that userId"
-                    }
-                  },
-                  "Errore2": {
                     "summary": "Neanche un utente con l'userId specificato",
                     "value": {
                       "error": "There is no user with that userId"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Piu utenti con lo stesso userId",
+                    "value": {
+                      "error": "There are too many users with that userId"
                     }
                   }
                 }
@@ -449,46 +449,46 @@
                     },
                     "username": {
                       "type": "string",
-                      "example": "ilMostro"
+                      "example": "usernameProva"
                     }
                   }
                 }
               }
             }
           },
-          "202": {
-            "description": "Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"More than one user with that id\" <br>Se non e' stato trovato nessun account con l'userId trovato, verra restituito \"No such user\"",
+          "409": {
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                  "anyOf": [
                     {
-                      "$ref": "#/components/schemas/troppiUser"
+                      "$ref": "#/components/schemas/Errore1"
                     },
                     {
-                      "$ref": "#/components/schemas/nessunUser"
+                      "$ref": "#/components/schemas/Errore2"
                     }
                   ]
                 },
                 "examples": {
-                  "troppiUser": {
-                    "summary": "Piu di un utente con lo stesso userId",
+                  "Errore1": {
+                    "summary": "Neanche un utente con l'userId specificato",
                     "value": {
-                      "error": "More than one user with that id"
+                      "error": "There is no user with that userId"
                     }
                   },
-                  "nessunUser": {
-                    "summary": "Nessun utente con l'userId indicato",
+                  "Errore2": {
+                    "summary": "Piu utenti con lo stesso userId",
                     "value": {
-                      "error": "No such user"
+                      "error": "There are too many users with that userId"
                     }
                   }
                 }
               }
             }
           },
-          "500": {
-            "description": "error di connessione al database, verra restituito \"Connection error\"",
+          "501": {
+            "description": "Errore generico, verra restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -496,7 +496,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
-                      "example": "Connection error"
+                      "example": "Generic error"
                     }
                   }
                 }
@@ -509,22 +509,6 @@
   },
   "components": {
     "schemas": {
-      "troppiUser": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          }
-        }
-      },
-      "nessunUser": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          }
-        }
-      },
       "Errore1": {
         "type": "object",
         "properties": {

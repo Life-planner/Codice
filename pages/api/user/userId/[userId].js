@@ -1,4 +1,5 @@
-import clientPromise from "../../../../lib/mongodb";
+import dbConnect from "../../../../lib/dbConnect";
+import UtenteAutenticato from "../../../../models/UtenteAutenticato";
 
 export default function handler(req, res) {
   if (req.method === "GET") {
@@ -33,26 +34,26 @@ export default function handler(req, res) {
  *               example: prova@prova.it
  *             username:
  *               type: string
- *               example: ilMostro
- *       202 :
- *         description: Se e' stato trovato piu di un account con lo stesso userId, verra restituito "More than one user with that id" <br>Se non e' stato trovato nessun account con l'userId trovato, verra restituito "No such user"
+ *               example: usernameProva
+ *       409:
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId"
  *         content:
  *          application/json:
  *           schema:
- *            oneOf:
- *             - $ref: '#/components/schemas/troppiUser'
- *             - $ref: '#/components/schemas/nessunUser'
+ *            anyOf:
+ *             - $ref: '#/components/schemas/Errore1'
+ *             - $ref: '#/components/schemas/Errore2'
  *           examples:
- *            troppiUser:
- *             summary: Piu di un utente con lo stesso userId
+ *            Errore1:
+ *             summary: Neanche un utente con l'userId specificato
  *             value:
- *              error: More than one user with that id
- *            nessunUser:
- *             summary: Nessun utente con l'userId indicato
+ *              error: There is no user with that userId
+ *            Errore2:
+ *             summary: Piu utenti con lo stesso userId
  *             value:
- *              error: No such user
- *       500:
- *         description: error di connessione al database, verra restituito "Connection error"
+ *              error: There are too many users with that userId
+ *       501:
+ *         description: Errore generico, verra restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -60,43 +61,37 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Connection error
- * components:
- *  schemas:
- *    troppiUser:
- *      type: object
- *      properties:
- *        error:
- *          type: string
- *    nessunUser:
- *      type: object
- *      properties:
- *        error:
- *          type: string
+ *               example: Generic error
  */
 
 async function getUser(req, res) {
+  await dbConnect();
   try {
-    const client = await clientPromise;
-    const collection = client.db("PlanIt").collection("user");
-
     const { userId } = req.query;
-    const user = await collection.find({ userId: userId }).toArray();
 
-    if (Object.keys(user).length == 1) {
-      res.status(200).json({
-        userId: user[0].userId,
-        email: user[0].email,
-        username: user[0].username,
-      });
-    } else if (Object.keys(user).length > 1) {
-      res.status(202).json({ error: "More than one user with that id" });
-    } else {
-      res.status(202).json({ error: "No such user" });
+    const users = await UtenteAutenticato.find({
+      userId: userId,
+    });
+    if (Object.keys(users).length == 0) {
+      res.status(409).json({ error: "There is no user with that userId" });
+      return;
+    } else if (Object.keys(users).length > 1) {
+      res
+        .status(409)
+        .json({ error: "There are too many users with that userId" });
+      return;
     }
+
+    res.status(200).json({
+      userId: users[0].userId,
+      email: users[0].email,
+      username: users[0].username,
+    });
+    return;
+
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Connection error" });
+    res.status(501).json({ error: "Generic error" });
     throw new Error(e).message;
   }
 }

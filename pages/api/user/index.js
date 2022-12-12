@@ -190,13 +190,13 @@ export default function handler(req, res) {
  *             - $ref: '#/components/schemas/Errore2'
  *           examples:
  *            Errore1:
- *             summary: Piu utenti con lo stesso userId
- *             value:
- *              error: There are too many users with that userId
- *            Errore2:
  *             summary: Neanche un utente con l'userId specificato
  *             value:
  *              error: There is no user with that userId
+ *            Errore2:
+ *             summary: Piu utenti con lo stesso userId
+ *             value:
+ *              error: There are too many users with that userId
  *       500:
  *         description: Errore di eliminazione nel database, verra restituito "User not deleted"
  *         content:
