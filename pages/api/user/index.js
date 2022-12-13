@@ -21,14 +21,50 @@ export default function handler(req, res) {
  *         in: query
  *         description: UserId
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Utente1:
+ *           summary: Utente1
+ *           value: User1
+ *          Utente2:
+ *           summary: Utente2
+ *           value: User2
+ *          Utente3:
+ *           summary: Utente3
+ *           value: User3
  *       - name: email
  *         in: query
  *         description: Email
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Email1:
+ *           summary: Email1
+ *           value: "prova@example.com"
+ *          Email2:
+ *           summary: Email2
+ *           value: "prova@studenti.unitn.it"
+ *          Email3:
+ *           summary: Email3
+ *           value: "prova@gmail.com"
  *       - name: username
  *         in: query
  *         description: Username
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Username1:
+ *           summary: Username1
+ *           value: Username1
+ *          Username2:
+ *           summary: Username2
+ *           value: Username2
+ *          Username3:
+ *           summary: Username3
+ *           value: Username3
  *
  *     responses:
  *       200:
@@ -82,16 +118,40 @@ export default function handler(req, res) {
  *               type: string
  *               example: Generic error
  *   put:
- *     description: Modifica l'username di un utente dato l'userId e username
+ *     description: Modifica l'username di un utente dato l'userId e il nuovo username
  *     parameters:
  *       - name: userId
  *         in: query
  *         description: UserId
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Utente1:
+ *           summary: Utente1
+ *           value: User1
+ *          Utente2:
+ *           summary: Utente2
+ *           value: User2
+ *          Utente3:
+ *           summary: Utente3
+ *           value: User3
  *       - name: username
  *         in: query
  *         description: Username
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Username1:
+ *           summary: Username1
+ *           value: Username1
+ *          Username2:
+ *           summary: Username2
+ *           value: Username2
+ *          Username3:
+ *           summary: Username3
+ *           value: Username3
  *
  *     responses:
  *       200:
@@ -119,18 +179,19 @@ export default function handler(req, res) {
  *         content:
  *          application/json:
  *           schema:
- *            anyOf:
- *             - $ref: '#/components/schemas/Errore1'
- *             - $ref: '#/components/schemas/Errore2'
+ *            type: object
+ *            properties:
+ *             error:
+ *              type: string
  *           examples:
  *            Errore1:
- *             summary: Piu utenti con lo stesso userId
- *             value:
- *              error: There are too many users with that userId
- *            Errore2:
  *             summary: Neanche un utente con l'userId specificato
  *             value:
  *              error: There is no user with that userId
+ *            Errore2:
+ *             summary: Piu utenti con lo stesso userId
+ *             value:
+ *              error: There are too many users with that userId
  *       500:
  *         description: Errore di modifica nel database, verra restituito "Not edited"
  *         content:
@@ -158,6 +219,18 @@ export default function handler(req, res) {
  *         in: query
  *         description: UserId
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Utente1:
+ *           summary: Utente1
+ *           value: User1
+ *          Utente2:
+ *           summary: Utente2
+ *           value: User2
+ *          Utente3:
+ *           summary: Utente3
+ *           value: User3
  *
  *     responses:
  *       200:
@@ -185,9 +258,10 @@ export default function handler(req, res) {
  *         content:
  *          application/json:
  *           schema:
- *            anyOf:
- *             - $ref: '#/components/schemas/Errore1'
- *             - $ref: '#/components/schemas/Errore2'
+ *            type: object
+ *            properties:
+ *             error:
+ *              type: string
  *           examples:
  *            Errore1:
  *             summary: Neanche un utente con l'userId specificato
@@ -217,18 +291,6 @@ export default function handler(req, res) {
  *             error:
  *               type: string
  *               example: Generic error
- * components:
- *  schemas:
- *    Errore1:
- *      type: object
- *      properties:
- *        error:
- *          type: string
- *    Errore2:
- *      type: object
- *      properties:
- *        error:
- *          type: string
  */
 
 async function postUser(req, res) {
@@ -284,11 +346,10 @@ async function putUser(req, res) {
     }
 
     const users = await UtenteAutenticato.find({
-    userId: userId    });
+      userId: userId,
+    });
     if (Object.keys(users).length == 0) {
-      res
-        .status(409)
-        .json({ error: "There is no user with that userId" });
+      res.status(409).json({ error: "There is no user with that userId" });
       return;
     } else if (Object.keys(users).length > 1) {
       res

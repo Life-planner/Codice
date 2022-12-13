@@ -9,14 +9,26 @@ export default function handler(req, res) {
 
 /**
  * @swagger
- * /api/user/userId/[userId]:
+ * /api/user/userId/{userId}:
  *   get:
  *     description: Ritorna userId, email, username di un utente dato l'userId
  *     parameters:
  *       - name: userId
- *         in: path
- *         description: User ID
+ *         in: query
+ *         description: UserId
  *         required: true
+ *         schema:
+ *          type: string
+ *         examples:
+ *          Utente1:
+ *           summary: Utente1
+ *           value: User1
+ *          Utente2:
+ *           summary: Utente2
+ *           value: User2
+ *          Utente3:
+ *           summary: Utente3
+ *           value: User3
  *
  *     responses:
  *       200:
@@ -28,21 +40,44 @@ export default function handler(req, res) {
  *            properties:
  *             userId:
  *               type: string
- *               example: qwerasdfvxzcvz
  *             email:
  *               type: string
- *               example: prova@prova.it
+ *               format: email
+ *               pattern: '!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'
  *             username:
  *               type: string
- *               example: usernameProva
+ *           examples:
+ *            Esempio1:
+ *             summary: Esempio1
+ *             value: 
+ *              userId: Utente1
+ *              email: prova@example.com
+ *              username: Username1
+ *            Esempio2:
+ *             summary: Esempio2
+ *             value: 
+ *              userId: Utente2
+ *              email: prova@studenti.unitn.it
+ *              username: Username2
+ *       400:
+ *         description: Manca il parametro, verra restituito "Parameter missing"
+ *         content:
+ *          application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *             error:
+ *               type: string
+ *               example: Parameter missing
  *       409:
  *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId"
  *         content:
  *          application/json:
  *           schema:
- *            anyOf:
- *             - $ref: '#/components/schemas/Errore1'
- *             - $ref: '#/components/schemas/Errore2'
+ *            type: object
+ *            properties:
+ *             error:
+ *              type: string
  *           examples:
  *            Errore1:
  *             summary: Neanche un utente con l'userId specificato
@@ -69,6 +104,11 @@ async function getUser(req, res) {
   try {
     const { userId } = req.query;
 
+    if (userId == null) {
+      res.status(400).json({ error: "Parameter missing" });
+      return;
+    }
+
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -88,7 +128,6 @@ async function getUser(req, res) {
       username: users[0].username,
     });
     return;
-
   } catch (e) {
     console.error(e);
     res.status(501).json({ error: "Generic error" });
