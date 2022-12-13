@@ -1,0 +1,40 @@
+.primary {
+  --color: var(--primary-500);
+  --text: var(--base);
+}
+
+.primary:hover {
+  --color: var(--primary-400);
+  --text: var(--base);
+}
+
+.selected {
+  --color: var(--base);
+  --text: var(--primary-500);
+}
+
+.container {
+  width: 12.5rem;
+  height: 3.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--borderRadius);
+  font-weight: 600;
+  font-size: 1.125rem;
+  background-color: var(--color);
+  color: var(--text);
+  user-select: none;
+}
+
+.container:hover {
+  cursor: pointer;
+}
+
+.container > span {
+  margin: 0.75rem;
+}
+
+.container:last-child {
+  margin-top: auto;
+}
