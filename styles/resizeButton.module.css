@@ -1,0 +1,24 @@
+.container {
+  --color: var(--base);
+  --text: var(--black-100);
+}
+
+.container:hover {
+  --color: var(--backGround);
+  --text: var(--black-100);
+  cursor: pointer;
+}
+
+.container {
+  padding: var(--smallGap);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--innerBorderRadius);
+  font-weight: 400;
+  font-size: 0.875rem;
+  background-color: var(--color);
+  color: var(--text);
+  user-select: none;
+  gap: var(--smallGap);
+}

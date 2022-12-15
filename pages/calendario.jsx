@@ -3,6 +3,7 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 import styles from "../styles/calendario.module.css";
 import Menu from "../components/Menu";
+import CalendarMenu from "../components/calendarMenu";
 
 export default withPageAuthRequired(function Calendario() {
   return (
@@ -14,6 +15,19 @@ export default withPageAuthRequired(function Calendario() {
       </Head>
       <div className={styles.home}>
         <Menu selected="Calendario" />
+        <div className={styles.content}>
+          <CalendarMenu />
+          <div className={styles.calendario}>
+            <div className={styles.wrapper}>
+              <div
+                style={{
+                  width: "200rem",
+                  height: "200rem",
+                }}
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

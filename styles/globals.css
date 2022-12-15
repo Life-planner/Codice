@@ -16,6 +16,7 @@ body {
   --base: #f3f3fd;
   --black-100: #1e1e1e;
   --borderRadius: 1rem;
+  --innerBorderRadius: 0.625rem;
   --bigGap: 1.5rem;
   --mediumGap: 1.25rem;
   --smallGap: 0.625rem;

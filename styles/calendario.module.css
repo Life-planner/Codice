@@ -3,3 +3,46 @@
   background-color: var(--backGround);
   display: flex;
 }
+
+.content {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--bigGap);
+  gap: var(--bigGap);
+}
+
+.calendario {
+  width: calc(100vw - 15.625rem);
+  height: calc(100vh - 60px);
+  background-color: var(--base);
+  border-radius: var(--borderRadius);
+  padding: var(--mediumGap);
+  min-height: 0;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--backGround);
+  border-radius: 10px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-300);
+  border-radius: 10px;
+}
+
+.wrapper::-webkit-scrollbar-corner {
+  background-color: var(--base);
+}
