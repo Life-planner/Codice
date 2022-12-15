@@ -14,8 +14,8 @@
 }
 
 .calendario {
-  width: calc(100vw - 15.625rem);
-  height: calc(100vh - 60px);
+  width: calc(100vw - 15.625rem - var(--bigGap) * 2);
+  height: 100%;
   background-color: var(--base);
   border-radius: var(--borderRadius);
   padding: var(--mediumGap);
