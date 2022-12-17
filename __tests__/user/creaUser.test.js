@@ -12,8 +12,8 @@ const { postUser } = require("../../pages/api/user/index");
 const { putUser } = require("../../pages/api/user/index");
 const { deleteUser } = require("../../pages/api/user/index");
 
-beforeEach(() => {
-  cancellaTutto();
+beforeEach(async () => {
+  await cancellaTutto();
 });
 
 describe("Test API per l'utente (/api/user/*)", () => {
