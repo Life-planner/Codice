@@ -293,7 +293,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-async function postUser(req, res) {
+export async function postUser(req, res) {
   await dbConnect();
   try {
     const { userId, email, username } = req.query;
@@ -329,13 +329,12 @@ async function postUser(req, res) {
     res.status(200).json({ success: "User inserted correctly" });
     return;
   } catch (e) {
-    console.error(e);
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
-async function putUser(req, res) {
+export async function putUser(req, res) {
   await dbConnect();
   try {
     const { userId, username } = req.query;
@@ -375,7 +374,7 @@ async function putUser(req, res) {
   }
 }
 
-async function deleteUser(req, res) {
+export async function deleteUser(req, res) {
   await dbConnect();
   try {
     const { userId } = req.query;

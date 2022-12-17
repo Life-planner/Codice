@@ -63,6 +63,10 @@ const SchemaCalendario = new mongoose.Schema(
             latitudine: { type: String, default: "" },
             longitudine: { type: String, default: "" },
           },
+          default: {
+            latitudine: "",
+            longitudine: "",
+          },
         },
         priorita: { type: Number, default: 6, min: 1, max: 10 },
         difficolta: { type: Number, default: 6, min: 1, max: 10 },

@@ -486,6 +486,7 @@ export default function handler(req, res) {
  *           summary: Esempio3
  *           value: 6397d3b9c75299548437182b
  *
+ *
  *     responses:
  *       200:
  *         description: Calendario eliminato con successo, verra restituito "Calendar deleted correctly"
@@ -725,14 +726,20 @@ async function modificaCalendario(req, res) {
       tempImpostazioniPredefiniteEventi.luogo == null ||
       tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
       tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.latitudine,
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.longitudine,
+      ) ||
       tempImpostazioniPredefiniteEventi.priorita == null ||
-      tempImpostazioniPredefiniteEventi.difficolta == null ||
-      tempImpostazioniPredefiniteEventi.durata <= 0 ||
-      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0 ||
       tempImpostazioniPredefiniteEventi.priorita <= 0 ||
       tempImpostazioniPredefiniteEventi.priorita > 10 ||
+      tempImpostazioniPredefiniteEventi.difficolta == null ||
       tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
-      tempImpostazioniPredefiniteEventi.difficolta > 10
+      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+      tempImpostazioniPredefiniteEventi.durata <= 0 ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
     ) {
       res.status(400).json({ error: "Wrong format impostazioni predefinite" });
       return;
@@ -769,7 +776,7 @@ async function eliminaCalendario(req, res) {
     const { objectId } = req.query;
     const { userId } = req.query;
 
-    if (objectId == null || nome == null) {
+    if (objectId == null || userId == null) {
       res.status(400).json({ error: "Parameter missing" });
       return;
     }
