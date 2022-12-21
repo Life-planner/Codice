@@ -5,8 +5,6 @@ import { createMocks } from "node-mocks-http";
 import "@testing-library/jest-dom";
 
 const { cancellaTutto } = require("../../models/funzioniDiSupporto");
-const { inserisciUnUtente } = require("../../models/funzioniDiSupporto");
-const { inserisciDueUtentiUguali } = require("../../models/funzioniDiSupporto");
 
 const { postUser } = require("../../pages/api/user/index");
 const { putUser } = require("../../pages/api/user/index");
@@ -17,7 +15,7 @@ beforeEach(async () => {
 });
 
 describe("Test API per l'utente (/api/user/*)", () => {
-  describe("Test di tutti i casi POST (crazione utente)", () => {
+  describe("Test di tutti i casi POST (creazione utente)", () => {
     describe("200", () => {
       test("Utente iscritto con successo", async () => {
         const { req, res } = createMocks({
@@ -329,7 +327,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           }),
         );
       });
-      test("Utente dulicato", async () => {
+      test("Utente duplicato", async () => {
         async () => {
           const { req, res } = createMocks({
             method: "POST",
@@ -450,7 +448,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           }),
         );
       });
-      test("Utente dulicato", async () => {
+      test("Utente duplicato", async () => {
         async () => {
           const { req, res } = createMocks({
             method: "POST",
