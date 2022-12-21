@@ -4,7 +4,9 @@
 import { createMocks } from "node-mocks-http";
 import "@testing-library/jest-dom";
 
-const { cancellaTuttoCalendario } = require("../../models/funzioniDiSupporto");
+const {
+  cancellaTutto, cancellaTuttoCalendario,
+} = require("../../models/funzioniDiSupporto");
 
 const { creaCalendario } = require("../../pages/api/calendar/index");
 const { modificaCalendario } = require("../../pages/api/calendar/index");
@@ -15,6 +17,7 @@ beforeEach(async () => {
 });
 
 beforeAll(async () => {
+  await cancellaTutto();
   const { req, res } = createMocks({
     method: "POST",
     query: {
