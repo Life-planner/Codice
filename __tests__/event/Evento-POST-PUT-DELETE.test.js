@@ -4,14 +4,48 @@
 import { createMocks } from "node-mocks-http";
 import "@testing-library/jest-dom";
 
-const { cancellaTutto } = require("../../models/funzioniDiSupporto");
+const {
+  cancellaTutto,
+  cancellaTuttoEvento,
+} = require("../../models/funzioniDiSupporto");
 
 const { postUser } = require("../../pages/api/user/index");
 const { putUser } = require("../../pages/api/user/index");
 const { deleteUser } = require("../../pages/api/user/index");
 
 beforeEach(async () => {
+  await cancellaTuttoEvento();
+});
+
+beforeAll(async () => {
   await cancellaTutto();
+  async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+      query: {
+        userId: "utenteTestPostEvento",
+        email: "utenteTestPostEvento@prova.unitn.it",
+        username: "utenteTestPostEvento",
+      },
+    });
+    await postUser(req, res);
+  };
+  async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+      query: {
+        userId: "utenteTestPostEvento",
+        nome: "calendarioTestProva1",
+        fusoOrario: {
+          GMTOffset: -5,
+          localita: "New York",
+        },
+        colore: "#00FF00",
+        principale: false,
+      },
+    });
+    await creaCalendario(req, res);
+  };
 });
 
 describe("Test API per l'utente (/api/user/*)", () => {
@@ -415,8 +449,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
       test("Manca uno o piu parametri -- userId", async () => {
         const { req, res } = createMocks({
           method: "DELETE",
-          query: {
-          },
+          query: {},
         });
 
         await deleteUser(req, res);
