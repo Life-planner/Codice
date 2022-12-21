@@ -552,7 +552,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-async function creaCalendario(req, res) {
+export async function creaCalendario(req, res) {
   await dbConnect();
   try {
     const { nome, fusoOrario, colore, principale } = req.query;
@@ -593,15 +593,12 @@ async function creaCalendario(req, res) {
       return;
     }
 
-    let tempFusoOrario;
     if (fusoOrario != null) {
-      tempFusoOrario = JSON.parse(fusoOrario);
-
       if (
-        tempFusoOrario.GMTOffset == null ||
-        tempFusoOrario.localita == null ||
-        tempFusoOrario.GMTOffset > 12 ||
-        tempFusoOrario.GMTOffset < -12
+        fusoOrario.GMTOffset == null ||
+        fusoOrario.localita == null ||
+        fusoOrario.GMTOffset > 12 ||
+        fusoOrario.GMTOffset < -12
       ) {
         res.status(400).json({ error: "Wrong format for time zone" });
         return;
@@ -611,7 +608,7 @@ async function creaCalendario(req, res) {
     Calendario.create(
       {
         nome: nome,
-        fusoOrario: fusoOrario == null ? undefined : tempFusoOrario,
+        fusoOrario: fusoOrario == null ? undefined : fusoOrario,
         colore: colore == null ? undefined : colore,
         partecipanti: [userId],
         principale: principale == null ? false : principale,
@@ -634,7 +631,7 @@ async function creaCalendario(req, res) {
   }
 }
 
-async function modificaCalendario(req, res) {
+export async function modificaCalendario(req, res) {
   await dbConnect();
   try {
     const {
@@ -770,7 +767,7 @@ async function modificaCalendario(req, res) {
   }
 }
 
-async function eliminaCalendario(req, res) {
+export async function eliminaCalendario(req, res) {
   await dbConnect();
   try {
     const { objectId } = req.query;

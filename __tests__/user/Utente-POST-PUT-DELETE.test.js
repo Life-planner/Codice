@@ -6,9 +6,9 @@ import "@testing-library/jest-dom";
 
 const { cancellaTutto } = require("../../models/funzioniDiSupporto");
 
-const { postUser } = require("../../pages/api/user/index");
-const { putUser } = require("../../pages/api/user/index");
-const { deleteUser } = require("../../pages/api/user/index");
+const { creaUser } = require("../../pages/api/user/index");
+const { modificaUser } = require("../../pages/api/user/index");
+const { eliminaUser } = require("../../pages/api/user/index");
 
 beforeEach(async () => {
   await cancellaTutto();
@@ -27,7 +27,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(200);
 
@@ -49,7 +49,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -68,7 +68,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -87,7 +87,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -105,7 +105,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -123,7 +123,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -141,7 +141,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -157,7 +157,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           query: {},
         });
 
-        await postUser(req, res);
+        await creaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -180,7 +180,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          await postUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -199,7 +199,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
               username: "utenteTestProva2",
             },
           });
-          await postUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(409);
           expect(JSON.parse(res._getData())).toEqual(
@@ -224,7 +224,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          await postUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -242,7 +242,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          await putUser(req, res);
+          await modificaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -263,7 +263,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await putUser(req, res);
+        await modificaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -281,7 +281,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await putUser(req, res);
+        await modificaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -297,7 +297,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           query: {},
         });
 
-        await putUser(req, res);
+        await modificaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -318,7 +318,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await putUser(req, res);
+        await modificaUser(req, res);
 
         expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
@@ -338,8 +338,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          postUser(req, res);
-          await postUser(req, res);
+          creaUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -357,7 +357,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
               username: "utenteTestProvaRipetutoProvaPutUser",
             },
           });
-          await putUser(req, res);
+          await modificaUser(req, res);
 
           expect(res._getStatusCode()).toBe(409);
           expect(JSON.parse(res._getData())).toEqual(
@@ -382,7 +382,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          await postUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -399,7 +399,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          await deleteUser(req, res);
+          await eliminaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -419,7 +419,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await deleteUser(req, res);
+        await eliminaUser(req, res);
 
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
@@ -439,7 +439,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           },
         });
 
-        await deleteUser(req, res);
+        await eliminaUser(req, res);
 
         expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
@@ -459,8 +459,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
             },
           });
 
-          postUser(req, res);
-          await postUser(req, res);
+          creaUser(req, res);
+          await creaUser(req, res);
 
           expect(res._getStatusCode()).toBe(200);
           expect(JSON.parse(res._getData())).toEqual(
@@ -477,7 +477,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
               userId: "utenteTestProvaRipetutoProvaPutUser",
             },
           });
-          await deleteUser(req, res);
+
+          await eliminaUser(req, res);
 
           expect(res._getStatusCode()).toBe(409);
           expect(JSON.parse(res._getData())).toEqual(

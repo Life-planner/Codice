@@ -3,11 +3,11 @@ import UtenteAutenticato from "../../../models/UtenteAutenticato";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    postUser(req, res);
+    creaUser(req, res);
   } else if (req.method === "PUT") {
-    putUser(req, res);
+    modificaUser(req, res);
   } else if (req.method === "DELETE") {
-    deleteUser(req, res);
+    eliminaUser(req, res);
   }
 }
 
@@ -293,7 +293,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-export async function postUser(req, res) {
+export async function creaUser(req, res) {
   await dbConnect();
   try {
     const { userId, email, username } = req.query;
@@ -334,7 +334,7 @@ export async function postUser(req, res) {
   }
 }
 
-export async function putUser(req, res) {
+export async function modificaUser(req, res) {
   await dbConnect();
   try {
     const { userId, username } = req.query;
@@ -374,7 +374,7 @@ export async function putUser(req, res) {
   }
 }
 
-export async function deleteUser(req, res) {
+export async function eliminaUser(req, res) {
   await dbConnect();
   try {
     const { userId } = req.query;
@@ -397,9 +397,9 @@ export async function deleteUser(req, res) {
       return;
     }
 
-    const deleteUser = await UtenteAutenticato.remove({ userId: userId });
+    const eliminaUser = await UtenteAutenticato.remove({ userId: userId });
 
-    if (deleteUser.deletedCount >= 1) {
+    if (eliminaUser.deletedCount >= 1) {
       res.status(200).json({ success: "User deleted correctly" });
       return;
     } else {
