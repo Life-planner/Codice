@@ -448,7 +448,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           }),
         );
       });
-      test("Utente dulicato", async () => {
+      test("Utente duplicato", async () => {
         async () => {
           const { req, res } = createMocks({
             method: "POST",

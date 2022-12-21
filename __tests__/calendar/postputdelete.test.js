@@ -51,23 +51,11 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         });
       
       test("Calendario inserito con successo con userId, nome, fusoOrario", async () => {
-        
-        async () => {
+
           const { req, res } = createMocks({
             method: "POST",
             query: {
               userId: "utenteTestPostCalendario",
-              email: "utenteTestProvaPostCalendario@prova.unitn",
-              username: "utenteTestPostCalendario",
-            },
-          });
-        }
-
-        async () => {
-          const { req, res } = createMocks({
-            method: "POST",
-            query: {
-              userId: "utenteTestProva1",
               nome : "calendarioTestProva1",
               fusoOrario: {
                 GMTOffset: -5,
@@ -85,14 +73,13 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
               success: "Calendar inserted correctly",
             }),
           );
-        }
-      });
+        });
 
       test("Calendario inserito con successo con userId, nome, fusoOrario, colore", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -5,
@@ -117,7 +104,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -5,
@@ -138,11 +125,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Calendario inserito con successo con userId, nome, fusoOrario, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -5,
@@ -162,11 +150,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Calendario inserito con successo con userId, nome, colore", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             colore: "#00FF00",
           },
@@ -182,11 +171,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Calendario inserito con successo con userId, nome, colore, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             colore: "#00FF00",
             principale: false,
@@ -203,11 +193,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Calendario inserito con successo con userId, nome, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome : "calendarioTestProva1",
             principale: false,
           },
@@ -232,7 +223,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
           },
         });
 
@@ -245,11 +236,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, fusoOrario", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             fusoOrario: {
               GMTOffset: -5,
               localita: "New York",
@@ -266,11 +258,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, fusoOrario, colore", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             fusoOrario: {
               GMTOffset: -5,
               localita: "New York",
@@ -288,11 +281,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, fusoOrario, colore, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             fusoOrario: {
               GMTOffset: -5,
               localita: "New York",
@@ -311,11 +305,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, colore", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             colore: "#00FF00",
           },
         });
@@ -329,11 +324,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, colore, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             colore: "#00FF00",
             principale: false,
           },
@@ -348,11 +344,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             principale: false,
           },
         });
@@ -366,11 +363,12 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
           }),
         );
       });
+
       test("Manca il parametro name, parametri presente: userId, fusoOrario, principale", async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             fusoOrario: {
               GMTOffset: -5,
               localita: "New York",
@@ -393,7 +391,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -5,
@@ -418,7 +416,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             colore: "colore_inesistente",
           },
@@ -438,7 +436,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -5,
@@ -462,7 +460,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             colore: "colore_inesistente",
             principale: false,
@@ -483,7 +481,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -14,
@@ -508,7 +506,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -14,
@@ -531,7 +529,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -14,
@@ -555,7 +553,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestPostCalendario",
             nome: "calendarioTestProva1",
             fusoOrario: {
               GMTOffset: -14,
@@ -759,184 +757,296 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
 
       test("Utente duplicato, parametri presenti: userId, nome", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-          },
-        });
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
+            },
+          });
+        
+          await postUser(req, res);
+        };
 
-        await creaCalendario(req, res);
+        async () => {  
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+            },
+          });
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          await creaCalendario(req, res);
+
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        }
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, fusoOrario", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            fusoOrario: {
-              GMTOffset: -5,
-              localita: "New York",
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
             },
-          },
-        });
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              fusoOrario: {
+                GMTOffset: -5,
+                localita: "New York",
+              },
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        };
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, colore", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            colore: "FF0000",
-          },
-        });
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
+            },
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              colore: "FF0000",
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        }
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, principale", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            principale: false,
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
+            },
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              principale: false,
 
-          },
-        });
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        }
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, fusoOrario, colore", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            fusoOrario: {
-              GMTOffset: -5,
-              localita: "New York",
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
             },
-            colore: "FF0000",
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              fusoOrario: {
+                GMTOffset: -5,
+                localita: "New York",
+              },
+              colore: "FF0000",
 
-          },
-        });
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        };
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, fusoOrario, principale", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            fusoOrario: {
-              GMTOffset: -5,
-              localita: "New York",
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
             },
-            principale: false,
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              fusoOrario: {
+                GMTOffset: -5,
+                localita: "New York",
+              },
+              principale: false,
+            },
+          });
 
-          },
-        });
+          await creaCalendario(req, res);
 
-        await creaCalendario(req, res);
-
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        };
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, colore, principale", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            colore: "FF0000",
-            principale: false,
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
+            },
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              colore: "FF0000",
+              principale: false,
 
-          },
-        });
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        }
       });
 
       test("Utente duplicato, parametri presenti: userId, nome, fusoOrario, colore, principale", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestProvaRipetutoProvaPostCalendario",
-            nome: "calendarioTestProva1",
-            fusoOrario: {
-              GMTOffset: -5,
-              localita: "New York",
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestPostCalendario",
+              email: "utenteTestProvaPostCalendario@prova.unitn",
+              username: "utenteTestPostCalendario",
             },
-            colore: "FF0000",
-            principale: false,
+          });
+        
+          await postUser(req, res);
+        };
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestProvaRipetutoProvaPostCalendario",
+              nome: "calendarioTestProva1",
+              fusoOrario: {
+                GMTOffset: -5,
+                localita: "New York",
+              },
+              colore: "FF0000",
+              principale: false,
 
-          },
-        });
+            },
+          });
 
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many users with that userId",
+            }),
+          );
+        }
       });
 
       test("Esiste già un calendario principale per questo userId: userId, nome, principale", async () => {
