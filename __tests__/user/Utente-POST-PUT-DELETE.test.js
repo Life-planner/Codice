@@ -4,13 +4,24 @@
 import { createMocks } from "node-mocks-http";
 import "@testing-library/jest-dom";
 
-const { cancellaTutto } = require("../../models/funzioniDiSupporto");
+const {
+  cancellaTutto,
+  cancellaTuttoUtente,
+} = require("../../models/funzioniDiSupporto");
 
 const { creaUser } = require("../../pages/api/user/index");
 const { modificaUser } = require("../../pages/api/user/index");
 const { eliminaUser } = require("../../pages/api/user/index");
 
 beforeEach(async () => {
+  await cancellaTuttoUtente();
+});
+
+beforeAll(async () => {
+  await cancellaTutto();
+});
+
+afterAll(async () => {
   await cancellaTutto();
 });
 
@@ -21,16 +32,16 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
-            email: "utenteTestProva1@prova.unitn",
-            username: "utenteTestProva1",
+            userId: "utenteTestProva123123",
+            email: "utenteTestProva123123@prova.unitn",
+            username: "utenteTestProva123123",
           },
         });
 
         await creaUser(req, res);
 
+        console.log(res._getData());
         expect(res._getStatusCode()).toBe(200);
-
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             success: "User inserted correctly",
@@ -44,8 +55,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            email: "utenteTestProva1@prova.unitn",
-            username: "utenteTestProva1",
+            email: "utenteTestProva11@prova.unitn",
+            username: "utenteTestProva11",
           },
         });
 
@@ -63,8 +74,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
-            username: "utenteTestProva1",
+            userId: "utenteTestProva12",
+            username: "utenteTestProva12",
           },
         });
 
@@ -82,8 +93,8 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
-            email: "utenteTestProva1@prova.unitn",
+            userId: "utenteTestProva13",
+            email: "utenteTestProva13@prova.unitn",
           },
         });
 
@@ -101,7 +112,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            username: "utenteTestProva1",
+            username: "utenteTestProva14",
           },
         });
 
@@ -119,7 +130,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            email: "utenteTestProva1@prova.unitn",
+            email: "utenteTestProva14@prova.unitn",
           },
         });
 
@@ -137,7 +148,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
-            userId: "utenteTestProva1",
+            userId: "utenteTestProva15",
           },
         });
 
@@ -174,9 +185,9 @@ describe("Test API per l'utente (/api/user/*)", () => {
           const { req, res } = createMocks({
             method: "POST",
             query: {
-              userId: "utenteTestProva2",
-              email: "utenteTestProva2@prova.unitn",
-              username: "utenteTestProva2",
+              userId: "utenteTestProva20",
+              email: "utenteTestProva20@prova.unitn",
+              username: "utenteTestProva20",
             },
           });
 
@@ -194,9 +205,9 @@ describe("Test API per l'utente (/api/user/*)", () => {
           const { req, res } = createMocks({
             method: "POST",
             query: {
-              userId: "utenteTestProva2",
-              email: "utenteTestProva2@prova.unitn",
-              username: "utenteTestProva2",
+              userId: "utenteTestProva20",
+              email: "utenteTestProva20@prova.unitn",
+              username: "utenteTestProva20",
             },
           });
           await creaUser(req, res);
@@ -218,9 +229,9 @@ describe("Test API per l'utente (/api/user/*)", () => {
           const { req, res } = createMocks({
             method: "POST",
             query: {
-              userId: "utenteTestProva1",
-              email: "utenteTestProva1@prova.unitn",
-              username: "utenteTestProva1",
+              userId: "utenteTestProva18",
+              email: "utenteTestProva18@prova.unitn",
+              username: "utenteTestProva18",
             },
           });
 
@@ -237,7 +248,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
           const { req, res } = createMocks({
             method: "PUT",
             query: {
-              userId: "utenteTestProva1",
+              userId: "utenteTestProva18",
               username: "utenteTestProva10",
             },
           });
@@ -415,8 +426,7 @@ describe("Test API per l'utente (/api/user/*)", () => {
       test("Manca uno o piu parametri -- userId", async () => {
         const { req, res } = createMocks({
           method: "DELETE",
-          query: {
-          },
+          query: {},
         });
 
         await eliminaUser(req, res);

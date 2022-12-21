@@ -25,24 +25,18 @@ export async function cancellaTutto() {
  *  username: "UtenteProva1"
  */
 export async function cancellaTuttoUtente() {
-  const client = await clientPromise;
-  const db = client.db("test");
+  await dbConnect();
 
-  let tabelle = db.listCollections().toArray(function (err, collInfos) {
-    if (!err) {
-      collInfos.forEach((i) => {
-        if (i.name == "UtenteAutenticato") {
-          try {
-            db.collection(i.name).drop();
-          } catch (err) {
-            if (err.message !== "ns not found") {
-              throw err;
-            }
-          }
-        }
-      });
+  try {
+    await UtenteAutenticato.collection.drop();
+  } catch (e) {
+    if (e.code >= 0 || e.code < 0) {
+    } else {
+      throw e;
     }
-  });
+  }
+
+  return;
 }
 /**
  * Cancella la tabella Calenario

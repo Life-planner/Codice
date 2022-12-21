@@ -21,16 +21,19 @@ beforeEach(async () => {
 
 beforeAll(async () => {
   await cancellaTutto();
-  const { req, res } = createMocks({
-    method: "POST",
-    query: {
-      userId: "utenteTestCalendario",
-      email: "utenteTestProvaPostCalendario@prova.unitn",
-      username: "utenteTestCalendario",
-    },
-  });
+    const { req, res } = createMocks({
+      method: "POST",
+      query: {
+        userId: " ",
+        email: "utenteTestCalendario@prova.unitn.it",
+        username: "utenteTestCalendario",
+      },
+    });
+    await creaUser(req, res);
+});
 
-  await creaUser(req, res);
+afterAll(async () => {
+  await cancellaTutto();
 });
 
 describe("Test API per l'utente (/api/calendar/*)", () => {
@@ -47,6 +50,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
+        console.log(res._getData());
         expect(res._getStatusCode()).toBe(200);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
@@ -69,6 +73,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
         });
 
         await creaCalendario(req, res);
+        console.log(res._getData());
 
         expect(res._getStatusCode()).toBe(200);
         expect(JSON.parse(res._getData())).toEqual(
@@ -228,7 +233,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Name missing",
@@ -246,7 +251,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Name missing",
@@ -262,7 +267,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Name missing",
@@ -282,7 +287,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Wrong format for color",
@@ -305,7 +310,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Wrong format for time zone",
@@ -327,7 +332,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(400);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "Wrong format for time zone",
@@ -348,7 +353,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
         await creaCalendario(req, res);
 
-                expect(res._getStatusCode()).toBe(409);
+        expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             error: "There is no user with that userId",
@@ -382,7 +387,7 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
 
           await creaCalendario(req, res);
 
-                    expect(res._getStatusCode()).toBe(409);
+          expect(res._getStatusCode()).toBe(409);
           expect(JSON.parse(res._getData())).toEqual(
             expect.objectContaining({
               error: "There are too many users with that userId",
@@ -392,24 +397,38 @@ describe("Test API per l'utente (/api/calendar/*)", () => {
       });
 
       test("Esiste già un calendario principale per questo userId: userId, nome, principale", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestCalendario",
-            nome: "calendarioTestProva1",
-            principale: true,
-          },
-        });
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestCalendario",
+              nome: "calendarioTestProva1true",
+              principale: true,
+            },
+          });
 
-        await creaCalendario(req, res);
-        await creaCalendario(req, res);
+          await creaCalendario(req, res);
+        };
 
-                expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many primary calendars",
-          }),
-        );
+        async () => {
+          const { req, res } = createMocks({
+            method: "POST",
+            query: {
+              userId: "utenteTestCalendario",
+              nome: "calendarioTestProva1true",
+              principale: true,
+            },
+          });
+
+          await creaCalendario(req, res);
+
+          expect(res._getStatusCode()).toBe(409);
+          expect(JSON.parse(res._getData())).toEqual(
+            expect.objectContaining({
+              error: "There are too many primary calendars",
+            }),
+          );
+        };
       });
     });
   });
