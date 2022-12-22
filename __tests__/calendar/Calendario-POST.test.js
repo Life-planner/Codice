@@ -28,13 +28,13 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
     });
     await UtenteAutenticato.insertOne({
       userId: "utenteTestCalendarioPOSTDuplicato",
-      email: "utenteTestCalendarioPOSTDuplicato@prova.unitn",
+      email: "utenteTestCalendarioPOSTDuplicato@unitn.it",
       username: "utenteTestCalendarioPOSTDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestCalendarioPOSTDuplicato",
-      email: "utenteTestCalendarioPOSTDuplicato@prova.unitn",
+      email: "utenteTestCalendarioPOSTDuplicato@unitn.it",
       username: "utenteTestCalendarioPOSTDuplicato",
     });
   });

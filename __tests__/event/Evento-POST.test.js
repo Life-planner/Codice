@@ -29,13 +29,13 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
     });
     await UtenteAutenticato.insertOne({
       userId: "utenteTestEventoPOSTDuplicato",
-      email: "utenteTestEventoPOSTDuplicato@prova.unitn",
+      email: "utenteTestEventoPOSTDuplicato@unitn.it",
       username: "utenteTestEventoPOSTDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestEventoPOSTDuplicato",
-      email: "utenteTestEventoPOSTDuplicato@prova.unitn",
+      email: "utenteTestEventoPOSTDuplicato@unitn.it",
       username: "utenteTestEventoPOSTDuplicato",
     });
 
@@ -63,7 +63,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTest = IDCalendarioTest.insertedId 
+    IDCalendarioTest = IDCalendarioTest.insertedId;
   });
 
   afterAll(async () => {
@@ -112,13 +112,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -175,13 +172,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -211,7 +205,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -241,13 +235,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -278,7 +269,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -309,13 +300,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -350,7 +338,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -385,13 +373,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -427,7 +412,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -463,13 +448,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -495,7 +477,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -521,13 +503,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -554,7 +533,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -581,13 +560,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -618,7 +594,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -649,13 +625,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -719,13 +692,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -777,14 +747,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
-
+          },
         },
       });
 
@@ -844,13 +810,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -881,7 +844,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -913,13 +876,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -948,7 +908,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -977,13 +937,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -1013,7 +970,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -1043,13 +1000,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
+              giorniSettimana: ["Sabato", "Domenica"],
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -1075,7 +1029,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoSingolo: {
             data: 16718931689,
             isScadenza: true,
-          }, 
+          },
         },
       });
 
@@ -1143,30 +1097,30 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           error: "IDCalendario or titolo or evento details missing",
         }),
       );
-      });
-      test("Manca uno o piu parametri -- userId, parametri presenti: IDCalendario, titolo, isEventoSingolo, eventoSingolo", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            IDCalendario: IDCalendarioTest,
-            titolo: "titoloTestPostEvento",
-            isEventoSingolo: true,
-            eventoSingolo: {
-              data: 16718931689,
-              isScadenza: true,
-            },
+    });
+    test("Manca uno o piu parametri -- userId, parametri presenti: IDCalendario, titolo, isEventoSingolo, eventoSingolo", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          isEventoSingolo: true,
+          eventoSingolo: {
+            data: 16718931689,
+            isScadenza: true,
           },
-        });
-  
-        await creaEvento(req, res);
-  
-        expect(res._getStatusCode()).toBe(400);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "IDCalendario or titolo or evento details missing",
-          }),
-        );
+        },
       });
+
+      await creaEvento(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "IDCalendario or titolo or evento details missing",
+        }),
+      );
+    });
 
     test("Manca uno o piu parametri -- titolo, parametri presenti: userId, IDCalendario, isEventoSingolo, eventoSingolo", async () => {
       const { req, res } = createMocks({
@@ -1191,7 +1145,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         }),
       );
     });
-    
+
     test("Manca uno o piu parametri -- isEventoSingolo, parametri presenti: userId, IDCalendario, eventoSingolo", async () => {
       const { req, res } = createMocks({
         method: "POST",
@@ -1244,7 +1198,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
           isEventoSingolo: false,
-          eventoRipetuto: null
+          eventoRipetuto: null,
         },
       });
 
@@ -1272,7 +1226,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           luogo: {
             latitudine: null,
             longitudine: null,
-          }
+          },
         },
       });
 
@@ -1299,8 +1253,8 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           },
           luogo: {
             latitudine: 25.652291,
-            longitudine: 190.00,
-          }
+            longitudine: 190.0,
+          },
         },
       });
 
@@ -1328,7 +1282,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           luogo: {
             latitudine: 25.652291,
             longitudine: null,
-          }
+          },
         },
       });
 
@@ -1356,7 +1310,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           luogo: {
             latitudine: null,
             longitudine: 51.487782,
-          }
+          },
         },
       });
 
@@ -1433,11 +1387,8 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           },
           notifiche: {
             titolo: null,
-            data: [
-              16718931689,
-              16718932689,
-            ],
-          }
+            data: [16718931689, 16718932689],
+          },
         },
       });
 
@@ -1464,8 +1415,8 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           },
           notifiche: {
             titolo: "Partita tra poco",
-            data:null,
-          }
+            data: null,
+          },
         },
       });
 
@@ -1493,7 +1444,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           notifiche: {
             titolo: null,
             data: null,
-          }
+          },
         },
       });
 
@@ -1518,7 +1469,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             data: 16718931689,
             isScadenza: true,
           },
-          durata: -1
+          durata: -1,
         },
       });
 
@@ -1568,7 +1519,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             impostazioniAvanzate: {
               data: 1671194251689,
             },
-          }
+          },
         },
       });
 
@@ -1581,82 +1532,81 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         }),
       );
     });
-
   });
 
   describe("409", () => {
     test("Ci sono più di un utente con l'userId dato", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestEventoPOSTDuplicato",
-            IDCalendario: IDCalendarioTest,
-            titolo: "titoloTestPostEvento",
-            isEventoSingolo: true,
-            eventoSingolo: {
-              data: 16718931689,
-              isScadenza: true,
-            },
-          }
-        });
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestEventoPOSTDuplicato",
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          isEventoSingolo: true,
+          eventoSingolo: {
+            data: 16718931689,
+            isScadenza: true,
+          },
+        },
+      });
 
-        await creaEvento(req, res);
+      await creaEvento(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "There are too many users with that userId",
+        }),
+      );
     });
     test("Utente non esistente", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "UtenteNonEsistente",
-            IDCalendario: IDCalendarioTest,
-            titolo: "titoloTestPostEvento",
-            isEventoSingolo: true,
-            eventoSingolo: {
-              data: 16718931689,
-              isScadenza: true,
-            },
-          }
-        });
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "UtenteNonEsistente",
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          isEventoSingolo: true,
+          eventoSingolo: {
+            data: 16718931689,
+            isScadenza: true,
+          },
+        },
+      });
 
-        await creaEvento(req, res);
+      await creaEvento(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There is no user with that userId",
-          }),
-        );
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "There is no user with that userId",
+        }),
+      );
     });
     test("IDcalendario non esistente o userId non possiede tale IDCalendario", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestEventoPOST",
-            IDCalendario: "IdCalendarioNonEsistente",
-            titolo: "titoloTestPostEvento",
-            isEventoSingolo: true,
-            eventoSingolo: {
-              data: 16718931689,
-              isScadenza: true,
-            },
-          }
-        });
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestEventoPOST",
+          IDCalendario: "IdCalendarioNonEsistente",
+          titolo: "titoloTestPostEvento",
+          isEventoSingolo: true,
+          eventoSingolo: {
+            data: 16718931689,
+            isScadenza: true,
+          },
+        },
+      });
 
-        await creaEvento(req, res);
-        console.log(res._getData());
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There is no calendar with that ID or you do not own the calendar",
-          }),
-        );
+      await creaEvento(req, res);
+      console.log(res._getData());
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error:
+            "There is no calendar with that ID or you do not own the calendar",
+        }),
+      );
     });
-    
   });
 });

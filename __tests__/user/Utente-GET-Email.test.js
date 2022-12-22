@@ -6,9 +6,9 @@ import "@testing-library/jest-dom";
 
 const { MongoClient } = require("mongodb");
 
-const { modificaUser } = require("../../pages/api/user/index");
+const { getUser } = require("../../pages/api/user/email/[email].js");
 
-describe("Test di tutti i casi PUT (modifica utente)", () => {
+describe("Test di tutti i casi GET con email", () => {
   let connection;
   let db;
 
@@ -22,21 +22,20 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
     const UtenteAutenticato = db.collection("UtenteAutenticato");
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestPUT",
-      email: "utenteTestPUT@unitn.it",
-      username: "utenteTestPUT",
+      userId: "utenteTestGET1",
+      email: "utenteTestGET1@unitn.it",
+      username: "utenteTestGET1",
+    });
+    await UtenteAutenticato.insertOne({
+      userId: "utenteTestGETDuplicato",
+      email: "utenteTestGETDuplicato@unitn.it",
+      username: "utenteTestGETDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestPUTDuplicato",
-      email: "utenteTestPUTDuplicato@unitn.it",
-      username: "utenteTestPUTDuplicato",
-    });
-
-    await UtenteAutenticato.insertOne({
-      userId: "utenteTestPUTDuplicato",
-      email: "utenteTestPUTDuplicato@unitn.it",
-      username: "utenteTestPUTDuplicato",
+      userId: "utenteTestGETDuplicato",
+      email: "utenteTestGETDuplicato@unitn.it",
+      username: "utenteTestGETDuplicato",
     });
   });
 
@@ -50,71 +49,36 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteTestPUT",
-          username: "utenteTestPUT10",
+          email: "utenteTestGET1@unitn.it",
         },
       });
 
-      await modificaUser(req, res);
+      await getUser(req, res);
 
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          success: "User updated correctly",
+          userId: "utenteTestGET1",
+          email: "utenteTestGET1@unitn.it",
+          username: "utenteTestGET1",
         }),
       );
     });
   });
 
   describe("400", () => {
-    test("Manca uno o piu parametri -- userId", async () => {
-      const { req, res } = createMocks({
-        method: "PUT",
-        query: {
-          username: "utenteTest1",
-        },
-      });
-
-      await modificaUser(req, res);
-
-      expect(res._getStatusCode()).toBe(400);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          error: "Parameter missing",
-        }),
-      );
-    });
-
-    test("Manca uno o piu parametri -- username", async () => {
-      const { req, res } = createMocks({
-        method: "PUT",
-        query: {
-          userId: "utenteTest1",
-        },
-      });
-
-      await modificaUser(req, res);
-
-      expect(res._getStatusCode()).toBe(400);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          error: "Parameter missing",
-        }),
-      );
-    });
-
-    test("Manca uno o piu parametri -- userId e username", async () => {
+    test("Manca il parametro", async () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {},
       });
 
-      await modificaUser(req, res);
+      await getUser(req, res);
 
       expect(res._getStatusCode()).toBe(400);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          error: "Parameter missing",
+          error: "Parameter missing or malformed",
         }),
       );
     });
@@ -125,17 +89,16 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteNonEsistente",
-          username: "utenteTest2",
+          email: "utenteNonEsiste@unitn.it",
         },
       });
 
-      await modificaUser(req, res);
+      await getUser(req, res);
 
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          error: "There is no user with that userId",
+          error: "There is no user with that email",
         }),
       );
     });
@@ -143,16 +106,15 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteTestPUTDuplicato",
-          username: "utenteTestPUTDuplicato22",
+          email: "utenteTestGETDuplicato@unitn.it",
         },
       });
-      await modificaUser(req, res);
+      await getUser(req, res);
 
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          error: "There are too many users with that userId",
+          error: "There are too many users with that email",
         }),
       );
     });

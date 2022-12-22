@@ -99,7 +99,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-async function getUser(req, res) {
+export async function getUser(req, res) {
   await dbConnect();
   try {
     const { userId } = req.query;

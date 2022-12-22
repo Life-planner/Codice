@@ -33,21 +33,19 @@ export async function cancellaTuttoUtente() {
   await UtenteAutenticato.create(
     {
       userId: "utenteTestProvaDuplicato",
-      email: "utenteTestProvaDuplicato@prova.unitn",
+      email: "utenteTestProvaDuplicato@unitn.it",
       username: "utenteTestProvaDuplicato",
     },
-    function (err, user) {
-    },
+    function (err, user) {},
   );
 
   await UtenteAutenticato.create(
     {
       userId: "utenteTestProvaDuplicato",
-      email: "utenteTestProvaDuplicato@prova.unitn",
+      email: "utenteTestProvaDuplicato@unitn.it",
       username: "utenteTestProvaDuplicato",
     },
-    function (err, user) {
-    },
+    function (err, user) {},
   );
 
   return;

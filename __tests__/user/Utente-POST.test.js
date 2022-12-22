@@ -35,7 +35,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
         method: "POST",
         query: {
           userId: "utenteTest123123",
-          email: "utenteTest123123@prova.unitn",
+          email: "utenteTest123123@unitn.it",
           username: "utenteTest123123",
         },
       });
@@ -56,7 +56,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          email: "utenteTest11@prova.unitn",
+          email: "utenteTest11@unitn.it",
           username: "utenteTest11",
         },
       });
@@ -95,7 +95,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
         method: "POST",
         query: {
           userId: "utenteTest13",
-          email: "utenteTest13@prova.unitn",
+          email: "utenteTest13@unitn.it",
         },
       });
 
@@ -131,7 +131,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          email: "utenteTest14@prova.unitn",
+          email: "utenteTest14@unitn.it",
         },
       });
 
@@ -186,7 +186,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
 
       await UtenteAutenticato.insertOne({
         userId: "utenteTestDuplicato",
-        email: "utenteTestDuplicato@prova.unitn",
+        email: "utenteTestDuplicato@unitn.it",
         username: "utenteTestDuplicato",
       });
 
@@ -194,7 +194,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
         method: "POST",
         query: {
           userId: "utenteTestDuplicato",
-          email: "utenteTestDuplicato@prova.unitn",
+          email: "utenteTestDuplicato@unitn.it",
           username: "utenteTestDuplicato",
         },
       });

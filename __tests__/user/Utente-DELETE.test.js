@@ -23,19 +23,19 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestDELETE",
-      email: "utenteTestDELETE@prova.unitn",
+      email: "utenteTestDELETE@unitn.it",
       username: "utenteTestDELETE",
     });
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestDELETEDuplicato",
-      email: "utenteTestDELETEDuplicato@prova.unitn",
+      email: "utenteTestDELETEDuplicato@unitn.it",
       username: "utenteTestDELETEDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestDELETEDuplicato",
-      email: "utenteTestDELETEDuplicato@prova.unitn",
+      email: "utenteTestDELETEDuplicato@unitn.it",
       username: "utenteTestDELETEDuplicato",
     });
   });
