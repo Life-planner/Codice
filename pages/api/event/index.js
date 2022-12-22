@@ -950,18 +950,16 @@ export async function creaEvento(req, res) {
       return;
     }
 
-    let tempLuogo;
     if (luogo != null) {
-      tempLuogo = JSON.parse(luogo);
 
       if (
-        tempLuogo.latitudine == null ||
-        tempLuogo.longitudine == null ||
+        luogo.latitudine == null ||
+        luogo.longitudine == null ||
         !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.latitudine,
+          luogo.latitudine,
         ) ||
         !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.longitudine,
+          luogo.longitudine,
         )
       ) {
         res.status(400).json({ error: "Wrong format for location" });
@@ -976,10 +974,8 @@ export async function creaEvento(req, res) {
       res.status(400).json({ error: "Wrong format for difficolta" });
       return;
     }
-    let tempNotifiche;
     if (notifiche != null) {
-      tempNotifiche = JSON.parse(notifiche);
-      if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+      if (notifiche.titolo == null || notifiche.data == null) {
         res.status(400).json({ error: "Wrong format for notifiche" });
         return;
       }
@@ -989,28 +985,24 @@ export async function creaEvento(req, res) {
       return;
     }
     if (isEventoSingolo) {
-      let tempEventoSingolo;
       if (eventoSingolo != null) {
-        tempEventoSingolo = JSON.parse(eventoSingolo);
         if (
-          tempEventoSingolo.data == null ||
-          tempEventoSingolo.isScadenza == null
+          eventoSingolo.data == null ||
+          eventoSingolo.isScadenza == null
         ) {
           res.status(400).json({ error: "Wrong format for eventoSingolo" });
           return;
         }
       }
     } else {
-      let tempEventoRipetuto;
       if (eventoRipetuto != null) {
-        tempEventoRipetuto = JSON.parse(eventoSingolo);
         if (
-          tempEventoRipetuto.numeroRipetizioni == null ||
-          tempEventoRipetuto.impostazioniAvanzate == null ||
-          tempEventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-          tempEventoRipetuto.impostazioniAvanzate.data == null ||
-          tempEventoRipetuto.numeroRipetizioni < 1 ||
-          tempEventoRipetuto.impostazioniAvanzate.giorniSettimana == []
+          eventoRipetuto.numeroRipetizioni == null ||
+          eventoRipetuto.impostazioniAvanzate == null ||
+          eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
+          eventoRipetuto.impostazioniAvanzate.data == null ||
+          eventoRipetuto.numeroRipetizioni < 1 ||
+          eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
         ) {
           res.status(400).json({ error: "Wrong format for eventoRipetuto" });
           return;
@@ -1158,18 +1150,16 @@ export async function modificaEvento(req, res) {
       return;
     }
 
-    let tempLuogo;
-    tempLuogo = JSON.parse(luogo);
-
     if (
-      tempLuogo.latitudine == null ||
-      tempLuogo.longitudine == null ||
-      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempLuogo.latitudine,
-      ) ||
-      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempLuogo.longitudine,
-      )
+      luogo != null &&
+      (luogo.latitudine == null ||
+        luogo.longitudine == null ||
+        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          luogo.latitudine,
+        ) ||
+        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          luogo.longitudine,
+        ))
     ) {
       res.status(400).json({ error: "Wrong format for location" });
       return;
@@ -1182,9 +1172,7 @@ export async function modificaEvento(req, res) {
       res.status(400).json({ error: "Wrong format for difficolta" });
       return;
     }
-    let tempNotifiche;
-    tempNotifiche = JSON.parse(notifiche);
-    if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+    if (notifiche!=null && (notifiche.titolo == null || notifiche.data == null)) {
       res.status(400).json({ error: "Wrong format for notifiche" });
       return;
     }
@@ -1193,25 +1181,18 @@ export async function modificaEvento(req, res) {
       return;
     }
     if (isEventoSingolo) {
-      let tempEventoSingolo;
-      tempEventoSingolo = JSON.parse(eventoSingolo);
-      if (
-        tempEventoSingolo.data == null ||
-        tempEventoSingolo.isScadenza == null
-      ) {
+      if (eventoSingolo.data == null || eventoSingolo.isScadenza == null) {
         res.status(400).json({ error: "Wrong format for eventoSingolo" });
         return;
       }
     } else {
-      let tempEventoRipetuto;
-      tempEventoRipetuto = JSON.parse(eventoSingolo);
       if (
-        tempEventoRipetuto.numeroRipetizioni == null ||
-        tempEventoRipetuto.impostazioniAvanzate == null ||
-        tempEventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-        tempEventoRipetuto.impostazioniAvanzate.data == null ||
-        tempEventoRipetuto.numeroRipetizioni < 1 ||
-        tempEventoRipetuto.impostazioniAvanzate.giorniSettimana == []
+        eventoRipetuto.numeroRipetizioni == null ||
+        eventoRipetuto.impostazioniAvanzate == null ||
+        eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
+        eventoRipetuto.impostazioniAvanzate.data == null ||
+        eventoRipetuto.numeroRipetizioni < 1 ||
+        eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
       ) {
         res.status(400).json({ error: "Wrong format for eventoRipetuto" });
         return;
