@@ -76,7 +76,6 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
   beforeEach(async () => {
     await db.collection("Evento").deleteMany({});
   });
-
   describe("200", () => {
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, eventoSingolo", async () => {
       const { req, res } = createMocks({
@@ -94,7 +93,6 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       });
 
       await creaEvento(req, res);
-
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
@@ -114,10 +112,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -177,10 +175,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -243,10 +241,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -311,10 +309,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -387,10 +385,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -465,10 +463,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -523,10 +521,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -583,10 +581,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -651,10 +649,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -721,10 +719,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -779,10 +777,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -846,10 +844,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -915,10 +913,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -979,10 +977,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -1045,10 +1043,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-                Sabato,
-                Domenica,
-              },
+              giorniSettimana: [
+                "Sabato",
+                "Domenica",
+              ],
               data: 1671194251689,
             },
           }
@@ -1139,7 +1137,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
 
       await creaEvento(req, res);
 
-      expect(res._getStatusCode()).toBe(200);
+      expect(res._getStatusCode()).toBe(400);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "IDCalendario or titolo or evento details missing",
@@ -1162,7 +1160,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
   
         await creaEvento(req, res);
   
-        expect(res._getStatusCode()).toBe(200);
+        expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
             success: "IDCalendario or titolo or evento details missing",
@@ -1225,6 +1223,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
+          eventoSingolo: null,
         },
       });
 
@@ -1245,6 +1244,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
           isEventoSingolo: false,
+          eventoRipetuto: null
         },
       });
 
@@ -1272,6 +1272,34 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           luogo: {
             latitudine: null,
             longitudine: null,
+          }
+        },
+      });
+
+      await creaEvento(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "Wrong format for location",
+        }),
+      );
+    });
+    test("Formato parametro luogo non corretto", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestEventoPOST",
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          isEventoSingolo: true,
+          eventoSingolo: {
+            data: 1671189531689,
+            isScadenza: true,
+          },
+          luogo: {
+            latitudine: 25.652291,
+            longitudine: 190.00,
           }
         },
       });
