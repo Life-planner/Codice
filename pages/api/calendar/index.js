@@ -805,7 +805,7 @@ export async function eliminaCalendario(req, res) {
       return;
     }
 
-    Calendario.remove(
+    Calendario.deleteMany(
       { _id: new ObjectId(objectId) },
       function (err, calendar) {
         if (err) {

@@ -21,6 +21,7 @@
     "swagger-ui-react": "^4.15.5"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/node": "18.11.12",

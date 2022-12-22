@@ -1311,7 +1311,7 @@ async function eliminaEvento(req, res) {
       return;
     }
 
-    Evento.remove({ _id: new ObjectId(IDEvento) }, function (err, event) {
+    Evento.deleteMany({ _id: new ObjectId(IDEvento) }, function (err, event) {
       if (err) {
         res.status(500).json({ error: "Event not deleted" });
         return;

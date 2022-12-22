@@ -10,20 +10,14 @@ export async function cancellaTutto() {
     try {
       await model.collection.drop();
     } catch (e) {
-    if (e.code >= 0 || e.code < 0) {
-    } else {
-      throw e;
-    }
+      if (e.code >= 0 || e.code < 0) {
+      } else {
+        throw e;
+      }
     }
   }
 }
-/**
- * Cancella la tabella UtenteAutenticato
- * Poi crea un utente con:
- *  userId: "UtenteProva1"
- *  useremail: "UtenteProva1"
- *  username: "UtenteProva1"
- */
+
 export async function cancellaTuttoUtente() {
   await dbConnect();
 
@@ -35,6 +29,26 @@ export async function cancellaTuttoUtente() {
       throw e;
     }
   }
+
+  await UtenteAutenticato.create(
+    {
+      userId: "utenteTestProvaDuplicato",
+      email: "utenteTestProvaDuplicato@prova.unitn",
+      username: "utenteTestProvaDuplicato",
+    },
+    function (err, user) {
+    },
+  );
+
+  await UtenteAutenticato.create(
+    {
+      userId: "utenteTestProvaDuplicato",
+      email: "utenteTestProvaDuplicato@prova.unitn",
+      username: "utenteTestProvaDuplicato",
+    },
+    function (err, user) {
+    },
+  );
 
   return;
 }
