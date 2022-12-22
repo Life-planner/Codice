@@ -48,7 +48,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioPOST"],
+      partecipanti: ["utenteTestEventoPOST"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -86,7 +86,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -144,7 +144,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             longitudine: 51.487782,
           },
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -209,7 +209,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           },
           priorita: 5,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -276,7 +276,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           priorita: 5,
           difficolta: 1,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -345,10 +345,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -380,7 +380,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoRipetuto: {
             numeroRipetizioni: 5,
@@ -421,11 +421,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -457,7 +457,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoRipetuto: {
@@ -493,7 +493,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: true,
           priorita: 5,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -552,7 +552,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           priorita: 5,
           difficolta: 1,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -613,10 +613,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -644,7 +644,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoRipetuto: {
             numeroRipetizioni: 5,
@@ -681,11 +681,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -713,7 +713,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoRipetuto: {
@@ -749,7 +749,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: true,
           difficolta: 1,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -809,10 +809,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -839,7 +839,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoRipetuto: {
             numeroRipetizioni: 5,
@@ -875,11 +875,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           difficolta: 1,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -907,7 +907,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           partecipanti: "corrige2",
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoRipetuto: {
@@ -943,10 +943,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: true,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -972,7 +972,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: false,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           eventoRipetuto: {
             numeroRipetizioni: 5,
@@ -1007,11 +1007,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: true,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -1037,7 +1037,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: false,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [16718931689, 16718932689],
           },
           durata: 10,
           eventoRipetuto: {
@@ -1073,7 +1073,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           isEventoSingolo: true,
           durata: 10,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           }, 
         },
@@ -1129,7 +1129,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -1140,7 +1140,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(res._getStatusCode()).toBe(400);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          success: "IDCalendario or titolo or evento details missing",
+          error: "IDCalendario or titolo or evento details missing",
         }),
       );
       });
@@ -1152,7 +1152,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             titolo: "titoloTestPostEvento",
             isEventoSingolo: true,
             eventoSingolo: {
-              data: 1671189531689,
+              data: 16718931689,
               isScadenza: true,
             },
           },
@@ -1163,7 +1163,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         expect(res._getStatusCode()).toBe(400);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
-            success: "IDCalendario or titolo or evento details missing",
+            error: "IDCalendario or titolo or evento details missing",
           }),
         );
       });
@@ -1176,7 +1176,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           IDCalendario: IDCalendarioTest,
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -1199,7 +1199,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           userId: "utenteTestEventoPOST",
           IDCalendario: IDCalendarioTest,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
         },
@@ -1266,7 +1266,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           luogo: {
@@ -1294,7 +1294,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           luogo: {
@@ -1322,7 +1322,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           luogo: {
@@ -1350,7 +1350,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           luogo: {
@@ -1378,7 +1378,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           priorita: -1,
@@ -1403,7 +1403,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           difficolta: -1,
@@ -1428,14 +1428,14 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           notifiche: {
             titolo: null,
             data: [
-              1671189531689,
-              1671189532689,
+              16718931689,
+              16718932689,
             ],
           }
         },
@@ -1459,7 +1459,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           notifiche: {
@@ -1487,7 +1487,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           notifiche: {
@@ -1515,7 +1515,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: true,
           },
           durata: -1
@@ -1540,7 +1540,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           titolo: "titoloTestPostEvento",
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: 16718931689,
             isScadenza: null,
           },
         },
@@ -1562,12 +1562,10 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
           userId: "utenteTestEventoPOST",
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
-          isEventoSingolo: true,
+          isEventoSingolo: false,
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: {
-              },
               data: 1671194251689,
             },
           }
@@ -1588,7 +1586,6 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
 
   describe("409", () => {
     test("Ci sono più di un utente con l'userId dato", async () => {
-      async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
@@ -1597,7 +1594,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             titolo: "titoloTestPostEvento",
             isEventoSingolo: true,
             eventoSingolo: {
-              data: 1671189531689,
+              data: 16718931689,
               isScadenza: true,
             },
           }
@@ -1608,13 +1605,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
-            success: "There are too many users with that userId",
+            error: "There are too many users with that userId",
           }),
         );
-      };
     });
     test("Utente non esistente", async () => {
-      async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
@@ -1623,7 +1618,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             titolo: "titoloTestPostEvento",
             isEventoSingolo: true,
             eventoSingolo: {
-              data: 1671189531689,
+              data: 16718931689,
               isScadenza: true,
             },
           }
@@ -1634,13 +1629,11 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
-            success: "There is no user with that userId",
+            error: "There is no user with that userId",
           }),
         );
-      };
     });
     test("IDcalendario non esistente o userId non possiede tale IDCalendario", async () => {
-      async () => {
         const { req, res } = createMocks({
           method: "POST",
           query: {
@@ -1649,21 +1642,20 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
             titolo: "titoloTestPostEvento",
             isEventoSingolo: true,
             eventoSingolo: {
-              data: 1671189531689,
+              data: 16718931689,
               isScadenza: true,
             },
           }
         });
 
         await creaEvento(req, res);
-
+        console.log(res._getData());
         expect(res._getStatusCode()).toBe(409);
         expect(JSON.parse(res._getData())).toEqual(
           expect.objectContaining({
-            success: "There is no calendar with that ID or you do not own the calendar",
+            error: "There is no calendar with that ID or you do not own the calendar",
           }),
         );
-      };
     });
     
   });
