@@ -913,8 +913,8 @@ export async function creaEvento(req, res) {
       titolo == null ||
       userId == null ||
       isEventoSingolo == null ||
-      (eventoSingolo == null && eventoRipetuto != null) ||
-      (eventoSingolo != null && eventoRipetuto == null)
+      (isEventoSingolo == true && eventoSingolo == null) ||
+      (isEventoSingolo == false && eventoRipetuto == null)
     ) {
       res
         .status(400)
