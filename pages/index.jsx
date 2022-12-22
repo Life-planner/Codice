@@ -15,11 +15,6 @@ export default function Home() {
       </Head>
       <div className={styles.home}>
         <Navbar />
-        {/*
-        <div className={styles.main}>
-          <Container type="large"></Container>
-        </div>
-  */}
       </div>
     </div>
   );

@@ -15,7 +15,9 @@ export default function IconButton({
         selected ? styles.selected : styles.primary
       }`}
     >
-      <span class="material-symbols-outlined">{icon}</span>
+      <span class="material-symbols-outlined" style={{ fontSize: "1.625rem" }}>
+        {icon}
+      </span>
       {text}
     </Link>
   );

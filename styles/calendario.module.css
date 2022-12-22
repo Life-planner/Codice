@@ -1,7 +1,11 @@
 .home {
-  min-height: 100vh;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   background-color: var(--backGround);
   display: flex;
+  overflow: hidden;
 }
 
 .content {
@@ -14,7 +18,7 @@
 }
 
 .calendario {
-  width: calc(100vw - 15.625rem - var(--bigGap) * 2);
+  position: relative;
   height: 100%;
   background-color: var(--base);
   border-radius: var(--borderRadius);
@@ -22,7 +26,26 @@
   min-height: 0;
 }
 
+.highlight {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: calc(var(--mediumGap) * (-1));
+  padding: 0 var(--mediumGap);
+}
+
+.highlight-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  padding-right: calc(0.5rem + 10px);
+  grid-template-columns: 2.75rem repeat(7, 1fr);
+  grid-template-rows: 1;
+  min-width: calc(7 * 10rem + 2.5rem);
+}
+
 .wrapper {
+  position: relative;
   height: 100%;
   width: 100%;
   overflow: auto;
@@ -45,4 +68,140 @@
 
 .wrapper::-webkit-scrollbar-corner {
   background-color: var(--base);
+}
+
+.grid {
+  padding-right: 0.5rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.75rem repeat(7, 1fr);
+  grid-template-rows: 3.75rem repeat(24, 6rem);
+  min-width: calc(7 * 10rem + 2.5rem);
+}
+
+.grid-absolute {
+  margin-top: 3.75rem;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding-right: 0.5rem;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 2.75rem repeat(7, 1fr);
+  grid-template-rows: repeat(24, 6rem);
+  min-width: calc(7 * 10rem + 2.5rem);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--base);
+  z-index: 1;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  height: 2px;
+  border-radius: 1rem;
+  background-color: var(--primary-100);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  top: 50%;
+  right: 0%;
+  width: 2px;
+  border-radius: 1rem;
+  background-color: var(--primary-100);
+}
+
+.header:last-child:before {
+  display: none;
+}
+
+.cell {
+  position: relative;
+}
+
+.cell::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  top: 0%;
+  right: 0%;
+  width: 2px;
+  border-radius: 1rem;
+  background-color: var(--primary-100);
+}
+
+.cell::after {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  height: 1px;
+  border-radius: 1rem;
+  background-color: var(--primary-100);
+}
+
+.last::before {
+  display: none;
+}
+
+.last2::after {
+  display: none;
+}
+
+.selected {
+  background-color: var(--primary-50);
+}
+
+.day0 {
+  padding: 0 var(--smallGap);
+  grid-row: 1 / 25;
+  grid-column: 2;
+}
+
+.day1 {
+  grid-row: 1 / 25;
+  grid-column: 3;
+}
+
+.day2 {
+  grid-row: 1 / 25;
+  grid-column: 4;
+}
+
+.day3 {
+  grid-row: 1 / 25;
+  grid-column: 5;
+}
+
+.day4 {
+  grid-row: 1 / 25;
+  grid-column: 6;
+}
+
+.day5 {
+  grid-row: 1 / 25;
+  grid-column: 7;
+}
+
+.day6 {
+  grid-row: 1 / 25;
+  grid-column: 8;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
 }
