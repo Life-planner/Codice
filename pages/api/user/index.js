@@ -397,18 +397,15 @@ export async function eliminaUser(req, res) {
       return;
     }
 
-    const eliminaUser = await UtenteAutenticato.deleteMany(
-      { userId: userId },
-      function (err, event) {
-        if (err) {
-          res.status(500).json({ error: "User not deleted" });
-          return;
-        }
-      },
-    );
+    const deleteUser = await UtenteAutenticato.deleteMany({ userId: userId });
 
-    res.status(200).json({ success: "User deleted correctly" });
-    return;
+    if (deleteUser.deletedCount >= 1) {
+      res.status(200).json({ success: "User deleted correctly" });
+      return;
+    } else {
+      res.status(500).json({ error: "User not deleted" });
+      return;
+    }
   } catch (e) {
     console.error(e);
     res.status(501).json({ error: "Generic error" });

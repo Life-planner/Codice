@@ -22,21 +22,21 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
     const UtenteAutenticato = db.collection("UtenteAutenticato");
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaDELETE",
-      email: "utenteTestProvaDELETE@prova.unitn",
-      username: "utenteTestProvaDELETE",
+      userId: "utenteTestDELETE",
+      email: "utenteTestDELETE@prova.unitn",
+      username: "utenteTestDELETE",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaDELETEDuplicato",
-      email: "utenteTestProvaDELETEDuplicato@prova.unitn",
-      username: "utenteTestProvaDELETEDuplicato",
+      userId: "utenteTestDELETEDuplicato",
+      email: "utenteTestDELETEDuplicato@prova.unitn",
+      username: "utenteTestDELETEDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaDELETEDuplicato",
-      email: "utenteTestProvaDELETEDuplicato@prova.unitn",
-      username: "utenteTestProvaDELETEDuplicato",
+      userId: "utenteTestDELETEDuplicato",
+      email: "utenteTestDELETEDuplicato@prova.unitn",
+      username: "utenteTestDELETEDuplicato",
     });
   });
 
@@ -44,24 +44,24 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
     await db.collection("UtenteAutenticato").deleteMany({});
     await connection.close();
   });
-    
-    describe("200", () => {
+
+  describe("200", () => {
     test("Utente eliminato con successo", async () => {
-        const { req, res } = createMocks({
-          method: "DELETE",
-          query: {
-            userId: "utenteTestProvaDELETE",
-          },
-        });
+      const { req, res } = createMocks({
+        method: "DELETE",
+        query: {
+          userId: "utenteTestDELETE",
+        },
+      });
 
-        await eliminaUser(req, res);
+      await eliminaUser(req, res);
 
-        expect(res._getStatusCode()).toBe(200);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            success: "User deleted correctly",
-          }),
-        );
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "User deleted correctly",
+        }),
+      );
     });
   });
 
@@ -102,21 +102,21 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
       );
     });
     test("Utente duplicato", async () => {
-        const { req, res } = createMocks({
-          method: "DELETE",
-          query: {
-            userId: "utenteTestProvaDELETEDuplicato",
-          },
-        });
+      const { req, res } = createMocks({
+        method: "DELETE",
+        query: {
+          userId: "utenteTestDELETEDuplicato",
+        },
+      });
 
-        await eliminaUser(req, res);
+      await eliminaUser(req, res);
 
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "There are too many users with that userId",
+        }),
+      );
     });
   });
 });

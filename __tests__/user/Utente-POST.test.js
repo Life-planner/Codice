@@ -9,7 +9,6 @@ const { MongoClient } = require("mongodb");
 const { creaUser } = require("../../pages/api/user/index");
 
 describe("Test di tutti i casi POST (creazione utente)", () => {
-
   let connection;
   let db;
 
@@ -35,9 +34,9 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          userId: "utenteTestProva123123",
-          email: "utenteTestProva123123@prova.unitn",
-          username: "utenteTestProva123123",
+          userId: "utenteTest123123",
+          email: "utenteTest123123@prova.unitn",
+          username: "utenteTest123123",
         },
       });
 
@@ -57,8 +56,8 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          email: "utenteTestProva11@prova.unitn",
-          username: "utenteTestProva11",
+          email: "utenteTest11@prova.unitn",
+          username: "utenteTest11",
         },
       });
 
@@ -76,8 +75,8 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          userId: "utenteTestProva12",
-          username: "utenteTestProva12",
+          userId: "utenteTest12",
+          username: "utenteTest12",
         },
       });
 
@@ -95,8 +94,8 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          userId: "utenteTestProva13",
-          email: "utenteTestProva13@prova.unitn",
+          userId: "utenteTest13",
+          email: "utenteTest13@prova.unitn",
         },
       });
 
@@ -114,7 +113,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          username: "utenteTestProva14",
+          username: "utenteTest14",
         },
       });
 
@@ -132,7 +131,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          email: "utenteTestProva14@prova.unitn",
+          email: "utenteTest14@prova.unitn",
         },
       });
 
@@ -150,7 +149,7 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          userId: "utenteTestProva15",
+          userId: "utenteTest15",
         },
       });
 
@@ -183,22 +182,20 @@ describe("Test di tutti i casi POST (creazione utente)", () => {
 
   describe("409", () => {
     test("Utente esiste gia", async () => {
-
       const UtenteAutenticato = db.collection("UtenteAutenticato");
 
       await UtenteAutenticato.insertOne({
-        userId: "utenteTestProvaDuplicato",
-        email: "utenteTestProvaDuplicato@prova.unitn",
-        username: "utenteTestProvaDuplicato",
+        userId: "utenteTestDuplicato",
+        email: "utenteTestDuplicato@prova.unitn",
+        username: "utenteTestDuplicato",
       });
-
 
       const { req, res } = createMocks({
         method: "POST",
         query: {
-          userId: "utenteTestProvaDuplicato",
-          email: "utenteTestProvaDuplicato@prova.unitn",
-          username: "utenteTestProvaDuplicato",
+          userId: "utenteTestDuplicato",
+          email: "utenteTestDuplicato@prova.unitn",
+          username: "utenteTestDuplicato",
         },
       });
       await creaUser(req, res);

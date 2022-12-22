@@ -22,21 +22,21 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
     const UtenteAutenticato = db.collection("UtenteAutenticato");
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaPUT",
-      email: "utenteTestProvaPUT@prova.unitn",
-      username: "utenteTestProvaPUT",
+      userId: "utenteTestPUT",
+      email: "utenteTestPUT@prova.unitn",
+      username: "utenteTestPUT",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaPUTDuplicato",
-      email: "utenteTestProvaPUTDuplicato@prova.unitn",
-      username: "utenteTestProvaPUTDuplicato",
+      userId: "utenteTestPUTDuplicato",
+      email: "utenteTestPUTDuplicato@prova.unitn",
+      username: "utenteTestPUTDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestProvaPUTDuplicato",
-      email: "utenteTestProvaPUTDuplicato@prova.unitn",
-      username: "utenteTestProvaPUTDuplicato",
+      userId: "utenteTestPUTDuplicato",
+      email: "utenteTestPUTDuplicato@prova.unitn",
+      username: "utenteTestPUTDuplicato",
     });
   });
 
@@ -50,8 +50,8 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteTestProvaPUT",
-          username: "utenteTestProvaPUT10",
+          userId: "utenteTestPUT",
+          username: "utenteTestPUT10",
         },
       });
 
@@ -71,7 +71,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          username: "utenteTestProva1",
+          username: "utenteTest1",
         },
       });
 
@@ -89,7 +89,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteTestProva1",
+          userId: "utenteTest1",
         },
       });
 
@@ -126,7 +126,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
         method: "PUT",
         query: {
           userId: "utenteNonEsistente",
-          username: "utenteTestProva2",
+          username: "utenteTest2",
         },
       });
 
@@ -143,8 +143,8 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
-          userId: "utenteTestProvaPUTDuplicato",
-          username: "utenteTestProvaPUTDuplicato22",
+          userId: "utenteTestPUTDuplicato",
+          username: "utenteTestPUTDuplicato22",
         },
       });
       await modificaUser(req, res);

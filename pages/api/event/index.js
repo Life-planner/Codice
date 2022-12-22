@@ -762,7 +762,7 @@ export default function handler(req, res) {
  *            Errore3:
  *             summary: Non esiste il calendario indicato o l'utente che lo ha richiesto non lo posside
  *             value:
- *              error: There is no calendar with that ID or you do not 
+ *              error: There is no calendar with that ID or you do not
  *            Errore4:
  *             summary: Non esiste l'evento o l'utente che lo ha richiesto non lo posside
  *             value:
@@ -889,7 +889,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-async function creaEvento(req, res) {
+export async function creaEvento(req, res) {
   await dbConnect();
   try {
     const {
@@ -1075,7 +1075,7 @@ async function creaEvento(req, res) {
   }
 }
 
-async function modificaEvento(req, res) {
+export async function modificaEvento(req, res) {
   await dbConnect();
   try {
     const {
@@ -1273,7 +1273,7 @@ async function modificaEvento(req, res) {
   }
 }
 
-async function eliminaEvento(req, res) {
+export async function eliminaEvento(req, res) {
   await dbConnect();
   try {
     const { IDEvento } = req.query;
@@ -1311,15 +1311,17 @@ async function eliminaEvento(req, res) {
       return;
     }
 
-    Evento.deleteMany({ _id: new ObjectId(IDEvento) }, function (err, event) {
-      if (err) {
-        res.status(500).json({ error: "Event not deleted" });
-        return;
-      }
+    const deleteEvent = await Evento.deleteMany({
+      _id: new ObjectId(IDEvento),
     });
 
-    res.status(200).json({ success: "Event deleted correctly" });
-    return;
+    if (deleteEvent.deletedCount >= 1) {
+      res.status(200).json({ success: "Event not deleted" });
+      return;
+    } else {
+      res.status(500).json({ error: "Event not deleted" });
+      return;
+    }
   } catch (e) {
     console.error(e);
     res.status(501).json({ error: "Generic error" });

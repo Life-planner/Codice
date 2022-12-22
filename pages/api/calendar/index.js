@@ -576,7 +576,7 @@ export async function creaCalendario(req, res) {
       return;
     }
 
-    if (principale === "true") {
+    if (principale === "true" || principale == true) {
       const calendariPrincipali = await Calendario.find({
         $and: [{ partecipanti: userId }, { principale: true }],
       });
@@ -805,18 +805,17 @@ export async function eliminaCalendario(req, res) {
       return;
     }
 
-    Calendario.deleteMany(
-      { _id: new ObjectId(objectId) },
-      function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Calendar not deleted" });
-          return;
-        }
-      },
-    );
 
-    res.status(200).json({ success: "Calendar deleted correctly" });
-    return;
+    const deleteCalendar = await Calendario.deleteMany({ _id: new ObjectId(objectId) });
+
+    if (deleteCalendar.deletedCount >= 1) {
+      res.status(200).json({ success: "Calendar deleted correctly" });
+      return;
+    } else {
+      res.status(500).json({ error: "Calendar not deleted" });
+      return;
+    }
+
   } catch (e) {
     console.error(e);
     res.status(501).json({ error: "Generic error" });
