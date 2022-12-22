@@ -1101,8 +1101,8 @@ export async function modificaEvento(req, res) {
       titolo == null ||
       userId == null ||
       isEventoSingolo == null ||
-      (eventoSingolo == null && eventoRipetuto != null) ||
-      (eventoSingolo != null && eventoRipetuto == null) ||
+      (isEventoSingolo == true && eventoSingolo == null) ||
+      (isEventoSingolo == false && eventoRipetuto == null) ||
       descrizione == null ||
       luogo == null ||
       partecipanti == null ||
@@ -1147,9 +1147,13 @@ export async function modificaEvento(req, res) {
       _id: new ObjectId(IDCalendario),
       partecipanti: userId,
     });
-    if (Object.keys(calendario).length == 0) {
+    if (
+      Object.keys(calendario).length == 0 ||
+      calendario[0].partecipanti[0] != userId
+    ) {
       res.status(409).json({
-        error: "There is no calendar with that ID",
+        error:
+          "There is no calendar with that ID or you do not own the calendar",
       });
       return;
     }
