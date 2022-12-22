@@ -1020,7 +1020,9 @@ export async function creaEvento(req, res) {
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
+            partecipanti == null
+              ? calendariPosseduti[0].partecipanti
+              : partecipanti,
           notifiche: notifiche == null ? undefined : notifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
@@ -1043,7 +1045,9 @@ export async function creaEvento(req, res) {
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
+            partecipanti == null
+              ? calendariPosseduti[0].partecipanti
+              : partecipanti,
           notifiche: notifiche == null ? undefined : notifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
