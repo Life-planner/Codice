@@ -1599,7 +1599,6 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       });
 
       await creaEvento(req, res);
-      console.log(res._getData());
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({

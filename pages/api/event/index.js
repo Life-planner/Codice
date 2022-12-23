@@ -1305,7 +1305,7 @@ export async function eliminaEvento(req, res) {
     });
 
     if (deleteEvent.deletedCount >= 1) {
-      res.status(200).json({ success: "Event not deleted" });
+      res.status(200).json({ success: "Event deleted correctly" });
       return;
     } else {
       res.status(500).json({ error: "Event not deleted" });

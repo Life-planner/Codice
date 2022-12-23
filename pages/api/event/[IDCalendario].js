@@ -5,7 +5,7 @@ import UtenteAutenticato from "../../../models/UtenteAutenticato";
 
 export default function handler(req, res) {
   if (req.method === "GET") {
-    getCalendari(req, res);
+    getEventi(req, res);
   }
 }
 
@@ -214,7 +214,7 @@ export default function handler(req, res) {
  *
  */
 
-async function getCalendari(req, res) {
+export async function getEventi(req, res) {
   await dbConnect();
   try {
     const { IDCalendario } = req.query;
@@ -255,7 +255,7 @@ async function getCalendari(req, res) {
         { IDCalendario: new ObjectId(IDCalendario) },
       ],
     });
-    if (Object.keys(calendari).length == 0) {
+    if (Object.keys(calendariPosseduti).length == 0) {
       res
         .status(409)
         .json({
