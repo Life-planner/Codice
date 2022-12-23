@@ -17,6 +17,15 @@ const customJestConfig = {
   testEnvironment: "node",
   preset: "@shelf/jest-mongodb",
   watchPathIgnorePatterns: ["globalConfig"],
+  reporters: [
+    "default",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        pageTitle: "PlanIt test results",
+      },
+    ],
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
