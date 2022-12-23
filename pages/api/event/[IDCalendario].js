@@ -124,46 +124,46 @@ export default function handler(req, res) {
  *             summary: Esempio di un meeting
  *             value:
  *              eventi:
- *               IDCalendario: 6396bd239161940e645f15cb
- *               titolo: Meeting Lavazza
- *               descrizione: 
- *               luogo:
- *                latitudine: ""
- *                longitudine: ""
- *               priorita: 10
- *               difficolta: 7
- *               partecipanti: [User1, Rappresentante3]
- *               notifiche: 
- *                titolo: Meeting Lavazza
- *                data: 1671689450
- *               durata: 90 
- *               isEventoSingolo: true
- *               eventoSingolo:
- *                data: 1671689509
- *                isScadenza: false
+ *               - IDCalendario: 6396bd239161940e645f15cb
+ *                 titolo: Meeting Lavazza
+ *                 descrizione:
+ *                 luogo:
+ *                  latitudine: ""
+ *                  longitudine: ""
+ *                 priorita: 10
+ *                 difficolta: 7
+ *                 partecipanti: [User1, Rappresentante3]
+ *                 notifiche:
+ *                  titolo: Meeting Lavazza
+ *                  data: 1671689450
+ *                 durata: 90
+ *                 isEventoSingolo: true
+ *                 eventoSingolo:
+ *                  data: 1671689509
+ *                  isScadenza: false
  *            Lezione:
  *             summary: Esempio di una lezione
  *             value:
  *              eventi:
- *               IDCalendario: 6396bd239161940e645f15cb
- *               titolo: Lezione Analisi 
- *               descrizione: 
- *               luogo:
- *                latitudine: ""
- *                longitudine: ""
- *               priorita: 7
- *               difficolta: 10
- *               partecipanti: [User1,]
- *               notifiche: 
- *                titolo:
- *                data: 
- *               durata: 120 
- *               isEventoSingolo: false
- *               eventoRipetuto: 
- *                numeroRipetizioni: 24
- *                impostazioniAvanzate:
- *                 giorniSettimana: [Lunedi, Giovedi]
- *                 data: 1671692400
+ *               - IDCalendario: 6396bd239161940e645f15cb
+ *                 titolo: Lezione Analisi
+ *                 descrizione:
+ *                 luogo:
+ *                  latitudine: ""
+ *                  longitudine: ""
+ *                 priorita: 7
+ *                 difficolta: 10
+ *                 partecipanti: [User1,]
+ *                 notifiche:
+ *                  titolo:
+ *                  data:
+ *                 durata: 120
+ *                 isEventoSingolo: false
+ *                 eventoRipetuto:
+ *                  numeroRipetizioni: 24
+ *                  impostazioniAvanzate:
+ *                   giorniSettimana: [Lunedi, Giovedi]
+ *                   data: 1671692400
  *
  *       400:
  *         description: Manca il parametro userId o IDCalendario, verra restituito "Parameter missing"
@@ -255,12 +255,10 @@ export async function getEventi(req, res) {
         { IDCalendario: new ObjectId(IDCalendario) },
       ],
     });
-    if (Object.keys(calendariPosseduti).length == 0) {
-      res
-        .status(409)
-        .json({
-          error: "There are no events with that userId and IDCalendario",
-        });
+    if (Object.keys(eventi).length == 0) {
+      res.status(409).json({
+        error: "There are no events with that userId and IDCalendario",
+      });
       return;
     }
     res.status(200).json({

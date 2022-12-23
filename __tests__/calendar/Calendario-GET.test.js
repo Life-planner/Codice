@@ -6,13 +6,14 @@ import "@testing-library/jest-dom";
 
 const { MongoClient } = require("mongodb");
 
-const { eliminaCalendario } = require("../../pages/api/calendar/index");
+const { getCalendari } = require("../../pages/api/calendar/[userId]");
 
 describe("Test di tutti i casi DELETE (elimina calendario)", () => {
   let connection;
   let db;
-  let IDCalendarioTest;
-  let IDCalendarioTestNonEsistente;
+  let IDCalendarioTest1;
+  let IDCalendarioTest2;
+  let IDCalendarioTest3;
 
   beforeAll(async () => {
     connection = await MongoClient.connect(process.env.MONGODB_URI, {
@@ -24,9 +25,19 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
     const UtenteAutenticato = db.collection("UtenteAutenticato");
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETE",
-      email: "utenteTestCalendarioDELETE@unitn.it",
-      username: "utenteTestCalendarioDELETE",
+      userId: "utenteTestCalendarioDELETE1calendario",
+      email: "utenteTestCalendarioDELETE1calendario@unitn.it",
+      username: "utenteTestCalendarioDELETE1calendario",
+    });
+    await UtenteAutenticato.insertOne({
+      userId: "utenteTestCalendarioDELETE2calendari",
+      email: "utenteTestCalendarioDELETE2calendari@unitn.it",
+      username: "utenteTestCalendarioDELETE2calendari",
+    });
+    await UtenteAutenticato.insertOne({
+      userId: "utenteTestCalendarioDELETESenzaCalendari",
+      email: "utenteTestCalendarioDELETESenzaCalendari@unitn.it",
+      username: "utenteTestCalendarioDELETESenzaCalendari",
     });
     await UtenteAutenticato.insertOne({
       userId: "utenteTestCalendarioDELETEDuplicato",
@@ -42,14 +53,14 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
 
     const CalendarioInserimento = db.collection("Calendario");
 
-    IDCalendarioTest = await CalendarioInserimento.insertOne({
-      nome: "calendarioTestEventoPOST",
+    IDCalendarioTest1 = await CalendarioInserimento.insertOne({
+      nome: "calendarioTestEventoPOST1",
       fusoOrario: {
         GMTOffset: -5,
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioDELETE"],
+      partecipanti: ["utenteTestCalendarioDELETE2calendari"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -64,16 +75,16 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTest = String(IDCalendarioTest.insertedId);
+    IDCalendarioTest1 = String(IDCalendarioTest1.insertedId);
 
-    IDCalendarioTestNonEsistente = await CalendarioInserimento.insertOne({
-      nome: "calendarioTestEventoPOST",
+    IDCalendarioTest2 = await CalendarioInserimento.insertOne({
+      nome: "calendarioTestEventoPOST2",
       fusoOrario: {
         GMTOffset: -5,
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioNonEsistente"],
+      partecipanti: ["utenteTestCalendarioDELETE2calendari"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -88,7 +99,31 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTestNonEsistente = String(IDCalendarioTestNonEsistente.insertedId);
+    IDCalendarioTest2 = String(IDCalendarioTest2.insertedId);
+
+    IDCalendarioTest3 = await CalendarioInserimento.insertOne({
+      nome: "calendarioTestEventoPOST3",
+      fusoOrario: {
+        GMTOffset: -5,
+        localita: "New York",
+      },
+      colore: "#7C36B9",
+      partecipanti: ["utenteTestCalendarioDELETE1calendario"],
+      principale: true,
+      impostazioniPredefiniteEventi: {
+        titolo: "",
+        descrizione: "",
+        durata: 30,
+        tempAnticNotifica: 30,
+        luogo: {
+          latitudine: "",
+          longitudine: "",
+        },
+        priorita: 6,
+        difficolta: 6,
+      },
+    });
+    IDCalendarioTest3 = String(IDCalendarioTest3.insertedId);
   });
 
   afterAll(async () => {
@@ -98,68 +133,39 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
   });
 
   describe("200", () => {
-    test("Calendario modificato con successo con userId, nome del Calendario", async () => {
+    test("Get calendario utente con 1 calendario", async () => {
       const { req, res } = createMocks({
-        method: "DELETE",
+        method: "GET",
         query: {
-          IDCalendario: IDCalendarioTest,
-          userId: "utenteTestCalendarioDELETE",
+          userId: "utenteTestCalendarioDELETE1calendario",
         },
       });
 
-      await eliminaCalendario(req, res);
+      await getCalendari(req, res);
 
       expect(res._getStatusCode()).toBe(200);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          success: "Calendar deleted correctly",
-        }),
-      );
+    });
+    test("Get calendario utente con 2 calendari", async () => {
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: "utenteTestCalendarioDELETE2calendari",
+        },
+      });
+
+      await getCalendari(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
     });
   });
   describe("400", () => {
-    test("Manca un parametro -- IDCalendario", async () => {
+    test("Manca il parametro userId", async () => {
       const { req, res } = createMocks({
-        method: "DELETE",
-        query: {
-          userId: "utenteTestCalendarioDELETE",
-        },
-      });
-
-      await eliminaCalendario(req, res);
-
-      expect(res._getStatusCode()).toBe(400);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          error: "Parameter missing",
-        }),
-      );
-    });
-    test("Manca un parametro -- userId", async () => {
-      const { req, res } = createMocks({
-        method: "DELETE",
-        query: {
-          IDCalendario: IDCalendarioTest,
-        },
-      });
-
-      await eliminaCalendario(req, res);
-
-      expect(res._getStatusCode()).toBe(400);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          error: "Parameter missing",
-        }),
-      );
-    });
-    test("Manca un parametro -- IDCalendario, userId", async () => {
-      const { req, res } = createMocks({
-        method: "DELETE",
+        method: "GET",
         query: {},
       });
 
-      await eliminaCalendario(req, res);
-
+      await getCalendari(req, res);
       expect(res._getStatusCode()).toBe(400);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
@@ -169,17 +175,15 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
     });
   });
   describe("409", () => {
-    test("Manca l'utente con l'userId specificato", async () => {
+    test("Manca l'account con l'userId specificato", async () => {
       const { req, res } = createMocks({
-        method: "DELETE",
+        method: "GET",
         query: {
-          IDCalendario: IDCalendarioTest,
-          userId: "utenteTestCalendarioNonEsistente",
+          userId: "utenteTestCalendarioDELETENonEsistente",
         },
       });
 
-      await eliminaCalendario(req, res);
-
+      await getCalendari(req, res);
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
@@ -187,17 +191,15 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
         }),
       );
     });
-    test("Troppi utenti con l'userId specificato", async () => {
+    test("E' stato trovato piu di un utente con l'userId specificato", async () => {
       const { req, res } = createMocks({
-        method: "DELETE",
+        method: "GET",
         query: {
-          IDCalendario: IDCalendarioTest,
           userId: "utenteTestCalendarioDELETEDuplicato",
         },
       });
 
-      await eliminaCalendario(req, res);
-
+      await getCalendari(req, res);
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
@@ -205,21 +207,19 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
         }),
       );
     });
-    test("L'utente con l'userId specificato non possiede il calendario", async () => {
+    test("L'utente con l'userId specificato non ha calendari", async () => {
       const { req, res } = createMocks({
-        method: "DELETE",
+        method: "GET",
         query: {
-          IDCalendario: IDCalendarioTestNonEsistente,
-          userId: "utenteTestCalendarioDELETE",
+          userId: "utenteTestCalendarioDELETESenzaCalendari",
         },
       });
 
-      await eliminaCalendario(req, res);
-
+      await getCalendari(req, res);
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          error: "You do not own the calendar",
+          error: "There are no calendars with that userId",
         }),
       );
     });

@@ -92,48 +92,50 @@ export default function handler(req, res) {
  *                   type: integer
  *                   minimum: 1
  *                   maximum: 10
- * 
+ *
  *           examples:
  *            Compleanno:
  *             summary: Esempio di un calendario per compleanni
  *             value:
- *              nome: "Compleanni"
- *              fusoOrario: 
- *               GMTOffset: 0
- *               localita: "London"
- *              colore: "#FFAAFF"
- *              partecipanti: [User1, User2, User3]
- *              principale: false
- *              impostazioniPredefiniteEventi: 
- *               titolo: "Compleanno"
- *               descrizione: "Compleanno di"
- *               durata: 1440
- *               tempAnticNotifica: 1440
- *               luogo:
- *                latitudine: "12N"
- *                longitudine: "13E"
- *               priorita: 7
- *               difficolta: 1
+ *              calendari:
+ *               - nome: "Compleanni"
+ *                 fusoOrario:
+ *                  GMTOffset: 0
+ *                  localita: "London"
+ *                 colore: "#FFAAFF"
+ *                 partecipanti: [User1, User2, User3]
+ *                 principale: false
+ *                 impostazioniPredefiniteEventi:
+ *                  titolo: "Compleanno"
+ *                  descrizione: "Compleanno di"
+ *                  durata: 1440
+ *                  tempAnticNotifica: 1440
+ *                  luogo:
+ *                   latitudine: "12N"
+ *                   longitudine: "13E"
+ *                  priorita: 7
+ *                  difficolta: 1
  *            Lavoro:
  *             summary: Esempio di un calendario di lavoro
  *             value:
- *              nome: "Lavoro"
- *              fusoOrario: 
- *               GMTOffset: -5
- *               localita: "NewYork"
- *              colore: "#FF0000"
- *              partecipanti: [User1, User3]
- *              principale: false
- *              impostazioniPredefiniteEventi: 
- *               titolo: "Meeting"
- *               descrizione: "Aggiornamento su "
- *               durata: 30
- *               tempAnticNotifica: 10
- *               luogo:
- *                latitudine: "12N"
- *                longitudine: "1E"
- *               priorita: 5
- *               difficolta: 6
+ *              calendari:
+ *               - nome: "Lavoro"
+ *                 fusoOrario:
+ *                  GMTOffset: -5
+ *                  localita: "NewYork"
+ *                 colore: "#FF0000"
+ *                 partecipanti: [User1, User3]
+ *                 principale: false
+ *                 impostazioniPredefiniteEventi:
+ *                  titolo: "Meeting"
+ *                  descrizione: "Aggiornamento su "
+ *                  durata: 30
+ *                  tempAnticNotifica: 10
+ *                  luogo:
+ *                   latitudine: "12N"
+ *                   longitudine: "1E"
+ *                  priorita: 5
+ *                  difficolta: 6
  *
  *       400:
  *         description: Manca il parametro userId, verra restituito "Parameter missing"
@@ -179,7 +181,7 @@ export default function handler(req, res) {
  *               example: Generic error
  */
 
-async function getCalendari(req, res) {
+export async function getCalendari(req, res) {
   await dbConnect();
   try {
     const { userId } = req.query;
