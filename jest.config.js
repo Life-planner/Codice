@@ -23,6 +23,9 @@ const customJestConfig = {
       "./node_modules/jest-html-reporter",
       {
         pageTitle: "PlanIt test results",
+        outputPath: "./public/test-report.html",
+        executionTimeWarningThreshold: 10,
+        logo: "./public/favicon.png",
       },
     ],
   ],

@@ -8,7 +8,7 @@ const { MongoClient } = require("mongodb");
 
 const { getCalendari } = require("../../pages/api/calendar/[userId]");
 
-describe("Test di tutti i casi DELETE (elimina calendario)", () => {
+describe("Test di tutti i casi GET (ottieni calendari)", () => {
   let connection;
   let db;
   let IDCalendarioTest1;
