@@ -23,7 +23,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestCalendarioPOST",
-      email: "utenteTestCalendarioPOST@prova.unitn.it",
+      email: "utenteTestCalendarioPOST@unitn.it",
       username: "utenteTestCalendarioPOST",
     });
     await UtenteAutenticato.insertOne({

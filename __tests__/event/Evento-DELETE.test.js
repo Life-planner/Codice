@@ -25,7 +25,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestEventoDELETE",
-      email: "utenteTestEventoDELETE@prova.unitn.it",
+      email: "utenteTestEventoDELETE@unitn.it",
       username: "utenteTestEventoDELETE",
     });
     await UtenteAutenticato.insertOne({
@@ -65,8 +65,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTest = IDCalendarioTest.insertedId;
-
+    IDCalendarioTest = String(IDCalendarioTest.insertedId);
 
     const EventoInserimento = db.collection("Evento");
     IDEventoTest = await EventoInserimento.insertOne({
@@ -93,7 +92,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       },
       eventoRipetuto: null,
     });
-    IDEventoTest = IDEventoTest.insertedId;
+    IDEventoTest = String(IDEventoTest.insertedId);
   });
 
   afterAll(async () => {
@@ -108,13 +107,12 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-            userId: "utenteTestEventoDELETE",
-            IDEvento: IDEventoTest,
+          userId: "utenteTestEventoDELETE",
+          IDEvento: IDEventoTest,
         },
-    });
+      });
 
       await eliminaEvento(req, res);
-      console.log(res._getData());
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
@@ -126,93 +124,93 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
 
   describe("400", () => {
     test("Manca il parametro userId", async () => {
-        const { req, res } = createMocks({
-          method: "GET",
-          query: {
-              userId: null,
-              IDEvento: IDEventoTest,
-          },
-      });
-  
-        await eliminaEvento(req, res);
-        expect(res._getStatusCode()).toBe(400);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "Parameter missing",
-          }),
-        );
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: null,
+          IDEvento: IDEventoTest,
+        },
       });
 
-      test("Manca il parametro EventoID", async () => {
-        const { req, res } = createMocks({
-          method: "GET",
-          query: {
-              userId: "utenteTestEventoDELETE",
-              IDEvento: null
-          },
+      await eliminaEvento(req, res);
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "Parameter missing",
+        }),
+      );
+    });
+
+    test("Manca il parametro EventoID", async () => {
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: "utenteTestEventoDELETE",
+          IDEvento: null,
+        },
       });
-  
-        await eliminaEvento(req, res);
-        expect(res._getStatusCode()).toBe(400);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "Parameter missing",
-          }),
-        );
-      });
+
+      await eliminaEvento(req, res);
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "Parameter missing",
+        }),
+      );
+    });
   });
 
   describe("409", () => {
     test("Utente non esistente", async () => {
-        const { req, res } = createMocks({
-          method: "GET",
-          query: {
-              userId: "utenteNonEsistente",
-              IDEvento: IDEventoTest,
-          },
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: "utenteNonEsistente",
+          IDEvento: IDEventoTest,
+        },
       });
-  
-        await eliminaEvento(req, res);
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There is no user with that userId",
-          }),
-        );
-      });
+
+      await eliminaEvento(req, res);
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "There is no user with that userId",
+        }),
+      );
+    });
     test("Esiste più di un utente con l'userId inserito", async () => {
-        const { req, res } = createMocks({
-          method: "GET",
-          query: {
-              userId: "utenteTestEventoDELETEDuplicato",
-              IDEvento: IDEventoTest,
-          },
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: "utenteTestEventoDELETEDuplicato",
+          IDEvento: IDEventoTest,
+        },
       });
-  
-        await eliminaEvento(req, res);
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "There are too many users with that userId",
-          }),
-        );
-      });
+
+      await eliminaEvento(req, res);
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "There are too many users with that userId",
+        }),
+      );
+    });
     test("Non sono stati trovati calendari con IDCalendario o l'userID dato", async () => {
-        const { req, res } = createMocks({
-          method: "GET",
-          query: {
-              userId: "utenteTestEventoDELETE",
-              IDEvento: "EventoNonEsistente",
-          },
+      const { req, res } = createMocks({
+        method: "GET",
+        query: {
+          userId: "utenteTestEventoDELETE",
+          IDEvento: "6396bd239161940e645f15cb",
+        },
       });
-  
-        await eliminaEvento(req, res);
-        expect(res._getStatusCode()).toBe(409);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            error: "You do not own the event",
-          }),
-        );
-      });
+
+      await eliminaEvento(req, res);
+      expect(res._getStatusCode()).toBe(409);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          error: "You do not own the event",
+        }),
+      );
+    });
   });
 });

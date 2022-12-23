@@ -131,11 +131,7 @@
                         "localita": "London"
                       },
                       "colore": "#FFAAFF",
-                      "partecipanti": [
-                        "User1",
-                        "User2",
-                        "User3"
-                      ],
+                      "partecipanti": ["User1", "User2", "User3"],
                       "principale": false,
                       "impostazioniPredefiniteEventi": {
                         "titolo": "Compleanno",
@@ -160,10 +156,7 @@
                         "localita": "NewYork"
                       },
                       "colore": "#FF0000",
-                      "partecipanti": [
-                        "User1",
-                        "User3"
-                      ],
+                      "partecipanti": ["User1", "User3"],
                       "principale": false,
                       "impostazioniPredefiniteEventi": {
                         "titolo": "Meeting",
@@ -416,7 +409,7 @@
             }
           },
           "400": {
-            "description": "Se manca il nome, verra restituito \"Name missing\" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se il il valore GTMOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"",
+            "description": "Se manca il nome, verra restituito \"Name missing\" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -441,7 +434,7 @@
                     }
                   },
                   "Errore3": {
-                    "summary": "Formato del valore GTMOffset non valido",
+                    "summary": "Formato del valore GMTOffset non valido",
                     "value": {
                       "error": "Wrong format for time zone"
                     }
@@ -686,38 +679,23 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": [
-                  "User1"
-                ]
+                "value": ["User1"]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": [
-                  "User1",
-                  "User2"
-                ]
+                "value": ["User1", "User2"]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": [
-                  "User1",
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User1", "User2", "User3"]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": [
-                  "User1",
-                  "User3"
-                ]
+                "value": ["User1", "User3"]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": [
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User2", "User3"]
               }
             }
           },
@@ -807,7 +785,7 @@
             }
           },
           "400": {
-            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GTMOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
+            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -826,7 +804,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Formato del valore GTMOffset non valido",
+                    "summary": "Formato del valore GMTOffset non valido",
                     "value": {
                       "error": "Wrong format for time zone"
                     }
@@ -1195,11 +1173,7 @@
                         "localita": "London"
                       },
                       "colore": "#FFAAFF",
-                      "partecipanti": [
-                        "User1",
-                        "User2",
-                        "User3"
-                      ],
+                      "partecipanti": ["User1", "User2", "User3"],
                       "principale": false,
                       "impostazioniPredefiniteEventi": {
                         "titolo": "Compleanno",
@@ -1224,10 +1198,7 @@
                         "localita": "NewYork"
                       },
                       "colore": "#FF0000",
-                      "partecipanti": [
-                        "User1",
-                        "User3"
-                      ],
+                      "partecipanti": ["User1", "User3"],
                       "principale": false,
                       "impostazioniPredefiniteEventi": {
                         "titolo": "Meeting",
@@ -1517,38 +1488,23 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": [
-                  "User1"
-                ]
+                "value": ["User1"]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": [
-                  "User1",
-                  "User2"
-                ]
+                "value": ["User1", "User2"]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": [
-                  "User1",
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User1", "User2", "User3"]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": [
-                  "User1",
-                  "User3"
-                ]
+                "value": ["User1", "User3"]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": [
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User2", "User3"]
               }
             }
           },
@@ -1566,9 +1522,7 @@
                       "type": "string"
                     },
                     "data": {
-                      "type": [
-                        "date"
-                      ]
+                      "type": ["date"]
                     }
                   }
                 }
@@ -1579,28 +1533,21 @@
                 "summary": "Partita tra poco",
                 "value": {
                   "titolo": "Partita tra poco",
-                  "data": [
-                    1671189531689,
-                    1671189532689
-                  ]
+                  "data": [1671189531689, 1671189532689]
                 }
               },
               "Lezione": {
                 "summary": "Lezione tra poco",
                 "value": {
                   "titolo": "Lezione tra poco",
-                  "data": [
-                    1671189531689
-                  ]
+                  "data": [1671189531689]
                 }
               },
               "Appuntamento": {
                 "summary": "Appuntamento tra poco",
                 "value": {
                   "titolo": "Appuntamento tra poco",
-                  "data": [
-                    1671194251689
-                  ]
+                  "data": [1671194251689]
                 }
               }
             }
@@ -1708,9 +1655,7 @@
                       "type": "object",
                       "properties": {
                         "giorniSettimana": {
-                          "type": [
-                            "string"
-                          ]
+                          "type": ["string"]
                         },
                         "data": {
                           "type": "date"
@@ -1727,10 +1672,7 @@
                 "value": {
                   "numeroRipetizioni": 5,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": [
-                      "Sabato",
-                      "Domenica"
-                    ],
+                    "giorniSettimana": ["Sabato", "Domenica"],
                     "data": 1671194251689
                   }
                 }
@@ -1740,10 +1682,7 @@
                 "value": {
                   "numeroRipetizioni": 20,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": [
-                      "Lunedi",
-                      "Mercoledi"
-                    ],
+                    "giorniSettimana": ["Lunedi", "Mercoledi"],
                     "data": 1671194251689
                   }
                 }
@@ -1753,9 +1692,7 @@
                 "value": {
                   "numeroRipetizioni": 5,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": [
-                      "Mercoeldi"
-                    ],
+                    "giorniSettimana": ["Mercoeldi"],
                     "data": 1671194253689
                   }
                 }
@@ -1806,7 +1743,7 @@
                     }
                   },
                   "Errore3": {
-                    "summary": "Formato del valore GTMOffset non valido",
+                    "summary": "Formato del valore GMTOffset non valido",
                     "value": {
                       "error": "Wrong format for time zone"
                     }
@@ -2051,38 +1988,23 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": [
-                  "User1"
-                ]
+                "value": ["User1"]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": [
-                  "User1",
-                  "User2"
-                ]
+                "value": ["User1", "User2"]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": [
-                  "User1",
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User1", "User2", "User3"]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": [
-                  "User1",
-                  "User3"
-                ]
+                "value": ["User1", "User3"]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": [
-                  "User2",
-                  "User3"
-                ]
+                "value": ["User2", "User3"]
               }
             }
           },
@@ -2172,7 +2094,7 @@
             }
           },
           "400": {
-            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GTMOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
+            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2191,7 +2113,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Formato del valore GTMOffset non valido",
+                    "summary": "Formato del valore GMTOffset non valido",
                     "value": {
                       "error": "Wrong format for time zone"
                     }

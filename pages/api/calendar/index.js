@@ -129,7 +129,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar inserted correctly
  *       400:
- *         description: Se manca il nome, verra restituito "Name missing" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se il il valore GTMOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"
+ *         description: Se manca il nome, verra restituito "Name missing" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"
  *         content:
  *          application/json:
  *           schema:
@@ -147,7 +147,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format for color
  *            Errore3:
- *             summary: Formato del valore GTMOffset non valido
+ *             summary: Formato del valore GMTOffset non valido
  *             value:
  *              error: Wrong format for time zone
  *       409:
@@ -193,7 +193,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Generic error
  *   put:
- *     description: Modifica i valori di un calendario dato l'objectId del calendario stesso e gli attributi da modificare
+ *     description: Modifica i valori di un calendario dato l'IDCalendario del calendario stesso e gli attributi da modificare
  *     parameters:
  *       - name: userId
  *         in: query
@@ -211,7 +211,7 @@ export default function handler(req, res) {
  *          Utente3:
  *           summary: Utente3
  *           value: User3
- *       - name: objectId
+ *       - name: IDCalendario
  *         in: query
  *         description: Id del documento all'interno del DataBase
  *         required: true
@@ -383,7 +383,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar updated correctly
  *       400:
- *         description: Se manca uno o piu parametri, verra restituito "Parameter missing" <br>Se il il valore GTMOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se le impostazioni predefinite non sono valide, verra restituito "Wrong format impostazioni predefinite"
+ *         description: Se manca uno o piu parametri, verra restituito "Parameter missing" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se le impostazioni predefinite non sono valide, verra restituito "Wrong format impostazioni predefinite"
  *         content:
  *          application/json:
  *           schema:
@@ -397,7 +397,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Parameter missing
  *            Errore2:
- *             summary: Formato del valore GTMOffset non valido
+ *             summary: Formato del valore GMTOffset non valido
  *             value:
  *              error: Wrong format for time zone
  *            Errore3:
@@ -451,7 +451,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Generic error
  *   delete:
- *     description: Elimina un calendario dato l'objectId
+ *     description: Elimina un calendario dato l'IDCalendario
  *     parameters:
  *       - name: userId
  *         in: query
@@ -469,7 +469,7 @@ export default function handler(req, res) {
  *          Utente3:
  *           summary: Utente3
  *           value: User3
- *       - name: objectId
+ *       - name: IDCalendario
  *         in: query
  *         description: Id del documento all'interno del DataBase
  *         required: true
@@ -635,23 +635,36 @@ export async function modificaCalendario(req, res) {
   await dbConnect();
   try {
     const {
-      objectId,
+      IDCalendario,
       nome,
       fusoOrario,
       colore,
       partecipanti,
+      principale,
       impostazioniPredefiniteEventi,
     } = req.query;
     const { userId } = req.query;
 
     if (
-      objectId == null ||
+      IDCalendario == null ||
+      userId == null ||
       nome == null ||
       fusoOrario == null ||
+      fusoOrario.GMTOffset == null ||
+      fusoOrario.localita == null ||
       colore == null ||
       partecipanti == null ||
+      principale == null ||
       impostazioniPredefiniteEventi == null ||
-      userId == null
+      impostazioniPredefiniteEventi.titolo == null ||
+      impostazioniPredefiniteEventi.descrizione == null ||
+      impostazioniPredefiniteEventi.durata == null ||
+      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      impostazioniPredefiniteEventi.luogo == null ||
+      impostazioniPredefiniteEventi.luogo.latitudine == null ||
+      impostazioniPredefiniteEventi.luogo.longitudine == null ||
+      impostazioniPredefiniteEventi.priorita == null ||
+      impostazioniPredefiniteEventi.difficolta == null
     ) {
       res.status(400).json({ error: "Parameter missing" });
       return;
@@ -672,7 +685,7 @@ export async function modificaCalendario(req, res) {
     var ObjectId = require("mongoose").Types.ObjectId;
 
     const calendariPosseduti = await Calendario.find({
-      $and: [{ partecipanti: userId }, { _id: new ObjectId(objectId) }],
+      $and: [{ partecipanti: userId }, { _id: new ObjectId(IDCalendario) }],
     });
     if (
       Object.keys(calendariPosseduti).length == 0 ||
@@ -684,12 +697,12 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    let tempFusoOrario = JSON.parse(fusoOrario);
     if (
-      tempFusoOrario.GMTOffset == null ||
-      tempFusoOrario.localita == null ||
-      tempFusoOrario.GMTOffset > 12 ||
-      tempFusoOrario.GMTOffset < -12
+      fusoOrario != null &&
+      (fusoOrario.GMTOffset == null ||
+        fusoOrario.localita == null ||
+        fusoOrario.GMTOffset > 12 ||
+        fusoOrario.GMTOffset < -12)
     ) {
       res.status(400).json({ error: "Wrong format for time zone" });
       return;
@@ -711,44 +724,40 @@ export async function modificaCalendario(req, res) {
     }
 */
 
-    let tempImpostazioniPredefiniteEventi = JSON.parse(
-      impostazioniPredefiniteEventi,
-    );
-
     if (
-      tempImpostazioniPredefiniteEventi.titolo == null ||
-      tempImpostazioniPredefiniteEventi.descrizione == null ||
-      tempImpostazioniPredefiniteEventi.durata == null ||
-      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      tempImpostazioniPredefiniteEventi.luogo == null ||
-      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
-      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      impostazioniPredefiniteEventi.titolo == null ||
+      impostazioniPredefiniteEventi.descrizione == null ||
+      impostazioniPredefiniteEventi.durata == null ||
+      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      impostazioniPredefiniteEventi.luogo == null ||
+      impostazioniPredefiniteEventi.luogo.latitudine == null ||
+      impostazioniPredefiniteEventi.luogo.longitudine == null ||
       !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempImpostazioniPredefiniteEventi.luogo.latitudine,
+        impostazioniPredefiniteEventi.luogo.latitudine,
       ) ||
       !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempImpostazioniPredefiniteEventi.luogo.longitudine,
+        impostazioniPredefiniteEventi.luogo.longitudine,
       ) ||
-      tempImpostazioniPredefiniteEventi.priorita == null ||
-      tempImpostazioniPredefiniteEventi.priorita <= 0 ||
-      tempImpostazioniPredefiniteEventi.priorita > 10 ||
-      tempImpostazioniPredefiniteEventi.difficolta == null ||
-      tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
-      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
-      tempImpostazioniPredefiniteEventi.durata <= 0 ||
-      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+      impostazioniPredefiniteEventi.priorita == null ||
+      impostazioniPredefiniteEventi.priorita <= 0 ||
+      impostazioniPredefiniteEventi.priorita > 10 ||
+      impostazioniPredefiniteEventi.difficolta == null ||
+      impostazioniPredefiniteEventi.difficolta <= 0 ||
+      impostazioniPredefiniteEventi.difficolta > 10 ||
+      impostazioniPredefiniteEventi.durata <= 0 ||
+      impostazioniPredefiniteEventi.tempAnticNotifica < 0
     ) {
       res.status(400).json({ error: "Wrong format impostazioni predefinite" });
       return;
     }
     Calendario.updateMany(
-      { _id: new ObjectId(objectId) },
+      { _id: new ObjectId(IDCalendario) },
       {
         nome: nome,
-        fusoOrario: tempFusoOrario,
+        fusoOrario: fusoOrario,
         colore: colore,
-        partecipanti: tempPartecipanti,
-        impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
+        partecipanti: partecipanti,
+        impostazioniPredefiniteEventi: impostazioniPredefiniteEventi,
       },
       function (err, calendar) {
         if (err) {
@@ -770,10 +779,10 @@ export async function modificaCalendario(req, res) {
 export async function eliminaCalendario(req, res) {
   await dbConnect();
   try {
-    const { objectId } = req.query;
+    const { IDCalendario } = req.query;
     const { userId } = req.query;
 
-    if (objectId == null || userId == null) {
+    if (IDCalendario == null || userId == null) {
       res.status(400).json({ error: "Parameter missing" });
       return;
     }
@@ -793,7 +802,7 @@ export async function eliminaCalendario(req, res) {
     var ObjectId = require("mongoose").Types.ObjectId;
 
     const calendariPosseduti = await Calendario.find({
-      $and: [{ partecipanti: userId }, { _id: new ObjectId(objectId) }],
+      $and: [{ partecipanti: userId }, { _id: new ObjectId(IDCalendario) }],
     });
     if (
       Object.keys(calendariPosseduti).length == 0 ||
@@ -805,8 +814,9 @@ export async function eliminaCalendario(req, res) {
       return;
     }
 
-
-    const deleteCalendar = await Calendario.deleteMany({ _id: new ObjectId(objectId) });
+    const deleteCalendar = await Calendario.deleteMany({
+      _id: new ObjectId(IDCalendario),
+    });
 
     if (deleteCalendar.deletedCount >= 1) {
       res.status(200).json({ success: "Calendar deleted correctly" });
@@ -815,7 +825,6 @@ export async function eliminaCalendario(req, res) {
       res.status(500).json({ error: "Calendar not deleted" });
       return;
     }
-
   } catch (e) {
     console.error(e);
     res.status(501).json({ error: "Generic error" });

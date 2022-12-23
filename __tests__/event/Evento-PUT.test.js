@@ -25,7 +25,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
 
     await UtenteAutenticato.insertOne({
       userId: "utenteTestEventoPUT",
-      email: "utenteTestEventoPUT@prova.unitn.it",
+      email: "utenteTestEventoPUT@unitn.it",
       username: "utenteTestEventoPUT",
     });
     await UtenteAutenticato.insertOne({
@@ -65,7 +65,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTest = IDCalendarioTest.insertedId;
+    IDCalendarioTest = String(IDCalendarioTest.insertedId);
 
     const EventoInserimento = db.collection("Evento");
     IDEventoTest = await EventoInserimento.insertOne({
@@ -82,17 +82,17 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       partecipanti: ["utenteTestEventoPUT"],
       notifiche: {
         titolo: "Partita tra poco",
-        data: [1671189531689, 1671189532689],
+        data: [new Date(1671189531689), new Date(1671189532689)],
       },
       durata: 10,
       isEventoSingolo: true,
       eventoSingolo: {
-        data: 1671189531689,
+        data: new Date(1671189531689),
         isScadenza: true,
       },
       eventoRipetuto: null,
     });
-    IDEventoTest = IDEventoTest.insertedId;
+    IDEventoTest = String(IDEventoTest.insertedId);
   });
 
   afterAll(async () => {
@@ -121,7 +121,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -129,11 +129,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -165,7 +162,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: true,
@@ -205,7 +202,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -213,11 +210,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -248,7 +242,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -256,11 +250,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -291,7 +282,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -299,11 +290,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -334,7 +322,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -342,11 +330,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -374,7 +359,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -382,11 +367,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -417,7 +399,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -425,11 +407,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -460,7 +439,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -468,11 +447,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -503,7 +479,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           difficolta: 3,
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -511,11 +487,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -551,11 +524,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -587,18 +557,15 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           isEventoSingolo: false,
           eventoSingolo: null,
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -630,18 +597,15 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           eventoSingolo: null,
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -673,7 +637,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: true,
@@ -681,11 +645,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -717,7 +678,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -752,7 +713,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -760,11 +721,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -796,7 +754,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -804,11 +762,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -840,7 +795,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -848,11 +803,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -892,11 +844,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -928,7 +877,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: -1,
           isEventoSingolo: false,
@@ -936,11 +885,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -972,12 +918,12 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: true,
           eventoSingolo: {
-            data: 1671189531689,
+            data: new Date(1671189531689),
             isScadenza: null,
           },
           eventoRipetuto: null,
@@ -1010,7 +956,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -1018,7 +964,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              data: 1671194251689,
+              data: new Date(1671194251689),
             },
           },
         },
@@ -1053,7 +999,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -1061,11 +1007,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -1097,7 +1040,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -1105,11 +1048,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -1129,7 +1069,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
         query: {
           userId: "utenteTestEventoPUT",
           IDEvento: IDEventoTest,
-          IDCalendario: "CalendarioNonEsistente",
+          IDCalendario: "6396bd239161940e645f15cb",
           titolo: "titoloTestPostEventoNuovo",
           descrizione: "descrizioneTest",
           luogo: {
@@ -1141,7 +1081,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -1149,11 +1089,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
@@ -1163,7 +1100,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
-          error: "There is no calendar with that ID or you do not own the calendar",
+          error:
+            "There is no calendar with that ID or you do not own the calendar",
         }),
       );
     });
@@ -1172,7 +1110,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
         method: "PUT",
         query: {
           userId: "utenteTestEventoPUT",
-          IDEvento: "EventoNonEsistente",
+          IDEvento: "6396bd239161940e645f15cb",
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEventoNuovo",
           descrizione: "descrizioneTest",
@@ -1185,7 +1123,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           partecipanti: ["utenteTestEventoPUT"],
           notifiche: {
             titolo: "Partita tra poco",
-            data: [1671189531689, 1671189532689],
+            data: [new Date(1671189531689), new Date(1671189532689)],
           },
           durata: 10,
           isEventoSingolo: false,
@@ -1193,11 +1131,8 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
           eventoRipetuto: {
             numeroRipetizioni: 5,
             impostazioniAvanzate: {
-              giorniSettimana: [
-                "Sabato",
-                "Domenica",
-              ],
-              data: 1671194251689,
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
             },
           },
         },
