@@ -1,0 +1,38 @@
+.outline {
+  border: 2px solid var(--primary-500);
+  --color: var(--base);
+  --text: var(--primary-500);
+}
+
+.outline:hover {
+  --color: var(--primary-100);
+  --text: var(--primary-500);
+  cursor: pointer;
+}
+
+.primary {
+  border: 2px solid var(--primary-500);
+  --color: var(--primary-500);
+  --text: var(--base);
+}
+
+.primary:hover {
+  border: 2px solid var(--primary-400);
+  --color: var(--primary-400);
+  --text: var(--base);
+  cursor: pointer;
+}
+
+.container {
+  padding: var(--smallGap);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--borderRadius);
+  font-size: 0.875rem;
+  background-color: var(--color);
+  color: var(--text);
+  user-select: none;
+  gap: var(--smallGap);
+  font-weight: 500;
+}

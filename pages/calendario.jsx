@@ -9,10 +9,31 @@ import Hour from "../components/Hour";
 import Activity from "../components/Activity";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
+import Fab from "../components/Fab";
+import CreateCalendar from "../components/CreateCalendar";
+import CreateEvent from "../components/CreaEvento";
 
 export default withPageAuthRequired(function Calendario() {
   const [firstDay, setFirstDay] = useState(getMonday(new Date()));
   const [sidebar, setSidebar] = useState(false);
+  const [createCalendarShow, setCreateCalendarShow] = useState(false);
+  const [createEventShow, setCreateEventShow] = useState(false);
+
+  const closeCalendar = () => {
+    setCreateCalendarShow(false);
+  };
+
+  const openCalendar = () => {
+    setCreateCalendarShow(true);
+  };
+
+  const closeEvent = () => {
+    setCreateEventShow(false);
+  };
+
+  const openEvent = () => {
+    setCreateEventShow(true);
+  };
 
   const goToday = () => {
     setFirstDay(getMonday(new Date()));
@@ -90,6 +111,7 @@ export default withPageAuthRequired(function Calendario() {
       </Head>
       <div className={styles.home}>
         <Menu selected="Calendario" />
+
         <Sidebar show={sidebar} closeSidebar={() => closeSidebar()} />
         {sidebar ? (
           <div className={styles.backdrop} onClick={() => closeSidebar()} />
@@ -229,6 +251,36 @@ export default withPageAuthRequired(function Calendario() {
             </div>
           </div>
         </div>
+        {createCalendarShow ? (
+          <div
+            className={styles.backdrop}
+            style={{ backgroundColor: "var(--black-50)" }}
+            onClick={() => {
+              closeCalendar();
+            }}
+          >
+            <CreateCalendar close={() => closeCalendar()} />
+          </div>
+        ) : null}
+        {createEventShow ? (
+          <div
+            className={styles.backdrop}
+            style={{ backgroundColor: "var(--black-50)" }}
+            onClick={() => {
+              closeEvent();
+            }}
+          >
+            <CreateEvent close={() => closeEvent()} />
+          </div>
+        ) : null}
+        <Fab
+          openCalendar={() => {
+            openCalendar();
+          }}
+          openEvent={() => {
+            openEvent();
+          }}
+        />
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ body {
   --black-100: #1e1e1e;
   --black-75: #1e1e1ebf;
   --black-50: #1e1e1e80;
+  --black-25: #1e1e1e40;
   --borderRadius: 1rem;
   --innerBorderRadius: 0.625rem;
   --bigGap: 1.5rem;
@@ -101,6 +102,7 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 @media screen and (max-width: 1600px) {
@@ -119,4 +121,23 @@ a {
   :root {
     font-size: 10px;
   }
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--black-25);
+  font-weight: 500;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--black-25);
+  font-weight: 500;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--black-25);
+  font-weight: 500;
 }
