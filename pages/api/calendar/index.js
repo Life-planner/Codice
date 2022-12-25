@@ -600,7 +600,7 @@ export async function creaCalendario(req, res) {
         fusoOrario.GMTOffset > 12 ||
         fusoOrario.GMTOffset < -12
       ) {
-        res.status(400).json({ error: "Wrong format for time zone" });
+        res.status(400).json({ fusoOrario, json: JSON.parse(fusoOrario), error: "Wrong format for time zone" });
         return;
       }
     }
