@@ -922,6 +922,94 @@ export async function creaEvento(req, res) {
       return;
     }
 
+
+    let tempLuogo
+    if (luogo != null) {
+
+      try{
+        tempLuogo = JSON.parse(luogo)
+      }catch{
+        tempLuogo = luogo
+      }
+      if (
+        tempLuogo.latitudine == null ||
+        tempLuogo.longitudine == null ||
+        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.latitudine,
+        ) ||
+        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.longitudine,
+        )
+      ) {
+        res.status(400).json({ error: "Wrong format for location" });
+        return;
+      }
+    }
+    if (priorita != null && (priorita <= 0 || priorita > 10)) {
+      res.status(400).json({ error: "Wrong format for priorita" });
+      return;
+    }
+    if (difficolta != null && (difficolta <= 0 || difficolta > 10)) {
+      res.status(400).json({ error: "Wrong format for difficolta" });
+      return;
+    }
+    let tempNotifiche
+    if (notifiche != null) {
+      
+      try{
+        tempNotifiche = JSON.parse(notifiche)
+      }catch{
+        tempNotifiche = notifiche
+      }
+      
+      if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+        res.status(400).json({ error: "Wrong format for notifiche" });
+        return;
+      }
+    }
+    if (durata != null && durata <= 0) {
+      res.status(400).json({ error: "Wrong format for durata" });
+      return;
+    }
+    
+    let tempEvento
+
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        try{
+          tempEvento = JSON.parse(eventoSingolo)
+        }catch{
+          tempEvento = eventoSingolo
+        }
+        if (
+          tempEvento.data == null ||
+          tempEvento.isScadenza == null
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoSingolo" });
+          return;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        try{
+          tempEvento = JSON.parse(eventoRipetuto)
+        }catch{
+          tempEvento = eventoRipetuto
+        }
+        if (
+          tempEvento.numeroRipetizioni == null ||
+          tempEvento.impostazioniAvanzate == null ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
+          tempEvento.impostazioniAvanzate.data == null ||
+          tempEvento.numeroRipetizioni < 1 ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == []
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
+          return;
+        }
+      }
+    }
+
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -934,6 +1022,7 @@ export async function creaEvento(req, res) {
         .json({ error: "There are too many users with that userId" });
       return;
     }
+
     var ObjectId = require("mongoose").Types.ObjectId;
 
     const calendariPosseduti = await Calendario.find({
@@ -950,83 +1039,24 @@ export async function creaEvento(req, res) {
       return;
     }
 
-    if (luogo != null) {
-
-      if (
-        luogo.latitudine == null ||
-        luogo.longitudine == null ||
-        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.latitudine,
-        ) ||
-        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.longitudine,
-        )
-      ) {
-        res.status(400).json({ error: "Wrong format for location" });
-        return;
-      }
-    }
-    if (priorita != null && (priorita <= 0 || priorita > 10)) {
-      res.status(400).json({ error: "Wrong format for priorita" });
-      return;
-    }
-    if (difficolta != null && (difficolta <= 0 || difficolta > 10)) {
-      res.status(400).json({ error: "Wrong format for difficolta" });
-      return;
-    }
-    if (notifiche != null) {
-      if (notifiche.titolo == null || notifiche.data == null) {
-        res.status(400).json({ error: "Wrong format for notifiche" });
-        return;
-      }
-    }
-    if (durata != null && durata <= 0) {
-      res.status(400).json({ error: "Wrong format for durata" });
-      return;
-    }
-    if (isEventoSingolo) {
-      if (eventoSingolo != null) {
-        if (
-          eventoSingolo.data == null ||
-          eventoSingolo.isScadenza == null
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoSingolo" });
-          return;
-        }
-      }
-    } else {
-      if (eventoRipetuto != null) {
-        if (
-          eventoRipetuto.numeroRipetizioni == null ||
-          eventoRipetuto.impostazioniAvanzate == null ||
-          eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-          eventoRipetuto.impostazioniAvanzate.data == null ||
-          eventoRipetuto.numeroRipetizioni < 1 ||
-          eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
-          return;
-        }
-      }
-    }
-
+  
     if (isEventoSingolo) {
       Evento.create(
         {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
             partecipanti == null
               ? calendariPosseduti[0].partecipanti
               : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : eventoSingolo,
+          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
@@ -1041,17 +1071,17 @@ export async function creaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
             partecipanti == null
               ? calendariPosseduti[0].partecipanti
               : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : eventoRipetuto,
+          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
@@ -1090,6 +1120,94 @@ export async function modificaEvento(req, res) {
       eventoRipetuto,
     } = req.query;
     const { userId } = req.query;
+
+
+
+    let tempLuogo
+    if (luogo != null) {
+
+      try{
+        tempLuogo = JSON.parse(luogo)
+      }catch{
+        tempLuogo = luogo
+      }
+      if (
+        tempLuogo.latitudine == null ||
+        tempLuogo.longitudine == null ||
+        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.latitudine,
+        ) ||
+        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.longitudine,
+        )
+      ) {
+        res.status(400).json({ error: "Wrong format for location" });
+        return;
+      }
+    }
+    if (priorita <= 0 || priorita > 10) {
+      res.status(400).json({ error: "Wrong format for priorita" });
+      return;
+    }
+    if (difficolta <= 0 || difficolta > 10) {
+      res.status(400).json({ error: "Wrong format for difficolta" });
+      return;
+    }
+    let tempNotifiche
+    if (notifiche != null) {
+      
+      try{
+        tempNotifiche = JSON.parse(notifiche)
+      }catch{
+        tempNotifiche = notifiche
+      }
+      
+      if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+        res.status(400).json({ error: "Wrong format for notifiche" });
+        return;
+      }
+    }
+    if (durata <= 0) {
+      res.status(400).json({ error: "Wrong format for durata" });
+      return;
+    }
+    let tempEvento
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        try{
+          tempEvento = JSON.parse(eventoSingolo)
+        }catch{
+          tempEvento = eventoSingolo
+        }
+        if (
+          tempEvento.data == null ||
+          tempEvento.isScadenza == null
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoSingolo" });
+          return;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        try{
+          tempEvento = JSON.parse(eventoRipetuto)
+        }catch{
+          tempEvento = eventoRipetuto
+        }
+        if (
+          tempEvento.numeroRipetizioni == null ||
+          tempEvento.impostazioniAvanzate == null ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
+          tempEvento.impostazioniAvanzate.data == null ||
+          tempEvento.numeroRipetizioni < 1 ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == []
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
+          return;
+        }
+      }
+    }
+
 
     if (
       IDEvento == null ||
@@ -1154,54 +1272,6 @@ export async function modificaEvento(req, res) {
       return;
     }
 
-    if (
-      luogo != null &&
-      (luogo.latitudine == null ||
-        luogo.longitudine == null ||
-        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.latitudine,
-        ) ||
-        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.longitudine,
-        ))
-    ) {
-      res.status(400).json({ error: "Wrong format for location" });
-      return;
-    }
-    if (priorita <= 0 || priorita > 10) {
-      res.status(400).json({ error: "Wrong format for priorita" });
-      return;
-    }
-    if (difficolta <= 0 || difficolta > 10) {
-      res.status(400).json({ error: "Wrong format for difficolta" });
-      return;
-    }
-    if (notifiche!=null && (notifiche.titolo == null || notifiche.data == null)) {
-      res.status(400).json({ error: "Wrong format for notifiche" });
-      return;
-    }
-    if (durata <= 0) {
-      res.status(400).json({ error: "Wrong format for durata" });
-      return;
-    }
-    if (isEventoSingolo) {
-      if (eventoSingolo.data == null || eventoSingolo.isScadenza == null) {
-        res.status(400).json({ error: "Wrong format for eventoSingolo" });
-        return;
-      }
-    } else {
-      if (
-        eventoRipetuto.numeroRipetizioni == null ||
-        eventoRipetuto.impostazioniAvanzate == null ||
-        eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-        eventoRipetuto.impostazioniAvanzate.data == null ||
-        eventoRipetuto.numeroRipetizioni < 1 ||
-        eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
-      ) {
-        res.status(400).json({ error: "Wrong format for eventoRipetuto" });
-        return;
-      }
-    }
 
     if (isEventoSingolo) {
       Evento.updateMany(
@@ -1210,15 +1280,15 @@ export async function modificaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
             partecipanti == null ? calendario[0].partecipanti : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : eventoSingolo,
+          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
@@ -1234,15 +1304,15 @@ export async function modificaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
           partecipanti:
             partecipanti == null ? calendario[0].partecipanti : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : eventoRipetuto,
+          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {

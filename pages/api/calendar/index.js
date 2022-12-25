@@ -563,6 +563,31 @@ export async function creaCalendario(req, res) {
       return;
     }
 
+    if (colore != null && !/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
+      res.status(400).json({ error: "Wrong format for color" });
+      return;
+    }
+
+    let tempFusoOrario
+
+    if (fusoOrario != null) {
+      try{
+        tempFusoOrario = JSON.parse(fusoOrario)
+      }catch{
+        tempFusoOrario = fusoOrario
+      }
+
+      if (
+        tempFusoOrario.GMTOffset == null ||
+        tempFusoOrario.localita == null ||
+        tempFusoOrario.GMTOffset > 12 ||
+        tempFusoOrario.GMTOffset < -12
+      ) {
+        res.status(400).json({ error: "Wrong format for time zone" });
+        return;
+      }
+    }
+
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -588,27 +613,10 @@ export async function creaCalendario(req, res) {
       }
     }
 
-    if (colore != null && !/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
-      res.status(400).json({ error: "Wrong format for color" });
-      return;
-    }
-
-    if (fusoOrario != null) {
-      if (
-        fusoOrario.GMTOffset == null ||
-        fusoOrario.localita == null ||
-        fusoOrario.GMTOffset > 12 ||
-        fusoOrario.GMTOffset < -12
-      ) {
-        res.status(400).json({ fusoOrario, json: JSON.parse(fusoOrario), error: "Wrong format for time zone" });
-        return;
-      }
-    }
-
     Calendario.create(
       {
         nome: nome,
-        fusoOrario: fusoOrario == null ? undefined : fusoOrario,
+        fusoOrario: fusoOrario == null ? undefined : tempFusoOrario,
         colore: colore == null ? undefined : colore,
         partecipanti: [userId],
         principale: principale == null ? false : principale,
@@ -645,28 +653,86 @@ export async function modificaCalendario(req, res) {
     } = req.query;
     const { userId } = req.query;
 
+    let tempFusoOrario
+
+    if (fusoOrario != null) {
+      try{
+        tempFusoOrario = JSON.parse(fusoOrario)
+      }catch{
+        tempFusoOrario = fusoOrario
+      }
+    
+    if (tempFusoOrario.GMTOffset == null ||
+        tempFusoOrario.localita == null ||
+        tempFusoOrario.GMTOffset > 12 ||
+        tempFusoOrario.GMTOffset < -12) {
+      res.status(400).json({ error: "Wrong format for time zone" });
+      return;
+    }
+  }
+  let tempImpostazioniPredefiniteEventi
+
+    if (impostazioniPredefiniteEventi != null) {
+      try{
+        tempImpostazioniPredefiniteEventi = JSON.parse(impostazioniPredefiniteEventi)
+      }catch{
+        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
+      }
+    if (
+      tempImpostazioniPredefiniteEventi.titolo == null ||
+      tempImpostazioniPredefiniteEventi.descrizione == null ||
+      tempImpostazioniPredefiniteEventi.durata == null ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      tempImpostazioniPredefiniteEventi.luogo == null ||
+      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.latitudine,
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.longitudine,
+      ) ||
+      tempImpostazioniPredefiniteEventi.priorita == null ||
+      tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+      tempImpostazioniPredefiniteEventi.priorita > 10 ||
+      tempImpostazioniPredefiniteEventi.difficolta == null ||
+      tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+      tempImpostazioniPredefiniteEventi.durata <= 0 ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+    ) {
+      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
+      return;
+    }
+  }
+
     if (
       IDCalendario == null ||
       userId == null ||
       nome == null ||
       fusoOrario == null ||
-      fusoOrario.GMTOffset == null ||
-      fusoOrario.localita == null ||
+      tempFusoOrario.GMTOffset == null ||
+      tempFusoOrario.localita == null ||
       colore == null ||
       partecipanti == null ||
       principale == null ||
       impostazioniPredefiniteEventi == null ||
-      impostazioniPredefiniteEventi.titolo == null ||
-      impostazioniPredefiniteEventi.descrizione == null ||
-      impostazioniPredefiniteEventi.durata == null ||
-      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      impostazioniPredefiniteEventi.luogo == null ||
-      impostazioniPredefiniteEventi.luogo.latitudine == null ||
-      impostazioniPredefiniteEventi.luogo.longitudine == null ||
-      impostazioniPredefiniteEventi.priorita == null ||
-      impostazioniPredefiniteEventi.difficolta == null
+      tempImpostazioniPredefiniteEventi.titolo == null ||
+      tempImpostazioniPredefiniteEventi.descrizione == null ||
+      tempImpostazioniPredefiniteEventi.durata == null ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      tempImpostazioniPredefiniteEventi.luogo == null ||
+      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      tempImpostazioniPredefiniteEventi.priorita == null ||
+      tempImpostazioniPredefiniteEventi.difficolta == null
     ) {
       res.status(400).json({ error: "Parameter missing" });
+      return;
+    }
+    
+    if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
+      res.status(400).json({ error: "Wrong format for color" });
       return;
     }
 
@@ -697,67 +763,14 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    if (
-      fusoOrario != null &&
-      (fusoOrario.GMTOffset == null ||
-        fusoOrario.localita == null ||
-        fusoOrario.GMTOffset > 12 ||
-        fusoOrario.GMTOffset < -12)
-    ) {
-      res.status(400).json({ error: "Wrong format for time zone" });
-      return;
-    }
-
-    if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
-      res.status(400).json({ error: "Wrong format for color" });
-      return;
-    }
-
-    /*
-    let tempPartecipanti = partecipanti.split(",");
-    if (!tempPartecipanti.includes(userId)) {
-      res.status(400).json({
-        tempPartecipanti,
-        error: "Missing owner from list partecipanti",
-      });
-      return;
-    }
-*/
-
-    if (
-      impostazioniPredefiniteEventi.titolo == null ||
-      impostazioniPredefiniteEventi.descrizione == null ||
-      impostazioniPredefiniteEventi.durata == null ||
-      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      impostazioniPredefiniteEventi.luogo == null ||
-      impostazioniPredefiniteEventi.luogo.latitudine == null ||
-      impostazioniPredefiniteEventi.luogo.longitudine == null ||
-      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        impostazioniPredefiniteEventi.luogo.latitudine,
-      ) ||
-      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        impostazioniPredefiniteEventi.luogo.longitudine,
-      ) ||
-      impostazioniPredefiniteEventi.priorita == null ||
-      impostazioniPredefiniteEventi.priorita <= 0 ||
-      impostazioniPredefiniteEventi.priorita > 10 ||
-      impostazioniPredefiniteEventi.difficolta == null ||
-      impostazioniPredefiniteEventi.difficolta <= 0 ||
-      impostazioniPredefiniteEventi.difficolta > 10 ||
-      impostazioniPredefiniteEventi.durata <= 0 ||
-      impostazioniPredefiniteEventi.tempAnticNotifica < 0
-    ) {
-      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
-      return;
-    }
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
         nome: nome,
-        fusoOrario: fusoOrario,
+        fusoOrario: tempFusoOrario,
         colore: colore,
         partecipanti: partecipanti,
-        impostazioniPredefiniteEventi: impostazioniPredefiniteEventi,
+        impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
         if (err) {
