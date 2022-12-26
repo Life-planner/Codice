@@ -743,7 +743,6 @@ export async function modificaCalendario(req, res) {
     if(partecipanti != null && Array.isArray(partecipanti)){
       if(partecipanti.length == 1 && /(, )/gm.test(partecipanti)){
         tempPartecipanti = partecipanti[0].split(", ")
-        res.status(400).json({ tempPartecipanti, partecipanti });
       }else{
         tempPartecipanti = partecipanti
       }

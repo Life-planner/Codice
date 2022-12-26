@@ -1010,6 +1010,16 @@ export async function creaEvento(req, res) {
       }
     }
 
+    let tempPartecipanti
+
+    if(partecipanti != null && Array.isArray(partecipanti)){
+      if(partecipanti.length == 1 && /(, )/gm.test(partecipanti)){
+        tempPartecipanti = partecipanti[0].split(", ")
+      }else{
+        tempPartecipanti = partecipanti
+      }
+    }
+
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -1052,7 +1062,7 @@ export async function creaEvento(req, res) {
           partecipanti:
             partecipanti == null
               ? calendariPosseduti[0].partecipanti
-              : partecipanti,
+              : tempPartecipanti,
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
@@ -1077,7 +1087,7 @@ export async function creaEvento(req, res) {
           partecipanti:
             partecipanti == null
               ? calendariPosseduti[0].partecipanti
-              : partecipanti,
+              : tempPartecipanti,
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
