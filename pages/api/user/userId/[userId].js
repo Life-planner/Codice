@@ -113,7 +113,7 @@ export async function getUser(req, res) {
       userId: userId,
     });
     if (Object.keys(users).length == 0) {
-      res.status(409).json({ error: "There is no user with that userId" });
+      res.status(409).json({ userId, error: "There is no user with that userId" });
       return;
     } else if (Object.keys(users).length > 1) {
       res
