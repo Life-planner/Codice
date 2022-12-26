@@ -111,8 +111,8 @@ export default function handler(req, res) {
  *                  durata: 1440
  *                  tempAnticNotifica: 1440
  *                  luogo:
- *                   latitudine: "12N"
- *                   longitudine: "13E"
+ *                   latitudine: "12.123123"
+ *                   longitudine: "133.123123"
  *                  priorita: 7
  *                  difficolta: 1
  *            Lavoro:
@@ -132,8 +132,8 @@ export default function handler(req, res) {
  *                  durata: 30
  *                  tempAnticNotifica: 10
  *                  luogo:
- *                   latitudine: "12N"
- *                   longitudine: "1E"
+ *                   latitudine: "12.123123"
+ *                   longitudine: "13.123123"
  *                  priorita: 5
  *                  difficolta: 6
  *

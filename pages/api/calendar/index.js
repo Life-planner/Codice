@@ -366,8 +366,8 @@ export default function handler(req, res) {
  *            durata: 1440
  *            tempAnticNotifica: 1440
  *            luogo:
- *             latitudine: "12N"
- *             longitudine: "13E"
+ *             latitudine: "12.123123"
+ *             longitudine: "13.123123"
  *            priorita: 7
  *            difficolta: 1
  *
@@ -715,7 +715,6 @@ export async function modificaCalendario(req, res) {
       tempFusoOrario.localita == null ||
       colore == null ||
       partecipanti == null ||
-      principale == null ||
       impostazioniPredefiniteEventi == null ||
       tempImpostazioniPredefiniteEventi.titolo == null ||
       tempImpostazioniPredefiniteEventi.descrizione == null ||

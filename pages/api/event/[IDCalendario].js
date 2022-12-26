@@ -128,8 +128,8 @@ export default function handler(req, res) {
  *                 titolo: Meeting Lavazza
  *                 descrizione:
  *                 luogo:
- *                  latitudine: ""
- *                  longitudine: ""
+ *                  latitudine: "11.124578"
+ *                  longitudine: "52.125658"
  *                 priorita: 10
  *                 difficolta: 7
  *                 partecipanti: [User1, Rappresentante3]
@@ -149,8 +149,8 @@ export default function handler(req, res) {
  *                 titolo: Lezione Analisi
  *                 descrizione:
  *                 luogo:
- *                  latitudine: ""
- *                  longitudine: ""
+ *                  latitudine: "11.124578"
+ *                  longitudine: "52.125658"
  *                 priorita: 7
  *                 difficolta: 10
  *                 partecipanti: [User1,]
