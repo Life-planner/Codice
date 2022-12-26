@@ -432,43 +432,6 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
         }),
       );
     });
-    test("Manca uno o piu parametri -- principale", async () => {
-      const { req, res } = createMocks({
-        method: "PUT",
-        query: {
-          IDCalendario: IDCalendarioTest,
-          userId: "utenteTestCalendarioPUT",
-          nome: "utenteTestCalendarioPUT",
-          fusoOrario: {
-            GMTOffset: -5,
-            localita: "New York",
-          },
-          colore: "#7C36B9",
-          partecipanti: ["utenteTestCalendarioPUT"],
-          impostazioniPredefiniteEventi: {
-            titolo: "",
-            descrizione: "",
-            durata: 30,
-            tempAnticNotifica: 30,
-            luogo: {
-              latitudine: 12.123456,
-              longitudine: 12.123456,
-            },
-            priorita: 6,
-            difficolta: 6,
-          },
-        },
-      });
-
-      await modificaCalendario(req, res);
-
-      expect(res._getStatusCode()).toBe(400);
-      expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining({
-          error: "Parameter missing",
-        }),
-      );
-    });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi", async () => {
       const { req, res } = createMocks({
         method: "PUT",

@@ -227,7 +227,7 @@ export async function creaUser(req, res) {
     const users = await UtenteAutenticato.find({
       $or: [{ userId: userId }, { email: email }],
     });
-    if (Object.keys(users).length >= 1) {
+    if (Object.keys(users).length >= 1 || /[, \\%=]/gm.test(userId)) {
       res
         .status(409)
         .json({ error: "There is alrady one user with that id or email" });

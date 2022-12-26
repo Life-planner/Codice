@@ -661,15 +661,7 @@ export async function modificaCalendario(req, res) {
       }catch{
         tempFusoOrario = fusoOrario
       }
-    
-    if (tempFusoOrario.GMTOffset == null ||
-        tempFusoOrario.localita == null ||
-        tempFusoOrario.GMTOffset > 12 ||
-        tempFusoOrario.GMTOffset < -12) {
-      res.status(400).json({ error: "Wrong format for time zone" });
-      return;
-    }
-  }
+      }
   let tempImpostazioniPredefiniteEventi
 
     if (impostazioniPredefiniteEventi != null) {
@@ -678,33 +670,9 @@ export async function modificaCalendario(req, res) {
       }catch{
         tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
       }
-    if (
-      tempImpostazioniPredefiniteEventi.titolo == null ||
-      tempImpostazioniPredefiniteEventi.descrizione == null ||
-      tempImpostazioniPredefiniteEventi.durata == null ||
-      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      tempImpostazioniPredefiniteEventi.luogo == null ||
-      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
-      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
-      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempImpostazioniPredefiniteEventi.luogo.latitudine,
-      ) ||
-      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempImpostazioniPredefiniteEventi.luogo.longitudine,
-      ) ||
-      tempImpostazioniPredefiniteEventi.priorita == null ||
-      tempImpostazioniPredefiniteEventi.priorita <= 0 ||
-      tempImpostazioniPredefiniteEventi.priorita > 10 ||
-      tempImpostazioniPredefiniteEventi.difficolta == null ||
-      tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
-      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
-      tempImpostazioniPredefiniteEventi.durata <= 0 ||
-      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
-    ) {
-      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
-      return;
     }
-  }
+
+
 
     if (
       IDCalendario == null ||
@@ -729,10 +697,55 @@ export async function modificaCalendario(req, res) {
       res.status(400).json({ error: "Parameter missing" });
       return;
     }
+
+    if (tempFusoOrario.GMTOffset == null ||
+      tempFusoOrario.localita == null ||
+      tempFusoOrario.GMTOffset > 12 ||
+      tempFusoOrario.GMTOffset < -12) {
+    res.status(400).json({ error: "Wrong format for time zone" });
+    return;
+  }
+  
+  if (
+    tempImpostazioniPredefiniteEventi.titolo == null ||
+    tempImpostazioniPredefiniteEventi.descrizione == null ||
+    tempImpostazioniPredefiniteEventi.durata == null ||
+    tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+    tempImpostazioniPredefiniteEventi.luogo == null ||
+    tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+    tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+    !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+      tempImpostazioniPredefiniteEventi.luogo.latitudine,
+    ) ||
+    !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+      tempImpostazioniPredefiniteEventi.luogo.longitudine,
+    ) ||
+    tempImpostazioniPredefiniteEventi.priorita == null ||
+    tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+    tempImpostazioniPredefiniteEventi.priorita > 10 ||
+    tempImpostazioniPredefiniteEventi.difficolta == null ||
+    tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+    tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+    tempImpostazioniPredefiniteEventi.durata <= 0 ||
+    tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+  ) {
+    res.status(400).json({ error: "Wrong format impostazioni predefinite" });
+    return;
+  }
     
     if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
       res.status(400).json({ error: "Wrong format for color" });
       return;
+    }
+
+    let tempPartecipanti
+
+    if(partecipanti != null && Array.isArray(partecipanti)){
+      if(partecipanti.length == 1 && /(, )/gm.test(partecipanti)){
+        tempPartecipanti = partecipanti.split(", ")
+      }else{
+        tempPartecipanti = partecipanti
+      }
     }
 
     const users = await UtenteAutenticato.find({
@@ -768,7 +781,7 @@ export async function modificaCalendario(req, res) {
         nome: nome,
         fusoOrario: tempFusoOrario,
         colore: colore,
-        partecipanti: partecipanti,
+        partecipanti: tempPartecipanti,
         impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
