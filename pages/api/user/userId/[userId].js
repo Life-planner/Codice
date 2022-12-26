@@ -14,7 +14,7 @@ export default function handler(req, res) {
  *     description: Ritorna userId, email, username di un utente dato l'userId
  *     parameters:
  *       - name: userId
- *         in: query
+ *         in: path
  *         description: UserId
  *         required: true
  *         schema:
@@ -113,7 +113,7 @@ export async function getUser(req, res) {
       userId: userId,
     });
     if (Object.keys(users).length == 0) {
-      res.status(409).json({ userId, error: "There is no user with that userId" });
+      res.status(409).json({ error: "There is no user with that userId" });
       return;
     } else if (Object.keys(users).length > 1) {
       res

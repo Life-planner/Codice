@@ -32,7 +32,7 @@ export default function handler(req, res) {
  *           summary: Utente3
  *           value: User3
  *       - name: IDCalendario
- *         in: query
+ *         in: path
  *         description: Id del documento all'interno del DataBase
  *         required: true
  *         schema:

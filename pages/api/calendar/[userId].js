@@ -10,7 +10,7 @@ export default function handler(req, res) {
 
 /**
  * @swagger
- * /api/calendar/{user}:
+ * /api/calendar/{userId}:
  *   get:
  *     description: Ritorna tutti i calendari di un utentente dato l'userId
  *     parameters:
