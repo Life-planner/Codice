@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.79% </span>
+                <span class="strong">79.31% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/29</span>
+                <span class='fraction'>23/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.79% </span>
+                <span class="strong">79.31% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/29</span>
+                <span class='fraction'>23/29</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -472,41 +472,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -696,42 +696,42 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               example: Generic error
  */
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >getCalendari(</span>req, res) {
-<span class="cstat-no" title="statement not covered" >  await dbConnect();</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const { userId } = <span class="cstat-no" title="statement not covered" >req.query;</span>
+export async function getCalendari(req, res) {
+  await dbConnect();
+  try {
+    const { userId } = req.query;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (userId == null) {</span>
-<span class="cstat-no" title="statement not covered" >      res.status(400).json({ error: "Parameter missing" });</span>
-<span class="cstat-no" title="statement not covered" >      return;</span>
+    if (userId == null) {
+      res.status(400).json({ error: "Parameter missing" });
+      return;
     }
 &nbsp;
-    const users = <span class="cstat-no" title="statement not covered" >await UtenteAutenticato.find({</span>
+    const users = await UtenteAutenticato.find({
       userId: userId,
     });
-<span class="cstat-no" title="statement not covered" >    if (Object.keys(users).length == 0) {</span>
-<span class="cstat-no" title="statement not covered" >      res.status(409).json({ error: "There is no user with that userId" });</span>
-<span class="cstat-no" title="statement not covered" >      return;</span>
-    } else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>if (Object.keys(users).length &gt; 1) {</span>
-<span class="cstat-no" title="statement not covered" >      res</span>
+    if (Object.keys(users).length == 0) {
+      res.status(409).json({ error: "There is no user with that userId" });
+      return;
+    } else if (Object.keys(users).length &gt; 1) {
+      res
         .status(409)
         .json({ error: "There are too many users with that userId" });
-<span class="cstat-no" title="statement not covered" >      return;</span>
+      return;
     }
 &nbsp;
-    const calendari = <span class="cstat-no" title="statement not covered" >await Calendario.find({</span>
+    const calendari = await Calendario.find({
       partecipanti: userId,
     });
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (Object.keys(calendari).length == 0) {</span>
-<span class="cstat-no" title="statement not covered" >      res</span>
+    if (Object.keys(calendari).length == 0) {
+      res
         .status(409)
         .json({ error: "There are no calendars with that userId" });
-<span class="cstat-no" title="statement not covered" >      return;</span>
+      return;
     }
-<span class="cstat-no" title="statement not covered" >    res.status(200).json({</span>
+    res.status(200).json({
       calendari,
     });
-<span class="cstat-no" title="statement not covered" >    return;</span>
+    return;
   } catch (e) {
 <span class="cstat-no" title="statement not covered" >    console.error(e);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
@@ -745,7 +745,7 @@ export async function <span class="fstat-no" title="function not covered" >getCa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-27T19:19:10.965Z
+                at 2022-12-27T19:58:03.014Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

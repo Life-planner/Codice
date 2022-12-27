@@ -768,7 +768,7 @@ export default function handler(req, res) {
  *             value:
  *              error: You do not own the event
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verra restituito "Not modified"
  *         content:
  *          application/json:
  *           schema:
@@ -776,7 +776,7 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Not inserted
+ *               example: Not modified
  *       501:
  *         description: Errore generico, verra restituito "Generic error"
  *         content:
@@ -1331,7 +1331,7 @@ export async function modificaEvento(req, res) {
         },
         function (err, calendar) {
           if (err) {
-            res.status(500).json({ error: "Not inserted" });
+            res.status(500).json({ error: "Not modified" });
             return;
           }
         },
