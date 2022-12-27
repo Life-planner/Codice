@@ -1141,27 +1141,7 @@ export async function modificaEvento(req, res) {
       }catch{
         tempLuogo = luogo
       }
-      if (
-        tempLuogo.latitudine == null ||
-        tempLuogo.longitudine == null ||
-        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.latitudine,
-        ) ||
-        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.longitudine,
-        )
-      ) {
-        res.status(400).json({ error: "Wrong format for location" });
-        return;
-      }
-    }
-    if (priorita <= 0 || priorita > 10) {
-      res.status(400).json({ error: "Wrong format for priorita" });
-      return;
-    }
-    if (difficolta <= 0 || difficolta > 10) {
-      res.status(400).json({ error: "Wrong format for difficolta" });
-      return;
+
     }
     let tempNotifiche
     if (notifiche != null) {
@@ -1171,12 +1151,7 @@ export async function modificaEvento(req, res) {
       }catch{
         tempNotifiche = notifiche
       }
-      
-      if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
-        res.status(400).json({ error: "Wrong format for notifiche" });
-        return;
-      }
-    }
+          }
     if (durata <= 0) {
       res.status(400).json({ error: "Wrong format for durata" });
       return;
@@ -1237,6 +1212,60 @@ export async function modificaEvento(req, res) {
     ) {
       res.status(400).json({ error: "Parameter missing" });
       return;
+    }
+
+    if (priorita <= 0 || priorita > 10) {
+      res.status(400).json({ error: "Wrong format for priorita" });
+      return;
+    }
+    if (difficolta <= 0 || difficolta > 10) {
+      res.status(400).json({ error: "Wrong format for difficolta" });
+      return;
+    }
+
+    if (
+      tempLuogo.latitudine == null ||
+      tempLuogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempLuogo.latitudine,
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempLuogo.longitudine,
+      )
+    ) {
+      res.status(400).json({ error: "Wrong format for location" });
+      return;
+    }
+    if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+      res.status(400).json({ error: "Wrong format for notifiche" });
+      return;
+    }
+
+
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        if (
+          tempEvento.data == null ||
+          tempEvento.isScadenza == null
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoSingolo" });
+          return;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        if (
+          tempEvento.numeroRipetizioni == null ||
+          tempEvento.impostazioniAvanzate == null ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
+          tempEvento.impostazioniAvanzate.data == null ||
+          tempEvento.numeroRipetizioni < 1 ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == []
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
+          return;
+        }
+      }
     }
 
     const users = await UtenteAutenticato.find({
