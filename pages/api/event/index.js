@@ -1004,16 +1004,6 @@ export async function creaEvento(req, res) {
       }
     }
 
-    let tempPartecipanti;
-
-    if (partecipanti != null && Array.isArray(partecipanti)) {
-      if (partecipanti.length == 1 && /(, )/gm.test(partecipanti)) {
-        tempPartecipanti = partecipanti[0].split(", ");
-      } else {
-        tempPartecipanti = partecipanti;
-      }
-    }
-
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -1043,6 +1033,8 @@ export async function creaEvento(req, res) {
       return;
     }
 
+    let tempPartecipanti = partecipanti != null && Array.isArray(partecipanti)? partecipanti.filter((item) => item !== userId) : calendariPosseduti[0].partecipanti;
+
     if (isEventoSingolo) {
       Evento.create(
         {
@@ -1052,10 +1044,7 @@ export async function creaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null
-              ? calendariPosseduti[0].partecipanti
-              : tempPartecipanti,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
@@ -1077,10 +1066,7 @@ export async function creaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null
-              ? calendariPosseduti[0].partecipanti
-              : tempPartecipanti,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
@@ -1278,6 +1264,7 @@ export async function modificaEvento(req, res) {
     }
 
     let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+
     Evento.updateMany(
       { _id: new ObjectId(IDEvento) },
       {
