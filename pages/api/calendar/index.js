@@ -648,7 +648,6 @@ export async function modificaCalendario(req, res) {
       fusoOrario,
       colore,
       partecipanti,
-      principale,
       impostazioniPredefiniteEventi,
     } = req.query;
     const { userId } = req.query;
@@ -671,8 +670,6 @@ export async function modificaCalendario(req, res) {
         tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
       }
     }
-
-
 
     if (
       IDCalendario == null ||
@@ -738,16 +735,6 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    let tempPartecipanti
-
-    if(partecipanti != null && Array.isArray(partecipanti)){
-      if(partecipanti.length == 1 && /(, )/gm.test(partecipanti)){
-        tempPartecipanti = partecipanti[0].split(", ")
-      }else{
-        tempPartecipanti = partecipanti
-      }
-    }
-
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -775,13 +762,27 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
+    let tempPartecipanti = partecipanti.filter(item => item !== userId)
+
+    Calendario.updateMany(
+      { _id: new ObjectId(IDCalendario) },
+      {
+        partecipanti: [userId],
+      },
+      function (err, calendar) {
+        if (err) {
+          res.status(500).json({ error: "Not edited" });
+          return;
+        }
+      },
+    );
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
         nome: nome,
         fusoOrario: tempFusoOrario,
         colore: colore,
-        partecipanti: tempPartecipanti,
+        $addToSet: {partecipanti: { $each: tempPartecipanti}},
         impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {

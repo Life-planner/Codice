@@ -922,23 +922,21 @@ export async function creaEvento(req, res) {
       return;
     }
 
-
-    let tempLuogo
+    let tempLuogo;
     if (luogo != null) {
-
-      try{
-        tempLuogo = JSON.parse(luogo)
-      }catch{
-        tempLuogo = luogo
+      try {
+        tempLuogo = JSON.parse(luogo);
+      } catch {
+        tempLuogo = luogo;
       }
       if (
         tempLuogo.latitudine == null ||
         tempLuogo.longitudine == null ||
         !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.latitudine,
+          tempLuogo.latitudine
         ) ||
         !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          tempLuogo.longitudine,
+          tempLuogo.longitudine
         )
       ) {
         res.status(400).json({ error: "Wrong format for location" });
@@ -953,15 +951,14 @@ export async function creaEvento(req, res) {
       res.status(400).json({ error: "Wrong format for difficolta" });
       return;
     }
-    let tempNotifiche
+    let tempNotifiche;
     if (notifiche != null) {
-      
-      try{
-        tempNotifiche = JSON.parse(notifiche)
-      }catch{
-        tempNotifiche = notifiche
+      try {
+        tempNotifiche = JSON.parse(notifiche);
+      } catch {
+        tempNotifiche = notifiche;
       }
-      
+
       if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
         res.status(400).json({ error: "Wrong format for notifiche" });
         return;
@@ -971,30 +968,27 @@ export async function creaEvento(req, res) {
       res.status(400).json({ error: "Wrong format for durata" });
       return;
     }
-    
-    let tempEvento
+
+    let tempEvento;
 
     if (isEventoSingolo) {
       if (eventoSingolo != null) {
-        try{
-          tempEvento = JSON.parse(eventoSingolo)
-        }catch{
-          tempEvento = eventoSingolo
+        try {
+          tempEvento = JSON.parse(eventoSingolo);
+        } catch {
+          tempEvento = eventoSingolo;
         }
-        if (
-          tempEvento.data == null ||
-          tempEvento.isScadenza == null
-        ) {
+        if (tempEvento.data == null || tempEvento.isScadenza == null) {
           res.status(400).json({ error: "Wrong format for eventoSingolo" });
           return;
         }
       }
     } else {
       if (eventoRipetuto != null) {
-        try{
-          tempEvento = JSON.parse(eventoRipetuto)
-        }catch{
-          tempEvento = eventoRipetuto
+        try {
+          tempEvento = JSON.parse(eventoRipetuto);
+        } catch {
+          tempEvento = eventoRipetuto;
         }
         if (
           tempEvento.numeroRipetizioni == null ||
@@ -1010,13 +1004,13 @@ export async function creaEvento(req, res) {
       }
     }
 
-    let tempPartecipanti
+    let tempPartecipanti;
 
-    if(partecipanti != null && Array.isArray(partecipanti)){
-      if(partecipanti.length == 1 && /(, )/gm.test(partecipanti)){
-        tempPartecipanti = partecipanti[0].split(", ")
-      }else{
-        tempPartecipanti = partecipanti
+    if (partecipanti != null && Array.isArray(partecipanti)) {
+      if (partecipanti.length == 1 && /(, )/gm.test(partecipanti)) {
+        tempPartecipanti = partecipanti[0].split(", ");
+      } else {
+        tempPartecipanti = partecipanti;
       }
     }
 
@@ -1049,7 +1043,6 @@ export async function creaEvento(req, res) {
       return;
     }
 
-  
     if (isEventoSingolo) {
       Evento.create(
         {
@@ -1073,7 +1066,7 @@ export async function creaEvento(req, res) {
             res.status(500).json({ error: "Not inserted" });
             return;
           }
-        },
+        }
       );
     } else {
       Evento.create(
@@ -1098,7 +1091,7 @@ export async function creaEvento(req, res) {
             res.status(500).json({ error: "Not inserted" });
             return;
           }
-        },
+        }
       );
     }
 
@@ -1131,68 +1124,40 @@ export async function modificaEvento(req, res) {
     } = req.query;
     const { userId } = req.query;
 
-
-
-    let tempLuogo
+    let tempLuogo;
     if (luogo != null) {
-
-      try{
-        tempLuogo = JSON.parse(luogo)
-      }catch{
-        tempLuogo = luogo
+      try {
+        tempLuogo = JSON.parse(luogo);
+      } catch {
+        tempLuogo = luogo;
       }
-
     }
-    let tempNotifiche
+    let tempNotifiche;
     if (notifiche != null) {
-      
-      try{
-        tempNotifiche = JSON.parse(notifiche)
-      }catch{
-        tempNotifiche = notifiche
+      try {
+        tempNotifiche = JSON.parse(notifiche);
+      } catch {
+        tempNotifiche = notifiche;
       }
-          }
-    if (durata <= 0) {
-      res.status(400).json({ error: "Wrong format for durata" });
-      return;
     }
-    let tempEvento
+    let tempEvento;
     if (isEventoSingolo) {
       if (eventoSingolo != null) {
-        try{
-          tempEvento = JSON.parse(eventoSingolo)
-        }catch{
-          tempEvento = eventoSingolo
-        }
-        if (
-          tempEvento.data == null ||
-          tempEvento.isScadenza == null
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoSingolo" });
-          return;
+        try {
+          tempEvento = JSON.parse(eventoSingolo);
+        } catch {
+          tempEvento = eventoSingolo;
         }
       }
     } else {
       if (eventoRipetuto != null) {
-        try{
-          tempEvento = JSON.parse(eventoRipetuto)
-        }catch{
-          tempEvento = eventoRipetuto
-        }
-        if (
-          tempEvento.numeroRipetizioni == null ||
-          tempEvento.impostazioniAvanzate == null ||
-          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
-          tempEvento.impostazioniAvanzate.data == null ||
-          tempEvento.numeroRipetizioni < 1 ||
-          tempEvento.impostazioniAvanzate.giorniSettimana == []
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
-          return;
+        try {
+          tempEvento = JSON.parse(eventoRipetuto);
+        } catch {
+          tempEvento = eventoRipetuto;
         }
       }
     }
-
 
     if (
       IDEvento == null ||
@@ -1223,14 +1188,19 @@ export async function modificaEvento(req, res) {
       return;
     }
 
+    if (durata <= 0) {
+      res.status(400).json({ error: "Wrong format for durata" });
+      return;
+    }
+
     if (
       tempLuogo.latitudine == null ||
       tempLuogo.longitudine == null ||
       !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempLuogo.latitudine,
+        tempLuogo.latitudine
       ) ||
       !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        tempLuogo.longitudine,
+        tempLuogo.longitudine
       )
     ) {
       res.status(400).json({ error: "Wrong format for location" });
@@ -1241,13 +1211,9 @@ export async function modificaEvento(req, res) {
       return;
     }
 
-
     if (isEventoSingolo) {
       if (eventoSingolo != null) {
-        if (
-          tempEvento.data == null ||
-          tempEvento.isScadenza == null
-        ) {
+        if (tempEvento.data == null || tempEvento.isScadenza == null) {
           res.status(400).json({ error: "Wrong format for eventoSingolo" });
           return;
         }
@@ -1311,6 +1277,19 @@ export async function modificaEvento(req, res) {
       return;
     }
 
+    let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+    Evento.updateMany(
+      { _id: new ObjectId(IDEvento) },
+      {
+        partecipanti: [userId],
+      },
+      function (err, calendar) {
+        if (err) {
+          res.status(500).json({ error: "Not modified" });
+          return;
+        }
+      }
+    );
 
     if (isEventoSingolo) {
       Evento.updateMany(
@@ -1322,8 +1301,7 @@ export async function modificaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
@@ -1334,7 +1312,7 @@ export async function modificaEvento(req, res) {
             res.status(500).json({ error: "Not modified" });
             return;
           }
-        },
+        }
       );
     } else {
       Evento.updateMany(
@@ -1346,8 +1324,7 @@ export async function modificaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
@@ -1358,7 +1335,7 @@ export async function modificaEvento(req, res) {
             res.status(500).json({ error: "Not modified" });
             return;
           }
-        },
+        }
       );
     }
 
