@@ -32,7 +32,7 @@ export default function handler(req, res) {
  *           value: User3
  *     responses:
  *       200:
- *         description: E' stato trovato almeno un calendario e verra restituito sotto forma di lista
+ *         description: E' stato trovato almeno un calendario e verrà restituito sotto forma di lista
  *         content:
  *          application/json:
  *           schema:
@@ -138,7 +138,7 @@ export default function handler(req, res) {
  *                  difficolta: 6
  *
  *       400:
- *         description: Manca il parametro userId, verra restituito "Parameter missing"
+ *         description: Manca il parametro userId, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -148,7 +148,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId" <br>Se non sono stati trovati calendari per l'userId dato, verra restituito "There are no calendars with that userId"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId" <br>Se non sono stati trovati calendari per l'userId dato, verrà restituito "There are no calendars with that userId"
  *         content:
  *          application/json:
  *           schema:
@@ -162,7 +162,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
@@ -170,7 +170,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There are no calendars with that userId
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:

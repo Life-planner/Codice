@@ -32,7 +32,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Trovato un unico account, verra restituito userId, email e username
+ *         description: Trovato un unico account, verrà restituito userId, email e username
  *         content:
  *          application/json:
  *           schema:
@@ -60,7 +60,7 @@ export default function handler(req, res) {
  *              email: prova@studenti.unitn.it
  *              username: Username2
  *       400:
- *         description: Manca la mail o il formato non e' corretto, verra restituito "Parameter missing or malformed"
+ *         description: Manca la mail o il formato non e' corretto, verrà restituito "Parameter missing or malformed"
  *         content:
  *          application/json:
  *           schema:
@@ -70,7 +70,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing or malformed
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'email data, verra restituito "There is no user with that email" <br>Se e' stato trovato piu di un account con la stessa email, verra restituito "There are too many users with that email"
+ *         description: Se non e' stato trovato neanche un account con l'email data, verrà restituito "There is no user with that email" <br>Se e' stato trovato più di un account con la stessa email, verrà restituito "There are too many users with that email"
  *         content:
  *          application/json:
  *           schema:
@@ -84,11 +84,11 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that email
  *            Errore2:
- *             summary: Piu utenti con la stessa email
+ *             summary: Più utenti con la stessa email
  *             value:
  *              error: There are too many users with that email
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:

@@ -68,7 +68,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Utente inserito con successo, verra restituito "User inserted correctly"
+ *         description: Utente inserito con successo, verrà restituito "User inserted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -78,7 +78,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: User inserted correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o piu parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -88,7 +88,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se e' stato trovato piu di un account con la stessa email o userId, verra restituito "There is alrady one user with that id or email"
+ *         description: Se e' stato trovato piu di un account con la stessa email o userId, verrà restituito "There is already one user with that id or email"
  *         content:
  *          application/json:
  *           schema:
@@ -98,7 +98,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: There is alrady one user with that id or email
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
  *         content:
  *          application/json:
  *           schema:
@@ -155,7 +155,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Username aggiornato con successo, verra restituito "User updated correctly"
+ *         description: Username aggiornato con successo, verrà restituito "User updated correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -165,7 +165,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: User updated correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o più parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -175,7 +175,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId"
  *         content:
  *          application/json:
  *           schema:
@@ -189,11 +189,11 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *       500:
- *         description: Errore di modifica nel database, verra restituito "Not edited"
+ *         description: Errore di modifica nel database, verrà restituito "Not edited"
  *         content:
  *          application/json:
  *           schema:
@@ -203,7 +203,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Not edited
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:

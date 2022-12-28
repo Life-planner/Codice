@@ -45,7 +45,7 @@ describe("Test di tutti i casi GET con email", () => {
   });
 
   describe("200", () => {
-    test("Utente modificato con successo", async () => {
+    test("Utente ottenuto con successo", async () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {

@@ -128,7 +128,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
   });
 
   describe("200", () => {
-    test("Evento ottenuto dal calendario con successo", async () => {
+    test("Eventi ottenuti dal calendario con successo", async () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
