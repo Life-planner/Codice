@@ -98,7 +98,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
   });
 
   describe("200", () => {
-    test("Calendario modificato con successo con userId, nome del Calendario", async () => {
+    test("Calendario modificato con successo con userId, nome del Calendario, fusoOrario, colore, partecipanti, principale, impostazioniPredefiniteEventi, priorita, difficolta", async () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
@@ -1171,7 +1171,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
         }),
       );
     });
-    test("Manca l'utente con l'userId specificato", async () => {
+    test("Non esiste l'IDCalendario oppure l'userId non possiede tale calendario", async () => {
       const { req, res } = createMocks({
         method: "PUT",
         query: {
