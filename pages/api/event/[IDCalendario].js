@@ -16,7 +16,7 @@ export default function handler(req, res) {
  *     description: Ritorna tutti gli eventi di un utentente dato l'userId e IDCalendario
  *     parameters:
  *       - name: userId
- *         in: path
+ *         in: query
  *         description: UserId
  *         required: true
  *         schema:
