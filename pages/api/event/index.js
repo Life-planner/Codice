@@ -93,9 +93,9 @@ export default function handler(req, res) {
  *            type: object
  *            properties:
  *             latitudine:
- *              type: string
+ *              type: number
  *             longitudine:
- *              type: string
+ *              type: number
  *         examples:
  *          Calcio:
  *           summary: Posizione partita Francia Marocco
@@ -485,9 +485,9 @@ export default function handler(req, res) {
  *            type: object
  *            properties:
  *             latitudine:
- *              type: string
+ *              type: number
  *             longitudine:
- *              type: string
+ *              type: number
  *         examples:
  *          Calcio:
  *           summary: Posizione partita Francia Marocco

@@ -346,9 +346,9 @@ export default function handler(req, res) {
  *              type: object
  *              properties:
  *               latitudine:
- *                type: string
+ *                type: number
  *               longitudine:
- *                type: string
+ *                type: number
  *             priorita:
  *              type: integer
  *              minimum: 1
