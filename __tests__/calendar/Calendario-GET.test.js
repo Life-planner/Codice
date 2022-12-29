@@ -25,30 +25,30 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
     const UtenteAutenticato = db.collection("UtenteAutenticato");
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETE1calendario",
-      email: "utenteTestCalendarioDELETE1calendario@unitn.it",
-      username: "utenteTestCalendarioDELETE1calendario",
+      userId: "utenteTestCalendarioGET1calendario",
+      email: "utenteTestCalendarioGET1calendario@unitn.it",
+      username: "utenteTestCalendarioGET1calendario",
     });
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETE2calendari",
-      email: "utenteTestCalendarioDELETE2calendari@unitn.it",
-      username: "utenteTestCalendarioDELETE2calendari",
+      userId: "utenteTestCalendarioGET2calendari",
+      email: "utenteTestCalendarioGET2calendari@unitn.it",
+      username: "utenteTestCalendarioGET2calendari",
     });
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETESenzaCalendari",
-      email: "utenteTestCalendarioDELETESenzaCalendari@unitn.it",
-      username: "utenteTestCalendarioDELETESenzaCalendari",
+      userId: "utenteTestCalendarioGETSenzaCalendari",
+      email: "utenteTestCalendarioGETSenzaCalendari@unitn.it",
+      username: "utenteTestCalendarioGETSenzaCalendari",
     });
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETEDuplicato",
-      email: "utenteTestCalendarioDELETEDuplicato@unitn.it",
-      username: "utenteTestCalendarioDELETEDuplicato",
+      userId: "utenteTestCalendarioGETDuplicato",
+      email: "utenteTestCalendarioGETDuplicato@unitn.it",
+      username: "utenteTestCalendarioGETDuplicato",
     });
 
     await UtenteAutenticato.insertOne({
-      userId: "utenteTestCalendarioDELETEDuplicato",
-      email: "utenteTestCalendarioDELETEDuplicato@unitn.it",
-      username: "utenteTestCalendarioDELETEDuplicato",
+      userId: "utenteTestCalendarioGETDuplicato",
+      email: "utenteTestCalendarioGETDuplicato@unitn.it",
+      username: "utenteTestCalendarioGETDuplicato",
     });
 
     const CalendarioInserimento = db.collection("Calendario");
@@ -60,7 +60,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioDELETE2calendari"],
+      partecipanti: ["utenteTestCalendarioGET2calendari"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -84,7 +84,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioDELETE2calendari"],
+      partecipanti: ["utenteTestCalendarioGET2calendari", "utenteTestCalendarioGET1calendario"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -108,7 +108,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioDELETE1calendario"],
+      partecipanti: ["utenteTestCalendarioGET1calendario"],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -137,19 +137,18 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-          userId: "utenteTestCalendarioDELETE1calendario",
+          userId: "utenteTestCalendarioGET1calendario",
         },
       });
 
       await getCalendari(req, res);
-
       expect(res._getStatusCode()).toBe(200);
     });
     test("Get calendario utente con 2 calendari", async () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-          userId: "utenteTestCalendarioDELETE2calendari",
+          userId: "utenteTestCalendarioGET2calendari",
         },
       });
 
@@ -179,7 +178,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-          userId: "utenteTestCalendarioDELETENonEsistente",
+          userId: "utenteTestCalendarioGETNonEsistente",
         },
       });
 
@@ -195,7 +194,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-          userId: "utenteTestCalendarioDELETEDuplicato",
+          userId: "utenteTestCalendarioGETDuplicato",
         },
       });
 
@@ -211,7 +210,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {
-          userId: "utenteTestCalendarioDELETESenzaCalendari",
+          userId: "utenteTestCalendarioGETSenzaCalendari",
         },
       });
 

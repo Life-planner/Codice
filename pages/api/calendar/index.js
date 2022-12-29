@@ -16,7 +16,7 @@ export default function handler(req, res) {
  * @swagger
  * /api/calendar/:
  *   post:
- *     description: Crea un calendario dati nome, userId, fusoOrario, colore con cui verra visualizzato, e se e' il calendario principale o meno
+ *     description: Crea un calendario dati nome, userId, fusoOrario, colore con cui verrà visualizzato, e se e' il calendario principale o meno
  *     parameters:
  *       - name: userId
  *         in: query
@@ -52,7 +52,7 @@ export default function handler(req, res) {
  *           value: Lezioni
  *       - name: fusoOrario
  *         in: query
- *         description: Oggetto contente il fuso orario e il capoluogo realtivo
+ *         description: Oggetto contente il fuso orario e il capoluogo relativo
  *         required: false
  *         allowEmptyValue: false
  *         content:
@@ -110,7 +110,7 @@ export default function handler(req, res) {
  *           value: "#FF00FF"
  *       - name: principale
  *         in: query
- *         description: Valore booleano che indica se il caledario e' il calendario principale o meno
+ *         description: Valore booleano che indica se il calendario e' il calendario principale o meno
  *         required: false
  *         schema:
  *          type: boolean
@@ -119,7 +119,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Calendario inserito con successo, verra restituito "Calendar inserted correctly"
+ *         description: Calendario inserito con successo, verrà restituito "Calendar inserted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -129,7 +129,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar inserted correctly
  *       400:
- *         description: Se manca il nome, verra restituito "Name missing" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"
+ *         description: Se manca il nome, verrà restituito "Name missing" <br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito "Wrong format for color" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato "Wrong format for time zone"
  *         content:
  *          application/json:
  *           schema:
@@ -151,7 +151,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format for time zone
  *       409:
- *         description: Se manca l'utente con l'userId dato, verra restituito "There is no user with that userId" <br>Se c'e piu di un utente con l'userId dato, verra restituito "There are too many users with that userId" <br>Se esiste gia un calendario principale, verra riornato "There are too many primary calendars"
+ *         description: Se manca l'utente con l'userId dato, verrà restituito "There is no user with that userId" <br>Se c'è più di un utente con l'userId dato, verrà restituito "There are too many users with that userId" <br>Se esiste già un calendario principale, verrà ritornato "There are too many primary calendars"
  *         content:
  *          application/json:
  *           schema:
@@ -165,15 +165,15 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: C'e piu di un utente con l'userId specificato
+ *             summary: C'è più di un utente con l'userId specificato
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
- *             summary: Esiste gia un calendario principale
+ *             summary: Esiste già un calendario principale
  *             value:
  *              error: There are too many primary calendars
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
  *         content:
  *          application/json:
  *           schema:
@@ -183,7 +183,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Not inserted
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -245,7 +245,7 @@ export default function handler(req, res) {
  *           value: Lezioni
  *       - name: fusoOrario
  *         in: query
- *         description: Oggetto contente il fuso orario e il capoluogo realtivo
+ *         description: Oggetto contente il fuso orario e il capoluogo relativo
  *         required: true
  *         content:
  *          application/json:
@@ -346,9 +346,9 @@ export default function handler(req, res) {
  *              type: object
  *              properties:
  *               latitudine:
- *                type: string
+ *                type: number
  *               longitudine:
- *                type: string
+ *                type: number
  *             priorita:
  *              type: integer
  *              minimum: 1
@@ -366,14 +366,14 @@ export default function handler(req, res) {
  *            durata: 1440
  *            tempAnticNotifica: 1440
  *            luogo:
- *             latitudine: "12N"
- *             longitudine: "13E"
+ *             latitudine: "12.123123"
+ *             longitudine: "13.123123"
  *            priorita: 7
  *            difficolta: 1
  *
  *     responses:
  *       200:
- *         description: Calendario aggiornato con successo, verra restituito "Calendar updated correctly"
+ *         description: Calendario aggiornato con successo, verrà restituito "Calendar updated correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -383,7 +383,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar updated correctly
  *       400:
- *         description: Se manca uno o piu parametri, verra restituito "Parameter missing" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato "Wrong format for time zone"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito "Wrong format for color" <br>Se le impostazioni predefinite non sono valide, verra restituito "Wrong format impostazioni predefinite"
+ *         description: Se manca uno o più parametri, verrà restituito "Parameter missing" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato "Wrong format for time zone"<br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito "Wrong format for color" <br>Se le impostazioni predefinite non sono valide, verrà restituito "Wrong format impostazioni predefinite"
  *         content:
  *          application/json:
  *           schema:
@@ -409,7 +409,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format impostazioni predefinite
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId" <br>Se non possiedi il caleendario, verra restituito "You do not own the calendar"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId" <br>Se non possiedi il calendario, verrà restituito "You do not own the calendar"
  *         content:
  *          application/json:
  *           schema:
@@ -423,7 +423,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
@@ -431,7 +431,7 @@ export default function handler(req, res) {
  *             value:
  *              error: You do not own the calendar
  *       500:
- *         description: Errore di modifica nel database, verra restituito "Not edited"
+ *         description: Errore di modifica nel database, verrà restituito "Not edited"
  *         content:
  *          application/json:
  *           schema:
@@ -441,7 +441,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Not edited
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -489,7 +489,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Calendario eliminato con successo, verra restituito "Calendar deleted correctly"
+ *         description: Calendario eliminato con successo, verrà restituito "Calendar deleted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -499,7 +499,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar deleted correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o più parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -509,7 +509,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId" <br>Se non possiedi il caleendario, verra restituito "You do not own the calendar"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId" <br>Se non possiedi il calendario, verrà restituito "You do not own the calendar"
  *         content:
  *          application/json:
  *           schema:
@@ -523,7 +523,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
@@ -531,7 +531,7 @@ export default function handler(req, res) {
  *             value:
  *              error: You do not own the calendar
  *       500:
- *         description: Errore di eliminazione nel database, verra restituito "Calendar not deleted"
+ *         description: Errore di eliminazione nel database, verrà restituito "Calendar not deleted"
  *         content:
  *          application/json:
  *           schema:
@@ -541,7 +541,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar not deleted
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -561,6 +561,31 @@ export async function creaCalendario(req, res) {
     if (nome == null || userId == null) {
       res.status(400).json({ error: "Name missing" }); //TODO or userID
       return;
+    }
+
+    if (colore != null && !/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
+      res.status(400).json({ error: "Wrong format for color" });
+      return;
+    }
+
+    let tempFusoOrario
+
+    if (fusoOrario != null) {
+      try{
+        tempFusoOrario = JSON.parse(fusoOrario)
+      }catch{
+        tempFusoOrario = fusoOrario
+      }
+
+      if (
+        tempFusoOrario.GMTOffset == null ||
+        tempFusoOrario.localita == null ||
+        tempFusoOrario.GMTOffset > 12 ||
+        tempFusoOrario.GMTOffset < -12
+      ) {
+        res.status(400).json({ error: "Wrong format for time zone" });
+        return;
+      }
     }
 
     const users = await UtenteAutenticato.find({
@@ -588,27 +613,10 @@ export async function creaCalendario(req, res) {
       }
     }
 
-    if (colore != null && !/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
-      res.status(400).json({ error: "Wrong format for color" });
-      return;
-    }
-
-    if (fusoOrario != null) {
-      if (
-        fusoOrario.GMTOffset == null ||
-        fusoOrario.localita == null ||
-        fusoOrario.GMTOffset > 12 ||
-        fusoOrario.GMTOffset < -12
-      ) {
-        res.status(400).json({ error: "Wrong format for time zone" });
-        return;
-      }
-    }
-
     Calendario.create(
       {
         nome: nome,
-        fusoOrario: fusoOrario == null ? undefined : fusoOrario,
+        fusoOrario: fusoOrario == null ? undefined : tempFusoOrario,
         colore: colore == null ? undefined : colore,
         partecipanti: [userId],
         principale: principale == null ? false : principale,
@@ -640,33 +648,90 @@ export async function modificaCalendario(req, res) {
       fusoOrario,
       colore,
       partecipanti,
-      principale,
       impostazioniPredefiniteEventi,
     } = req.query;
     const { userId } = req.query;
+
+    let tempFusoOrario
+
+    if (fusoOrario != null) {
+      try{
+        tempFusoOrario = JSON.parse(fusoOrario)
+      }catch{
+        tempFusoOrario = fusoOrario
+      }
+      }
+  let tempImpostazioniPredefiniteEventi
+
+    if (impostazioniPredefiniteEventi != null) {
+      try{
+        tempImpostazioniPredefiniteEventi = JSON.parse(impostazioniPredefiniteEventi)
+      }catch{
+        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
+      }
+    }
 
     if (
       IDCalendario == null ||
       userId == null ||
       nome == null ||
       fusoOrario == null ||
-      fusoOrario.GMTOffset == null ||
-      fusoOrario.localita == null ||
+      tempFusoOrario.GMTOffset == null ||
+      tempFusoOrario.localita == null ||
       colore == null ||
       partecipanti == null ||
-      principale == null ||
       impostazioniPredefiniteEventi == null ||
-      impostazioniPredefiniteEventi.titolo == null ||
-      impostazioniPredefiniteEventi.descrizione == null ||
-      impostazioniPredefiniteEventi.durata == null ||
-      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      impostazioniPredefiniteEventi.luogo == null ||
-      impostazioniPredefiniteEventi.luogo.latitudine == null ||
-      impostazioniPredefiniteEventi.luogo.longitudine == null ||
-      impostazioniPredefiniteEventi.priorita == null ||
-      impostazioniPredefiniteEventi.difficolta == null
+      tempImpostazioniPredefiniteEventi.titolo == null ||
+      tempImpostazioniPredefiniteEventi.descrizione == null ||
+      tempImpostazioniPredefiniteEventi.durata == null ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      tempImpostazioniPredefiniteEventi.luogo == null ||
+      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      tempImpostazioniPredefiniteEventi.priorita == null ||
+      tempImpostazioniPredefiniteEventi.difficolta == null
     ) {
       res.status(400).json({ error: "Parameter missing" });
+      return;
+    }
+
+    if (tempFusoOrario.GMTOffset == null ||
+      tempFusoOrario.localita == null ||
+      tempFusoOrario.GMTOffset > 12 ||
+      tempFusoOrario.GMTOffset < -12) {
+    res.status(400).json({ error: "Wrong format for time zone" });
+    return;
+  }
+  
+  if (
+    tempImpostazioniPredefiniteEventi.titolo == null ||
+    tempImpostazioniPredefiniteEventi.descrizione == null ||
+    tempImpostazioniPredefiniteEventi.durata == null ||
+    tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+    tempImpostazioniPredefiniteEventi.luogo == null ||
+    tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+    tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+    !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+      tempImpostazioniPredefiniteEventi.luogo.latitudine,
+    ) ||
+    !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+      tempImpostazioniPredefiniteEventi.luogo.longitudine,
+    ) ||
+    tempImpostazioniPredefiniteEventi.priorita == null ||
+    tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+    tempImpostazioniPredefiniteEventi.priorita > 10 ||
+    tempImpostazioniPredefiniteEventi.difficolta == null ||
+    tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+    tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+    tempImpostazioniPredefiniteEventi.durata <= 0 ||
+    tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+  ) {
+    res.status(400).json({ error: "Wrong format impostazioni predefinite" });
+    return;
+  }
+    
+    if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
+      res.status(400).json({ error: "Wrong format for color" });
       return;
     }
 
@@ -697,67 +762,28 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    if (
-      fusoOrario != null &&
-      (fusoOrario.GMTOffset == null ||
-        fusoOrario.localita == null ||
-        fusoOrario.GMTOffset > 12 ||
-        fusoOrario.GMTOffset < -12)
-    ) {
-      res.status(400).json({ error: "Wrong format for time zone" });
-      return;
-    }
+    let tempPartecipanti = partecipanti.filter(item => item !== userId)
 
-    if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
-      res.status(400).json({ error: "Wrong format for color" });
-      return;
-    }
-
-    /*
-    let tempPartecipanti = partecipanti.split(",");
-    if (!tempPartecipanti.includes(userId)) {
-      res.status(400).json({
-        tempPartecipanti,
-        error: "Missing owner from list partecipanti",
-      });
-      return;
-    }
-*/
-
-    if (
-      impostazioniPredefiniteEventi.titolo == null ||
-      impostazioniPredefiniteEventi.descrizione == null ||
-      impostazioniPredefiniteEventi.durata == null ||
-      impostazioniPredefiniteEventi.tempAnticNotifica == null ||
-      impostazioniPredefiniteEventi.luogo == null ||
-      impostazioniPredefiniteEventi.luogo.latitudine == null ||
-      impostazioniPredefiniteEventi.luogo.longitudine == null ||
-      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        impostazioniPredefiniteEventi.luogo.latitudine,
-      ) ||
-      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-        impostazioniPredefiniteEventi.luogo.longitudine,
-      ) ||
-      impostazioniPredefiniteEventi.priorita == null ||
-      impostazioniPredefiniteEventi.priorita <= 0 ||
-      impostazioniPredefiniteEventi.priorita > 10 ||
-      impostazioniPredefiniteEventi.difficolta == null ||
-      impostazioniPredefiniteEventi.difficolta <= 0 ||
-      impostazioniPredefiniteEventi.difficolta > 10 ||
-      impostazioniPredefiniteEventi.durata <= 0 ||
-      impostazioniPredefiniteEventi.tempAnticNotifica < 0
-    ) {
-      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
-      return;
-    }
+    Calendario.updateMany(
+      { _id: new ObjectId(IDCalendario) },
+      {
+        partecipanti: [userId],
+      },
+      function (err, calendar) {
+        if (err) {
+          res.status(500).json({ error: "Not edited" });
+          return;
+        }
+      },
+    );
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
         nome: nome,
-        fusoOrario: fusoOrario,
+        fusoOrario: tempFusoOrario,
         colore: colore,
-        partecipanti: partecipanti,
-        impostazioniPredefiniteEventi: impostazioniPredefiniteEventi,
+        $addToSet: {partecipanti: { $each: tempPartecipanti}},
+        impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
         if (err) {

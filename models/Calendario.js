@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const colorValidator = (v) => /^#([0-9a-f]{3}){1,2}$/i.test(v);
-
 const SchemaCalendario = new mongoose.Schema(
   {
     nome: {

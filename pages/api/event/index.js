@@ -17,7 +17,7 @@ export default function handler(req, res) {
  * @swagger
  * /api/event/:
  *   post:
- *     description: Crea un evento dati userId, IDCalendario, il titolo, la descrizione, il luogo, la priorita, la difficolta, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evnto singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per  eventoRipetuto,
+ *     description: Crea un evento dati userId, IDCalendario, il titolo, la descrizione, il luogo, la priorita, la difficolta, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evnto singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per eventoRipetuto,
  *     parameters:
  *       - name: userId
  *         in: query
@@ -82,7 +82,7 @@ export default function handler(req, res) {
  *           value: Argomenti trattati \n- MongoDB
  *          Appuntamento:
  *           summary: Appuntamento clienti
- *           value: Argomenti di discussione \n- Punti deboli \n- Come miglirare la strategia \n- Aumentare profitti
+ *           value: Argomenti di discussione \n- Punti deboli \n- Come migliorare la strategia \n- Aumentare profitti
  *       - name: luogo
  *         in: query
  *         description: Nome del calendario
@@ -93,9 +93,9 @@ export default function handler(req, res) {
  *            type: object
  *            properties:
  *             latitudine:
- *              type: string
+ *              type: number
  *             longitudine:
- *              type: string
+ *              type: number
  *         examples:
  *          Calcio:
  *           summary: Posizione partita Francia Marocco
@@ -103,7 +103,7 @@ export default function handler(req, res) {
  *            latitudine: 25.652291
  *            longitudine: 51.487782
  *          Lezione:
- *           summary: Posizione Universita
+ *           summary: Posizione Università
  *           value:
  *            latitudine: 46.068244
  *            longitudine: 11.150163
@@ -114,32 +114,32 @@ export default function handler(req, res) {
  *            longitudine: 9.493751
  *       - name: priorita
  *         in: query
- *         description: Priorita dell'evento
+ *         description: Priorità dell'evento
  *         required: false
  *         schema:
  *          type: number
  *         examples:
  *          basso:
- *           summary: Priorita bassa
+ *           summary: Priorità bassa
  *           value: 1
  *          medio:
- *           summary: Priorita media
+ *           summary: Priorità media
  *           value: 5
  *          alto:
- *           summary: Priorita alta
+ *           summary: Priorità alta
  *           value: 10
  *       - name: difficolta
  *         in: query
- *         description: Difficolta dell'evento
+ *         description: Difficoltà dell'evento
  *         required: false
  *         schema:
  *          type: number
  *         examples:
  *          basso:
- *           summary: Difficolta bassa
+ *           summary: Difficoltà bassa
  *           value: 1
  *          medio:
- *           summary: Difficolta media
+ *           summary: Difficoltà media
  *           value: 5
  *          alto:
  *           summary: Difficolta alta
@@ -215,7 +215,7 @@ export default function handler(req, res) {
  *           value: 1440
  *       - name: isEventoSingolo
  *         in: query
- *         description: Vaslore booleano che identifica se e' un evento singolo o evento ripetuto
+ *         description: Valore booleano che identifica se e' un evento singolo o evento ripetuto
  *         required: true
  *         schema:
  *          type: boolean
@@ -251,7 +251,7 @@ export default function handler(req, res) {
  *            data: 1671189531689
  *            isScadenza: false
  *          Appuntamento:
- *           summary: Oraio dell'appuntamento
+ *           summary: Orario dell'appuntamento
  *           value:
  *            data: 1671194251689
  *            isScadenza: false
@@ -289,16 +289,16 @@ export default function handler(req, res) {
  *             giorniSettimana: ["Lunedi", "Mercoledi"]
  *             data: 1671194251689
  *          Appuntamento:
- *           summary: Oraio delgli appuntamenti
+ *           summary: Orario degli appuntamenti
  *           value:
  *            numeroRipetizioni: 5
  *            impostazioniAvanzate:
- *             giorniSettimana: ["Mercoeldi"]
+ *             giorniSettimana: ["Mercoledi"]
  *             data: 1671194253689
  *
  *     responses:
  *       200:
- *         description: Evento inserito con successo, verra restituito "Event inserted correctly"
+ *         description: Evento inserito con successo, verrà restituito "Event inserted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -308,7 +308,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Event inserted correctly
  *       400:
- *         description: Se manca uno o piu dei seguoenti IDCalendario, nome, titolo, isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verra restituito "IDCalendario or titolo or evento details missing" <br>Se la posizione e' stata passata come parametro ma il formato non e' corretto, verra restituito "Wrong format for location" <br>Se la priorita e' stata passata come parametro ma il valore non e' corretto, verra restituito "Wrong format for priorita" <br>Se la difficolta e' stata passata come parametro ma il valore non e' corretto, verra restituito "Wrong format for difficolta" <br>Se le impostazioni notifiche sono state passate come parametro ma il valore non e' corretto, verra restituito "Wrong format for notifiche" <br>Se la durata e' stata passata come parametro ma il valore non e' corretto, verra restituito "Wrong format for durata" <br>Se le informazioni di un evento singolo sono state passate come parametro ma il valore non e' corretto, verra restituito "Wrong format for eventoSingolo" <br>Se le informazioni di un evento ripetuto sono state passate come parametro ma il valore non e' corretto, verra restituito "Wrong format for eventoRipetuto"
+ *         description: Se manca uno o più dei seguoenti IDCalendario, nome, titolo, isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verrà restituito "IDCalendario or titolo or evento details missing" <br>Se la posizione e' stata passata come parametro ma il formato non e' corretto, verrà restituito "Wrong format for location" <br>Se la priorità e' stata passata come parametro ma il valore non e' corretto, verrà restituito "Wrong format for priorita" <br>Se la difficolta e' stata passata come parametro ma il valore non e' corretto, verrà restituito "Wrong format for difficolta" <br>Se le impostazioni notifiche sono state passate come parametro ma il valore non e' corretto, verrà restituito "Wrong format for notifiche" <br>Se la durata e' stata passata come parametro ma il valore non e' corretto, verrà restituito "Wrong format for durata" <br>Se le informazioni di un evento singolo sono state passate come parametro ma il valore non e' corretto, verrà restituito "Wrong format for eventoSingolo" <br>Se le informazioni di un evento ripetuto sono state passate come parametro ma il valore non e' corretto, verrà restituito "Wrong format for eventoRipetuto"
  *         content:
  *          application/json:
  *           schema:
@@ -318,7 +318,7 @@ export default function handler(req, res) {
  *              type: string
  *           examples:
  *            Errore1:
- *             summary: Manca un paramtro obbligatorio
+ *             summary: Manca un parametro obbligatorio
  *             value:
  *              error: IDCalendario or titolo or evento details missing
  *            Errore2:
@@ -326,11 +326,11 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format for location
  *            Errore3:
- *             summary: Parametro priorita non valido
+ *             summary: Parametro priorità non valido
  *             value:
  *              error: Wrong format for priorita
  *            Errore4:
- *             summary: Parametro difficolta non valido
+ *             summary: Parametro difficoltà non valido
  *             value:
  *              error: Wrong format for difficolta
  *            Errore5:
@@ -350,7 +350,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format for eventoRipetuto
  *       409:
- *         description: Se manca l'utente con l'userId dato, verra restituito "There is no user with that userId" <br>Se c'e piu di un utente con l'userId dato, verra restituito "There are too many users with that userId" <br>Se manca un calendario con il IDCalendario oopure l'utente non possiede il calendario specificato, verra riornato "There is no calendar with that ID or you do not own the calendar"
+ *         description: Se manca l'utente con l'userId dato, verrà restituito "There is no user with that userId" <br>Se c'è più di un utente con l'userId dato, verrà restituito "There are too many users with that userId" <br>Se manca un calendario con il IDCalendario oppure l'utente non possiede il calendario specificato, verrà ritornato "There is no calendar with that ID or you do not own the calendar"
  *         content:
  *          application/json:
  *           schema:
@@ -364,15 +364,15 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: C'e piu di un utente con l'userId specificato
+ *             summary: C'è più di un utente con l'userId specificato
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
- *             summary: Non esiste il calendario indicato o l'utente che lo ha richiesto non lo posside
+ *             summary: Non esiste il calendario indicato o l'utente che lo ha richiesto non lo e
  *             value:
  *              error: There is no calendar with that ID or you do not own the calendar
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
  *         content:
  *          application/json:
  *           schema:
@@ -382,7 +382,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Not inserted
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -393,7 +393,7 @@ export default function handler(req, res) {
  *               example: Generic error
  *
  *   put:
- *     description: Modifica un evento dati userId, IDEvento, IDCalendario, il titolo, la descrizione, il luogo, la priorita, la difficolta, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evnto singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per  eventoRipetuto,
+ *     description: Modifica un evento dati userId, IDEvento, IDCalendario, il titolo, la descrizione, il luogo, la priorità, la difficoltà, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evento singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per eventoRipetuto,
  *     parameters:
  *       - name: userId
  *         in: query
@@ -485,9 +485,9 @@ export default function handler(req, res) {
  *            type: object
  *            properties:
  *             latitudine:
- *              type: string
+ *              type: number
  *             longitudine:
- *              type: string
+ *              type: number
  *         examples:
  *          Calcio:
  *           summary: Posizione partita Francia Marocco
@@ -495,7 +495,7 @@ export default function handler(req, res) {
  *            latitudine: 25.652291
  *            longitudine: 51.487782
  *          Lezione:
- *           summary: Posizione Universita
+ *           summary: Posizione Università
  *           value:
  *            latitudine: 46.068244
  *            longitudine: 11.150163
@@ -506,35 +506,35 @@ export default function handler(req, res) {
  *            longitudine: 9.493751
  *       - name: priorita
  *         in: query
- *         description: Priorita dell'evento
+ *         description: Priorità dell'evento
  *         required: true
  *         schema:
  *          type: number
  *         examples:
  *          basso:
- *           summary: Priorita bassa
+ *           summary: Priorità bassa
  *           value: 1
  *          medio:
- *           summary: Priorita media
+ *           summary: Priorità media
  *           value: 5
  *          alto:
- *           summary: Priorita alta
+ *           summary: Priorità alta
  *           value: 10
  *       - name: difficolta
  *         in: query
- *         description: Difficolta dell'evento
+ *         description: Difficoltà dell'evento
  *         required: true
  *         schema:
  *          type: number
  *         examples:
  *          basso:
- *           summary: Difficolta bassa
+ *           summary: Difficoltà bassa
  *           value: 1
  *          medio:
- *           summary: Difficolta media
+ *           summary: Difficoltà media
  *           value: 5
  *          alto:
- *           summary: Difficolta alta
+ *           summary: Difficoltà alta
  *           value: 10
  *       - name: partecipanti
  *         in: query
@@ -607,7 +607,7 @@ export default function handler(req, res) {
  *           value: 1440
  *       - name: isEventoSingolo
  *         in: query
- *         description: Vaslore booleano che identifica se e' un evento singolo o evento ripetuto
+ *         description: Valore booleano che identifica se e' un evento singolo o evento ripetuto
  *         required: true
  *         schema:
  *          type: boolean
@@ -643,7 +643,7 @@ export default function handler(req, res) {
  *            data: 1671189531689
  *            isScadenza: false
  *          Appuntamento:
- *           summary: Oraio dell'appuntamento
+ *           summary: Orario dell'appuntamento
  *           value:
  *            data: 1671194251689
  *            isScadenza: false
@@ -681,7 +681,7 @@ export default function handler(req, res) {
  *             giorniSettimana: ["Lunedi", "Mercoledi"]
  *             data: 1671194251689
  *          Appuntamento:
- *           summary: Oraio delgli appuntamenti
+ *           summary: Orario degli appuntamenti
  *           value:
  *            numeroRipetizioni: 5
  *            impostazioniAvanzate:
@@ -690,7 +690,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Evento modificato con successo, verra restituito "Event edited correctly"
+ *         description: Evento modificato con successo, verrà restituito "Event edited correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -700,7 +700,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Event edited correctly
  *       400:
- *         description: Se manca uno o piu dei seguoenti IDCalendario, nome, titolo, descrizione, luogo, priorita, difficolta, partecipanti, notifiche durata isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verra restituito "Parameter missing" <br>Se il formato della posizione non e' corretto, verra restituito "Wrong format for location" <br>Se il formato della priorita non e' corretto, verra restituito "Wrong format for priorita" <br>Se il formato della difficolta non e' corretto, verra restituito "Wrong format for difficolta" <br>Se il formato delle impostazioni notifiche non e' corretto, verra restituito "Wrong format for notifiche" <br>Se il formato della durata non e' corretto, verra restituito "Wrong format for durata" <br>Se il formato delle informazioni di un evento singolo  non e' corretto, verra restituito "Wrong format for eventoSingolo" <br>Se il formato delle informazioni di un evento ripetuto non e' corretto, verra restituito "Wrong format for eventoRipetuto"
+ *         description: Se manca uno o più dei seguenti userId, IDCalendario, titolo, descrizione, luogo, priorita, difficolta, partecipanti, notifiche durata isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verrà restituito "Parameter missing" <br>Se il formato della posizione non e' corretto, verrà restituito "Wrong format for location" <br>Se il formato della priorita non e' corretto, verrà restituito "Wrong format for priorita" <br>Se il formato della difficolta non e' corretto, verrà restituito "Wrong format for difficolta" <br>Se il formato delle impostazioni notifiche non e' corretto, verrà restituito "Wrong format for notifiche" <br>Se il formato della durata non e' corretto, verrà restituito "Wrong format for durata" <br>Se il formato delle informazioni di un evento singolo  non e' corretto, verrà restituito "Wrong format for eventoSingolo" <br>Se il formato delle informazioni di un evento ripetuto non e' corretto, verrà restituito "Wrong format for eventoRipetuto"
  *         content:
  *          application/json:
  *           schema:
@@ -710,7 +710,7 @@ export default function handler(req, res) {
  *              type: string
  *           examples:
  *            Errore1:
- *             summary: Manca un paramtro obbligatorio
+ *             summary: Manca un parametro obbligatorio
  *             value:
  *              error: Parameter missing
  *            Errore2:
@@ -742,7 +742,7 @@ export default function handler(req, res) {
  *             value:
  *              error: Wrong format for eventoRipetuto
  *       409:
- *         description: Se manca l'utente con l'userId dato, verra restituito "There is no user with that userId" <br>Se c'e piu di un utente con l'userId dato, verra restituito "There are too many users with that userId" <br>Se manca un calendario con il IDCalendario oopure l'utente non possiede il calendario specificato, verra riornato "There is no calendar with that ID or you do not own the calendar" <br>Se manca l'evento con l'IDEvento oopure l'utente non possiede l'evento specificato, verra riornato "You do not own the event"
+ *         description: Se manca l'utente con l'userId dato, verrà restituito "There is no user with that userId" <br>Se c'è più di un utente con l'userId dato, verrà restituito "There are too many users with that userId" <br>Se manca un calendario con il IDCalendario oopure l'utente non possiede il calendario specificato, verrà ritornato "There is no calendar with that ID or you do not own the calendar" <br>Se manca l'evento con l'IDEvento oopure l'utente non possiede l'evento specificato, verrà ritornato "You do not own the event"
  *         content:
  *          application/json:
  *           schema:
@@ -756,19 +756,19 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: C'e piu di un utente con l'userId specificato
+ *             summary: C'è più di un utente con l'userId specificato
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
- *             summary: Non esiste il calendario indicato o l'utente che lo ha richiesto non lo posside
+ *             summary: Non esiste il calendario indicato o l'utente che lo ha richiesto non lo e
  *             value:
  *              error: There is no calendar with that ID or you do not
  *            Errore4:
- *             summary: Non esiste l'evento o l'utente che lo ha richiesto non lo posside
+ *             summary: Non esiste l'evento o l'utente che lo ha richiesto non lo possiede
  *             value:
  *              error: You do not own the event
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not modified"
  *         content:
  *          application/json:
  *           schema:
@@ -776,9 +776,9 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Not inserted
+ *               example: Not modified
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -826,7 +826,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Evento eliminato con successo, verra restituito "Event deleted correctly"
+ *         description: Evento eliminato con successo, verrà restituito "Event deleted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -836,7 +836,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Event deleted correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o più parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -846,7 +846,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId" <br>Se non possiedi l'evento, verra restituito "You do not own the event"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId" <br>Se non possiedi l'evento, verrà restituito "You do not own the event"
  *         content:
  *          application/json:
  *           schema:
@@ -860,7 +860,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *            Errore3:
@@ -868,7 +868,7 @@ export default function handler(req, res) {
  *             value:
  *              error: You do not own the event
  *       500:
- *         description: Errore di eliminazione nel database, verra restituito "Event not deleted"
+ *         description: Errore di eliminazione nel database, verrà restituito "Event not deleted"
  *         content:
  *          application/json:
  *           schema:
@@ -878,7 +878,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Event not deleted
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -922,6 +922,88 @@ export async function creaEvento(req, res) {
       return;
     }
 
+    let tempLuogo;
+    if (luogo != null) {
+      try {
+        tempLuogo = JSON.parse(luogo);
+      } catch {
+        tempLuogo = luogo;
+      }
+      if (
+        tempLuogo.latitudine == null ||
+        tempLuogo.longitudine == null ||
+        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.latitudine
+        ) ||
+        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempLuogo.longitudine
+        )
+      ) {
+        res.status(400).json({ error: "Wrong format for location" });
+        return;
+      }
+    }
+    if (priorita != null && (priorita <= 0 || priorita > 10)) {
+      res.status(400).json({ error: "Wrong format for priorita" });
+      return;
+    }
+    if (difficolta != null && (difficolta <= 0 || difficolta > 10)) {
+      res.status(400).json({ error: "Wrong format for difficolta" });
+      return;
+    }
+    let tempNotifiche;
+    if (notifiche != null) {
+      try {
+        tempNotifiche = JSON.parse(notifiche);
+      } catch {
+        tempNotifiche = notifiche;
+      }
+
+      if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+        res.status(400).json({ error: "Wrong format for notifiche" });
+        return;
+      }
+    }
+    if (durata != null && durata <= 0) {
+      res.status(400).json({ error: "Wrong format for durata" });
+      return;
+    }
+
+    let tempEvento;
+
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        try {
+          tempEvento = JSON.parse(eventoSingolo);
+        } catch {
+          tempEvento = eventoSingolo;
+        }
+        if (tempEvento.data == null || tempEvento.isScadenza == null) {
+          res.status(400).json({ error: "Wrong format for eventoSingolo" });
+          return;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        try {
+          tempEvento = JSON.parse(eventoRipetuto);
+        } catch {
+          tempEvento = eventoRipetuto;
+        }
+        if (
+          tempEvento.numeroRipetizioni == null ||
+          tempEvento.impostazioniAvanzate == null ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
+          tempEvento.impostazioniAvanzate.data == null ||
+          tempEvento.numeroRipetizioni < 1 ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == []
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
+          return;
+        }
+      }
+    }
+
     const users = await UtenteAutenticato.find({
       userId: userId,
     });
@@ -934,6 +1016,7 @@ export async function creaEvento(req, res) {
         .json({ error: "There are too many users with that userId" });
       return;
     }
+
     var ObjectId = require("mongoose").Types.ObjectId;
 
     const calendariPosseduti = await Calendario.find({
@@ -950,65 +1033,7 @@ export async function creaEvento(req, res) {
       return;
     }
 
-    if (luogo != null) {
-
-      if (
-        luogo.latitudine == null ||
-        luogo.longitudine == null ||
-        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.latitudine,
-        ) ||
-        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.longitudine,
-        )
-      ) {
-        res.status(400).json({ error: "Wrong format for location" });
-        return;
-      }
-    }
-    if (priorita != null && (priorita <= 0 || priorita > 10)) {
-      res.status(400).json({ error: "Wrong format for priorita" });
-      return;
-    }
-    if (difficolta != null && (difficolta <= 0 || difficolta > 10)) {
-      res.status(400).json({ error: "Wrong format for difficolta" });
-      return;
-    }
-    if (notifiche != null) {
-      if (notifiche.titolo == null || notifiche.data == null) {
-        res.status(400).json({ error: "Wrong format for notifiche" });
-        return;
-      }
-    }
-    if (durata != null && durata <= 0) {
-      res.status(400).json({ error: "Wrong format for durata" });
-      return;
-    }
-    if (isEventoSingolo) {
-      if (eventoSingolo != null) {
-        if (
-          eventoSingolo.data == null ||
-          eventoSingolo.isScadenza == null
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoSingolo" });
-          return;
-        }
-      }
-    } else {
-      if (eventoRipetuto != null) {
-        if (
-          eventoRipetuto.numeroRipetizioni == null ||
-          eventoRipetuto.impostazioniAvanzate == null ||
-          eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-          eventoRipetuto.impostazioniAvanzate.data == null ||
-          eventoRipetuto.numeroRipetizioni < 1 ||
-          eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
-        ) {
-          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
-          return;
-        }
-      }
-    }
+    let tempPartecipanti = partecipanti != null && Array.isArray(partecipanti)? partecipanti.filter((item) => item !== userId) : calendariPosseduti[0].partecipanti;
 
     if (isEventoSingolo) {
       Evento.create(
@@ -1016,24 +1041,21 @@ export async function creaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null
-              ? calendariPosseduti[0].partecipanti
-              : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : eventoSingolo,
+          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
             res.status(500).json({ error: "Not inserted" });
             return;
           }
-        },
+        }
       );
     } else {
       Evento.create(
@@ -1041,24 +1063,21 @@ export async function creaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null
-              ? calendariPosseduti[0].partecipanti
-              : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : eventoRipetuto,
+          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
             res.status(500).json({ error: "Not inserted" });
             return;
           }
-        },
+        }
       );
     }
 
@@ -1091,6 +1110,41 @@ export async function modificaEvento(req, res) {
     } = req.query;
     const { userId } = req.query;
 
+    let tempLuogo;
+    if (luogo != null) {
+      try {
+        tempLuogo = JSON.parse(luogo);
+      } catch {
+        tempLuogo = luogo;
+      }
+    }
+    let tempNotifiche;
+    if (notifiche != null) {
+      try {
+        tempNotifiche = JSON.parse(notifiche);
+      } catch {
+        tempNotifiche = notifiche;
+      }
+    }
+    let tempEvento;
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        try {
+          tempEvento = JSON.parse(eventoSingolo);
+        } catch {
+          tempEvento = eventoSingolo;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        try {
+          tempEvento = JSON.parse(eventoRipetuto);
+        } catch {
+          tempEvento = eventoRipetuto;
+        }
+      }
+    }
+
     if (
       IDEvento == null ||
       IDCalendario == null ||
@@ -1109,6 +1163,61 @@ export async function modificaEvento(req, res) {
     ) {
       res.status(400).json({ error: "Parameter missing" });
       return;
+    }
+
+    if (priorita <= 0 || priorita > 10) {
+      res.status(400).json({ error: "Wrong format for priorita" });
+      return;
+    }
+    if (difficolta <= 0 || difficolta > 10) {
+      res.status(400).json({ error: "Wrong format for difficolta" });
+      return;
+    }
+
+    if (durata <= 0) {
+      res.status(400).json({ error: "Wrong format for durata" });
+      return;
+    }
+
+    if (
+      tempLuogo.latitudine == null ||
+      tempLuogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempLuogo.latitudine
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempLuogo.longitudine
+      )
+    ) {
+      res.status(400).json({ error: "Wrong format for location" });
+      return;
+    }
+    if (tempNotifiche.titolo == null || tempNotifiche.data == null) {
+      res.status(400).json({ error: "Wrong format for notifiche" });
+      return;
+    }
+
+    if (isEventoSingolo) {
+      if (eventoSingolo != null) {
+        if (tempEvento.data == null || tempEvento.isScadenza == null) {
+          res.status(400).json({ error: "Wrong format for eventoSingolo" });
+          return;
+        }
+      }
+    } else {
+      if (eventoRipetuto != null) {
+        if (
+          tempEvento.numeroRipetizioni == null ||
+          tempEvento.impostazioniAvanzate == null ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == null ||
+          tempEvento.impostazioniAvanzate.data == null ||
+          tempEvento.numeroRipetizioni < 1 ||
+          tempEvento.impostazioniAvanzate.giorniSettimana == []
+        ) {
+          res.status(400).json({ error: "Wrong format for eventoRipetuto" });
+          return;
+        }
+      }
     }
 
     const users = await UtenteAutenticato.find({
@@ -1154,54 +1263,20 @@ export async function modificaEvento(req, res) {
       return;
     }
 
-    if (
-      luogo != null &&
-      (luogo.latitudine == null ||
-        luogo.longitudine == null ||
-        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.latitudine,
-        ) ||
-        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-          luogo.longitudine,
-        ))
-    ) {
-      res.status(400).json({ error: "Wrong format for location" });
-      return;
-    }
-    if (priorita <= 0 || priorita > 10) {
-      res.status(400).json({ error: "Wrong format for priorita" });
-      return;
-    }
-    if (difficolta <= 0 || difficolta > 10) {
-      res.status(400).json({ error: "Wrong format for difficolta" });
-      return;
-    }
-    if (notifiche!=null && (notifiche.titolo == null || notifiche.data == null)) {
-      res.status(400).json({ error: "Wrong format for notifiche" });
-      return;
-    }
-    if (durata <= 0) {
-      res.status(400).json({ error: "Wrong format for durata" });
-      return;
-    }
-    if (isEventoSingolo) {
-      if (eventoSingolo.data == null || eventoSingolo.isScadenza == null) {
-        res.status(400).json({ error: "Wrong format for eventoSingolo" });
-        return;
+    let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+
+    Evento.updateMany(
+      { _id: new ObjectId(IDEvento) },
+      {
+        partecipanti: [userId],
+      },
+      function (err, calendar) {
+        if (err) {
+          res.status(500).json({ error: "Not modified" });
+          return;
+        }
       }
-    } else {
-      if (
-        eventoRipetuto.numeroRipetizioni == null ||
-        eventoRipetuto.impostazioniAvanzate == null ||
-        eventoRipetuto.impostazioniAvanzate.giorniSettimana == null ||
-        eventoRipetuto.impostazioniAvanzate.data == null ||
-        eventoRipetuto.numeroRipetizioni < 1 ||
-        eventoRipetuto.impostazioniAvanzate.giorniSettimana == []
-      ) {
-        res.status(400).json({ error: "Wrong format for eventoRipetuto" });
-        return;
-      }
-    }
+    );
 
     if (isEventoSingolo) {
       Evento.updateMany(
@@ -1210,22 +1285,21 @@ export async function modificaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : eventoSingolo,
+          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
-            res.status(500).json({ error: "Not inserted" });
+            res.status(500).json({ error: "Not modified" });
             return;
           }
-        },
+        }
       );
     } else {
       Evento.updateMany(
@@ -1234,22 +1308,21 @@ export async function modificaEvento(req, res) {
           IDCalendario: IDCalendario,
           titolo: titolo,
           descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : luogo,
+          luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          partecipanti:
-            partecipanti == null ? calendario[0].partecipanti : partecipanti,
-          notifiche: notifiche == null ? undefined : notifiche,
+          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : eventoRipetuto,
+          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
         function (err, calendar) {
           if (err) {
             res.status(500).json({ error: "Not modified" });
             return;
           }
-        },
+        }
       );
     }
 

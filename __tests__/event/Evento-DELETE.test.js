@@ -195,7 +195,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
         }),
       );
     });
-    test("Non sono stati trovati calendari con IDCalendario o l'userID dato", async () => {
+    test("Non sono stati trovati eventi con IDEvento o l'userID dato", async () => {
       const { req, res } = createMocks({
         method: "GET",
         query: {

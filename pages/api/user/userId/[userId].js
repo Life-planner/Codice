@@ -14,7 +14,7 @@ export default function handler(req, res) {
  *     description: Ritorna userId, email, username di un utente dato l'userId
  *     parameters:
  *       - name: userId
- *         in: query
+ *         in: path
  *         description: UserId
  *         required: true
  *         schema:
@@ -32,7 +32,7 @@ export default function handler(req, res) {
  *
  *     responses:
  *       200:
- *         description: Trovato un unico account, verra restituito userId, email e username
+ *         description: Trovato un unico account, verrà restituito userId, email e username
  *         content:
  *          application/json:
  *           schema:
@@ -60,7 +60,7 @@ export default function handler(req, res) {
  *              email: prova@studenti.unitn.it
  *              username: Username2
  *       400:
- *         description: Manca il parametro, verra restituito "Parameter missing"
+ *         description: Manca il parametro, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -70,7 +70,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId"
  *         content:
  *          application/json:
  *           schema:
@@ -84,11 +84,11 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
