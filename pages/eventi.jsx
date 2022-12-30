@@ -3,6 +3,7 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 import styles from "../styles/eventi.module.css";
 import Menu from "../components/Menu";
+import ResizeButton from "../components/ResizeButton";
 
 export default withPageAuthRequired(function Eventi() {
   return (
@@ -14,6 +15,15 @@ export default withPageAuthRequired(function Eventi() {
       </Head>
       <div className={styles.home}>
         <Menu selected="Eventi" />
+        <div className={styles["left-tab"]}>
+          <div className={styles.flex}>
+            <ResizeButton text="Crea Evento" icon="more_time" />
+            <ResizeButton text="Crea Evento Ripetuto" icon="update" />
+          </div>
+          <ResizeButton text="Crea Calendario" icon="event_note" />
+          <div className={styles.line} />
+        </div>
+        <div className={styles["right-tab"]}></div>
       </div>
     </div>
   );

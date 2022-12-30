@@ -23,7 +23,7 @@ export default function CreateEvent({ full, close = () => {} }) {
         <div className={styles["line-small"]} />
         <div className={styles["main-info"]}>
           <IconText text="Data" icon="edit_calendar" />
-          <div className=""></div>
+          <input type="datetime-local" className={styles.input} />
           <IconText text="Durata" icon="hourglass_empty" />
           <div className={styles.flex}>
             <input

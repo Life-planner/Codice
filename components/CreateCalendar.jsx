@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../styles/createCalendar.module.css";
 import FabButton from "./FabButton";
 import IconText from "./IconText";
+import Persone from "./Persone";
 
 export default function CreateCalendar({ full, close = () => {} }) {
   const [color, setColor] = useState("#8338ec");
@@ -26,12 +27,7 @@ export default function CreateCalendar({ full, close = () => {} }) {
         <div className={styles["line-small"]} />
         <div className={styles["main-info"]}>
           <IconText text="Persone" icon="groups" />
-          <input
-            disabled
-            type="text"
-            className={`${styles.input} ${styles.disabled}`}
-            placeholder="Aggiungi persone"
-          />
+          <Persone />
           <IconText text="Colore" icon="palette" />
           <div className={styles.color}>
             <input
