@@ -787,7 +787,7 @@ export async function creaCalendario(req, res) {
         }
       }
     );
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Calendar inserted correctly" });
     }
     return;
@@ -959,7 +959,7 @@ export async function modificaCalendario(req, res) {
         );
       }
     );
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Calendar updated correctly" });
     }
     return;

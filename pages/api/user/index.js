@@ -248,7 +248,7 @@ export async function creaUser(req, res) {
         res.status(200);
       }
     );
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "User inserted correctly" });
     }
     return;

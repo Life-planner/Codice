@@ -159,7 +159,10 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
           },
           colore: "#00FF00",
           principale: false,
-          partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
         },
       });
 
@@ -185,7 +188,10 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
           },
           colore: "#00FF00",
           principale: false,
-          partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
           impostazioniPredefiniteEventi: {
             titolo: "",
             descrizione: "",
@@ -238,7 +244,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
           userId: "utenteTestCalendarioPOST",
           nome: "calendarioTestProva1",
           colore: "#00FF00",
-          principale: false
+          principale: false,
         },
       });
 
@@ -260,8 +266,11 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
           nome: "calendarioTestProva1",
           colore: "#00FF00",
           principale: false,
-          partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-        },  
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+        },
       });
       await creaCalendario(req, res);
 
@@ -272,37 +281,40 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
         })
       );
     });
-      test("Calendario inserito con successo con userId, nome, colore, principale, partecipanti, impostazioniPredefiniteEventi", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestCalendarioPOST",
-            nome: "calendarioTestProva1",
-            colore: "#00FF00",
-            principale: false,
-            partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-            impostazioniPredefiniteEventi: {
-              titolo: "",
-              descrizione: "",
-              durata: 30,
-              tempAnticNotifica: 30,
-              luogo: {
-                latitudine: 12.123456,
-                longitudine: 12.123456,
-              },
-              priorita: 6,
-              difficolta: 6,
+    test("Calendario inserito con successo con userId, nome, colore, principale, partecipanti, impostazioniPredefiniteEventi", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestCalendarioPOST",
+          nome: "calendarioTestProva1",
+          colore: "#00FF00",
+          principale: false,
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+          impostazioniPredefiniteEventi: {
+            titolo: "",
+            descrizione: "",
+            durata: 30,
+            tempAnticNotifica: 30,
+            luogo: {
+              latitudine: 12.123456,
+              longitudine: 12.123456,
             },
+            priorita: 6,
+            difficolta: 6,
           },
-        });
-        await creaCalendario(req, res);
+        },
+      });
+      await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(200);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            success: "Calendar inserted correctly",
-          })
-        );
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Calendar inserted correctly",
+        })
+      );
     });
 
     test("Calendario inserito con successo con userId, nome, principale", async () => {
@@ -324,118 +336,130 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       );
     });
 
-      test("Calendario inserito con successo con userId, nome, principale, partecipanti", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestCalendarioPOST",
-            nome: "calendarioTestProva1",
-            principale: false,
-            partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-          },
-        });
-        await creaCalendario(req, res);
-
-        expect(res._getStatusCode()).toBe(200);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            success: "Calendar inserted correctly",
-          })
-        );
+    test("Calendario inserito con successo con userId, nome, principale, partecipanti", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestCalendarioPOST",
+          nome: "calendarioTestProva1",
+          principale: false,
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+        },
       });
+      await creaCalendario(req, res);
 
-        test("Calendario inserito con successo con userId, nome, principale, partecipanti, impostazioniPredefiniteEventi", async () => {
-          const { req, res } = createMocks({
-            method: "POST",
-            query: {
-              userId: "utenteTestCalendarioPOST",
-              nome: "calendarioTestProva1",
-              principale: false,
-              partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-              impostazioniPredefiniteEventi: {
-                titolo: "",
-                descrizione: "",
-                durata: 30,
-                tempAnticNotifica: 30,
-                luogo: {
-                  latitudine: 12.123456,
-                  longitudine: 12.123456,
-                },
-                priorita: 6,
-                difficolta: 6,
-              },
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Calendar inserted correctly",
+        })
+      );
+    });
+
+    test("Calendario inserito con successo con userId, nome, principale, partecipanti, impostazioniPredefiniteEventi", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestCalendarioPOST",
+          nome: "calendarioTestProva1",
+          principale: false,
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+          impostazioniPredefiniteEventi: {
+            titolo: "",
+            descrizione: "",
+            durata: 30,
+            tempAnticNotifica: 30,
+            luogo: {
+              latitudine: 12.123456,
+              longitudine: 12.123456,
             },
-          });
-          await creaCalendario(req, res);
-
-          expect(res._getStatusCode()).toBe(200);
-          expect(JSON.parse(res._getData())).toEqual(
-            expect.objectContaining({
-              success: "Calendar inserted correctly",
-            })
-          );
-        });
-
-        test("Calendario inserito con successo con userId, nome, partecipanti", async () => {
-          const { req, res } = createMocks({
-            method: "POST",
-            query: {
-              userId: "utenteTestCalendarioPOST",
-              nome: "calendarioTestProva1",
-              partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-              impostazioniPredefiniteEventi: {
-                titolo: "",
-                descrizione: "",
-                durata: 30,
-                tempAnticNotifica: 30,
-                luogo: {
-                  latitudine: 12.123456,
-                  longitudine: 12.123456,
-                },
-                priorita: 6,
-                difficolta: 6,
-              },
-            },
-          });
-          await creaCalendario(req, res);
-  
-          expect(res._getStatusCode()).toBe(200);
-          expect(JSON.parse(res._getData())).toEqual(
-            expect.objectContaining({
-              success: "Calendar inserted correctly",
-            })
-          );
-      });
-
-      test("Calendario inserito con successo con userId, nome, partecipanti, impostazioniPredefiniteEventi", async () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          query: {
-            userId: "utenteTestCalendarioPOST",
-            nome: "calendarioTestProva1",
-            partecipanti: ["utenteTestCalendarioPOST", "utenteTestCalendarioPOSTPartecipante"],
-            impostazioniPredefiniteEventi: {
-              titolo: "",
-              descrizione: "",
-              durata: 30,
-              tempAnticNotifica: 30,
-              luogo: {
-                latitudine: 12.123456,
-                longitudine: 12.123456,
-              },
-              priorita: 6,
-              difficolta: 6,
-            },
+            priorita: 6,
+            difficolta: 6,
           },
-        });
-        await creaCalendario(req, res);
+        },
+      });
+      await creaCalendario(req, res);
 
-        expect(res._getStatusCode()).toBe(200);
-        expect(JSON.parse(res._getData())).toEqual(
-          expect.objectContaining({
-            success: "Calendar inserted correctly",
-          })
-        );
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Calendar inserted correctly",
+        })
+      );
+    });
+
+    test("Calendario inserito con successo con userId, nome, partecipanti", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestCalendarioPOST",
+          nome: "calendarioTestProva1",
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+          impostazioniPredefiniteEventi: {
+            titolo: "",
+            descrizione: "",
+            durata: 30,
+            tempAnticNotifica: 30,
+            luogo: {
+              latitudine: 12.123456,
+              longitudine: 12.123456,
+            },
+            priorita: 6,
+            difficolta: 6,
+          },
+        },
+      });
+      await creaCalendario(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Calendar inserted correctly",
+        })
+      );
+    });
+
+    test("Calendario inserito con successo con userId, nome, partecipanti, impostazioniPredefiniteEventi", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestCalendarioPOST",
+          nome: "calendarioTestProva1",
+          partecipanti: [
+            "utenteTestCalendarioPOST",
+            "utenteTestCalendarioPOSTPartecipante",
+          ],
+          impostazioniPredefiniteEventi: {
+            titolo: "",
+            descrizione: "",
+            durata: 30,
+            tempAnticNotifica: 30,
+            luogo: {
+              latitudine: 12.123456,
+              longitudine: 12.123456,
+            },
+            priorita: 6,
+            difficolta: 6,
+          },
+        },
+      });
+      await creaCalendario(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Calendar inserted correctly",
+        })
+      );
     });
 
     test("Calendario inserito con successo con userId, nome, impostazioniPredefiniteEventi", async () => {
@@ -466,11 +490,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
           success: "Calendar inserted correctly",
         })
       );
-  });
-
-        
-
-
+    });
   });
 
   describe("400", () => {

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.22% </span>
+                <span class="strong">72.97% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>52/72</span>
+                <span class='fraction'>54/74</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.37% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/27</span>
+                <span class='fraction'>20/28</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.22% </span>
+                <span class="strong">72.97% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>52/72</span>
+                <span class='fraction'>54/74</span>
             </div>
         
             
@@ -398,7 +398,10 @@
 <a name='L333'></a><a href='#L333'>333</a>
 <a name='L334'></a><a href='#L334'>334</a>
 <a name='L335'></a><a href='#L335'>335</a>
-<a name='L336'></a><a href='#L336'>336</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -645,9 +648,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -803,7 +809,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *
  *     responses:
  *       200:
- *         description: Utente inserito con successo, verra restituito "User inserted correctly"
+ *         description: Utente inserito con successo, verrà restituito "User inserted correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -813,7 +819,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: User inserted correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o piu parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -823,7 +829,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se e' stato trovato piu di un account con la stessa email o userId, verra restituito "There is alrady one user with that id or email"
+ *         description: Se e' stato trovato piu di un account con la stessa email o userId, verrà restituito "There is already one user with that id or email"
  *         content:
  *          application/json:
  *           schema:
@@ -833,7 +839,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: There is alrady one user with that id or email
  *       500:
- *         description: Errore di inserimento nel database, verra restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
  *         content:
  *          application/json:
  *           schema:
@@ -890,7 +896,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *
  *     responses:
  *       200:
- *         description: Username aggiornato con successo, verra restituito "User updated correctly"
+ *         description: Username aggiornato con successo, verrà restituito "User updated correctly"
  *         content:
  *          application/json:
  *           schema:
@@ -900,7 +906,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: User updated correctly
  *       400:
- *         description: Manca uno o piu parametri, verra restituito "Parameter missing"
+ *         description: Manca uno o più parametri, verrà restituito "Parameter missing"
  *         content:
  *          application/json:
  *           schema:
@@ -910,7 +916,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: Parameter missing
  *       409:
- *         description: Se non e' stato trovato neanche un account con l'userId dato, verra restituito "There is no user with that userId" &lt;br&gt;Se e' stato trovato piu di un account con lo stesso userId, verra restituito "There are too many users with that userId"
+ *         description: Se non e' stato trovato neanche un account con l'userId dato, verrà restituito "There is no user with that userId" &lt;br&gt;Se e' stato trovato più di un account con lo stesso userId, verrà restituito "There are too many users with that userId"
  *         content:
  *          application/json:
  *           schema:
@@ -924,11 +930,11 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *             value:
  *              error: There is no user with that userId
  *            Errore2:
- *             summary: Piu utenti con lo stesso userId
+ *             summary: Più utenti con lo stesso userId
  *             value:
  *              error: There are too many users with that userId
  *       500:
- *         description: Errore di modifica nel database, verra restituito "Not edited"
+ *         description: Errore di modifica nel database, verrà restituito "Not edited"
  *         content:
  *          application/json:
  *           schema:
@@ -938,7 +944,7 @@ export default function <span class="cstat-no" title="statement not covered" ><s
  *               type: string
  *               example: Not edited
  *       501:
- *         description: Errore generico, verra restituito "Generic error"
+ *         description: Errore generico, verrà restituito "Generic error"
  *         content:
  *          application/json:
  *           schema:
@@ -975,14 +981,17 @@ export async function creaUser(req, res) {
         email: email,
         username: username,
       },
-      function (err, user) {
+      function (err) {
         <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >          res.status(500).json({ error: "Not inserted" });</span>
 <span class="cstat-no" title="statement not covered" >          return;</span>
         }
-      },
+        res.status(200);
+      }
     );
-    res.status(200).json({ success: "User inserted correctly" });
+    if(res.statusCode === 200){
+      res.json({ success: "User inserted correctly" });
+    }
     return;
   } catch (e) {
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
@@ -1015,7 +1024,7 @@ export async function modificaUser(req, res) {
 &nbsp;
     const put = await UtenteAutenticato.updateMany(
       { userId: userId },
-      { $set: { username: username } },
+      { $set: { username: username } }
     );
 &nbsp;
     if (put.modifiedCount == 1) {
@@ -1075,7 +1084,7 @@ export async function eliminaUser(req, res) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-28T08:30:08.731Z
+                at 2023-01-01T20:03:42.298Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

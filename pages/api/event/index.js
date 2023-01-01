@@ -1062,7 +1062,7 @@ export async function creaEvento(req, res) {
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
+          eventoSingolo: tempEvento,
         },
         function (err, event) {
           if (err) {
@@ -1104,7 +1104,7 @@ export async function creaEvento(req, res) {
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
+          eventoRipetuto: tempEvento,
         },
         function (err, event) {
           if (err) {
@@ -1134,7 +1134,7 @@ export async function creaEvento(req, res) {
         }
       );
     }
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Event inserted correctly" });
     }
     return;
@@ -1338,15 +1338,15 @@ export async function modificaEvento(req, res) {
             {
               IDCalendario: IDCalendario,
               titolo: titolo,
-              descrizione: descrizione == null ? undefined : descrizione,
-              luogo: luogo == null ? undefined : tempLuogo,
-              priorita: priorita == null ? undefined : priorita,
-              difficolta: difficolta == null ? undefined : difficolta,
+              descrizione: descrizione,
+              luogo: tempLuogo,
+              priorita: priorita,
+              difficolta: difficolta,
               $addToSet: { partecipanti: { $each: tempPartecipanti } },
-              notifiche: notifiche == null ? undefined : tempNotifiche,
-              durata: durata == null ? undefined : durata,
+              notifiche: tempNotifiche,
+              durata: durata,
               isEventoSingolo: true,
-              eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
+              eventoSingolo: tempEvento,
             },
             function (err) {
               if (err) {
@@ -1362,15 +1362,15 @@ export async function modificaEvento(req, res) {
             {
               IDCalendario: IDCalendario,
               titolo: titolo,
-              descrizione: descrizione == null ? undefined : descrizione,
-              luogo: luogo == null ? undefined : tempLuogo,
-              priorita: priorita == null ? undefined : priorita,
-              difficolta: difficolta == null ? undefined : difficolta,
+              descrizione: descrizione,
+              luogo: tempLuogo,
+              priorita: priorita,
+              difficolta: difficolta,
               $addToSet: { partecipanti: { $each: tempPartecipanti } },
-              notifiche: notifiche == null ? undefined : tempNotifiche,
-              durata: durata == null ? undefined : durata,
+              notifiche: tempNotifiche,
+              durata: durata,
               isEventoSingolo: false,
-              eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
+              eventoRipetuto: tempEvento,
             },
             function (err) {
               if (err) {
@@ -1383,7 +1383,7 @@ export async function modificaEvento(req, res) {
         }
       }
     );
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Event edited correctly" });
     }
     return;

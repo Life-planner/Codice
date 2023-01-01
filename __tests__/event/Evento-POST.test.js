@@ -77,14 +77,16 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
     await db.collection("Evento").deleteMany({});
   });
   describe("200", () => {
-    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, eventoSingolo", async () => {
+    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, partecipanti, isEventoSingolo, eventoSingolo", async () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
           userId: "utenteTestEventoPOST",
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
+          descrizione: "Prova",
           isEventoSingolo: true,
+          partecipanti: ["utenteTestEventoPOST", "utenteTestEventoPOST2"],
           eventoSingolo: {
             data: new Date(16718931689),
             isScadenza: true,
@@ -100,14 +102,68 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         })
       );
     });
-
-    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, eventoRipetuto", async () => {
+    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, partecipanti, isEventoSingolo, eventoRipetuto", async () => {
       const { req, res } = createMocks({
         method: "POST",
         query: {
           userId: "utenteTestEventoPOST",
           IDCalendario: IDCalendarioTest,
           titolo: "titoloTestPostEvento",
+          descrizione: "ff",
+          partecipanti: ["utenteTestEventoPOST", "utenteTestEventoPOST2"],
+          isEventoSingolo: false,
+          eventoRipetuto: {
+            numeroRipetizioni: 5,
+            impostazioniAvanzate: {
+              giorniSettimana: ["Sabato", "Domenica"],
+              data: new Date(1671194251689),
+            },
+          },
+        },
+      });
+
+      await creaEvento(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Event inserted correctly",
+        })
+      );
+    });
+    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, partecipanti, isEventoSingolo, eventoSingolo", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestEventoPOST",
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          descrizione: "Prova",
+          isEventoSingolo: true,
+          partecipanti: ["utenteTestEventoPOST"],
+          eventoSingolo: {
+            data: new Date(16718931689),
+            isScadenza: true,
+          },
+        },
+      });
+
+      await creaEvento(req, res);
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining({
+          success: "Event inserted correctly",
+        })
+      );
+    });
+    test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, partecipanti, isEventoSingolo, eventoRipetuto", async () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        query: {
+          userId: "utenteTestEventoPOST",
+          IDCalendario: IDCalendarioTest,
+          titolo: "titoloTestPostEvento",
+          partecipanti: ["utenteTestEventoPOST"],
           isEventoSingolo: false,
           eventoRipetuto: {
             numeroRipetizioni: 5,
