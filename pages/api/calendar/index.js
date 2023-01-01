@@ -613,6 +613,7 @@ export async function creaCalendario(req, res) {
       }
     }
 
+    let error = false
     Calendario.create(
       {
         nome: nome,
@@ -623,12 +624,13 @@ export async function creaCalendario(req, res) {
         impostazioniPredefiniteEventi: undefined,
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not inserted" });
-          return;
-        }
+        error = err
       },
     );
+    if (error) {
+      res.status(500).json({ error: "Not inserted" });
+      return;
+    }
 
     res.status(200).json({ success: "Calendar inserted correctly" });
     return;
@@ -763,6 +765,7 @@ export async function modificaCalendario(req, res) {
     }
 
     let tempPartecipanti = partecipanti.filter(item => item !== userId)
+    let error = false
 
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
@@ -770,12 +773,14 @@ export async function modificaCalendario(req, res) {
         partecipanti: [userId],
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not edited" });
-          return;
-        }
+        error = err
       },
     );
+    if (error) {
+      res.status(500).json({ error: "Not edited" });
+      return;
+    }
+    error = false
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
@@ -786,13 +791,14 @@ export async function modificaCalendario(req, res) {
         impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not edited" });
-          return;
-        }
+        error = err
       },
     );
 
+    if (error) {
+      res.status(500).json({ error: "Not edited" });
+      return;
+    }
     res.status(200).json({ success: "Calendar updated correctly" });
     return;
   } catch (e) {
