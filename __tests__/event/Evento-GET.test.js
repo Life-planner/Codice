@@ -138,7 +138,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       });
 
       await getEventi(req, res);
-      
+
       expect(res._getStatusCode()).toBe(200);
     });
   });
@@ -158,7 +158,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
 
@@ -176,7 +176,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -196,7 +196,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Esiste più di un utente con l'userId inserito", async () => {
@@ -213,7 +213,7 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("Non sono stati trovati calendari con IDCalendario o l'userID dato", async () => {
@@ -226,12 +226,12 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       });
 
       await getEventi(req, res);
-      
+
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no calendar with that ID or you are not part of it",
-        }),
+        })
       );
     });
     test("Non sono presenti eventi nel calendario inserito", async () => {
@@ -244,12 +244,12 @@ describe("Test di tutti i casi GET (ottieni eventi dato IDCalendario e userID)",
       });
 
       await getEventi(req, res);
-      
+
       expect(res._getStatusCode()).toBe(409);
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are no events with that userId and IDCalendario",
-        }),
+        })
       );
     });
   });

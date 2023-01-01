@@ -61,7 +61,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "User updated correctly",
-        }),
+        })
       );
     });
   });
@@ -81,7 +81,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
 
@@ -99,7 +99,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
 
@@ -115,7 +115,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -136,7 +136,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Utente duplicato", async () => {
@@ -153,7 +153,7 @@ describe("Test di tutti i casi PUT (modifica utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
   });

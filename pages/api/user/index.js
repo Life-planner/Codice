@@ -234,22 +234,20 @@ export async function creaUser(req, res) {
       return;
     }
 
-    let error = false
     UtenteAutenticato.create(
       {
         userId: userId,
         email: email,
         username: username,
       },
-      function (err, user) {
-        error = err
-      },
+      function (err) {
+        if (err) {
+          res.status(500).json({ error: "Not inserted" });
+          return;
+        }
+        res.status(200).json({ success: "User inserted correctly" });
+      }
     );
-    if (error) {
-      res.status(500).json({ error: "Not inserted" });
-      return;
-    }
-    res.status(200).json({ success: "User inserted correctly" });
     return;
   } catch (e) {
     res.status(501).json({ error: "Generic error" });
@@ -282,7 +280,7 @@ export async function modificaUser(req, res) {
 
     const put = await UtenteAutenticato.updateMany(
       { userId: userId },
-      { $set: { username: username } },
+      { $set: { username: username } }
     );
 
     if (put.modifiedCount == 1) {

@@ -117,7 +117,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event deleted correctly",
-        }),
+        })
       );
     });
   });
@@ -137,7 +137,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
 
@@ -155,7 +155,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -175,7 +175,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Esiste più di un utente con l'userId inserito", async () => {
@@ -192,7 +192,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("Non sono stati trovati eventi con IDEvento o l'userID dato", async () => {
@@ -209,7 +209,7 @@ describe("Test di tutti i casi DELETE (elimina evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "You do not own the event",
-        }),
+        })
       );
     });
   });

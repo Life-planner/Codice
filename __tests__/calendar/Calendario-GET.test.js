@@ -84,7 +84,10 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
         localita: "New York",
       },
       colore: "#7C36B9",
-      partecipanti: ["utenteTestCalendarioGET2calendari", "utenteTestCalendarioGET1calendario"],
+      partecipanti: [
+        "utenteTestCalendarioGET2calendari",
+        "utenteTestCalendarioGET1calendario",
+      ],
       principale: true,
       impostazioniPredefiniteEventi: {
         titolo: "",
@@ -169,7 +172,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -187,7 +190,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("E' stato trovato piu di un utente con l'userId specificato", async () => {
@@ -203,7 +206,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("L'utente con l'userId specificato non ha calendari", async () => {
@@ -219,7 +222,7 @@ describe("Test di tutti i casi GET (ottieni calendari)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are no calendars with that userId",
-        }),
+        })
       );
     });
   });

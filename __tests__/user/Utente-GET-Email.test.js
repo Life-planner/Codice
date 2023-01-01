@@ -61,7 +61,7 @@ describe("Test di tutti i casi GET con email", () => {
           userId: "utenteTestGET1",
           email: "utenteTestGET1@unitn.it",
           username: "utenteTestGET1",
-        }),
+        })
       );
     });
   });
@@ -79,7 +79,7 @@ describe("Test di tutti i casi GET con email", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing or malformed",
-        }),
+        })
       );
     });
   });
@@ -99,7 +99,7 @@ describe("Test di tutti i casi GET con email", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that email",
-        }),
+        })
       );
     });
     test("Utente duplicato", async () => {
@@ -115,7 +115,7 @@ describe("Test di tutti i casi GET con email", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that email",
-        }),
+        })
       );
     });
   });

@@ -30,7 +30,7 @@ const customJestConfig = {
     ],
   ],
   collectCoverage: false,
-  coverageDirectory: './public/coverage/',
+  coverageDirectory: "./public/coverage/",
   coverageReporters: ["json", "html"],
 };
 

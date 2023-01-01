@@ -83,7 +83,7 @@ const SchemaCalendario = new mongoose.Schema(
       },
     },
   },
-  { collection: "Calendario" },
+  { collection: "Calendario" }
 );
 
 module.exports =

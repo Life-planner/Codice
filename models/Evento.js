@@ -80,7 +80,7 @@ const SchemaEvento = new mongoose.Schema(
           type: Boolean,
           default: false,
         },
-      }
+      },
     },
     eventoRipetuto: {
       type: {
@@ -103,10 +103,10 @@ const SchemaEvento = new mongoose.Schema(
             data: new Date(Date.now()),
           },
         },
-      }
+      },
     },
   },
-  { collection: "Evento" },
+  { collection: "Evento" }
 );
 
 module.exports =

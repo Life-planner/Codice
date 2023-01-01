@@ -97,7 +97,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
 
@@ -125,7 +125,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, eventoSingolo", async () => {
@@ -154,7 +154,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, eventoRipetuto", async () => {
@@ -186,7 +186,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, eventoSingolo", async () => {
@@ -216,7 +216,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, eventoRipetuto", async () => {
@@ -249,7 +249,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, difficolta, eventoSingolo", async () => {
@@ -280,7 +280,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, difficolta, eventoRipetuto", async () => {
@@ -314,7 +314,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, difficolta, notifiche, eventoSingolo", async () => {
@@ -349,7 +349,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo,luogo, priorita, difficolta, notifiche, eventoRipetuto", async () => {
@@ -387,7 +387,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, difficolta, notifiche, durata, eventoSingolo", async () => {
@@ -423,7 +423,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, luogo, priorita, difficolta, notifiche, durata, eventoRipetuto", async () => {
@@ -462,7 +462,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, eventoSingolo", async () => {
@@ -488,7 +488,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, eventoRipetuto", async () => {
@@ -517,7 +517,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, eventoSingolo", async () => {
@@ -544,7 +544,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, eventoRipetuto", async () => {
@@ -574,7 +574,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, notifiche, eventoSingolo", async () => {
@@ -605,7 +605,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, notifiche, eventoRipetuto", async () => {
@@ -639,7 +639,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, notifiche, durata, eventoSingolo", async () => {
@@ -671,7 +671,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, priorita, difficolta, notifiche, durata, eventoRipetuto", async () => {
@@ -706,7 +706,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, eventoSingolo", async () => {
@@ -732,7 +732,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, eventoRipetuto", async () => {
@@ -761,7 +761,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, notifiche, eventoSingolo", async () => {
@@ -791,7 +791,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, notifiche, eventoRipetuto", async () => {
@@ -824,7 +824,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, notifiche, durata, eventoSingolo", async () => {
@@ -855,7 +855,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, difficolta, notifiche, durata, eventoRipetuto", async () => {
@@ -890,7 +890,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, notifiche, eventoSingolo", async () => {
@@ -919,7 +919,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, notifiche, eventoRipetuto", async () => {
@@ -951,7 +951,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, notifiche, durata, eventoSingolo", async () => {
@@ -981,7 +981,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, notifiche, durata, eventoRipetuto", async () => {
@@ -1014,7 +1014,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, durata, eventoSingolo", async () => {
@@ -1040,7 +1040,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
     test("Evento inserito con successo, parametri: userId, IDCalendario, titolo, isEventoSingolo, durata, eventoRipetuto", async () => {
@@ -1069,7 +1069,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event inserted correctly",
-        }),
+        })
       );
     });
   });
@@ -1095,7 +1095,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- userId, parametri presenti: IDCalendario, titolo, isEventoSingolo, eventoSingolo", async () => {
@@ -1118,7 +1118,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
 
@@ -1142,7 +1142,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
 
@@ -1165,7 +1165,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
 
@@ -1187,7 +1187,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- eventoRipetuto, parametri presenti; userId, IDCalendario, isEventoSingolo", async () => {
@@ -1208,7 +1208,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "IDCalendario or titolo or evento details missing",
-        }),
+        })
       );
     });
     test("Formato parametro luogo non corretto", async () => {
@@ -1236,7 +1236,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for location",
-        }),
+        })
       );
     });
     test("Formato parametro luogo non corretto", async () => {
@@ -1264,7 +1264,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for location",
-        }),
+        })
       );
     });
     test("Formato parametro luogo non corretto", async () => {
@@ -1292,7 +1292,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for location",
-        }),
+        })
       );
     });
     test("Formato parametro luogo non corretto", async () => {
@@ -1320,7 +1320,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for location",
-        }),
+        })
       );
     });
     test("Formato parametro priorita non corretto", async () => {
@@ -1345,7 +1345,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for priorita",
-        }),
+        })
       );
     });
     test("Formato parametro difficolta non corretto", async () => {
@@ -1370,7 +1370,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for difficolta",
-        }),
+        })
       );
     });
     test("Formato parametro notifiche non corretto", async () => {
@@ -1398,7 +1398,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for notifiche",
-        }),
+        })
       );
     });
     test("Formato parametro notifiche non corretto", async () => {
@@ -1426,7 +1426,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for notifiche",
-        }),
+        })
       );
     });
     test("Formato parametro notifiche non corretto", async () => {
@@ -1454,7 +1454,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for notifiche",
-        }),
+        })
       );
     });
     test("Formato parametro durata non corretto", async () => {
@@ -1479,7 +1479,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for durata",
-        }),
+        })
       );
     });
     test("Formato parametro eventoSingolo non corretto", async () => {
@@ -1503,7 +1503,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for eventoSingolo",
-        }),
+        })
       );
     });
     test("Formato parametro eventoRipetuto non corretto", async () => {
@@ -1529,7 +1529,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for eventoRipetuto",
-        }),
+        })
       );
     });
   });
@@ -1556,7 +1556,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("Utente non esistente", async () => {
@@ -1580,7 +1580,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("IDcalendario non esistente o userId non possiede tale IDCalendario", async () => {
@@ -1604,7 +1604,7 @@ describe("Test di tutti i casi POST (creazione evento)", () => {
         expect.objectContaining({
           error:
             "There is no calendar with that ID or you do not own the calendar",
-        }),
+        })
       );
     });
   });

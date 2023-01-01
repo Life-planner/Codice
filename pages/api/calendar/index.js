@@ -116,6 +116,78 @@ export default function handler(req, res) {
  *          type: boolean
  *          example: false
  *         allowEmptyValue: false
+ *       - name: partecipanti
+ *         in: query
+ *         description: Nuova lista dei partecipanti
+ *         required: false
+ *         schema:
+ *          type: array
+ *          items:
+ *           type: string
+ *         examples:
+ *          Utente1:
+ *           summary: Utente1
+ *           value: [User1]
+ *          Utente12:
+ *           summary: Utente1 e Utente2
+ *           value: [User1, User2]
+ *          Utente123:
+ *           summary: Utente1, Utente2 e Utente3
+ *           value: [User1, User2, User3]
+ *          Utente13:
+ *           summary: Utente1 e Utente3
+ *           value: [User1, User3]
+ *          Utente23:
+ *           summary: Utente2 e Utente3
+ *           value: [User2, User3]
+ *       - name: impostazioniPredefiniteEventi
+ *         in: query
+ *         description: Oggetto contente tutte le nuove impostazioni predefinite
+ *         required: false
+ *         content:
+ *          application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *             titolo:
+ *              type: string
+ *             descrizione:
+ *              type: string
+ *             durata:
+ *              type: integer
+ *              minimum: 1
+ *             tempAnticNotifica:
+ *              type: integer
+ *              minimum: 0
+ *             luogo:
+ *              type: object
+ *              properties:
+ *               latitudine:
+ *                type: number
+ *               longitudine:
+ *                type: number
+ *             priorita:
+ *              type: integer
+ *              minimum: 1
+ *              maximum: 10
+ *             difficolta:
+ *              type: integer
+ *              minimum: 1
+ *              maximum: 10
+ *         examples:
+ *          Compleanno:
+ *           summary: Impostazioni per un calendario di compleanni
+ *           value:
+ *            titolo: "Compleanno"
+ *            descrizione: "Compleanno di"
+ *            durata: 1440
+ *            tempAnticNotifica: 1440
+ *            luogo:
+ *             latitudine: "12.123123"
+ *             longitudine: "13.123123"
+ *            priorita: 7
+ *            difficolta: 1
+ *
  *
  *     responses:
  *       200:
@@ -129,7 +201,7 @@ export default function handler(req, res) {
  *               type: string
  *               example: Calendar inserted correctly
  *       400:
- *         description: Se manca il nome, verrà restituito "Name missing" <br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito "Wrong format for color" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato "Wrong format for time zone"
+ *         description: Se manca il nome, verrà restituito "Name missing" <br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito "Wrong format for color" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato "Wrong format for time zone" <br>Se le impostazioni predefinite non sono valide, verrà restituito "Wrong format impostazioni predefinite"
  *         content:
  *          application/json:
  *           schema:
@@ -150,6 +222,10 @@ export default function handler(req, res) {
  *             summary: Formato del valore GMTOffset non valido
  *             value:
  *              error: Wrong format for time zone
+ *            Errore4:
+ *             summary: Le impostazioni predefinite non sono valide
+ *             value:
+ *              error: Wrong format impostazioni predefinite
  *       409:
  *         description: Se manca l'utente con l'userId dato, verrà restituito "There is no user with that userId" <br>Se c'è più di un utente con l'userId dato, verrà restituito "There are too many users with that userId" <br>Se esiste già un calendario principale, verrà ritornato "There are too many primary calendars"
  *         content:
@@ -173,7 +249,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There are too many primary calendars
  *       500:
- *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted" <br/> Se c'e un errore nell'inserimento dei partecipanti, verrà restituito "Error parteciapnti"
  *         content:
  *          application/json:
  *           schema:
@@ -181,7 +257,16 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Not inserted
+ *           examples:
+ *            Errore1:
+ *             summary: Errore di inserimento
+ *             value:
+ *              error: Not inserted
+ *            Errore2:
+ *             summary: Errore inserimento partecipanti
+ *             value:
+ *              error: Error parteciapnti
+ *
  *       501:
  *         description: Errore generico, verrà restituito "Generic error"
  *         content:
@@ -555,7 +640,14 @@ export default function handler(req, res) {
 export async function creaCalendario(req, res) {
   await dbConnect();
   try {
-    const { nome, fusoOrario, colore, principale } = req.query;
+    const {
+      nome,
+      fusoOrario,
+      colore,
+      principale,
+      partecipanti,
+      impostazioniPredefiniteEventi,
+    } = req.query;
     const { userId } = req.query;
 
     if (nome == null || userId == null) {
@@ -568,13 +660,13 @@ export async function creaCalendario(req, res) {
       return;
     }
 
-    let tempFusoOrario
+    let tempFusoOrario = null;
 
     if (fusoOrario != null) {
-      try{
-        tempFusoOrario = JSON.parse(fusoOrario)
-      }catch{
-        tempFusoOrario = fusoOrario
+      try {
+        tempFusoOrario = JSON.parse(fusoOrario);
+      } catch {
+        tempFusoOrario = fusoOrario;
       }
 
       if (
@@ -584,6 +676,46 @@ export async function creaCalendario(req, res) {
         tempFusoOrario.GMTOffset < -12
       ) {
         res.status(400).json({ error: "Wrong format for time zone" });
+        return;
+      }
+    }
+
+    let tempImpostazioniPredefiniteEventi = null;
+
+    if (impostazioniPredefiniteEventi != null) {
+      try {
+        tempImpostazioniPredefiniteEventi = JSON.parse(
+          impostazioniPredefiniteEventi
+        );
+      } catch {
+        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi;
+      }
+      if (
+        tempImpostazioniPredefiniteEventi.titolo == null ||
+        tempImpostazioniPredefiniteEventi.descrizione == null ||
+        tempImpostazioniPredefiniteEventi.durata == null ||
+        tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+        tempImpostazioniPredefiniteEventi.luogo == null ||
+        tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+        tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+        !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempImpostazioniPredefiniteEventi.luogo.latitudine
+        ) ||
+        !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+          tempImpostazioniPredefiniteEventi.luogo.longitudine
+        ) ||
+        tempImpostazioniPredefiniteEventi.priorita == null ||
+        tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+        tempImpostazioniPredefiniteEventi.priorita > 10 ||
+        tempImpostazioniPredefiniteEventi.difficolta == null ||
+        tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+        tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+        tempImpostazioniPredefiniteEventi.durata <= 0 ||
+        tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+      ) {
+        res
+          .status(400)
+          .json({ error: "Wrong format impostazioni predefinite" });
         return;
       }
     }
@@ -613,26 +745,48 @@ export async function creaCalendario(req, res) {
       }
     }
 
-    let error = false
-    Calendario.create(
+    let tempPartecipanti =
+      partecipanti != null && Array.isArray(partecipanti)
+        ? partecipanti.filter((item) => item !== userId)
+        : null;
+
+    await Calendario.create(
       {
         nome: nome,
         fusoOrario: fusoOrario == null ? undefined : tempFusoOrario,
         colore: colore == null ? undefined : colore,
         partecipanti: [userId],
         principale: principale == null ? false : principale,
-        impostazioniPredefiniteEventi: undefined,
+        impostazioniPredefiniteEventi:
+          tempImpostazioniPredefiniteEventi == null
+            ? undefined
+            : tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
-        error = err
-      },
+        if (err) {
+          res.status(500).json({ error: "Not inserted" });
+          return;
+        }
+        if (tempPartecipanti != null && tempPartecipanti != []) {
+          var ObjectId = require("mongoose").Types.ObjectId;
+          Calendario.updateMany(
+            { _id: new ObjectId(String(calendar._id)) },
+            {
+              $addToSet: { partecipanti: { $each: tempPartecipanti } },
+            },
+            function (err) {
+              if (err) {
+                res.status(500).json({ error: "Error parteciapnti" });
+                return;
+              }
+              res.status(200).json({ success: "Event inserted correctly" });
+            }
+          );
+        } else {
+          res.status(200).json({ success: "Calendar inserted correctly" });
+        }
+      }
     );
-    if (error) {
-      res.status(500).json({ error: "Not inserted" });
-      return;
-    }
-
-    res.status(200).json({ success: "Calendar inserted correctly" });
     return;
   } catch (e) {
     console.error(e);
@@ -654,22 +808,24 @@ export async function modificaCalendario(req, res) {
     } = req.query;
     const { userId } = req.query;
 
-    let tempFusoOrario
+    let tempFusoOrario;
 
     if (fusoOrario != null) {
-      try{
-        tempFusoOrario = JSON.parse(fusoOrario)
-      }catch{
-        tempFusoOrario = fusoOrario
+      try {
+        tempFusoOrario = JSON.parse(fusoOrario);
+      } catch {
+        tempFusoOrario = fusoOrario;
       }
-      }
-  let tempImpostazioniPredefiniteEventi
+    }
+    let tempImpostazioniPredefiniteEventi;
 
     if (impostazioniPredefiniteEventi != null) {
-      try{
-        tempImpostazioniPredefiniteEventi = JSON.parse(impostazioniPredefiniteEventi)
-      }catch{
-        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
+      try {
+        tempImpostazioniPredefiniteEventi = JSON.parse(
+          impostazioniPredefiniteEventi
+        );
+      } catch {
+        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi;
       }
     }
 
@@ -697,41 +853,43 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    if (tempFusoOrario.GMTOffset == null ||
+    if (
+      tempFusoOrario.GMTOffset == null ||
       tempFusoOrario.localita == null ||
       tempFusoOrario.GMTOffset > 12 ||
-      tempFusoOrario.GMTOffset < -12) {
-    res.status(400).json({ error: "Wrong format for time zone" });
-    return;
-  }
-  
-  if (
-    tempImpostazioniPredefiniteEventi.titolo == null ||
-    tempImpostazioniPredefiniteEventi.descrizione == null ||
-    tempImpostazioniPredefiniteEventi.durata == null ||
-    tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
-    tempImpostazioniPredefiniteEventi.luogo == null ||
-    tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
-    tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
-    !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-      tempImpostazioniPredefiniteEventi.luogo.latitudine,
-    ) ||
-    !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-      tempImpostazioniPredefiniteEventi.luogo.longitudine,
-    ) ||
-    tempImpostazioniPredefiniteEventi.priorita == null ||
-    tempImpostazioniPredefiniteEventi.priorita <= 0 ||
-    tempImpostazioniPredefiniteEventi.priorita > 10 ||
-    tempImpostazioniPredefiniteEventi.difficolta == null ||
-    tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
-    tempImpostazioniPredefiniteEventi.difficolta > 10 ||
-    tempImpostazioniPredefiniteEventi.durata <= 0 ||
-    tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
-  ) {
-    res.status(400).json({ error: "Wrong format impostazioni predefinite" });
-    return;
-  }
-    
+      tempFusoOrario.GMTOffset < -12
+    ) {
+      res.status(400).json({ error: "Wrong format for time zone" });
+      return;
+    }
+
+    if (
+      tempImpostazioniPredefiniteEventi.titolo == null ||
+      tempImpostazioniPredefiniteEventi.descrizione == null ||
+      tempImpostazioniPredefiniteEventi.durata == null ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      tempImpostazioniPredefiniteEventi.luogo == null ||
+      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.latitudine
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.longitudine
+      ) ||
+      tempImpostazioniPredefiniteEventi.priorita == null ||
+      tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+      tempImpostazioniPredefiniteEventi.priorita > 10 ||
+      tempImpostazioniPredefiniteEventi.difficolta == null ||
+      tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+      tempImpostazioniPredefiniteEventi.durata <= 0 ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+    ) {
+      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
+      return;
+    }
+
     if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
       res.status(400).json({ error: "Wrong format for color" });
       return;
@@ -764,42 +922,40 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    let tempPartecipanti = partecipanti.filter(item => item !== userId)
-    let error = false
+    let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+    let error = false;
 
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
         partecipanti: [userId],
       },
-      function (err, calendar) {
-        error = err
-      },
-    );
-    if (error) {
-      res.status(500).json({ error: "Not edited" });
-      return;
-    }
-    error = false
-    Calendario.updateMany(
-      { _id: new ObjectId(IDCalendario) },
-      {
-        nome: nome,
-        fusoOrario: tempFusoOrario,
-        colore: colore,
-        $addToSet: {partecipanti: { $each: tempPartecipanti}},
-        impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
-      },
-      function (err, calendar) {
-        error = err
-      },
-    );
+      function (err) {
+        if (err) {
+          res.status(500).json({ error: "Not edited" });
+          return;
+        }
 
-    if (error) {
-      res.status(500).json({ error: "Not edited" });
-      return;
-    }
-    res.status(200).json({ success: "Calendar updated correctly" });
+        Calendario.updateMany(
+          { _id: new ObjectId(IDCalendario) },
+          {
+            nome: nome,
+            fusoOrario: tempFusoOrario,
+            colore: colore,
+            $addToSet: { partecipanti: { $each: tempPartecipanti } },
+            impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
+          },
+          function (err) {
+            if (err) {
+              res.status(500).json({ error: "Not edited" });
+              return;
+            }
+
+            res.status(200).json({ success: "Calendar updated correctly" });
+          }
+        );
+      }
+    );
     return;
   } catch (e) {
     console.error(e);

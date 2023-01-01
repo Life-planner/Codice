@@ -60,7 +60,7 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "User deleted correctly",
-        }),
+        })
       );
     });
   });
@@ -78,7 +78,7 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -98,7 +98,7 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Utente duplicato", async () => {
@@ -115,7 +115,7 @@ describe("Test di tutti i casi DELETE (eliminazione utente)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
   });

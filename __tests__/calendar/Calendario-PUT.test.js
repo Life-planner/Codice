@@ -88,7 +88,9 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTestNonEsistente = String(IDCalendarioTestNonEsistente.insertedId);
+    IDCalendarioTestNonEsistente = String(
+      IDCalendarioTestNonEsistente.insertedId
+    );
   });
 
   afterAll(async () => {
@@ -133,7 +135,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar updated correctly",
-        }),
+        })
       );
     });
   });
@@ -173,7 +175,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- userId", async () => {
@@ -210,7 +212,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- nome", async () => {
@@ -247,7 +249,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- fusoOrario", async () => {
@@ -281,7 +283,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- fusoOrario GMTOffset", async () => {
@@ -318,7 +320,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- fusoOrario localita", async () => {
@@ -355,7 +357,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- colore", async () => {
@@ -392,7 +394,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- partecipanti", async () => {
@@ -429,7 +431,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi", async () => {
@@ -455,7 +457,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - titolo", async () => {
@@ -492,7 +494,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - descrizione", async () => {
@@ -529,7 +531,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - durata", async () => {
@@ -566,7 +568,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - tempAnticNotifica", async () => {
@@ -603,7 +605,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - luogo", async () => {
@@ -637,7 +639,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - luogo - latitudine", async () => {
@@ -674,7 +676,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - luogo - longitudine", async () => {
@@ -711,7 +713,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - priorita", async () => {
@@ -748,7 +750,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o piu parametri -- impostazioniPredefiniteEventi - difficolta", async () => {
@@ -785,7 +787,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Valore GTMOffset del fuso orario non e' valido", async () => {
@@ -823,7 +825,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for time zone",
-        }),
+        })
       );
     });
     test("Valore colore non e' valido", async () => {
@@ -861,7 +863,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for color",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - latitudine", async () => {
@@ -899,7 +901,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - longitudine", async () => {
@@ -937,7 +939,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - priorita", async () => {
@@ -975,7 +977,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - difficolta", async () => {
@@ -1013,7 +1015,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - durata", async () => {
@@ -1051,7 +1053,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
     test("Valore impostazioni predefinite non e' valido - tempAnticNotifica", async () => {
@@ -1089,7 +1091,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format impostazioni predefinite",
-        }),
+        })
       );
     });
   });
@@ -1130,7 +1132,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Piu di un utente con lo stesso userId specificato", async () => {
@@ -1168,7 +1170,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("Non esiste l'IDCalendario oppure l'userId non possiede tale calendario", async () => {
@@ -1206,7 +1208,7 @@ describe("Test di tutti i casi PUT (modifica calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "You do not own the calendar",
-        }),
+        })
       );
     });
   });

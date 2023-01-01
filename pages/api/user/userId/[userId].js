@@ -49,13 +49,13 @@ export default function handler(req, res) {
  *           examples:
  *            Esempio1:
  *             summary: Esempio1
- *             value: 
+ *             value:
  *              userId: Utente1
  *              email: prova@example.com
  *              username: Username1
  *            Esempio2:
  *             summary: Esempio2
- *             value: 
+ *             value:
  *              userId: Utente2
  *              email: prova@studenti.unitn.it
  *              username: Username2

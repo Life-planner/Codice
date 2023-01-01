@@ -372,7 +372,7 @@ export default function handler(req, res) {
  *             value:
  *              error: There is no calendar with that ID or you do not own the calendar
  *       500:
- *         description: Errore di inserimento nel database, verrà restituito "Not inserted"
+ *         description: Errore di inserimento nel database, verrà restituito "Not inserted" <br/> Se c'e un errore nell'inserimento dei partecipanti, verrà restituito "Error parteciapnti"
  *         content:
  *          application/json:
  *           schema:
@@ -380,7 +380,15 @@ export default function handler(req, res) {
  *            properties:
  *             error:
  *               type: string
- *               example: Not inserted
+ *           examples:
+ *            Errore1:
+ *             summary: Errore di inserimento
+ *             value:
+ *              error: Not inserted
+ *            Errore2:
+ *             summary: Errore inserimento partecipanti
+ *             value:
+ *              error: Error parteciapnti
  *       501:
  *         description: Errore generico, verrà restituito "Generic error"
  *         content:
@@ -982,8 +990,7 @@ export async function creaEvento(req, res) {
           res.status(400).json({ error: "Wrong format for eventoSingolo" });
           return;
         }
-        tempEvento.data = new Date(tempEvento.data)
-        
+        tempEvento.data = new Date(tempEvento.data);
       }
     } else {
       if (eventoRipetuto != null) {
@@ -1004,7 +1011,7 @@ export async function creaEvento(req, res) {
           return;
         }
 
-        tempEvento.impostazioniAvanzate.data = new Date(tempEvento.data)
+        tempEvento.impostazioniAvanzate.data = new Date(tempEvento.data);
       }
     }
 
@@ -1037,11 +1044,12 @@ export async function creaEvento(req, res) {
       return;
     }
 
-    let tempPartecipanti = partecipanti != null && Array.isArray(partecipanti)? partecipanti : calendariPosseduti[0].partecipanti;
-    let error = false;
+    let tempPartecipanti =
+      partecipanti != null && Array.isArray(partecipanti)
+        ? partecipanti.filter((item) => item !== userId)
+        : calendariPosseduti[0].partecipanti.filter((item) => item !== userId);
 
     if (isEventoSingolo) {
-      
       await Evento.create(
         {
           IDCalendario: IDCalendario,
@@ -1057,10 +1065,30 @@ export async function creaEvento(req, res) {
           eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
         function (err, event) {
-          error = err
+          if (err) {
+            res.status(500).json({ error: "Not inserted" });
+            return;
+          }
+          if (tempPartecipanti != null && tempPartecipanti != []) {
+            var ObjectId = require("mongoose").Types.ObjectId;
+            Evento.updateMany(
+              { _id: new ObjectId(String(event._id)) },
+              {
+                $addToSet: { partecipanti: { $each: tempPartecipanti } },
+              },
+              function (err) {
+                if (err) {
+                  res.status(500).json({ error: "Error parteciapnti" });
+                  return;
+                }
+                res.status(200).json({ success: "Event inserted correctly" });
+              }
+            );
+          } else {
+            res.status(200).json({ success: "Event inserted correctly" });
+          }
         }
       );
-
     } else {
       Evento.create(
         {
@@ -1077,17 +1105,31 @@ export async function creaEvento(req, res) {
           eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
         function (err, event) {
-          error = err
+          if (err) {
+            res.status(500).json({ error: "Not inserted" });
+            return;
+          }
+          if (tempPartecipanti != null && tempPartecipanti != []) {
+            var ObjectId = require("mongoose").Types.ObjectId;
+            Evento.updateMany(
+              { _id: new ObjectId(String(event._id)) },
+              {
+                $addToSet: { partecipanti: { $each: tempPartecipanti } },
+              },
+              function (err) {
+                if (err) {
+                  res.status(500).json({ error: "Error parteciapnti" });
+                  return;
+                }
+                res.status(200).json({ success: "Event inserted correctly" });
+              }
+            );
+          } else {
+            res.status(200).json({ success: "Event inserted correctly" });
+          }
         }
       );
     }
-    
-    if (error) {
-      res.status(500).json({ error: "Not inserted" });
-      return;
-    }
-
-    res.status(200).json({ success: "Event inserted correctly" });
     return;
   } catch (e) {
     console.error(e);
@@ -1277,65 +1319,63 @@ export async function modificaEvento(req, res) {
       {
         partecipanti: [userId],
       },
-      function (err, event) {
-        error = err
+      function (err) {
+        if (err) {
+          res.status(500).json({ error: "Not modified" });
+          return;
+        }
+
+        if (isEventoSingolo) {
+          Evento.updateMany(
+            { _id: new ObjectId(IDEvento) },
+            {
+              IDCalendario: IDCalendario,
+              titolo: titolo,
+              descrizione: descrizione == null ? undefined : descrizione,
+              luogo: luogo == null ? undefined : tempLuogo,
+              priorita: priorita == null ? undefined : priorita,
+              difficolta: difficolta == null ? undefined : difficolta,
+              $addToSet: { partecipanti: { $each: tempPartecipanti } },
+              notifiche: notifiche == null ? undefined : tempNotifiche,
+              durata: durata == null ? undefined : durata,
+              isEventoSingolo: true,
+              eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
+            },
+            function (err) {
+              if (err) {
+                res.status(500).json({ error: "Not modified" });
+                return;
+              }
+              res.status(200).json({ success: "Event edited correctly" });
+            }
+          );
+        } else {
+          Evento.updateMany(
+            { _id: new ObjectId(IDEvento) },
+            {
+              IDCalendario: IDCalendario,
+              titolo: titolo,
+              descrizione: descrizione == null ? undefined : descrizione,
+              luogo: luogo == null ? undefined : tempLuogo,
+              priorita: priorita == null ? undefined : priorita,
+              difficolta: difficolta == null ? undefined : difficolta,
+              $addToSet: { partecipanti: { $each: tempPartecipanti } },
+              notifiche: notifiche == null ? undefined : tempNotifiche,
+              durata: durata == null ? undefined : durata,
+              isEventoSingolo: false,
+              eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
+            },
+            function (err) {
+              if (err) {
+                res.status(500).json({ error: "Not modified" });
+                return;
+              }
+              res.status(200).json({ success: "Event edited correctly" });
+            }
+          );
+        }
       }
     );
-    if (error) {
-      res.status(500).json({ error: "Not modified" });
-      return;
-    }
-
-    error = false;
-
-    if (isEventoSingolo) {
-      Evento.updateMany(
-        { _id: new ObjectId(IDEvento) },
-        {
-          IDCalendario: IDCalendario,
-          titolo: titolo,
-          descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : tempLuogo,
-          priorita: priorita == null ? undefined : priorita,
-          difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
-          notifiche: notifiche == null ? undefined : tempNotifiche,
-          durata: durata == null ? undefined : durata,
-          isEventoSingolo: true,
-          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
-        },
-        function (err, event) {
-          error = err
-        }
-      );
-    } else {
-      Evento.updateMany(
-        { _id: new ObjectId(IDEvento) },
-        {
-          IDCalendario: IDCalendario,
-          titolo: titolo,
-          descrizione: descrizione == null ? undefined : descrizione,
-          luogo: luogo == null ? undefined : tempLuogo,
-          priorita: priorita == null ? undefined : priorita,
-          difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
-          notifiche: notifiche == null ? undefined : tempNotifiche,
-          durata: durata == null ? undefined : durata,
-          isEventoSingolo: false,
-          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
-        },
-        function (err, event) {
-          error = err
-        }
-      );
-    }
-
-    if (error) {
-      res.status(500).json({ error: "Not modified" });
-      return;
-    }
-
-    res.status(200).json({ success: "Event edited correctly" });
     return;
   } catch (e) {
     console.error(e);

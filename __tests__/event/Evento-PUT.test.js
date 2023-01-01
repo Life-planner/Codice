@@ -141,7 +141,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event edited correctly",
-        }),
+        })
       );
     });
     test("Evento modificato con successo -- isEventoSingolo = true", async () => {
@@ -179,7 +179,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Event edited correctly",
-        }),
+        })
       );
     });
   });
@@ -222,7 +222,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- IDEvento ", async () => {
@@ -262,7 +262,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- titolo ", async () => {
@@ -302,7 +302,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- descrizione ", async () => {
@@ -342,7 +342,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- luogo ", async () => {
@@ -379,7 +379,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- priorita ", async () => {
@@ -419,7 +419,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- difficolta ", async () => {
@@ -459,7 +459,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- partecipanti ", async () => {
@@ -499,7 +499,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- notifiche ", async () => {
@@ -536,7 +536,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- durata ", async () => {
@@ -576,7 +576,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- isEventoSingolo ", async () => {
@@ -616,7 +616,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- eventoSingolo ", async () => {
@@ -657,7 +657,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca uno o più parametri -- eventoRipetuto ", async () => {
@@ -692,7 +692,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Formato parametro luogo non corretto ", async () => {
@@ -733,7 +733,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for location",
-        }),
+        })
       );
     });
     test("Formato parametro priorita non corretto ", async () => {
@@ -774,7 +774,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for priorita",
-        }),
+        })
       );
     });
     test("Formato parametro difficolta non corretto ", async () => {
@@ -815,7 +815,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for difficolta",
-        }),
+        })
       );
     });
     test("Formato parametro notifiche non corretto ", async () => {
@@ -856,7 +856,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for notifiche",
-        }),
+        })
       );
     });
     test("Formato parametro durata non corretto ", async () => {
@@ -897,7 +897,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for durata",
-        }),
+        })
       );
     });
     test("Formato parametro eventoSingolo non corretto ", async () => {
@@ -935,7 +935,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for eventoSingolo",
-        }),
+        })
       );
     });
     test("Formato parametro eventoRipetuto non corretto ", async () => {
@@ -975,7 +975,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for eventoRipetuto",
-        }),
+        })
       );
     });
   });
@@ -1019,7 +1019,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Esistono più di un utente con l'userId dato", async () => {
@@ -1060,7 +1060,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("Non esiste l'IDCalendario oppure l'userId non possiede tale calendario", async () => {
@@ -1102,7 +1102,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
         expect.objectContaining({
           error:
             "There is no calendar with that ID or you do not own the calendar",
-        }),
+        })
       );
     });
     test("Non esiste l'IDEvento oppure l'userId non possiede tale evento", async () => {
@@ -1143,7 +1143,7 @@ describe("Test di tutti i casi PUT (modifica evento)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "You do not own the event",
-        }),
+        })
       );
     });
   });

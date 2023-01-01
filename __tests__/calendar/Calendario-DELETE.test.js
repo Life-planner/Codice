@@ -88,7 +88,9 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
         difficolta: 6,
       },
     });
-    IDCalendarioTestNonEsistente = String(IDCalendarioTestNonEsistente.insertedId);
+    IDCalendarioTestNonEsistente = String(
+      IDCalendarioTestNonEsistente.insertedId
+    );
   });
 
   afterAll(async () => {
@@ -113,7 +115,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar deleted correctly",
-        }),
+        })
       );
     });
   });
@@ -132,7 +134,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca un parametro -- userId", async () => {
@@ -149,7 +151,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
     test("Manca un parametro -- IDCalendario, userId", async () => {
@@ -164,7 +166,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Parameter missing",
-        }),
+        })
       );
     });
   });
@@ -184,7 +186,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
     test("Troppi utenti con l'userId specificato", async () => {
@@ -202,7 +204,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
     test("L'utente con l'userId specificato non possiede il calendario", async () => {
@@ -220,7 +222,7 @@ describe("Test di tutti i casi DELETE (elimina calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "You do not own the calendar",
-        }),
+        })
       );
     });
   });

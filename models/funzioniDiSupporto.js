@@ -36,7 +36,7 @@ export async function cancellaTuttoUtente() {
       email: "utenteTestProvaDuplicato@unitn.it",
       username: "utenteTestProvaDuplicato",
     },
-    function (err, user) {},
+    function (err, user) {}
   );
 
   await UtenteAutenticato.create(
@@ -45,7 +45,7 @@ export async function cancellaTuttoUtente() {
       email: "utenteTestProvaDuplicato@unitn.it",
       username: "utenteTestProvaDuplicato",
     },
-    function (err, user) {},
+    function (err, user) {}
   );
 
   return;

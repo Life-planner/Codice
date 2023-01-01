@@ -16,12 +16,9 @@ const SchemaUtenteAutenticato = new mongoose.Schema(
       required: [true, "Please provide a userId for this user."],
     },
   },
-  { collection: "UtenteAutenticato" },
+  { collection: "UtenteAutenticato" }
 );
 
 module.exports =
   mongoose.models.UtenteAutenticato ||
-  mongoose.model(
-    "UtenteAutenticato",
-    SchemaUtenteAutenticato
-  );
+  mongoose.model("UtenteAutenticato", SchemaUtenteAutenticato);

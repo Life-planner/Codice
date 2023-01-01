@@ -65,7 +65,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -88,7 +88,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -112,7 +112,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -137,7 +137,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -162,7 +162,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -183,7 +183,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -205,7 +205,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
 
@@ -226,7 +226,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           success: "Calendar inserted correctly",
-        }),
+        })
       );
     });
   });
@@ -246,7 +246,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Name missing",
-        }),
+        })
       );
     });
 
@@ -264,7 +264,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Name missing",
-        }),
+        })
       );
     });
 
@@ -280,7 +280,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Name missing",
-        }),
+        })
       );
     });
 
@@ -300,7 +300,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for color",
-        }),
+        })
       );
     });
 
@@ -323,7 +323,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for time zone",
-        }),
+        })
       );
     });
 
@@ -345,7 +345,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "Wrong format for time zone",
-        }),
+        })
       );
     });
   });
@@ -392,7 +392,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many primary calendars",
-        }),
+        })
       );
     });
 
@@ -411,7 +411,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There is no user with that userId",
-        }),
+        })
       );
     });
 
@@ -430,7 +430,7 @@ describe("Test di tutti i casi POST (creazione calendario)", () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining({
           error: "There are too many users with that userId",
-        }),
+        })
       );
     });
   });
