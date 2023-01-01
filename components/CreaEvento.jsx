@@ -177,9 +177,21 @@ export default function CreateEvent({ full, close = () => {}, calendari }) {
               setCalendario(e.target.value);
             }}
           />
-          <select name="time" id="duration" className={styles.select}>
+          <select
+            name="time"
+            id="duration"
+            className={styles.select}
+            value={calendario}
+            onChange={(e) => {
+              setCalendario(e.target.value);
+            }}
+          >
             {calendari.map((element) => {
-              return <option value={element._id}>{element.nome}</option>;
+              return (
+                <option value={element._id} key={"option" + element._id}>
+                  {element.nome}
+                </option>
+              );
             })}
           </select>
           <IconText text="Notifiche" icon="notifications" />

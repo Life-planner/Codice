@@ -9,7 +9,7 @@ import CalendarMenu from "../components/calendarMenu";
 import DayBox from "../components/dayBox";
 import Hour from "../components/Hour";
 import Activity from "../components/Activity";
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Fab from "../components/Fab";
 import CreateCalendar from "../components/CreateCalendar";
@@ -23,6 +23,41 @@ export default withPageAuthRequired(function Calendario() {
   const [calendari, setCalendari] = useState([]);
 
   const { user } = useUser();
+
+  const data = useMemo(() => {
+    let data = [];
+    for (let i = 0; i < 23; i++) {
+      data.push(
+        <>
+          <div className={styles.cell}>
+            <Hour index={i} />
+          </div>
+          <div className={styles.cell}></div>
+          <div className={styles.cell}></div>
+          <div className={styles.cell}></div>
+          <div className={styles.cell}></div>
+          <div className={styles.cell}></div>
+          <div className={styles.cell}></div>
+          <div className={`${styles.cell} ${styles.last}`}></div>
+        </>
+      );
+    }
+    data.push(
+      <>
+        <div className={`${styles.cell} ${styles.last2}`}>
+          <Hour index={23} />
+        </div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last2}`}></div>
+        <div className={`${styles.cell} ${styles.last} ${styles.last2}`}></div>
+      </>
+    );
+    return data.map((item, key) => React.cloneElement(item, { key }));
+  });
 
   const checkCalendari = (index) => {
     let temp = [...calendari];
@@ -136,38 +171,6 @@ export default withPageAuthRequired(function Calendario() {
   }
 
   const isToday = (x, y) => x.toDateString() === y.toDateString();
-
-  const data = [];
-  for (let i = 0; i < 23; i++) {
-    data.push(
-      <>
-        <div className={styles.cell}>
-          <Hour index={i} />
-        </div>
-        <div className={styles.cell}></div>
-        <div className={styles.cell}></div>
-        <div className={styles.cell}></div>
-        <div className={styles.cell}></div>
-        <div className={styles.cell}></div>
-        <div className={styles.cell}></div>
-        <div className={`${styles.cell} ${styles.last}`}></div>
-      </>
-    );
-  }
-  data.push(
-    <>
-      <div className={`${styles.cell} ${styles.last2}`}>
-        <Hour index={23} />
-      </div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last2}`}></div>
-      <div className={`${styles.cell} ${styles.last} ${styles.last2}`}></div>
-    </>
-  );
 
   return (
     <div>
