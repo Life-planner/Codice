@@ -49,6 +49,7 @@ export default function CreateCalendar({
         },
       })
       .then(function () {
+        toast.success("Calendario creato con successo");
         refreshCalendari();
       })
       .catch(function (error) {

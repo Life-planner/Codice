@@ -74,17 +74,13 @@ const SchemaEvento = new mongoose.Schema(
       type: {
         data: {
           type: Date,
-          default: Date.now,
+          default: new Date(Date.now()),
         },
         isScadenza: {
           type: Boolean,
           default: false,
         },
-      },
-      default: {
-        data: Date.now,
-        isScadenza: false,
-      },
+      }
     },
     eventoRipetuto: {
       type: {
@@ -99,22 +95,15 @@ const SchemaEvento = new mongoose.Schema(
               type: [String],
             },
             data: {
-              type: [Date],
+              type: Date,
             },
           },
           default: {
             giorniSettimana: ["Lunedi"],
-            data: Date.now,
+            data: new Date(Date.now()),
           },
         },
-      },
-      default: {
-        numeroRipetizioni: 1,
-        impostazioniAvanzate: {
-          giorniSettimana: ["Lunedi"],
-          data: Date.now,
-        },
-      },
+      }
     },
   },
   { collection: "Evento" },

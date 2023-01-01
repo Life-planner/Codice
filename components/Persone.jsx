@@ -9,6 +9,20 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
   const [soprannomi, setSoprannomi] = useState({});
   const [empty, setEmpty] = useState(true);
 
+  const setId = (email) => {
+    axios
+      .get(`/api/user/email/${email}`)
+      .then(function (response) {
+        setPersone([...persone, response.data.userId]);
+        addSoprannome(email);
+      })
+      .catch(function (error) {
+        toast.error(
+          "L'untente cercato non esiste, inserire un email di un utente esistente"
+        );
+      });
+  };
+
   const getSoprannome = (email) => {
     return (soprannomi[email] ??= email);
   };
@@ -66,8 +80,7 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
         onKeyUp={(e) => {
           if (e.code === "Enter") {
             if (validateEmail(add)) {
-              setPersone([...persone, add]);
-              addSoprannome(add);
+              setId(add);
               setAdd("");
               setEmpty(true);
             } else {

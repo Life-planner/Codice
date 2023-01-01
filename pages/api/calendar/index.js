@@ -568,13 +568,13 @@ export async function creaCalendario(req, res) {
       return;
     }
 
-    let tempFusoOrario
+    let tempFusoOrario;
 
     if (fusoOrario != null) {
-      try{
-        tempFusoOrario = JSON.parse(fusoOrario)
-      }catch{
-        tempFusoOrario = fusoOrario
+      try {
+        tempFusoOrario = JSON.parse(fusoOrario);
+      } catch {
+        tempFusoOrario = fusoOrario;
       }
 
       if (
@@ -613,6 +613,7 @@ export async function creaCalendario(req, res) {
       }
     }
 
+    let error = false;
     Calendario.create(
       {
         nome: nome,
@@ -623,12 +624,13 @@ export async function creaCalendario(req, res) {
         impostazioniPredefiniteEventi: undefined,
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not inserted" });
-          return;
-        }
-      },
+        error = err;
+      }
     );
+    if (error) {
+      res.status(500).json({ error: "Not inserted" });
+      return;
+    }
 
     res.status(200).json({ success: "Calendar inserted correctly" });
     return;
@@ -652,22 +654,24 @@ export async function modificaCalendario(req, res) {
     } = req.query;
     const { userId } = req.query;
 
-    let tempFusoOrario
+    let tempFusoOrario;
 
     if (fusoOrario != null) {
-      try{
-        tempFusoOrario = JSON.parse(fusoOrario)
-      }catch{
-        tempFusoOrario = fusoOrario
+      try {
+        tempFusoOrario = JSON.parse(fusoOrario);
+      } catch {
+        tempFusoOrario = fusoOrario;
       }
-      }
-  let tempImpostazioniPredefiniteEventi
+    }
+    let tempImpostazioniPredefiniteEventi;
 
     if (impostazioniPredefiniteEventi != null) {
-      try{
-        tempImpostazioniPredefiniteEventi = JSON.parse(impostazioniPredefiniteEventi)
-      }catch{
-        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi
+      try {
+        tempImpostazioniPredefiniteEventi = JSON.parse(
+          impostazioniPredefiniteEventi
+        );
+      } catch {
+        tempImpostazioniPredefiniteEventi = impostazioniPredefiniteEventi;
       }
     }
 
@@ -695,41 +699,43 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    if (tempFusoOrario.GMTOffset == null ||
+    if (
+      tempFusoOrario.GMTOffset == null ||
       tempFusoOrario.localita == null ||
       tempFusoOrario.GMTOffset > 12 ||
-      tempFusoOrario.GMTOffset < -12) {
-    res.status(400).json({ error: "Wrong format for time zone" });
-    return;
-  }
-  
-  if (
-    tempImpostazioniPredefiniteEventi.titolo == null ||
-    tempImpostazioniPredefiniteEventi.descrizione == null ||
-    tempImpostazioniPredefiniteEventi.durata == null ||
-    tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
-    tempImpostazioniPredefiniteEventi.luogo == null ||
-    tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
-    tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
-    !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-      tempImpostazioniPredefiniteEventi.luogo.latitudine,
-    ) ||
-    !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
-      tempImpostazioniPredefiniteEventi.luogo.longitudine,
-    ) ||
-    tempImpostazioniPredefiniteEventi.priorita == null ||
-    tempImpostazioniPredefiniteEventi.priorita <= 0 ||
-    tempImpostazioniPredefiniteEventi.priorita > 10 ||
-    tempImpostazioniPredefiniteEventi.difficolta == null ||
-    tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
-    tempImpostazioniPredefiniteEventi.difficolta > 10 ||
-    tempImpostazioniPredefiniteEventi.durata <= 0 ||
-    tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
-  ) {
-    res.status(400).json({ error: "Wrong format impostazioni predefinite" });
-    return;
-  }
-    
+      tempFusoOrario.GMTOffset < -12
+    ) {
+      res.status(400).json({ error: "Wrong format for time zone" });
+      return;
+    }
+
+    if (
+      tempImpostazioniPredefiniteEventi.titolo == null ||
+      tempImpostazioniPredefiniteEventi.descrizione == null ||
+      tempImpostazioniPredefiniteEventi.durata == null ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica == null ||
+      tempImpostazioniPredefiniteEventi.luogo == null ||
+      tempImpostazioniPredefiniteEventi.luogo.latitudine == null ||
+      tempImpostazioniPredefiniteEventi.luogo.longitudine == null ||
+      !/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.latitudine
+      ) ||
+      !/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/.test(
+        tempImpostazioniPredefiniteEventi.luogo.longitudine
+      ) ||
+      tempImpostazioniPredefiniteEventi.priorita == null ||
+      tempImpostazioniPredefiniteEventi.priorita <= 0 ||
+      tempImpostazioniPredefiniteEventi.priorita > 10 ||
+      tempImpostazioniPredefiniteEventi.difficolta == null ||
+      tempImpostazioniPredefiniteEventi.difficolta <= 0 ||
+      tempImpostazioniPredefiniteEventi.difficolta > 10 ||
+      tempImpostazioniPredefiniteEventi.durata <= 0 ||
+      tempImpostazioniPredefiniteEventi.tempAnticNotifica < 0
+    ) {
+      res.status(400).json({ error: "Wrong format impostazioni predefinite" });
+      return;
+    }
+
     if (!/^#([0-9a-f]{3}){1,2}$/i.test(colore)) {
       res.status(400).json({ error: "Wrong format for color" });
       return;
@@ -762,7 +768,8 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    let tempPartecipanti = partecipanti.filter(item => item !== userId)
+    let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+    let error = false;
 
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
@@ -770,29 +777,32 @@ export async function modificaCalendario(req, res) {
         partecipanti: [userId],
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not edited" });
-          return;
-        }
-      },
+        error = err;
+      }
     );
+    if (error) {
+      res.status(500).json({ error: "Not edited" });
+      return;
+    }
+    error = false;
     Calendario.updateMany(
       { _id: new ObjectId(IDCalendario) },
       {
         nome: nome,
         fusoOrario: tempFusoOrario,
         colore: colore,
-        $addToSet: {partecipanti: { $each: tempPartecipanti}},
+        $addToSet: { partecipanti: { $each: tempPartecipanti } },
         impostazioniPredefiniteEventi: tempImpostazioniPredefiniteEventi,
       },
       function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not edited" });
-          return;
-        }
-      },
+        error = err;
+      }
     );
 
+    if (error) {
+      res.status(500).json({ error: "Not edited" });
+      return;
+    }
     res.status(200).json({ success: "Calendar updated correctly" });
     return;
   } catch (e) {

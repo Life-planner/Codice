@@ -234,6 +234,7 @@ export async function creaUser(req, res) {
       return;
     }
 
+    let error = false
     UtenteAutenticato.create(
       {
         userId: userId,
@@ -241,12 +242,13 @@ export async function creaUser(req, res) {
         username: username,
       },
       function (err, user) {
-        if (err) {
-          res.status(500).json({ error: "Not inserted" });
-          return;
-        }
+        error = err
       },
     );
+    if (error) {
+      res.status(500).json({ error: "Not inserted" });
+      return;
+    }
     res.status(200).json({ success: "User inserted correctly" });
     return;
   } catch (e) {

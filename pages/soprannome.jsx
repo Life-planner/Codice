@@ -6,6 +6,7 @@ import axios from "axios";
 
 import styles from "../styles/soprannome.module.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default withPageAuthRequired(function Soprannome() {
   const [soprannome, setSoprannome] = useState("");
@@ -19,6 +20,9 @@ export default withPageAuthRequired(function Soprannome() {
           userId: user.sub,
           username: soprannome,
         },
+      })
+      .then(function (response) {
+        toast.success("Soprannome aggiornato");
       })
       .catch(function (error) {
         console.error(error);

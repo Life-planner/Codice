@@ -982,6 +982,7 @@ export async function creaEvento(req, res) {
           res.status(400).json({ error: "Wrong format for eventoSingolo" });
           return;
         }
+        tempEvento.data = new Date(tempEvento.data);
       }
     } else {
       if (eventoRipetuto != null) {
@@ -1001,6 +1002,8 @@ export async function creaEvento(req, res) {
           res.status(400).json({ error: "Wrong format for eventoRipetuto" });
           return;
         }
+
+        tempEvento.impostazioniAvanzate.data = new Date(tempEvento.data);
       }
     }
 
@@ -1033,10 +1036,14 @@ export async function creaEvento(req, res) {
       return;
     }
 
-    let tempPartecipanti = partecipanti != null && Array.isArray(partecipanti)? partecipanti.filter((item) => item !== userId) : calendariPosseduti[0].partecipanti;
+    let tempPartecipanti =
+      partecipanti != null && Array.isArray(partecipanti)
+        ? partecipanti
+        : calendariPosseduti[0].partecipanti;
+    let error = false;
 
     if (isEventoSingolo) {
-      Evento.create(
+      await Evento.create(
         {
           IDCalendario: IDCalendario,
           titolo: titolo,
@@ -1044,17 +1051,14 @@ export async function creaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
           eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
-        function (err, calendar) {
-          if (err) {
-            res.status(500).json({ error: "Not inserted" });
-            return;
-          }
+        function (err, event) {
+          error = err;
         }
       );
     } else {
@@ -1066,19 +1070,21 @@ export async function creaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
           eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
-        function (err, calendar) {
-          if (err) {
-            res.status(500).json({ error: "Not inserted" });
-            return;
-          }
+        function (err, event) {
+          error = err;
         }
       );
+    }
+
+    if (error) {
+      res.status(500).json({ error: "Not inserted" });
+      return;
     }
 
     res.status(200).json({ success: "Event inserted correctly" });
@@ -1264,19 +1270,23 @@ export async function modificaEvento(req, res) {
     }
 
     let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+    let error = false;
 
     Evento.updateMany(
       { _id: new ObjectId(IDEvento) },
       {
         partecipanti: [userId],
       },
-      function (err, calendar) {
-        if (err) {
-          res.status(500).json({ error: "Not modified" });
-          return;
-        }
+      function (err, event) {
+        error = err;
       }
     );
+    if (error) {
+      res.status(500).json({ error: "Not modified" });
+      return;
+    }
+
+    error = false;
 
     if (isEventoSingolo) {
       Evento.updateMany(
@@ -1288,17 +1298,14 @@ export async function modificaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: true,
           eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
         },
-        function (err, calendar) {
-          if (err) {
-            res.status(500).json({ error: "Not modified" });
-            return;
-          }
+        function (err, event) {
+          error = err;
         }
       );
     } else {
@@ -1311,19 +1318,21 @@ export async function modificaEvento(req, res) {
           luogo: luogo == null ? undefined : tempLuogo,
           priorita: priorita == null ? undefined : priorita,
           difficolta: difficolta == null ? undefined : difficolta,
-          $addToSet: {partecipanti: { $each: tempPartecipanti}},
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
           notifiche: notifiche == null ? undefined : tempNotifiche,
           durata: durata == null ? undefined : durata,
           isEventoSingolo: false,
           eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
         },
-        function (err, calendar) {
-          if (err) {
-            res.status(500).json({ error: "Not modified" });
-            return;
-          }
+        function (err, event) {
+          error = err;
         }
       );
+    }
+
+    if (error) {
+      res.status(500).json({ error: "Not modified" });
+      return;
     }
 
     res.status(200).json({ success: "Event edited correctly" });

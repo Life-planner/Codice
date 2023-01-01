@@ -61,17 +61,19 @@ export default function CreateEvent({ full, close = () => {}, calendari }) {
           descrizione: descrizione,
           priorita: priorita,
           difficolta: difficolta,
-          partecipanti: [user.email, ...persone],
+          partecipanti: [user.sub, ...persone],
           notifiche: { titolo: titolo, data: [getNotificationDate()] },
           durata: durata,
           isEventoSingolo: true,
           eventoSingolo: { data: data, isScadenza: true },
         },
       })
-      .then(function () {
-        refreshCalendari();
+      .then(function (response) {
+        toast.success("Evento creato con successo");
+        // aggiorno eventi
       })
       .catch(function (error) {
+        console.log(error);
         toast.error("Errore nel creare il calendario");
       });
   };
