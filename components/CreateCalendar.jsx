@@ -158,7 +158,6 @@ export default function CreateCalendar({
           <div className={styles.flex}>
             <input
               type="number"
-              defaultValue="30"
               min="0"
               placeholder="30"
               className={styles.mins}
@@ -183,7 +182,6 @@ export default function CreateCalendar({
           <IconText text="Priorità" icon="bolt" />
           <input
             type="number"
-            defaultValue="6"
             min="1"
             max="10"
             placeholder="6"
@@ -196,7 +194,6 @@ export default function CreateCalendar({
           <IconText text="Difficoltà" icon="battery_5_bar" />
           <input
             type="number"
-            defaultValue="6"
             min="1"
             max="10"
             placeholder="6"
@@ -217,7 +214,6 @@ export default function CreateCalendar({
           <div className={styles.flex}>
             <input
               type="number"
-              defaultValue="30"
               min="0"
               placeholder="30"
               className={styles.mins}
@@ -236,9 +232,7 @@ export default function CreateCalendar({
               }}
             >
               <option value="secondi">Secondi</option>
-              <option value="minuti" selected="selected">
-                Minuti
-              </option>
+              <option value="minuti">Minuti</option>
               <option value="ore">Ore</option>
               <option value="giorni">Giorni</option>
             </select>

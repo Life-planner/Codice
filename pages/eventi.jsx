@@ -34,14 +34,18 @@ export default withPageAuthRequired(function Eventi() {
           },
         })
         .then((response) => {
-          let temp = { ...eventi };
-          temp[element._id] = response.data.eventi;
-          setEventi({ ...temp });
+          setEventi((eventi) => {
+            let temp = { ...eventi };
+            temp[element._id] = response.data.eventi;
+            return { ...temp };
+          });
         })
         .catch((error) => {
-          let temp = { ...eventi };
-          temp[element._id] = [];
-          setEventi({ ...temp });
+          setEventi((eventi) => {
+            let temp = { ...eventi };
+            temp[element._id] = [];
+            return { ...temp };
+          });
         });
     });
   };
