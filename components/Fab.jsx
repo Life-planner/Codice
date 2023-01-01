@@ -12,7 +12,7 @@ export default function Fab({ openCalendar, openEvent }) {
     <div className={styles.container}>
       <div className={styles.circle}>
         <span
-          class={`material-symbols-outlined ${styles.transition} ${
+          className={`material-symbols-outlined ${styles.transition} ${
             open ? styles.open : null
           }`}
           style={{ fontSize: "2rem" }}

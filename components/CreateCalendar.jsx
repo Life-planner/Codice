@@ -3,11 +3,58 @@ import styles from "../styles/createCalendar.module.css";
 import FabButton from "./FabButton";
 import IconText from "./IconText";
 import Persone from "./Persone";
+import { toast } from "react-toastify";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-export default function CreateCalendar({ full, close = () => {} }) {
+import axios from "axios";
+
+export default function CreateCalendar({
+  full,
+  close = () => {},
+  refreshCalendari = () => {},
+}) {
+  const { user } = useUser();
+
+  const [titolo, setTitolo] = useState("");
+  const [persone, setPersone] = useState([]);
   const [color, setColor] = useState("#8338ec");
   const [textColor, setTextColor] = useState("#8338ec");
   const [gmt, setGmt] = useState(new Date().getTimezoneOffset() / -60);
+  const [durata, setDurata] = useState(30);
+  const [priorita, setPriorita] = useState(6);
+  const [difficolta, setDifficolta] = useState(6);
+  const [durataType, setDurataType] = useState("minuti");
+  const [notTime, setNotTime] = useState(30);
+  const [notType, setNotType] = useState("minuti");
+  const [eTitolo, seteTitolo] = useState("");
+  const [eDescrizione, seteDescrizione] = useState("");
+
+  const submit = () => {
+    if (titolo === "") {
+      toast.error("Devi inserire il titolo!");
+      return;
+    }
+    close();
+    axios
+      .post("/api/calendar", null, {
+        params: {
+          userId: user.sub,
+          nome: titolo,
+          fusoOrario: {
+            GMTOffset: gmt,
+            localita: "",
+          },
+          colore: color,
+          principale: false,
+        },
+      })
+      .then(function () {
+        refreshCalendari();
+      })
+      .catch(function (error) {
+        toast.error("Errore nel creare il calendario");
+      });
+  };
   return (
     <div
       className={styles.container}
@@ -23,11 +70,13 @@ export default function CreateCalendar({ full, close = () => {} }) {
           type="text"
           className={styles["input-title"]}
           placeholder="Aggiungi Nome Calendario"
+          value={titolo}
+          onChange={(e) => setTitolo(e.target.value)}
         />
         <div className={styles["line-small"]} />
         <div className={styles["main-info"]}>
           <IconText text="Persone" icon="groups" />
-          <Persone />
+          <Persone persone={persone} setPersone={(data) => setPersone(data)} />
           <IconText text="Colore" icon="palette" />
           <div className={styles.color}>
             <input
@@ -84,6 +133,26 @@ export default function CreateCalendar({ full, close = () => {} }) {
           Impostazioni predefinite degli eventi
         </div>
         <div className={styles["main-info"]}>
+          <IconText text="Titolo" icon="title" />
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="Aggiungi titolo eventi"
+            value={eTitolo}
+            onChange={(e) => {
+              seteTitolo(e.target.value);
+            }}
+          />
+          <IconText text="Descrizione" icon="description" />
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="Aggiungi descrizione eventi"
+            value={eDescrizione}
+            onChange={(e) => {
+              seteDescrizione(e.target.value);
+            }}
+          />
           <IconText text="Durata" icon="hourglass_empty" />
           <div className={styles.flex}>
             <input
@@ -92,8 +161,20 @@ export default function CreateCalendar({ full, close = () => {} }) {
               min="0"
               placeholder="30"
               className={styles.mins}
+              value={durata}
+              onChange={(e) => {
+                setDurata(e.target.value);
+              }}
             />
-            <select name="time" id="duration" className={styles.select}>
+            <select
+              name="time"
+              id="duration"
+              className={styles.select}
+              value={durataType}
+              onChange={(e) => {
+                setDurataType(e.target.value);
+              }}
+            >
               <option value="minuti">Min</option>
               <option value="ore">Ore</option>
             </select>
@@ -106,6 +187,10 @@ export default function CreateCalendar({ full, close = () => {} }) {
             max="10"
             placeholder="6"
             className={styles.mins}
+            value={priorita}
+            onChange={(e) => {
+              setPriorita(e.target.value);
+            }}
           />
           <IconText text="Difficoltà" icon="battery_5_bar" />
           <input
@@ -115,6 +200,10 @@ export default function CreateCalendar({ full, close = () => {} }) {
             max="10"
             placeholder="6"
             className={styles.mins}
+            value={difficolta}
+            onChange={(e) => {
+              setDifficolta(e.target.value);
+            }}
           />
           <IconText text="Luogo" icon="pin_drop" />
           <input
@@ -131,8 +220,20 @@ export default function CreateCalendar({ full, close = () => {} }) {
               min="0"
               placeholder="30"
               className={styles.mins}
+              value={notTime}
+              onChange={(e) => {
+                setNotTime(e.target.value);
+              }}
             />
-            <select name="time" id="duration" className={styles.select}>
+            <select
+              name="time"
+              id="duration"
+              className={styles.select}
+              value={notType}
+              onChange={(e) => {
+                setNotType(e.target.value);
+              }}
+            >
               <option value="secondi">Secondi</option>
               <option value="minuti" selected="selected">
                 Minuti
@@ -147,7 +248,7 @@ export default function CreateCalendar({ full, close = () => {} }) {
       </div>
       <div className={styles.buttons}>
         <FabButton text="Annulla" icon="close" callback={() => close()} />
-        <FabButton text="Salva" icon="done" primary callback={() => close()} />
+        <FabButton text="Salva" icon="done" primary callback={() => submit()} />
       </div>
     </div>
   );

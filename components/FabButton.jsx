@@ -20,7 +20,10 @@ export default function FabButton({
       {icon === "" ? (
         ""
       ) : (
-        <span class="material-symbols-outlined" style={{ fontSize: "1.25rem" }}>
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: "1.25rem" }}
+        >
           {icon}
         </span>
       )}

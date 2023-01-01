@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
+import Router from "next/router";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
+import axios from "axios";
 
 import styles from "../styles/calendario.module.css";
 import Menu from "../components/Menu";
@@ -18,6 +20,71 @@ export default withPageAuthRequired(function Calendario() {
   const [sidebar, setSidebar] = useState(false);
   const [createCalendarShow, setCreateCalendarShow] = useState(false);
   const [createEventShow, setCreateEventShow] = useState(false);
+  const [calendari, setCalendari] = useState([]);
+
+  const { user } = useUser();
+
+  const checkCalendari = (index) => {
+    let temp = [...calendari];
+    temp[index] = { ...temp[index], deselect: !temp[index].deselect };
+    setCalendari(temp);
+  };
+
+  const setAccount = async () => {
+    try {
+      await axios.get(`/api/user/email/${user.email}`);
+    } catch (error) {
+      if (error.response.data.error === "There is no user with that email") {
+        axios
+          .post("/api/user", null, {
+            params: {
+              userId: user.sub,
+              email: user.email,
+              username: user.email,
+            },
+          })
+          .then(function () {
+            axios
+              .post("/api/calendar", null, {
+                params: {
+                  userId: user.sub,
+                  nome: "Principale",
+                  colore: "#1e1e1e",
+                  principale: true,
+                },
+              })
+              .then(function () {
+                Router.push("/soprannome");
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
+            Router.push("/soprannome");
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      } else {
+        console.error(error.response.data);
+      }
+    }
+  };
+
+  const fetchCalendari = () => {
+    axios
+      .get(`/api/calendar/${user.sub}`)
+      .then((response) => {
+        setCalendari(response.data.calendari);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    setAccount();
+    fetchCalendari();
+  }, [user]);
 
   const closeCalendar = () => {
     setCreateCalendarShow(false);
@@ -74,31 +141,31 @@ export default withPageAuthRequired(function Calendario() {
   for (let i = 0; i < 23; i++) {
     data.push(
       <>
-        <div class={styles.cell}>
+        <div className={styles.cell}>
           <Hour index={i} />
         </div>
-        <div class={styles.cell}></div>
-        <div class={styles.cell}></div>
-        <div class={styles.cell}></div>
-        <div class={styles.cell}></div>
-        <div class={styles.cell}></div>
-        <div class={styles.cell}></div>
-        <div class={`${styles.cell} ${styles.last}`}></div>
+        <div className={styles.cell}></div>
+        <div className={styles.cell}></div>
+        <div className={styles.cell}></div>
+        <div className={styles.cell}></div>
+        <div className={styles.cell}></div>
+        <div className={styles.cell}></div>
+        <div className={`${styles.cell} ${styles.last}`}></div>
       </>
     );
   }
   data.push(
     <>
-      <div class={`${styles.cell} ${styles.last2}`}>
+      <div className={`${styles.cell} ${styles.last2}`}>
         <Hour index={23} />
       </div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last2}`}></div>
-      <div class={`${styles.cell} ${styles.last} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last2}`}></div>
+      <div className={`${styles.cell} ${styles.last} ${styles.last2}`}></div>
     </>
   );
 
@@ -112,7 +179,12 @@ export default withPageAuthRequired(function Calendario() {
       <div className={styles.home}>
         <Menu selected="Calendario" />
 
-        <Sidebar show={sidebar} closeSidebar={() => closeSidebar()} />
+        <Sidebar
+          show={sidebar}
+          closeSidebar={() => closeSidebar()}
+          calendari={calendari}
+          checkCalendari={checkCalendari}
+        />
         {sidebar ? (
           <div className={styles.backdrop} onClick={() => closeSidebar()} />
         ) : null}
@@ -259,7 +331,10 @@ export default withPageAuthRequired(function Calendario() {
               closeCalendar();
             }}
           >
-            <CreateCalendar close={() => closeCalendar()} />
+            <CreateCalendar
+              close={() => closeCalendar()}
+              refreshCalendari={() => fetchCalendari()}
+            />
           </div>
         ) : null}
         {createEventShow ? (
@@ -270,7 +345,7 @@ export default withPageAuthRequired(function Calendario() {
               closeEvent();
             }}
           >
-            <CreateEvent close={() => closeEvent()} />
+            <CreateEvent close={() => closeEvent()} calendari={calendari} />
           </div>
         ) : null}
         <Fab

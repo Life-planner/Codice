@@ -2,23 +2,24 @@ import styles from "../styles/checkCalendar.module.css";
 
 export default function CheckCalendar({
   text,
-  selected,
+  deselect = false,
   color = "#IEIEIE",
+  index,
   shared = false,
   callback = (id) => {},
 }) {
   return (
-    <div className={styles.container} onClick={() => callback()}>
+    <div className={styles.container} onClick={() => callback(index)}>
       <span
-        class="material-symbols-outlined"
+        className="material-symbols-outlined"
         style={{ fontSize: "1.5rem", color: color, cursor: "pointer" }}
       >
-        {selected ? "check_box" : "check_box_outline_blank"}
+        {deselect ? "check_box_outline_blank" : "check_box"}
       </span>
       {text}
       {shared ? (
         <span
-          class="material-symbols-outlined"
+          className="material-symbols-outlined"
           style={{ fontSize: "1.125rem", color: "var(--black-50)" }}
         >
           group

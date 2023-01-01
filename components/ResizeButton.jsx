@@ -7,7 +7,10 @@ export default function ResizeButton({ text, icon = "", callback = () => {} }) {
       {icon === "" ? (
         ""
       ) : (
-        <span class="material-symbols-outlined" style={{ fontSize: "1.25rem" }}>
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: "1.25rem" }}
+        >
           {icon}
         </span>
       )}

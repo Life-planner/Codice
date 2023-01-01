@@ -1,8 +1,14 @@
+import { isTemplateSpan } from "typescript";
 import styles from "../styles/sidebar.module.css";
 import CheckCalendar from "./CheckCalendar";
 import ResizeButton from "./ResizeButton";
 
-export default function Sidebar({ show, closeSidebar }) {
+export default function Sidebar({
+  show,
+  closeSidebar,
+  calendari,
+  checkCalendari = (id) => {},
+}) {
   return (
     <div
       className={styles.container}
@@ -15,11 +21,21 @@ export default function Sidebar({ show, closeSidebar }) {
           callback={() => closeSidebar()}
         />
         <div className={styles.line}></div>
-        <CheckCalendar text="Principale" />
-        <CheckCalendar text="PlanIt" color="#3a86ff" selected />
-        <CheckCalendar text="Fab Lab" color="#8338ec" selected />
-        <CheckCalendar text="Lavoro" color="#ff006e" shared />
-        <CheckCalendar text="Lezioni" color="#fb5607" shared selected />
+        {calendari?.map((element, index) => {
+          return (
+            <CheckCalendar
+              text={element.nome}
+              color={element.colore}
+              index={index}
+              deselect={element.deselect}
+              callback={(id) => {
+                checkCalendari(id);
+              }}
+              key={element._id}
+              shared={element.partecipanti.length > 1}
+            />
+          );
+        })}
       </div>
     </div>
   );
