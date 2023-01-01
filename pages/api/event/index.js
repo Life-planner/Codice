@@ -1081,11 +1081,13 @@ export async function creaEvento(req, res) {
                   res.status(500).json({ error: "Error parteciapnti" });
                   return;
                 }
-                res.status(200).json({ success: "Event inserted correctly" });
+                res.status(200);
+                return;
               }
             );
           } else {
-            res.status(200).json({ success: "Event inserted correctly" });
+            res.status(200);
+            return;
           }
         }
       );
@@ -1121,14 +1123,19 @@ export async function creaEvento(req, res) {
                   res.status(500).json({ error: "Error parteciapnti" });
                   return;
                 }
-                res.status(200).json({ success: "Event inserted correctly" });
+                res.status(200);
+                return;
               }
             );
           } else {
-            res.status(200).json({ success: "Event inserted correctly" });
+            res.status(200);
+            return;
           }
         }
       );
+    }
+    if(res.statusCode === 200){
+      res.json({ success: "Event inserted correctly" });
     }
     return;
   } catch (e) {
@@ -1346,7 +1353,7 @@ export async function modificaEvento(req, res) {
                 res.status(500).json({ error: "Not modified" });
                 return;
               }
-              res.status(200).json({ success: "Event edited correctly" });
+              res.status(200);
             }
           );
         } else {
@@ -1370,12 +1377,15 @@ export async function modificaEvento(req, res) {
                 res.status(500).json({ error: "Not modified" });
                 return;
               }
-              res.status(200).json({ success: "Event edited correctly" });
+              res.status(200);
             }
           );
         }
       }
     );
+    if(res.statusCode === 200){
+      res.json({ success: "Event edited correctly" });
+    }
     return;
   } catch (e) {
     console.error(e);

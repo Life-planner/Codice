@@ -245,9 +245,12 @@ export async function creaUser(req, res) {
           res.status(500).json({ error: "Not inserted" });
           return;
         }
-        res.status(200).json({ success: "User inserted correctly" });
+        res.status(200);
       }
     );
+    if(res.statusCode === 200){
+      res.json({ success: "User inserted correctly" });
+    }
     return;
   } catch (e) {
     res.status(501).json({ error: "Generic error" });

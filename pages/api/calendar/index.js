@@ -779,14 +779,17 @@ export async function creaCalendario(req, res) {
                 res.status(500).json({ error: "Error parteciapnti" });
                 return;
               }
-              res.status(200).json({ success: "Event inserted correctly" });
+              res.status(200);
             }
           );
         } else {
-          res.status(200).json({ success: "Calendar inserted correctly" });
+          res.status(200);
         }
       }
     );
+    if(res.statusCode === 200){
+      res.json({ success: "Calendar inserted correctly" });
+    }
     return;
   } catch (e) {
     console.error(e);
@@ -951,11 +954,14 @@ export async function modificaCalendario(req, res) {
               return;
             }
 
-            res.status(200).json({ success: "Calendar updated correctly" });
+            res.status(200);
           }
         );
       }
     );
+    if(res.statusCode === 200){
+      res.json({ success: "Calendar updated correctly" });
+    }
     return;
   } catch (e) {
     console.error(e);
