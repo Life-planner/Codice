@@ -48,6 +48,7 @@ export default function VisualizzaEvento({
       <div className={styles.line} />
       <div className={styles.small}>
         <input
+          readOnly
           type="text"
           className={styles["input-title"]}
           placeholder="Aggiungi Titolo Evento"
@@ -57,6 +58,7 @@ export default function VisualizzaEvento({
         <div className={styles["main-info"]}>
           <IconText text="Data" icon="edit_calendar" />
           <input
+            readOnly
             disabled
             type="datetime-local"
             className={styles.input}
@@ -67,6 +69,7 @@ export default function VisualizzaEvento({
           <IconText text="Durata" icon="hourglass_empty" />
           <div className={styles.flex}>
             <input
+              readOnly
               disabled
               type="number"
               min="0"
@@ -75,6 +78,7 @@ export default function VisualizzaEvento({
               value={durata}
             />
             <select
+              readOnly
               disabled
               name="time"
               id="duration"
@@ -93,6 +97,7 @@ export default function VisualizzaEvento({
           />
           <IconText text="Priorità" icon="bolt" />
           <input
+            readOnly
             disabled
             type="number"
             min="1"
@@ -103,6 +108,7 @@ export default function VisualizzaEvento({
           />
           <IconText text="Difficoltà" icon="battery_5_bar" />
           <input
+            readOnly
             disabled
             type="number"
             min="1"
@@ -113,12 +119,14 @@ export default function VisualizzaEvento({
           />
           <IconText text="Luogo" icon="pin_drop" />
           <input
+            readOnly
             disabled
             type="text"
             className={`${styles.input} ${styles.disabled}`}
           />
           <IconText text="Calendario" icon="event_note" value={calendario} />
           <select
+            readOnly
             disabled
             name="time"
             id="duration"
@@ -136,6 +144,7 @@ export default function VisualizzaEvento({
           <IconText text="Notifiche" icon="notifications" />
           <div className={styles.flex}>
             <input
+              readOnly
               disabled
               type="number"
               min="0"
@@ -144,6 +153,7 @@ export default function VisualizzaEvento({
               value={notTime}
             />
             <select
+              readOnly
               disabled
               name="time"
               id="duration"
@@ -160,6 +170,7 @@ export default function VisualizzaEvento({
         </div>
         <div className={styles["line-small"]} />
         <textarea
+          readOnly
           disabled
           className={styles.textarea}
           rows="3"

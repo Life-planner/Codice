@@ -383,6 +383,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -400,6 +401,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -417,6 +419,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -434,6 +437,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -451,6 +455,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -468,6 +473,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
@@ -485,6 +491,7 @@ export default withPageAuthRequired(function Calendario() {
                         callback={(event) => {
                           openShowEvent(event);
                         }}
+                        key={"attivita" + element._id}
                       />
                     );
                   })}
