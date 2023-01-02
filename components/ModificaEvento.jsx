@@ -45,6 +45,14 @@ export default function ModificaEvento({
   const [notType, setNotType] = useState("minuti");
   const [descrizione, setDescrizione] = useState(evento.descrizione);
 
+  const getMins = (number, type) => {
+    let temp = number;
+    if (type == "secondi") temp = temp / 60;
+    if (type == "ore") temp = temp * 60;
+    if (type == "giorni") temp = temp * 1440;
+    return temp;
+  };
+
   useEffect(() => {
     setTitolo(evento.titolo);
     setPersone(removeFirst(evento.partecipanti));
@@ -104,7 +112,7 @@ export default function ModificaEvento({
             latitudine: "0.000000",
             longitudine: "0.000000",
           }),
-          durata: durata,
+          durata: getMins(durata, durataType),
           isEventoSingolo: true,
           eventoSingolo: JSON.stringify({ data: data, isScadenza: true }),
         },

@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/createEvent.module.css";
 import FabButton from "./FabButton";
 import IconText from "./IconText";
 import Persone from "./Persone";
-import { toast } from "react-toastify";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function VisualizzaEvento({
   evento,
@@ -48,7 +46,7 @@ export default function VisualizzaEvento({
       }}
       style={full ? { width: "100%", height: "100%" } : null}
     >
-      <div className={styles.title}>Modifica Evento</div>
+      <div className={styles.title}>Visualizza Evento</div>
       <div className={styles.line} />
       <div className={styles.small}>
         <input

@@ -38,6 +38,14 @@ export default function CreateEvent({
   const [notType, setNotType] = useState("minuti");
   const [descrizione, setDescrizione] = useState("");
 
+  const getMins = (number, type) => {
+    let temp = number;
+    if (type == "secondi") temp = temp / 60;
+    if (type == "ore") temp = temp * 60;
+    if (type == "giorni") temp = temp * 1440;
+    return temp;
+  };
+
   const getNotificationDate = () => {
     let date = new Date(data);
     date.setSeconds(0, 0);
@@ -75,7 +83,7 @@ export default function CreateEvent({
             titolo: titolo,
             data: [getNotificationDate()],
           }),
-          durata: durata,
+          durata: getMins(durata, durataType),
           isEventoSingolo: true,
           eventoSingolo: JSON.stringify({ data: data, isScadenza: true }),
         },

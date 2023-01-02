@@ -29,9 +29,17 @@ export default function CreateCalendar({
   const [eTitolo, seteTitolo] = useState("");
   const [eDescrizione, seteDescrizione] = useState("");
 
+  const getMins = (number, type) => {
+    let temp = number;
+    if (type == "secondi") temp = temp / 60;
+    if (type == "ore") temp = temp * 60;
+    if (type == "giorni") temp = temp * 1440;
+    return temp;
+  };
+
   const submit = () => {
     if (titolo === "") {
-      toast.error("Devi inserire il titolo!");
+      toast.error("Devi inserire il nome del calendario!");
       return;
     }
     close();
@@ -50,8 +58,8 @@ export default function CreateCalendar({
           impostazioniPredefiniteEventi: JSON.stringify({
             titolo: eTitolo,
             descrizione: eDescrizione,
-            durata: durata,
-            tempAnticNotifica: notTime,
+            durata: getMins(durata, durataType),
+            tempAnticNotifica: getMins(notTime, notType),
             luogo: {
               latitudine: "0.000000",
               longitudine: "0.000000",

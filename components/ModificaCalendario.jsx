@@ -64,23 +64,17 @@ export default function ModificaCalendario({
     seteDescrizione(calendario.impostazioniPredefiniteEventi.descrizione);
   }, [calendario]);
 
-  const getDurata = () => {
-    let temp = durata;
-    if (durataType === "ore") temp * 60;
-    return temp;
-  };
-
-  const getNotifca = () => {
-    let temp = notTime;
-    if (notType === "minuti") temp * 60;
-    if (notType === "ore") temp * 3600;
-    if (notType === "giorni") temp * 86400;
+  const getMins = (number, type) => {
+    let temp = number;
+    if (type == "secondi") temp = temp / 60;
+    if (type == "ore") temp = temp * 60;
+    if (type == "giorni") temp = temp * 1440;
     return temp;
   };
 
   const submit = () => {
     if (titolo === "") {
-      toast.error("Devi inserire il titolo!");
+      toast.error("Devi inserire il nome del calendario!");
       return;
     }
     close();
@@ -99,8 +93,8 @@ export default function ModificaCalendario({
           impostazioniPredefiniteEventi: JSON.stringify({
             titolo: eTitolo,
             descrizione: eDescrizione,
-            durata: getDurata(),
-            tempAnticNotifica: getNotifca(),
+            durata: getMins(durata, durataType),
+            tempAnticNotifica: getMins(notTime, notType),
             luogo: {
               latitudine:
                 calendario.impostazioniPredefiniteEventi.luogo.latitudine,
