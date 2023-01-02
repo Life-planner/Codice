@@ -1216,23 +1216,6 @@ export async function modificaEvento(req, res) {
       }
     }
 
-    console.log(
-      IDEvento == null,
-      IDCalendario == null,
-      titolo == null,
-      userId == null,
-      isEventoSingolo == null,
-      isEventoSingolo == true && eventoSingolo == null,
-      isEventoSingolo == false && eventoRipetuto == null,
-      descrizione == null,
-      luogo == null,
-      arrPartecipanti == null,
-      priorita == null,
-      difficolta == null,
-      notifiche == null,
-      durata == null
-    );
-
     if (
       IDEvento == null ||
       IDCalendario == null ||

@@ -40,12 +40,25 @@ export default function CreateCalendar({
         params: {
           userId: user.sub,
           nome: titolo,
-          fusoOrario: {
+          fusoOrario: JSON.stringify({
             GMTOffset: gmt,
-            localita: "",
-          },
+            localita: "rome",
+          }),
           colore: color,
           principale: false,
+          partecipanti: JSON.stringify([user.sub, ...persone]),
+          impostazioniPredefiniteEventi: JSON.stringify({
+            titolo: eTitolo,
+            descrizione: eDescrizione,
+            durata: durata,
+            tempAnticNotifica: notTime,
+            luogo: {
+              latitudine: "0.000000",
+              longitudine: "0.000000",
+            },
+            priorita: priorita,
+            difficolta: difficolta,
+          }),
         },
       })
       .then(function () {

@@ -650,6 +650,14 @@ export async function creaCalendario(req, res) {
     } = req.query;
     const { userId } = req.query;
 
+    let arrPartecipanti;
+
+    if (typeof partecipanti == "string") {
+      arrPartecipanti = JSON.parse(partecipanti);
+    } else {
+      arrPartecipanti = partecipanti;
+    }
+
     if (nome == null || userId == null) {
       res.status(400).json({ error: "Name missing" }); //TODO or userID
       return;
@@ -746,8 +754,8 @@ export async function creaCalendario(req, res) {
     }
 
     let tempPartecipanti =
-      partecipanti != null && Array.isArray(partecipanti)
-        ? partecipanti.filter((item) => item !== userId)
+      arrPartecipanti != null && Array.isArray(arrPartecipanti)
+        ? arrPartecipanti.filter((item) => item !== userId)
         : null;
 
     await Calendario.create(
@@ -811,6 +819,14 @@ export async function modificaCalendario(req, res) {
     } = req.query;
     const { userId } = req.query;
 
+    let arrPartecipanti;
+
+    if (typeof partecipanti == "string") {
+      arrPartecipanti = JSON.parse(partecipanti);
+    } else {
+      arrPartecipanti = partecipanti;
+    }
+
     let tempFusoOrario;
 
     if (fusoOrario != null) {
@@ -840,7 +856,7 @@ export async function modificaCalendario(req, res) {
       tempFusoOrario.GMTOffset == null ||
       tempFusoOrario.localita == null ||
       colore == null ||
-      partecipanti == null ||
+      arrPartecipanti == null ||
       impostazioniPredefiniteEventi == null ||
       tempImpostazioniPredefiniteEventi.titolo == null ||
       tempImpostazioniPredefiniteEventi.descrizione == null ||
@@ -925,7 +941,7 @@ export async function modificaCalendario(req, res) {
       return;
     }
 
-    let tempPartecipanti = partecipanti.filter((item) => item !== userId);
+    let tempPartecipanti = arrPartecipanti.filter((item) => item !== userId);
     let error = false;
 
     Calendario.updateMany(
