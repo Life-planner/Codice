@@ -569,7 +569,11 @@ export default withPageAuthRequired(function Calendario() {
               closeEvent();
             }}
           >
-            <CreateEvent close={() => closeEvent()} calendari={calendari} />
+            <CreateEvent
+              close={() => closeEvent()}
+              calendari={calendari}
+              refreshEvento={fetchEvento()}
+            />
           </div>
         ) : null}
         {visualizzaEvent ? (
