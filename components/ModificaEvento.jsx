@@ -177,9 +177,11 @@ export default function ModificaEvento({
           <input
             type="datetime-local"
             className={styles.input}
-            value={new Date(data).toISOString().substring(0, 16)}
+            value={(data || "").toString().substring(0, 16)}
             onChange={(e) => {
-              setData(e.target.value);
+              if (!e.target["validity"].valid) return;
+              const dt = e.target["value"] + ":00Z";
+              setData(dt);
             }}
           />
           <IconText text="Durata" icon="hourglass_empty" />

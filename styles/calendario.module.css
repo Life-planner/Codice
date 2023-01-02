@@ -164,42 +164,49 @@
 }
 
 .day0 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 2;
 }
 
 .day1 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 3;
 }
 
 .day2 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 4;
 }
 
 .day3 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 5;
 }
 
 .day4 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 6;
 }
 
 .day5 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 7;
 }
 
 .day6 {
+  position: relative;
   padding: 0 var(--smallGap);
   grid-row: 1 / 25;
   grid-column: 8;

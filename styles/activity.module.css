@@ -1,5 +1,6 @@
 .container {
-  width: 100%;
+  position: absolute;
+  width: calc(100% - var(--smallGap) - var(--smallGap));
   border-radius: var(--borderRadius);
   cursor: pointer;
   padding: var(--smallGap);

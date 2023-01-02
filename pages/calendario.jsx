@@ -197,11 +197,7 @@ export default withPageAuthRequired(function Calendario() {
           if (data >= firstDay && data < getDateOffset(+7)) {
             setweekEvent((prev) => {
               let temp = { ...prev };
-              temp[
-                data.getDate() -
-                  firstDay.getDate() +
-                  (data.getUTCHours >= 23 ? -1 : 0)
-              ].push(evento);
+              temp[data.getUTCDate() - firstDay.getUTCDate() - 1].push(evento);
               return { ...temp };
             });
           }
