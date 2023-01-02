@@ -16,8 +16,6 @@ export default function ModificaCalendario({
 }) {
   const { user } = useUser();
 
-  console.log(calendario);
-
   const removeFirst = (array) => {
     let [, ...temp] = array;
     return temp;
@@ -86,7 +84,6 @@ export default function ModificaCalendario({
       return;
     }
     close();
-    console.log([user.sub, ...persone]);
     axios
       .put("/api/calendar", null, {
         params: {
@@ -117,7 +114,10 @@ export default function ModificaCalendario({
       })
       .then(function () {
         toast.success("Calendario modificato con successo");
-        refreshCalendari();
+        console.log("modificato");
+        setTimeout(() => {
+          refreshCalendari();
+        }, 100);
       })
       .catch(function (error) {
         toast.error("Errore nel modificare il calendario");

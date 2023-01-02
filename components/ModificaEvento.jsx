@@ -19,12 +19,6 @@ export default function ModificaEvento({
     id;
   },
 }) {
-  const getPrincipaleId = () => {
-    const x = calendari.find(function (x) {
-      if (x.nome === "Principale") return true;
-    });
-    return x._id;
-  };
   const { user } = useUser();
 
   const removeFirst = (array) => {
@@ -39,8 +33,6 @@ export default function ModificaEvento({
     return (date2 - date1) / 60000;
   };
 
-  console.log(evento);
-
   const [titolo, setTitolo] = useState(evento.titolo);
   const [persone, setPersone] = useState(removeFirst(evento.partecipanti));
   const [data, setData] = useState(evento.eventoSingolo.data);
@@ -48,7 +40,7 @@ export default function ModificaEvento({
   const [durataType, setDurataType] = useState("minuti");
   const [priorita, setPriorita] = useState(evento.priorita);
   const [difficolta, setDifficolta] = useState(evento.difficolta);
-  const [calendario, setCalendario] = useState(getPrincipaleId());
+  const [calendario, setCalendario] = useState(evento.IDCalendario);
   const [notTime, setNotTime] = useState(
     getNotificationReverse(evento.notifiche.data[0], evento.eventoSingolo.data)
   );
@@ -63,7 +55,7 @@ export default function ModificaEvento({
     setDurataType("minuti");
     setPriorita(evento.priorita);
     setDifficolta(evento.difficolta);
-    setCalendario(getPrincipaleId());
+    setCalendario(evento.IDCalendario);
     setNotTime(
       getNotificationReverse(
         evento.notifiche.data[0],
@@ -121,7 +113,12 @@ export default function ModificaEvento({
       })
       .then(function (response) {
         toast.success("Evento modificato con successo");
-        refreshEvento(calendario);
+        setTimeout(() => {
+          if (calendario != evento.IDCalendario) {
+            refreshEvento(evento.IDCalendario);
+          }
+          refreshEvento(calendario);
+        }, 100);
       })
       .catch(function (error) {
         console.log(error);
