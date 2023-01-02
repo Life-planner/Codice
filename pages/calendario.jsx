@@ -22,7 +22,15 @@ export default withPageAuthRequired(function Calendario() {
   const [createEventShow, setCreateEventShow] = useState(false);
   const [calendari, setCalendari] = useState([]);
   const [eventi, setEventi] = useState({});
-  const [weekEvent, setweekEvent] = useState({0:[],1:[],2:[],3:[],4:[],5:[],6:[]})
+  const [weekEvent, setweekEvent] = useState({
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  });
 
   const fetchEvento = (id) => {
     axios
@@ -57,6 +65,12 @@ export default withPageAuthRequired(function Calendario() {
     fetchEventi();
   }, [calendari]);
 
+  const getCalendarName = (id) => {
+    const x = calendari.find(function (x) {
+      if (x._id === id) return true;
+    });
+    return x.nome;
+  };
 
   const { user } = useUser();
 
@@ -153,29 +167,27 @@ export default withPageAuthRequired(function Calendario() {
   };
 
   const loadEvent = () => {
-    calendari.map((elemento)=>{
-    if(elemento.deselect != true){
-      if(!eventi[elemento._id]) return;
-      eventi[elemento._id].map((evento)=>{
-        let data = new Date(evento.eventoSingolo.data);
-        if(data >=  firstDay && data < getDateOffset(+7)){
-          console.log(data);
-          setweekEvent((prev) => {
-            let temp = {...prev};
-            temp[data.getDate() - firstDay.getDate()].push(evento);
-            return {...temp}
-          })
-        }
-      })
-    }
-  })
-  }
+    calendari.map((elemento) => {
+      if (elemento.deselect != true) {
+        if (!eventi[elemento._id]) return;
+        eventi[elemento._id].map((evento) => {
+          let data = new Date(evento.eventoSingolo.data);
+          if (data >= firstDay && data < getDateOffset(+7)) {
+            console.log(data);
+            setweekEvent((prev) => {
+              let temp = { ...prev };
+              temp[data.getDate() - firstDay.getDate()].push(evento);
+              return { ...temp };
+            });
+          }
+        });
+      }
+    });
+  };
 
-  const reset = () =>{
-    setweekEvent({0:[],1:[],2:[],3:[],4:[],5:[],6:[]})
-  }
-
-  console.log(weekEvent)
+  const reset = () => {
+    setweekEvent({ 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] });
+  };
 
   useEffect(() => {
     setAccount();
@@ -238,6 +250,12 @@ export default withPageAuthRequired(function Calendario() {
 
   const isToday = (x, y) => x.toDateString() === y.toDateString();
 
+  const getStart = (d) => {
+    d = new Date(d);
+    let time = d.getUTCMinutes();
+    time += d.getUTCHours() * 60;
+    return time;
+  };
 
   return (
     <div>
@@ -323,19 +341,89 @@ export default withPageAuthRequired(function Calendario() {
             <div className={styles.wrapper}>
               <div className={styles["grid-absolute"]}>
                 <div className={styles.day0}>
-                  <Activity
-                    start={420}
-                    duration={45}
-                    calendar="ciao"
-                    title="Workout"
-                  />
+                  {weekEvent[0].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
                 </div>
-                <div className={styles.day1}></div>
-                <div className={styles.day2}></div>
-                <div className={styles.day3}></div>
-                <div className={styles.day4}></div>
-                <div className={styles.day5}></div>
-                <div className={styles.day6}></div>
+                <div className={styles.day1}>
+                  {weekEvent[1].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.day2}>
+                  {weekEvent[2].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.day3}>
+                  {weekEvent[3].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.day4}>
+                  {weekEvent[4].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.day5}>
+                  {weekEvent[5].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.day6}>
+                  {weekEvent[6].map((element) => {
+                    return (
+                      <Activity
+                        start={getStart(element.eventoSingolo.data)}
+                        duration={element.durata}
+                        calendar={getCalendarName(element.IDCalendario)}
+                        title={element.titolo}
+                      />
+                    );
+                  })}
+                </div>
               </div>
               <div className={styles.grid}>
                 <div className={styles.header}></div>
