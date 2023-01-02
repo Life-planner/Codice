@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 
 import axios from "axios";
 
-export default function Persone({ persone, setPersone = (data) => {} }) {
+export default function Persone({
+  persone,
+  setPersone = (data) => {},
+  blocked = false,
+}) {
   const [add, setAdd] = useState("");
   const [soprannomi, setSoprannomi] = useState({});
   const [empty, setEmpty] = useState(true);
@@ -39,27 +43,25 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
   };
 
   const addSoprannome = () => {
-    persone.map((id)=>{
+    persone.map((id) => {
       axios
-      .get(`/api/user/userId/${id}`)
-      .then(function (response) {
-        let temp = soprannomi;
-        temp[id] = response.data.username;
-        setSoprannomi({ ...temp });
-      })
-      .catch(function (error) {
-        toast.error(
-          "Untente cercato non esiste, inserire un email di un utente esistente"
-        );
-      });
-    })
-    
-  }
+        .get(`/api/user/userId/${id}`)
+        .then(function (response) {
+          let temp = soprannomi;
+          temp[id] = response.data.username;
+          setSoprannomi({ ...temp });
+        })
+        .catch(function (error) {
+          toast.error(
+            "Untente cercato non esiste, inserire un email di un utente esistente"
+          );
+        });
+    });
+  };
 
   useEffect(() => {
     addSoprannome();
-  }, [])
-  
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -67,47 +69,51 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
         return (
           <div className={styles.persone} key={persona + Math.random()}>
             {getSoprannome(persona)}
-            <span
-              className="material-symbols-outlined"
-              style={{
-                fontSize: "1rem",
-                fontWeight: "700",
-              }}
-              onClick={() => {
-                persone.splice(id, 1);
-                setPersone([...persone]);
-              }}
-            >
-              close
-            </span>
+            {blocked ? null : (
+              <span
+                className="material-symbols-outlined"
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "700",
+                }}
+                onClick={() => {
+                  persone.splice(id, 1);
+                  setPersone([...persone]);
+                }}
+              >
+                close
+              </span>
+            )}
           </div>
         );
       })}
-      <input
-        type="text"
-        value={add}
-        className={styles.input}
-        placeholder="Aggiungi persone (email)"
-        onKeyUp={(e) => {
-          if (e.code === "Enter") {
-            if (validateEmail(add)) {
-              setId(add);
-              setAdd("");
-              setEmpty(true);
-            } else {
-              toast.error("Invalid email");
+      {blocked ? null : (
+        <input
+          type="text"
+          value={add}
+          className={styles.input}
+          placeholder="Aggiungi persone (email)"
+          onKeyUp={(e) => {
+            if (e.code === "Enter") {
+              if (validateEmail(add)) {
+                setId(add);
+                setAdd("");
+                setEmpty(true);
+              } else {
+                toast.error("Invalid email");
+              }
             }
-          }
-          if (e.code === "Backspace") {
-            if (empty) setPersone(persone.slice(0, -1));
-            setEmpty(add === "");
-          }
-        }}
-        onChange={(e) => {
-          setEmpty(false);
-          setAdd(e.target.value);
-        }}
-      />
+            if (e.code === "Backspace") {
+              if (empty) setPersone(persone.slice(0, -1));
+              setEmpty(add === "");
+            }
+          }}
+          onChange={(e) => {
+            setEmpty(false);
+            setAdd(e.target.value);
+          }}
+        />
+      )}
     </div>
   );
 }

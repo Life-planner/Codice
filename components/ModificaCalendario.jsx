@@ -125,6 +125,10 @@ export default function ModificaCalendario({
   };
 
   const elimina = () => {
+    if (calendario.principale) {
+      toast.error("Impossibile eliminare il calendario principale");
+      return;
+    }
     close();
     axios
       .delete("/api/calendar", {

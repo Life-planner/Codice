@@ -5,15 +5,28 @@
   padding: var(--smallGap);
 }
 
-.calendar {
+.calendar-black {
   font-size: 0.625rem;
   font-weight: 700;
   color: var(--black-50);
   text-transform: uppercase;
 }
 
-.title {
+.title-black {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--black-75);
+}
+
+.calendar-white {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--base);
+  text-transform: uppercase;
+}
+
+.title-white {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--base);
 }

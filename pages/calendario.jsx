@@ -14,14 +14,17 @@ import Sidebar from "../components/Sidebar";
 import Fab from "../components/Fab";
 import CreateCalendar from "../components/CreateCalendar";
 import CreateEvent from "../components/CreaEvento";
+import VisualizzaEvento from "../components/VisualizzaEvento";
 
 export default withPageAuthRequired(function Calendario() {
   const [firstDay, setFirstDay] = useState(getMonday(new Date()));
   const [sidebar, setSidebar] = useState(false);
   const [createCalendarShow, setCreateCalendarShow] = useState(false);
   const [createEventShow, setCreateEventShow] = useState(false);
+  const [visualizzaEvent, setVisualizzaEvent] = useState(false);
   const [calendari, setCalendari] = useState([]);
   const [eventi, setEventi] = useState({});
+  const [selectedEvent, setSelectedEvent] = useState({});
   const [weekEvent, setweekEvent] = useState({
     0: [],
     1: [],
@@ -70,6 +73,13 @@ export default withPageAuthRequired(function Calendario() {
       if (x._id === id) return true;
     });
     return x.nome;
+  };
+
+  const getCalendarColor = (id) => {
+    const x = calendari.find(function (x) {
+      if (x._id === id) return true;
+    });
+    return x.colore;
   };
 
   const { user } = useUser();
@@ -136,6 +146,18 @@ export default withPageAuthRequired(function Calendario() {
                   nome: "Principale",
                   colore: "#1e1e1e",
                   principale: true,
+                  impostazioniPredefiniteEventi: JSON.stringify({
+                    titolo: "",
+                    descrizione: "eDescrizione",
+                    durata: 30,
+                    tempAnticNotifica: 30,
+                    luogo: {
+                      latitudine: "0.000000",
+                      longitudine: "0.000000",
+                    },
+                    priorita: 6,
+                    difficolta: 6,
+                  }),
                 },
               })
               .then(function () {
@@ -205,6 +227,15 @@ export default withPageAuthRequired(function Calendario() {
 
   const openCalendar = () => {
     setCreateCalendarShow(true);
+  };
+
+  const closeShowEvent = () => {
+    setVisualizzaEvent(false);
+  };
+
+  const openShowEvent = (event) => {
+    setSelectedEvent({ ...event });
+    setVisualizzaEvent(true);
   };
 
   const closeEvent = () => {
@@ -344,10 +375,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[0].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -356,10 +392,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[1].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -368,10 +409,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[2].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -380,10 +426,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[3].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -392,10 +443,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[4].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -404,10 +460,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[5].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -416,10 +477,15 @@ export default withPageAuthRequired(function Calendario() {
                   {weekEvent[6].map((element) => {
                     return (
                       <Activity
+                        event={element}
                         start={getStart(element.eventoSingolo.data)}
                         duration={element.durata}
                         calendar={getCalendarName(element.IDCalendario)}
                         title={element.titolo}
+                        color={getCalendarColor(element.IDCalendario)}
+                        callback={(event) => {
+                          openShowEvent(event);
+                        }}
                       />
                     );
                   })}
@@ -504,6 +570,21 @@ export default withPageAuthRequired(function Calendario() {
             }}
           >
             <CreateEvent close={() => closeEvent()} calendari={calendari} />
+          </div>
+        ) : null}
+        {visualizzaEvent ? (
+          <div
+            className={styles.backdrop}
+            style={{ backgroundColor: "var(--black-50)" }}
+            onClick={() => {
+              closeShowEvent();
+            }}
+          >
+            <VisualizzaEvento
+              evento={selectedEvent}
+              close={() => closeShowEvent()}
+              calendari={calendari}
+            />
           </div>
         ) : null}
         <Fab
