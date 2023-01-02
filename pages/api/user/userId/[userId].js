@@ -129,8 +129,8 @@ export async function getUser(req, res) {
     });
     return;
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }

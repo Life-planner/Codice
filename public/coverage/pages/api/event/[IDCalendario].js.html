@@ -877,9 +877,9 @@ export async function getEventi(req, res) {
     });
     return;
   } catch (e) {
-<span class="cstat-no" title="statement not covered" >    console.error(e);</span>
+
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(e).message;</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>

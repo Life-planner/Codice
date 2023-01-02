@@ -800,9 +800,9 @@ export async function creaCalendario(req, res) {
     }
     return;
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
@@ -980,9 +980,9 @@ export async function modificaCalendario(req, res) {
     }
     return;
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
@@ -1036,8 +1036,8 @@ export async function eliminaCalendario(req, res) {
       return;
     }
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
