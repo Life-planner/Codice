@@ -53,6 +53,8 @@ export default function ModificaEvento({
     return temp;
   };
 
+  console.log(data);
+
   useEffect(() => {
     setTitolo(evento.titolo);
     setPersone(removeFirst(evento.partecipanti));
@@ -177,9 +179,7 @@ export default function ModificaEvento({
           <input
             type="datetime-local"
             className={styles.input}
-            defaultValue={new Date(evento.eventoSingolo.data)
-              .toISOString()
-              .substring(0, 16)}
+            value={new Date(data).toISOString().substring(0, 16)}
             onChange={(e) => {
               setData(e.target.value);
             }}
