@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 6;
+  position: absolute;
+  bottom: 3.5rem;
+  right: 3.5rem;
+  gap: 1rem;
+}
+
+.circle {
+  user-select: none;
+  color: var(--base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 3rem;
+  background-color: var(--primary-500);
+  width: 3rem;
+  height: 3rem;
+}
+
+.transition {
+  transition: 0.2s ease-in-out;
+}
+
+.open {
+  transform: rotate(-45deg);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 6;
+  gap: 1rem;
+  transition: 0.2s ease-in-out;
+  transform-origin: bottom right;
+}
+
+.closed {
+  transform: scale(0);
+}

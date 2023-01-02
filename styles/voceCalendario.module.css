@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--smallGap) 0;
+  gap: 0.375rem;
+  color: var(--black-100);
+  font-size: 0.875rem;
+}
+
+.name {
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  user-select: none;
+}
+
+.event-container {
+  display: flex;
+  align-items: center;
+  color: var(--black-100);
+  font-size: 0.875rem;
+}
+
+.event-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--smallGap);
+  padding-left: 1.25rem;
+}

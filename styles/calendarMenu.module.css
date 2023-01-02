@@ -1,0 +1,14 @@
+.container {
+  height: 60px;
+  width: 100%;
+  background-color: var(--base);
+  border-radius: var(--borderRadius);
+  display: flex;
+  align-items: center;
+  padding: var(--smallGap);
+  gap: var(--mediumGap);
+}
+
+.arrows {
+  display: flex;
+}

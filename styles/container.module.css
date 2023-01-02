@@ -1,0 +1,30 @@
+.large {
+  max-width: 1800px;
+  width: 100%;
+  padding: 0rem 10rem;
+}
+
+.small {
+  max-width: 1300px;
+  width: 100%;
+  padding: 0rem 10rem;
+}
+
+@media screen and (max-width: 1300px) {
+  .small {
+    max-width: 900px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .small {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .large,
+  .small {
+    padding: 0 5rem;
+  }
+}

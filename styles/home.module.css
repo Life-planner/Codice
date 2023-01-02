@@ -1,0 +1,19 @@
+.home {
+  min-height: 100vh;
+  background-color: var(--backGround);
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  height: 100%;
+  display: flex;
+  margin: var(--bigGap);
+  margin-top: 0;
+  padding: var(--smallGap) var(--bigGap);
+  background-color: var(--base);
+  border-radius: var(--borderRadius);
+  align-items: center;
+  justify-content: center;
+  gap: var(--mediumGap);
+}

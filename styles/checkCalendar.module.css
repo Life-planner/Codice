@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 400;
+  font-size: 0.875rem;
+  background-color: var(--base);
+  color: var(--black-100);
+  user-select: none;
+  gap: var(--smallGap);
+}

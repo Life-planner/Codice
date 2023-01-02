@@ -1046,8 +1046,14 @@ export async function creaEvento(req, res) {
 
     let tempPartecipanti =
       partecipanti != null && Array.isArray(partecipanti)
+<<<<<<< HEAD
+        ? partecipanti
+        : calendariPosseduti[0].partecipanti;
+    let error = false;
+=======
         ? partecipanti.filter((item) => item !== userId)
         : calendariPosseduti[0].partecipanti.filter((item) => item !== userId);
+>>>>>>> main
 
     if (isEventoSingolo) {
       await Evento.create(
@@ -1065,6 +1071,9 @@ export async function creaEvento(req, res) {
           eventoSingolo: tempEvento,
         },
         function (err, event) {
+<<<<<<< HEAD
+          error = err;
+=======
           if (err) {
             res.status(500).json({ error: "Not inserted" });
             return;
@@ -1089,6 +1098,7 @@ export async function creaEvento(req, res) {
             res.status(200);
             return;
           }
+>>>>>>> main
         }
       );
     } else {
@@ -1107,6 +1117,16 @@ export async function creaEvento(req, res) {
           eventoRipetuto: tempEvento,
         },
         function (err, event) {
+<<<<<<< HEAD
+          error = err;
+        }
+      );
+    }
+
+    if (error) {
+      res.status(500).json({ error: "Not inserted" });
+      return;
+=======
           if (err) {
             res.status(500).json({ error: "Not inserted" });
             return;
@@ -1136,6 +1156,7 @@ export async function creaEvento(req, res) {
     }
     if (res.statusCode === 200) {
       res.json({ success: "Event inserted correctly" });
+>>>>>>> main
     }
     return;
   } catch (e) {
@@ -1326,6 +1347,10 @@ export async function modificaEvento(req, res) {
       {
         partecipanti: [userId],
       },
+<<<<<<< HEAD
+      function (err, event) {
+        error = err;
+=======
       function (err) {
         if (err) {
           res.status(500).json({ error: "Not modified" });
@@ -1381,11 +1406,66 @@ export async function modificaEvento(req, res) {
             }
           );
         }
+>>>>>>> main
       }
     );
     if (res.statusCode === 200) {
       res.json({ success: "Event edited correctly" });
     }
+<<<<<<< HEAD
+
+    error = false;
+
+    if (isEventoSingolo) {
+      Evento.updateMany(
+        { _id: new ObjectId(IDEvento) },
+        {
+          IDCalendario: IDCalendario,
+          titolo: titolo,
+          descrizione: descrizione == null ? undefined : descrizione,
+          luogo: luogo == null ? undefined : tempLuogo,
+          priorita: priorita == null ? undefined : priorita,
+          difficolta: difficolta == null ? undefined : difficolta,
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
+          notifiche: notifiche == null ? undefined : tempNotifiche,
+          durata: durata == null ? undefined : durata,
+          isEventoSingolo: true,
+          eventoSingolo: eventoSingolo == null ? undefined : tempEvento,
+        },
+        function (err, event) {
+          error = err;
+        }
+      );
+    } else {
+      Evento.updateMany(
+        { _id: new ObjectId(IDEvento) },
+        {
+          IDCalendario: IDCalendario,
+          titolo: titolo,
+          descrizione: descrizione == null ? undefined : descrizione,
+          luogo: luogo == null ? undefined : tempLuogo,
+          priorita: priorita == null ? undefined : priorita,
+          difficolta: difficolta == null ? undefined : difficolta,
+          $addToSet: { partecipanti: { $each: tempPartecipanti } },
+          notifiche: notifiche == null ? undefined : tempNotifiche,
+          durata: durata == null ? undefined : durata,
+          isEventoSingolo: false,
+          eventoRipetuto: eventoRipetuto == null ? undefined : tempEvento,
+        },
+        function (err, event) {
+          error = err;
+        }
+      );
+    }
+
+    if (error) {
+      res.status(500).json({ error: "Not modified" });
+      return;
+    }
+
+    res.status(200).json({ success: "Event edited correctly" });
+=======
+>>>>>>> main
     return;
   } catch (e) {
     console.error(e);

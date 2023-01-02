@@ -1,0 +1,30 @@
+.primary {
+  --color: var(--primary-500);
+  --text: var(--base);
+  --hover: var(--primary-400);
+}
+
+.secondary {
+  --color: var(--gray-100);
+  --text: var(--black-100);
+  --hover: var(--gray-200);
+}
+
+.container {
+  width: 12.5rem;
+  height: 3.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--borderRadius);
+  font-weight: 600;
+  font-size: 1.125rem;
+  background-color: var(--color);
+  color: var(--text);
+  user-select: none;
+}
+
+.container:hover {
+  background-color: var(--hover);
+  cursor: pointer;
+}
