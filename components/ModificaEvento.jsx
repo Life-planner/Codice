@@ -53,8 +53,6 @@ export default function ModificaEvento({
     return temp;
   };
 
-  console.log(data);
-
   useEffect(() => {
     setTitolo(evento.titolo);
     setPersone(removeFirst(evento.partecipanti));
