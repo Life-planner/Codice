@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.37% </span>
+                <span class="strong">82.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>187/227</span>
+                <span class='fraction'>193/233</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.3% </span>
+                <span class="strong">82.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>186/226</span>
+                <span class='fraction'>192/232</span>
             </div>
         
             
@@ -1514,7 +1514,21 @@
 <a name='L1449'></a><a href='#L1449'>1449</a>
 <a name='L1450'></a><a href='#L1450'>1450</a>
 <a name='L1451'></a><a href='#L1451'>1451</a>
-<a name='L1452'></a><a href='#L1452'>1452</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L1452'></a><a href='#L1452'>1452</a>
+<a name='L1453'></a><a href='#L1453'>1453</a>
+<a name='L1454'></a><a href='#L1454'>1454</a>
+<a name='L1455'></a><a href='#L1455'>1455</a>
+<a name='L1456'></a><a href='#L1456'>1456</a>
+<a name='L1457'></a><a href='#L1457'>1457</a>
+<a name='L1458'></a><a href='#L1458'>1458</a>
+<a name='L1459'></a><a href='#L1459'>1459</a>
+<a name='L1460'></a><a href='#L1460'>1460</a>
+<a name='L1461'></a><a href='#L1461'>1461</a>
+<a name='L1462'></a><a href='#L1462'>1462</a>
+<a name='L1463'></a><a href='#L1463'>1463</a>
+<a name='L1464'></a><a href='#L1464'>1464</a>
+<a name='L1465'></a><a href='#L1465'>1465</a>
+<a name='L1466'></a><a href='#L1466'>1466</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -2430,6 +2444,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">55x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">55x</span>
@@ -2597,8 +2617,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2639,8 +2659,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2680,6 +2700,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
@@ -3883,6 +3911,12 @@ export async function creaEvento(req, res) {
     } = req.query;
     const { userId } = req.query;
 &nbsp;
+    let arrPartecipanti;
+    try {
+      arrPartecipanti = JSON.parse(partecipanti);
+    } catch (error) {
+      arrPartecipanti = partecipanti;
+    }
     if (
       IDCalendario == null ||
       titolo == null ||
@@ -4012,8 +4046,8 @@ export async function creaEvento(req, res) {
     }
 &nbsp;
     let tempPartecipanti =
-      partecipanti != null &amp;&amp; Array.isArray(partecipanti)
-        ? partecipanti.filter((item) =&gt; item !== userId)
+      arrPartecipanti != null &amp;&amp; Array.isArray(arrPartecipanti)
+        ? arrPartecipanti.filter((item) =&gt; item !== userId)
         : calendariPosseduti[0].partecipanti.filter((item) =&gt; item !== userId);
 &nbsp;
     if (isEventoSingolo) {
@@ -4101,7 +4135,7 @@ export async function creaEvento(req, res) {
         }
       );
     }
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Event inserted correctly" });
     }
     return;
@@ -4131,6 +4165,14 @@ export async function modificaEvento(req, res) {
       eventoRipetuto,
     } = req.query;
     const { userId } = req.query;
+&nbsp;
+    let arrPartecipanti;
+&nbsp;
+    try {
+      arrPartecipanti = JSON.parse(partecipanti);
+    } catch (error) {
+      arrPartecipanti = partecipanti;
+    }
 &nbsp;
     let tempLuogo;
     if (luogo != null) {
@@ -4177,7 +4219,7 @@ export async function modificaEvento(req, res) {
       (isEventoSingolo == false &amp;&amp; eventoRipetuto == null) ||
       descrizione == null ||
       luogo == null ||
-      partecipanti == null ||
+      arrPartecipanti == null ||
       priorita == null ||
       difficolta == null ||
       notifiche == null ||
@@ -4285,7 +4327,7 @@ export async function modificaEvento(req, res) {
       return;
     }
 &nbsp;
-    let tempPartecipanti = partecipanti.filter((item) =&gt; item !== userId);
+    let tempPartecipanti = arrPartecipanti.filter((item) =&gt; item !== userId);
     let error = false;
 &nbsp;
     Evento.updateMany(
@@ -4350,7 +4392,7 @@ export async function modificaEvento(req, res) {
         }
       }
     );
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.json({ success: "Event edited correctly" });
     }
     return;
@@ -4423,7 +4465,7 @@ export async function eliminaEvento(req, res) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-01T20:03:42.298Z
+                at 2023-01-02T11:53:35.262Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
