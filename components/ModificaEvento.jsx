@@ -8,8 +8,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 import axios from "axios";
 
-// refresh evento aggiunto da fare
-
 export default function ModificaEvento({
   evento,
   full,

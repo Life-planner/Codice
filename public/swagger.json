@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/calendar/{user}": {
+    "/api/calendar/{userId}": {
       "get": {
         "description": "Ritorna tutti i calendari di un utentente dato l'userId",
         "parameters": [
@@ -35,7 +35,7 @@
         ],
         "responses": {
           "200": {
-            "description": "E' stato trovato almeno un calendario e verra restituito sotto forma di lista",
+            "description": "E' stato trovato almeno un calendario e verrà restituito sotto forma di lista",
             "content": {
               "application/json": {
                 "schema": {
@@ -125,51 +125,66 @@
                   "Compleanno": {
                     "summary": "Esempio di un calendario per compleanni",
                     "value": {
-                      "nome": "Compleanni",
-                      "fusoOrario": {
-                        "GMTOffset": 0,
-                        "localita": "London"
-                      },
-                      "colore": "#FFAAFF",
-                      "partecipanti": ["User1", "User2", "User3"],
-                      "principale": false,
-                      "impostazioniPredefiniteEventi": {
-                        "titolo": "Compleanno",
-                        "descrizione": "Compleanno di",
-                        "durata": 1440,
-                        "tempAnticNotifica": 1440,
-                        "luogo": {
-                          "latitudine": "12N",
-                          "longitudine": "13E"
-                        },
-                        "priorita": 7,
-                        "difficolta": 1
-                      }
+                      "calendari": [
+                        {
+                          "nome": "Compleanni",
+                          "fusoOrario": {
+                            "GMTOffset": 0,
+                            "localita": "London"
+                          },
+                          "colore": "#FFAAFF",
+                          "partecipanti": [
+                            "User1",
+                            "User2",
+                            "User3"
+                          ],
+                          "principale": false,
+                          "impostazioniPredefiniteEventi": {
+                            "titolo": "Compleanno",
+                            "descrizione": "Compleanno di",
+                            "durata": 1440,
+                            "tempAnticNotifica": 1440,
+                            "luogo": {
+                              "latitudine": "12.123123",
+                              "longitudine": "133.123123"
+                            },
+                            "priorita": 7,
+                            "difficolta": 1
+                          }
+                        }
+                      ]
                     }
                   },
                   "Lavoro": {
                     "summary": "Esempio di un calendario di lavoro",
                     "value": {
-                      "nome": "Lavoro",
-                      "fusoOrario": {
-                        "GMTOffset": -5,
-                        "localita": "NewYork"
-                      },
-                      "colore": "#FF0000",
-                      "partecipanti": ["User1", "User3"],
-                      "principale": false,
-                      "impostazioniPredefiniteEventi": {
-                        "titolo": "Meeting",
-                        "descrizione": "Aggiornamento su ",
-                        "durata": 30,
-                        "tempAnticNotifica": 10,
-                        "luogo": {
-                          "latitudine": "12N",
-                          "longitudine": "1E"
-                        },
-                        "priorita": 5,
-                        "difficolta": 6
-                      }
+                      "calendari": [
+                        {
+                          "nome": "Lavoro",
+                          "fusoOrario": {
+                            "GMTOffset": -5,
+                            "localita": "NewYork"
+                          },
+                          "colore": "#FF0000",
+                          "partecipanti": [
+                            "User1",
+                            "User3"
+                          ],
+                          "principale": false,
+                          "impostazioniPredefiniteEventi": {
+                            "titolo": "Meeting",
+                            "descrizione": "Aggiornamento su ",
+                            "durata": 30,
+                            "tempAnticNotifica": 10,
+                            "luogo": {
+                              "latitudine": "12.123123",
+                              "longitudine": "13.123123"
+                            },
+                            "priorita": 5,
+                            "difficolta": 6
+                          }
+                        }
+                      ]
                     }
                   }
                 }
@@ -177,7 +192,7 @@
             }
           },
           "400": {
-            "description": "Manca il parametro userId, verra restituito \"Parameter missing\"",
+            "description": "Manca il parametro userId, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -193,7 +208,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non sono stati trovati calendari per l'userId dato, verra restituito \"There are no calendars with that userId\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\" <br>Se non sono stati trovati calendari per l'userId dato, verrà restituito \"There are no calendars with that userId\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -212,7 +227,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
@@ -228,7 +243,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -248,7 +263,7 @@
     },
     "/api/calendar/": {
       "post": {
-        "description": "Crea un calendario dati nome, userId, fusoOrario, colore con cui verra visualizzato, e se e' il calendario principale o meno",
+        "description": "Crea un calendario dati nome, userId, fusoOrario, colore con cui verrà visualizzato, e se e' il calendario principale o meno",
         "parameters": [
           {
             "name": "userId",
@@ -299,7 +314,7 @@
           {
             "name": "fusoOrario",
             "in": "query",
-            "description": "Oggetto contente il fuso orario e il capoluogo realtivo",
+            "description": "Oggetto contente il fuso orario e il capoluogo relativo",
             "required": false,
             "allowEmptyValue": false,
             "content": {
@@ -382,18 +397,134 @@
           {
             "name": "principale",
             "in": "query",
-            "description": "Valore booleano che indica se il caledario e' il calendario principale o meno",
+            "description": "Valore booleano che indica se il calendario e' il calendario principale o meno",
             "required": false,
             "schema": {
               "type": "boolean",
               "example": false
             },
             "allowEmptyValue": false
+          },
+          {
+            "name": "partecipanti",
+            "in": "query",
+            "description": "Nuova lista dei partecipanti",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "examples": {
+              "Utente1": {
+                "summary": "Utente1",
+                "value": [
+                  "User1"
+                ]
+              },
+              "Utente12": {
+                "summary": "Utente1 e Utente2",
+                "value": [
+                  "User1",
+                  "User2"
+                ]
+              },
+              "Utente123": {
+                "summary": "Utente1, Utente2 e Utente3",
+                "value": [
+                  "User1",
+                  "User2",
+                  "User3"
+                ]
+              },
+              "Utente13": {
+                "summary": "Utente1 e Utente3",
+                "value": [
+                  "User1",
+                  "User3"
+                ]
+              },
+              "Utente23": {
+                "summary": "Utente2 e Utente3",
+                "value": [
+                  "User2",
+                  "User3"
+                ]
+              }
+            }
+          },
+          {
+            "name": "impostazioniPredefiniteEventi",
+            "in": "query",
+            "description": "Oggetto contente tutte le nuove impostazioni predefinite",
+            "required": false,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titolo": {
+                      "type": "string"
+                    },
+                    "descrizione": {
+                      "type": "string"
+                    },
+                    "durata": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "tempAnticNotifica": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "luogo": {
+                      "type": "object",
+                      "properties": {
+                        "latitudine": {
+                          "type": "number"
+                        },
+                        "longitudine": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "priorita": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10
+                    },
+                    "difficolta": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Compleanno": {
+                "summary": "Impostazioni per un calendario di compleanni",
+                "value": {
+                  "titolo": "Compleanno",
+                  "descrizione": "Compleanno di",
+                  "durata": 1440,
+                  "tempAnticNotifica": 1440,
+                  "luogo": {
+                    "latitudine": "12.123123",
+                    "longitudine": "13.123123"
+                  },
+                  "priorita": 7,
+                  "difficolta": 1
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Calendario inserito con successo, verra restituito \"Calendar inserted correctly\"",
+            "description": "Calendario inserito con successo, verrà restituito \"Calendar inserted correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -409,7 +540,7 @@
             }
           },
           "400": {
-            "description": "Se manca il nome, verra restituito \"Name missing\" <br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"",
+            "description": "Se manca il nome, verrà restituito \"Name missing\" <br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito \"Wrong format for color\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato \"Wrong format for time zone\" <br>Se le impostazioni predefinite non sono valide, verrà restituito \"Wrong format impostazioni predefinite\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -438,13 +569,19 @@
                     "value": {
                       "error": "Wrong format for time zone"
                     }
+                  },
+                  "Errore4": {
+                    "summary": "Le impostazioni predefinite non sono valide",
+                    "value": {
+                      "error": "Wrong format impostazioni predefinite"
+                    }
                   }
                 }
               }
             }
           },
           "409": {
-            "description": "Se manca l'utente con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se c'e piu di un utente con l'userId dato, verra restituito \"There are too many users with that userId\" <br>Se esiste gia un calendario principale, verra riornato \"There are too many primary calendars\"",
+            "description": "Se manca l'utente con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se c'è più di un utente con l'userId dato, verrà restituito \"There are too many users with that userId\" <br>Se esiste già un calendario principale, verrà ritornato \"There are too many primary calendars\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -463,13 +600,13 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "C'e piu di un utente con l'userId specificato",
+                    "summary": "C'è più di un utente con l'userId specificato",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
                   },
                   "Errore3": {
-                    "summary": "Esiste gia un calendario principale",
+                    "summary": "Esiste già un calendario principale",
                     "value": {
                       "error": "There are too many primary calendars"
                     }
@@ -479,15 +616,28 @@
             }
           },
           "500": {
-            "description": "Errore di inserimento nel database, verra restituito \"Not inserted\"",
+            "description": "Errore di inserimento nel database, verrà restituito \"Not inserted\" <br/> Se c'e un errore nell'inserimento dei partecipanti, verrà restituito \"Error parteciapnti\"",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "error": {
-                      "type": "string",
-                      "example": "Not inserted"
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Errore1": {
+                    "summary": "Errore di inserimento",
+                    "value": {
+                      "error": "Not inserted"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Errore inserimento partecipanti",
+                    "value": {
+                      "error": "Error parteciapnti"
                     }
                   }
                 }
@@ -495,7 +645,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -513,7 +663,7 @@
         }
       },
       "put": {
-        "description": "Modifica i valori di un calendario dato l'objectId del calendario stesso e gli attributi da modificare",
+        "description": "Modifica i valori di un calendario dato l'IDCalendario del calendario stesso e gli attributi da modificare",
         "parameters": [
           {
             "name": "userId",
@@ -539,7 +689,7 @@
             }
           },
           {
-            "name": "objectId",
+            "name": "IDCalendario",
             "in": "query",
             "description": "Id del documento all'interno del DataBase",
             "required": true,
@@ -587,7 +737,7 @@
           {
             "name": "fusoOrario",
             "in": "query",
-            "description": "Oggetto contente il fuso orario e il capoluogo realtivo",
+            "description": "Oggetto contente il fuso orario e il capoluogo relativo",
             "required": true,
             "content": {
               "application/json": {
@@ -679,23 +829,38 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": ["User1"]
+                "value": [
+                  "User1"
+                ]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": ["User1", "User2"]
+                "value": [
+                  "User1",
+                  "User2"
+                ]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": ["User1", "User2", "User3"]
+                "value": [
+                  "User1",
+                  "User2",
+                  "User3"
+                ]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": ["User1", "User3"]
+                "value": [
+                  "User1",
+                  "User3"
+                ]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": ["User2", "User3"]
+                "value": [
+                  "User2",
+                  "User3"
+                ]
               }
             }
           },
@@ -727,10 +892,10 @@
                       "type": "object",
                       "properties": {
                         "latitudine": {
-                          "type": "string"
+                          "type": "number"
                         },
                         "longitudine": {
-                          "type": "string"
+                          "type": "number"
                         }
                       }
                     },
@@ -757,8 +922,8 @@
                   "durata": 1440,
                   "tempAnticNotifica": 1440,
                   "luogo": {
-                    "latitudine": "12N",
-                    "longitudine": "13E"
+                    "latitudine": "12.123123",
+                    "longitudine": "13.123123"
                   },
                   "priorita": 7,
                   "difficolta": 1
@@ -769,7 +934,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Calendario aggiornato con successo, verra restituito \"Calendar updated correctly\"",
+            "description": "Calendario aggiornato con successo, verrà restituito \"Calendar updated correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -785,7 +950,7 @@
             }
           },
           "400": {
-            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
+            "description": "Se manca uno o più parametri, verrà restituito \"Parameter missing\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verrà ritornato \"Wrong format for time zone\"<br>Se il colore e' stato passato come parametro ma il formato non e' corretto, verrà restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verrà restituito \"Wrong format impostazioni predefinite\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -826,7 +991,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non possiedi il caleendario, verra restituito \"You do not own the calendar\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\" <br>Se non possiedi il calendario, verrà restituito \"You do not own the calendar\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -845,7 +1010,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
@@ -861,7 +1026,7 @@
             }
           },
           "500": {
-            "description": "Errore di modifica nel database, verra restituito \"Not edited\"",
+            "description": "Errore di modifica nel database, verrà restituito \"Not edited\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -877,7 +1042,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -895,7 +1060,7 @@
         }
       },
       "delete": {
-        "description": "Elimina un calendario dato l'objectId",
+        "description": "Elimina un calendario dato l'IDCalendario",
         "parameters": [
           {
             "name": "userId",
@@ -921,7 +1086,7 @@
             }
           },
           {
-            "name": "objectId",
+            "name": "IDCalendario",
             "in": "query",
             "description": "Id del documento all'interno del DataBase",
             "required": true,
@@ -946,7 +1111,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Calendario eliminato con successo, verra restituito \"Calendar deleted correctly\"",
+            "description": "Calendario eliminato con successo, verrà restituito \"Calendar deleted correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -962,7 +1127,7 @@
             }
           },
           "400": {
-            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "description": "Manca uno o più parametri, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -978,7 +1143,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non possiedi il caleendario, verra restituito \"You do not own the calendar\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\" <br>Se non possiedi il calendario, verrà restituito \"You do not own the calendar\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -997,7 +1162,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
@@ -1013,7 +1178,7 @@
             }
           },
           "500": {
-            "description": "Errore di eliminazione nel database, verra restituito \"Calendar not deleted\"",
+            "description": "Errore di eliminazione nel database, verrà restituito \"Calendar not deleted\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1029,7 +1194,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1049,248 +1214,7 @@
     },
     "/api/event/{IDCalendario}": {
       "get": {
-        "description": "Ritorna tutti i calendari di un utentente dato l'userId",
-        "parameters": [
-          {
-            "name": "IDCalendario",
-            "in": "path",
-            "description": "UserId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "examples": {
-              "Utente1": {
-                "summary": "Utente1",
-                "value": "User1"
-              },
-              "Utente2": {
-                "summary": "Utente2",
-                "value": "User2"
-              },
-              "Utente3": {
-                "summary": "Utente3",
-                "value": "User3"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "E' stato trovato almeno un calendario e verra restituito sotto forma di lista",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "calendari": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "nome": {
-                            "type": "string"
-                          },
-                          "fusoOrario": {
-                            "type": "object",
-                            "properties": {
-                              "GMTOffset": {
-                                "type": "integer",
-                                "minimum": -12,
-                                "maximum": 12
-                              },
-                              "localita": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "colore": {
-                            "type": "string",
-                            "pattern": "/^#([0-9a-f]{3}){1,2}$/i"
-                          },
-                          "partecipanti": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "format": "userId"
-                            }
-                          },
-                          "principale": {
-                            "type": "boolean"
-                          },
-                          "impostazioniPredefiniteEventi": {
-                            "type": "object",
-                            "properties": {
-                              "titolo": {
-                                "type": "string"
-                              },
-                              "descrizione": {
-                                "type": "string"
-                              },
-                              "durata": {
-                                "type": "integer",
-                                "minimum": 1
-                              },
-                              "tempAnticNotifica": {
-                                "type": "integer",
-                                "minimum": 0
-                              },
-                              "luogo": {
-                                "type": "object",
-                                "properties": {
-                                  "latitudine": {
-                                    "type": "string"
-                                  },
-                                  "longitudine": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "priorita": {
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 10
-                              },
-                              "difficolta": {
-                                "type": "integer",
-                                "minimum": 1,
-                                "maximum": 10
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Compleanno": {
-                    "summary": "Esempio di un calendario per compleanni",
-                    "value": {
-                      "nome": "Compleanni",
-                      "fusoOrario": {
-                        "GMTOffset": 0,
-                        "localita": "London"
-                      },
-                      "colore": "#FFAAFF",
-                      "partecipanti": ["User1", "User2", "User3"],
-                      "principale": false,
-                      "impostazioniPredefiniteEventi": {
-                        "titolo": "Compleanno",
-                        "descrizione": "Compleanno di",
-                        "durata": 1440,
-                        "tempAnticNotifica": 1440,
-                        "luogo": {
-                          "latitudine": "12N",
-                          "longitudine": "13E"
-                        },
-                        "priorita": 7,
-                        "difficolta": 1
-                      }
-                    }
-                  },
-                  "Lavoro": {
-                    "summary": "Esempio di un calendario di lavoro",
-                    "value": {
-                      "nome": "Lavoro",
-                      "fusoOrario": {
-                        "GMTOffset": -5,
-                        "localita": "NewYork"
-                      },
-                      "colore": "#FF0000",
-                      "partecipanti": ["User1", "User3"],
-                      "principale": false,
-                      "impostazioniPredefiniteEventi": {
-                        "titolo": "Meeting",
-                        "descrizione": "Aggiornamento su ",
-                        "durata": 30,
-                        "tempAnticNotifica": 10,
-                        "luogo": {
-                          "latitudine": "12N",
-                          "longitudine": "1E"
-                        },
-                        "priorita": 5,
-                        "difficolta": 6
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Manca il parametro userId, verra restituito \"Parameter missing\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Parameter missing"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non sono stati trovati calendari per l'userId dato, verra restituito \"There are no calendars with that userId\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Errore1": {
-                    "summary": "Neanche un utente con l'userId specificato",
-                    "value": {
-                      "error": "There is no user with that userId"
-                    }
-                  },
-                  "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
-                    "value": {
-                      "error": "There are too many users with that userId"
-                    }
-                  },
-                  "Errore3": {
-                    "summary": "Utente senza calendari",
-                    "value": {
-                      "error": "There are no calendars with that userId"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Generic error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/event/": {
-      "post": {
-        "description": "Crea un evento dati userId, IDCalendario, il titolo, la descrizione, il luogo, la priorita, la difficolta, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evnto singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per  eventoRipetuto,",
+        "description": "Ritorna tutti gli eventi di un utentente dato l'userId e IDCalendario",
         "parameters": [
           {
             "name": "userId",
@@ -1316,7 +1240,315 @@
             }
           },
           {
-            "name": "objectId",
+            "name": "IDCalendario",
+            "in": "path",
+            "description": "Id del documento all'interno del DataBase",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "Esempio1": {
+                "summary": "Esempio1",
+                "value": "6396bd239161940e645f15cb"
+              },
+              "Esempio2": {
+                "summary": "Esempio2",
+                "value": "6396c4d4563516077ba3b705"
+              },
+              "Esempio3": {
+                "summary": "Esempio3",
+                "value": "6397d3b9c75299548437182b"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "E' stato trovato almeno un evento e verrà restituito sotto forma di lista",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "eventi": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "IDCalendario": {
+                            "type": "string"
+                          },
+                          "titolo": {
+                            "type": "string"
+                          },
+                          "descrizione": {
+                            "type": "string"
+                          },
+                          "luogo": {
+                            "type": "object",
+                            "properties": {
+                              "latitudine": {
+                                "type": "string"
+                              },
+                              "longitudine": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "priorita": {
+                            "type": "integer"
+                          },
+                          "difficolta": {
+                            "type": "integer"
+                          },
+                          "partecipanti": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "format": "userId"
+                            }
+                          },
+                          "notifiche": {
+                            "type": "object",
+                            "properties": {
+                              "titolo": {
+                                "type": "string"
+                              },
+                              "data": {
+                                "type": "array",
+                                "items": {
+                                  "type": "date"
+                                }
+                              }
+                            }
+                          },
+                          "durata": {
+                            "type": "integer"
+                          },
+                          "isEventoSingolo": {
+                            "type": "boolean"
+                          },
+                          "eventoSingolo": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "date"
+                              },
+                              "isScadenza": {
+                                "type": "boolean"
+                              }
+                            }
+                          },
+                          "eventoRipetuto": {
+                            "type": "object",
+                            "properties": {
+                              "numeroRipetizioni": {
+                                "type": "integer"
+                              },
+                              "impostazioniAvanzate": {
+                                "type": "object",
+                                "properties": {
+                                  "giorniSettimana": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "data": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "date"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Meeting": {
+                    "summary": "Esempio di un meeting",
+                    "value": {
+                      "eventi": [
+                        {
+                          "IDCalendario": "6396bd239161940e645f15cb",
+                          "titolo": "Meeting Lavazza",
+                          "descrizione": null,
+                          "luogo": {
+                            "latitudine": "11.124578",
+                            "longitudine": "52.125658"
+                          },
+                          "priorita": 10,
+                          "difficolta": 7,
+                          "partecipanti": [
+                            "User1",
+                            "Rappresentante3"
+                          ],
+                          "notifiche": {
+                            "titolo": "Meeting Lavazza",
+                            "data": 1671689450
+                          },
+                          "durata": 90,
+                          "isEventoSingolo": true,
+                          "eventoSingolo": {
+                            "data": 1671689509,
+                            "isScadenza": false
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Lezione": {
+                    "summary": "Esempio di una lezione",
+                    "value": {
+                      "eventi": [
+                        {
+                          "IDCalendario": "6396bd239161940e645f15cb",
+                          "titolo": "Lezione Analisi",
+                          "descrizione": null,
+                          "luogo": {
+                            "latitudine": "11.124578",
+                            "longitudine": "52.125658"
+                          },
+                          "priorita": 7,
+                          "difficolta": 10,
+                          "partecipanti": [
+                            "User1"
+                          ],
+                          "notifiche": {
+                            "titolo": null,
+                            "data": null
+                          },
+                          "durata": 120,
+                          "isEventoSingolo": false,
+                          "eventoRipetuto": {
+                            "numeroRipetizioni": 24,
+                            "impostazioniAvanzate": {
+                              "giorniSettimana": [
+                                "Lunedi",
+                                "Giovedi"
+                              ],
+                              "data": 1671692400
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Manca il parametro userId o IDCalendario, verrà restituito \"Parameter missing\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Parameter missing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\" <br>Se non sono stati trovati calendari con IDCalendario e l'userId dato, verrà restituito \"There is no calendar with that ID or you are not part of it\"<br>Se non ci sono eventi nel calendario indicato, verrà restituito \"There are no events with that userId and IDCalendario\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Errore1": {
+                    "summary": "Neanche un utente con l'userId specificato",
+                    "value": {
+                      "error": "There is no user with that userId"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Più utenti con lo stesso userId",
+                    "value": {
+                      "error": "There are too many users with that userId"
+                    }
+                  },
+                  "Errore3": {
+                    "summary": "Calendario inesistente o l'utente non e' parte di esso",
+                    "value": {
+                      "error": "There is no calendar with that ID or you are not part of it"
+                    }
+                  },
+                  "Errore4": {
+                    "summary": "Nessun evento nel calendario indicato in cui l'utente indicato e' partecipe",
+                    "value": {
+                      "error": "There are no events with that userId and IDCalendario"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Errore generico, verrà restituito \"Generic error\"",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Generic error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/event/": {
+      "post": {
+        "description": "Crea un evento dati userId, IDCalendario, il titolo, la descrizione, il luogo, la priorita, la difficolta, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evnto singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per eventoRipetuto,",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "UserId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "Utente1": {
+                "summary": "Utente1",
+                "value": "User1"
+              },
+              "Utente2": {
+                "summary": "Utente2",
+                "value": "User2"
+              },
+              "Utente3": {
+                "summary": "Utente3",
+                "value": "User3"
+              }
+            }
+          },
+          {
+            "name": "IDCalendario",
             "in": "query",
             "description": "Id del calendario all'interno del DataBase",
             "required": true,
@@ -1380,7 +1612,7 @@
               },
               "Appuntamento": {
                 "summary": "Appuntamento clienti",
-                "value": "Argomenti di discussione \\n- Punti deboli \\n- Come miglirare la strategia \\n- Aumentare profitti"
+                "value": "Argomenti di discussione \\n- Punti deboli \\n- Come migliorare la strategia \\n- Aumentare profitti"
               }
             }
           },
@@ -1395,10 +1627,10 @@
                   "type": "object",
                   "properties": {
                     "latitudine": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "longitudine": {
-                      "type": "string"
+                      "type": "number"
                     }
                   }
                 }
@@ -1413,7 +1645,7 @@
                 }
               },
               "Lezione": {
-                "summary": "Posizione Universita",
+                "summary": "Posizione Università",
                 "value": {
                   "latitudine": 46.068244,
                   "longitudine": 11.150163
@@ -1431,22 +1663,22 @@
           {
             "name": "priorita",
             "in": "query",
-            "description": "Priorita dell'evento",
+            "description": "Priorità dell'evento",
             "required": false,
             "schema": {
               "type": "number"
             },
             "examples": {
               "basso": {
-                "summary": "Priorita bassa",
+                "summary": "Priorità bassa",
                 "value": 1
               },
               "medio": {
-                "summary": "Priorita media",
+                "summary": "Priorità media",
                 "value": 5
               },
               "alto": {
-                "summary": "Priorita alta",
+                "summary": "Priorità alta",
                 "value": 10
               }
             }
@@ -1454,18 +1686,18 @@
           {
             "name": "difficolta",
             "in": "query",
-            "description": "Difficolta dell'evento",
+            "description": "Difficoltà dell'evento",
             "required": false,
             "schema": {
               "type": "number"
             },
             "examples": {
               "basso": {
-                "summary": "Difficolta bassa",
+                "summary": "Difficoltà bassa",
                 "value": 1
               },
               "medio": {
-                "summary": "Difficolta media",
+                "summary": "Difficoltà media",
                 "value": 5
               },
               "alto": {
@@ -1488,23 +1720,38 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": ["User1"]
+                "value": [
+                  "User1"
+                ]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": ["User1", "User2"]
+                "value": [
+                  "User1",
+                  "User2"
+                ]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": ["User1", "User2", "User3"]
+                "value": [
+                  "User1",
+                  "User2",
+                  "User3"
+                ]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": ["User1", "User3"]
+                "value": [
+                  "User1",
+                  "User3"
+                ]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": ["User2", "User3"]
+                "value": [
+                  "User2",
+                  "User3"
+                ]
               }
             }
           },
@@ -1522,7 +1769,9 @@
                       "type": "string"
                     },
                     "data": {
-                      "type": ["date"]
+                      "type": [
+                        "date"
+                      ]
                     }
                   }
                 }
@@ -1533,21 +1782,28 @@
                 "summary": "Partita tra poco",
                 "value": {
                   "titolo": "Partita tra poco",
-                  "data": [1671189531689, 1671189532689]
+                  "data": [
+                    1671189531689,
+                    1671189532689
+                  ]
                 }
               },
               "Lezione": {
                 "summary": "Lezione tra poco",
                 "value": {
                   "titolo": "Lezione tra poco",
-                  "data": [1671189531689]
+                  "data": [
+                    1671189531689
+                  ]
                 }
               },
               "Appuntamento": {
                 "summary": "Appuntamento tra poco",
                 "value": {
                   "titolo": "Appuntamento tra poco",
-                  "data": [1671194251689]
+                  "data": [
+                    1671194251689
+                  ]
                 }
               }
             }
@@ -1578,7 +1834,7 @@
           {
             "name": "isEventoSingolo",
             "in": "query",
-            "description": "Vaslore booleano che identifica se e' un evento singolo o evento ripetuto",
+            "description": "Valore booleano che identifica se e' un evento singolo o evento ripetuto",
             "required": true,
             "schema": {
               "type": "boolean"
@@ -1630,7 +1886,7 @@
                 }
               },
               "Appuntamento": {
-                "summary": "Oraio dell'appuntamento",
+                "summary": "Orario dell'appuntamento",
                 "value": {
                   "data": 1671194251689,
                   "isScadenza": false
@@ -1655,7 +1911,9 @@
                       "type": "object",
                       "properties": {
                         "giorniSettimana": {
-                          "type": ["string"]
+                          "type": [
+                            "string"
+                          ]
                         },
                         "data": {
                           "type": "date"
@@ -1672,7 +1930,10 @@
                 "value": {
                   "numeroRipetizioni": 5,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": ["Sabato", "Domenica"],
+                    "giorniSettimana": [
+                      "Sabato",
+                      "Domenica"
+                    ],
                     "data": 1671194251689
                   }
                 }
@@ -1682,17 +1943,22 @@
                 "value": {
                   "numeroRipetizioni": 20,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": ["Lunedi", "Mercoledi"],
+                    "giorniSettimana": [
+                      "Lunedi",
+                      "Mercoledi"
+                    ],
                     "data": 1671194251689
                   }
                 }
               },
               "Appuntamento": {
-                "summary": "Oraio delgli appuntamenti",
+                "summary": "Orario degli appuntamenti",
                 "value": {
                   "numeroRipetizioni": 5,
                   "impostazioniAvanzate": {
-                    "giorniSettimana": ["Mercoeldi"],
+                    "giorniSettimana": [
+                      "Mercoledi"
+                    ],
                     "data": 1671194253689
                   }
                 }
@@ -1702,7 +1968,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Evento inserito con successo, verra restituito \"Event inserted correctly\"",
+            "description": "Evento inserito con successo, verrà restituito \"Event inserted correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1718,7 +1984,7 @@
             }
           },
           "400": {
-            "description": "Se manca uno o piu dei seguoenti IDCalendario, nome, titolo, isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verra restituito \"IDCalendario or titolo or evento details missing\" <br>Se la posizione e' stata passata come parametro ma il formato non e' corretto, verra restituito \"Wrong format for location\" <br>Se la priorita e' stata passata come parametro ma il valore non e' corretto, verra restituito \"Wrong format for priorita\" <br>Se la difficolta e' stata passata come parametro ma il valore non e' corretto, verra restituito \"Wrong format for difficolta\" <br>Se le impostazioni notifiche sono state passate come parametro ma il valore non e' corretto, verra restituito \"Wrong format for notifiche\" <br>Se la durata e' stata passata come parametro ma il valore non e' corretto, verra restituito \"Wrong format for durata\" <br>Se le informazioni di un evento singolo sono state passate come parametro ma il valore non e' corretto, verra restituito \"Wrong format for eventoSingolo\" <br>Se le informazioni di un evento ripetuto sono state passate come parametro ma il valore non e' corretto, verra restituito \"Wrong format for eventoRipetuto\"",
+            "description": "Se manca uno o più dei seguoenti IDCalendario, nome, titolo, isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verrà restituito \"IDCalendario or titolo or evento details missing\" <br>Se la posizione e' stata passata come parametro ma il formato non e' corretto, verrà restituito \"Wrong format for location\" <br>Se la priorità e' stata passata come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for priorita\" <br>Se la difficolta e' stata passata come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for difficolta\" <br>Se le impostazioni notifiche sono state passate come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for notifiche\" <br>Se la durata e' stata passata come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for durata\" <br>Se le informazioni di un evento singolo sono state passate come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for eventoSingolo\" <br>Se le informazioni di un evento ripetuto sono state passate come parametro ma il valore non e' corretto, verrà restituito \"Wrong format for eventoRipetuto\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1731,21 +1997,51 @@
                 },
                 "examples": {
                   "Errore1": {
-                    "summary": "Manca un paramtro obbligatorio",
+                    "summary": "Manca un parametro obbligatorio",
                     "value": {
                       "error": "IDCalendario or titolo or evento details missing"
                     }
                   },
                   "Errore2": {
-                    "summary": "Formato colore non valido",
+                    "summary": "Parametro posizione non valido",
                     "value": {
-                      "error": "Wrong format for color"
+                      "error": "Wrong format for location"
                     }
                   },
                   "Errore3": {
-                    "summary": "Formato del valore GMTOffset non valido",
+                    "summary": "Parametro priorità non valido",
                     "value": {
-                      "error": "Wrong format for time zone"
+                      "error": "Wrong format for priorita"
+                    }
+                  },
+                  "Errore4": {
+                    "summary": "Parametro difficoltà non valido",
+                    "value": {
+                      "error": "Wrong format for difficolta"
+                    }
+                  },
+                  "Errore5": {
+                    "summary": "Parametro impostazioni notifiche non valido",
+                    "value": {
+                      "error": "Wrong format for notifiche"
+                    }
+                  },
+                  "Errore6": {
+                    "summary": "Parametro durata non valido",
+                    "value": {
+                      "error": "Wrong format for durata"
+                    }
+                  },
+                  "Errore7": {
+                    "summary": "Parametro eventoSingolo non valido",
+                    "value": {
+                      "error": "Wrong format for eventoSingolo"
+                    }
+                  },
+                  "Errore8": {
+                    "summary": "Parametro eventoRipetuto non valido",
+                    "value": {
+                      "error": "Wrong format for eventoRipetuto"
                     }
                   }
                 }
@@ -1753,7 +2049,7 @@
             }
           },
           "409": {
-            "description": "Se manca l'utente con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se c'e piu di un utente con l'userId dato, verra restituito \"There are too many users with that userId\" <br>Se manca un calendario con il IDCalendario, verra riornato \"There is no calendar with that ID\"",
+            "description": "Se manca l'utente con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se c'è più di un utente con l'userId dato, verrà restituito \"There are too many users with that userId\" <br>Se manca un calendario con il IDCalendario oppure l'utente non possiede il calendario specificato, verrà ritornato \"There is no calendar with that ID or you do not own the calendar\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1772,15 +2068,15 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "C'e piu di un utente con l'userId specificato",
+                    "summary": "C'è più di un utente con l'userId specificato",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
                   },
                   "Errore3": {
-                    "summary": "Esiste gia un calendario principale",
+                    "summary": "Non esiste il calendario indicato o l'utente che lo ha richiesto non lo e",
                     "value": {
-                      "error": "There are too many primary calendars"
+                      "error": "There is no calendar with that ID or you do not own the calendar"
                     }
                   }
                 }
@@ -1788,15 +2084,28 @@
             }
           },
           "500": {
-            "description": "Errore di inserimento nel database, verra restituito \"Not inserted\"",
+            "description": "Errore di inserimento nel database, verrà restituito \"Not inserted\" <br/> Se c'e un errore nell'inserimento dei partecipanti, verrà restituito \"Error parteciapnti\"",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "error": {
-                      "type": "string",
-                      "example": "Not inserted"
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Errore1": {
+                    "summary": "Errore di inserimento",
+                    "value": {
+                      "error": "Not inserted"
+                    }
+                  },
+                  "Errore2": {
+                    "summary": "Errore inserimento partecipanti",
+                    "value": {
+                      "error": "Error parteciapnti"
                     }
                   }
                 }
@@ -1804,7 +2113,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1822,7 +2131,7 @@
         }
       },
       "put": {
-        "description": "Modifica i valori di un calendario dato l'objectId del calendario stesso e gli attributi da modificare",
+        "description": "Modifica un evento dati userId, IDEvento, IDCalendario, il titolo, la descrizione, il luogo, la priorità, la difficoltà, i partecipanti, le impostazioni per le notifiche, la durata, se e' un evento singolo e in quel caso i valori per eventoSingolo, altrimenti i valori per eventoRipetuto,",
         "parameters": [
           {
             "name": "userId",
@@ -1848,9 +2157,9 @@
             }
           },
           {
-            "name": "objectId",
+            "name": "IDEvento",
             "in": "query",
-            "description": "Id del documento all'interno del DataBase",
+            "description": "Id dell'evento all'interno del DataBase",
             "required": true,
             "schema": {
               "type": "string"
@@ -1871,113 +2180,168 @@
             }
           },
           {
-            "name": "nome",
+            "name": "IDCalendario",
             "in": "query",
-            "description": "Nome del calendario",
+            "description": "Id del calendario all'interno del DataBase",
             "required": true,
             "schema": {
               "type": "string"
             },
             "examples": {
-              "Vacanze": {
-                "summary": "Calendario per le vacanze",
-                "value": "Vacanze"
+              "Esempio1": {
+                "summary": "Esempio1",
+                "value": "6396bd239161940e645f15cb"
               },
-              "OrariBiblioteca": {
-                "summary": "Calendario per gli orari della bibilioteca",
-                "value": "Orari della biblioteca"
+              "Esempio2": {
+                "summary": "Esempio2",
+                "value": "6396c4d4563516077ba3b705"
               },
-              "Lezioni": {
-                "summary": "Calendario per le lezioni",
-                "value": "Lezioni"
+              "Esempio3": {
+                "summary": "Esempio3",
+                "value": "6397d3b9c75299548437182b"
               }
             }
           },
           {
-            "name": "fusoOrario",
+            "name": "titolo",
             "in": "query",
-            "description": "Oggetto contente il fuso orario e il capoluogo realtivo",
+            "description": "Titolo dell evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "Calcio": {
+                "summary": "Partita di calcio",
+                "value": "Partita Francia-Marocco"
+              },
+              "Lezione": {
+                "summary": "Lezione Ingegneria del Software",
+                "value": "Lezione Ingegneria del Software"
+              },
+              "Appuntamento": {
+                "summary": "Appuntamento clienti",
+                "value": "Appuntamento con Azienda X"
+              }
+            }
+          },
+          {
+            "name": "descrizione",
+            "in": "query",
+            "description": "Descrizione dell'evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "Calcio": {
+                "summary": "Partita di calcio",
+                "value": "Partita Francia-Marocco secondo me vince Francia"
+              },
+              "Lezione": {
+                "summary": "Lezione Ingegneria del Software",
+                "value": "Argomenti trattati \\n- MongoDB"
+              },
+              "Appuntamento": {
+                "summary": "Appuntamento clienti",
+                "value": "Argomenti di discussione \\n- Punti deboli \\n- Come miglirare la strategia \\n- Aumentare profitti"
+              }
+            }
+          },
+          {
+            "name": "luogo",
+            "in": "query",
+            "description": "Nome del calendario",
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "GMTOffset": {
-                      "type": "integer",
-                      "minimum": -12,
-                      "maximum": 12
+                    "latitudine": {
+                      "type": "number"
                     },
-                    "localita": {
-                      "type": "string"
+                    "longitudine": {
+                      "type": "number"
                     }
                   }
                 }
               }
             },
             "examples": {
-              "Londra": {
-                "summary": "Fuso orario di Londra",
+              "Calcio": {
+                "summary": "Posizione partita Francia Marocco",
                 "value": {
-                  "GMTOffset": 0,
-                  "localita": "London"
+                  "latitudine": 25.652291,
+                  "longitudine": 51.487782
                 }
               },
-              "Roma": {
-                "summary": "Fuso orario di Roma",
+              "Lezione": {
+                "summary": "Posizione Università",
                 "value": {
-                  "GMTOffset": 1,
-                  "localita": "Rome"
+                  "latitudine": 46.068244,
+                  "longitudine": 11.150163
                 }
               },
-              "NewYork": {
-                "summary": "Fuso orario di New York",
+              "Appuntamento": {
+                "summary": "Posizione appuntamento",
                 "value": {
-                  "GMTOffset": -5,
-                  "localita": "New York"
+                  "latitudine": 40.348201,
+                  "longitudine": 9.493751
                 }
               }
             }
           },
           {
-            "name": "colore",
+            "name": "priorita",
             "in": "query",
-            "description": "Colore con cui verranno visti gli eventi del calendario",
+            "description": "Priorità dell'evento",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "number"
             },
             "examples": {
-              "Rosso": {
-                "summary": "Rosso",
-                "value": "#FF0000"
+              "basso": {
+                "summary": "Priorità bassa",
+                "value": 1
               },
-              "Verde": {
-                "summary": "Verde",
-                "value": "#00FF00"
+              "medio": {
+                "summary": "Priorità media",
+                "value": 5
               },
-              "Blu": {
-                "summary": "Blu",
-                "value": "#0000FF"
+              "alto": {
+                "summary": "Priorità alta",
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "difficolta",
+            "in": "query",
+            "description": "Difficoltà dell'evento",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "basso": {
+                "summary": "Difficoltà bassa",
+                "value": 1
               },
-              "Giallo": {
-                "summary": "Giallo",
-                "value": "#FFFF00"
+              "medio": {
+                "summary": "Difficoltà media",
+                "value": 5
               },
-              "Ciano": {
-                "summary": "Ciano",
-                "value": "#00FFFF"
-              },
-              "Magenta": {
-                "summary": "Magenta",
-                "value": "#FF00FF"
+              "alto": {
+                "summary": "Difficoltà alta",
+                "value": 10
               }
             }
           },
           {
             "name": "partecipanti",
             "in": "query",
-            "description": "Nuova lista dei partecipanti",
+            "description": "Lista dei partecipanti",
             "required": true,
             "schema": {
               "type": "array",
@@ -1988,30 +2352,45 @@
             "examples": {
               "Utente1": {
                 "summary": "Utente1",
-                "value": ["User1"]
+                "value": [
+                  "User1"
+                ]
               },
               "Utente12": {
                 "summary": "Utente1 e Utente2",
-                "value": ["User1", "User2"]
+                "value": [
+                  "User1",
+                  "User2"
+                ]
               },
               "Utente123": {
                 "summary": "Utente1, Utente2 e Utente3",
-                "value": ["User1", "User2", "User3"]
+                "value": [
+                  "User1",
+                  "User2",
+                  "User3"
+                ]
               },
               "Utente13": {
                 "summary": "Utente1 e Utente3",
-                "value": ["User1", "User3"]
+                "value": [
+                  "User1",
+                  "User3"
+                ]
               },
               "Utente23": {
                 "summary": "Utente2 e Utente3",
-                "value": ["User2", "User3"]
+                "value": [
+                  "User2",
+                  "User3"
+                ]
               }
             }
           },
           {
-            "name": "impostazioniPredefiniteEventi",
+            "name": "notifiche",
             "in": "query",
-            "description": "Oggetto contente tutte le nuove impostazioni predefinite",
+            "description": "Oggetto contente le impostazioni per le notifiche",
             "required": true,
             "content": {
               "application/json": {
@@ -2021,56 +2400,199 @@
                     "titolo": {
                       "type": "string"
                     },
-                    "descrizione": {
-                      "type": "string"
-                    },
-                    "durata": {
-                      "type": "integer",
-                      "minimum": 1
-                    },
-                    "tempAnticNotifica": {
-                      "type": "integer",
-                      "minimum": 0
-                    },
-                    "luogo": {
-                      "type": "object",
-                      "properties": {
-                        "latitudine": {
-                          "type": "string"
-                        },
-                        "longitudine": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "priorita": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 10
-                    },
-                    "difficolta": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 10
+                    "data": {
+                      "type": [
+                        "date"
+                      ]
                     }
                   }
                 }
               }
             },
             "examples": {
-              "Compleanno": {
-                "summary": "Impostazioni per un calendario di compleanni",
+              "Calcio": {
+                "summary": "Partita tra poco",
                 "value": {
-                  "titolo": "Compleanno",
-                  "descrizione": "Compleanno di",
-                  "durata": 1440,
-                  "tempAnticNotifica": 1440,
-                  "luogo": {
-                    "latitudine": "12N",
-                    "longitudine": "13E"
-                  },
-                  "priorita": 7,
-                  "difficolta": 1
+                  "titolo": "Partita tra poco",
+                  "data": [
+                    1671189531689,
+                    1671189532689
+                  ]
+                }
+              },
+              "Lezione": {
+                "summary": "Lezione tra poco",
+                "value": {
+                  "titolo": "Lezione tra poco",
+                  "data": [
+                    1671189531689
+                  ]
+                }
+              },
+              "Appuntamento": {
+                "summary": "Appuntamento tra poco",
+                "value": {
+                  "titolo": "Appuntamento tra poco",
+                  "data": [
+                    1671194251689
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "name": "durata",
+            "in": "query",
+            "description": "Durata dell'evento",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "basso": {
+                "summary": "Durata 10 min",
+                "value": 10
+              },
+              "medio": {
+                "summary": "Durata 1h",
+                "value": 60
+              },
+              "alto": {
+                "summary": "Durata 1 giorno",
+                "value": 1440
+              }
+            }
+          },
+          {
+            "name": "isEventoSingolo",
+            "in": "query",
+            "description": "Valore booleano che identifica se e' un evento singolo o evento ripetuto",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "examples": {
+              "singolo": {
+                "summary": "Evento singolo",
+                "value": true
+              },
+              "ripetuto": {
+                "summary": "Evento ripetuto",
+                "value": false
+              }
+            }
+          },
+          {
+            "name": "eventoSingolo",
+            "in": "query",
+            "description": "Oggetto contente le impostazioni per l'eventoSingolo",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "date"
+                    },
+                    "isScadenza": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Calcio": {
+                "summary": "Orario della partita",
+                "value": {
+                  "data": 1671189531689,
+                  "isScadenza": true
+                }
+              },
+              "Lezione": {
+                "summary": "orario della lezione",
+                "value": {
+                  "data": 1671189531689,
+                  "isScadenza": false
+                }
+              },
+              "Appuntamento": {
+                "summary": "Orario dell'appuntamento",
+                "value": {
+                  "data": 1671194251689,
+                  "isScadenza": false
+                }
+              }
+            }
+          },
+          {
+            "name": "eventoRipetuto",
+            "in": "query",
+            "description": "Oggetto contente le impostazioni per l'eventoRipetuto",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "numeroRipetizioni": {
+                      "type": "number"
+                    },
+                    "impostazioniAvanzate": {
+                      "type": "object",
+                      "properties": {
+                        "giorniSettimana": {
+                          "type": [
+                            "string"
+                          ]
+                        },
+                        "data": {
+                          "type": "date"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Partite": {
+                "summary": "Orario delle partite di calcetto",
+                "value": {
+                  "numeroRipetizioni": 5,
+                  "impostazioniAvanzate": {
+                    "giorniSettimana": [
+                      "Sabato",
+                      "Domenica"
+                    ],
+                    "data": 1671194251689
+                  }
+                }
+              },
+              "Lezione": {
+                "summary": "Orario delle lezioni",
+                "value": {
+                  "numeroRipetizioni": 20,
+                  "impostazioniAvanzate": {
+                    "giorniSettimana": [
+                      "Lunedi",
+                      "Mercoledi"
+                    ],
+                    "data": 1671194251689
+                  }
+                }
+              },
+              "Appuntamento": {
+                "summary": "Orario degli appuntamenti",
+                "value": {
+                  "numeroRipetizioni": 5,
+                  "impostazioniAvanzate": {
+                    "giorniSettimana": [
+                      "Mercoeldi"
+                    ],
+                    "data": 1671194253689
+                  }
                 }
               }
             }
@@ -2078,7 +2600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Calendario aggiornato con successo, verra restituito \"Calendar updated correctly\"",
+            "description": "Evento modificato con successo, verrà restituito \"Event edited correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2086,7 +2608,7 @@
                   "properties": {
                     "success": {
                       "type": "string",
-                      "example": "Calendar updated correctly"
+                      "example": "Event edited correctly"
                     }
                   }
                 }
@@ -2094,7 +2616,7 @@
             }
           },
           "400": {
-            "description": "Se manca uno o piu parametri, verra restituito \"Parameter missing\" <br>Se il il valore GMTOffset del fuso orario non e' valido, verra riornato \"Wrong format for time zone\"<br>Se il colore e' stato pasasto come parametro ma il formato non e' corretto, verra restituito \"Wrong format for color\" <br>Se le impostazioni predefinite non sono valide, verra restituito \"Wrong format impostazioni predefinite\"",
+            "description": "Se manca uno o più dei seguenti userId, IDCalendario, titolo, descrizione, luogo, priorita, difficolta, partecipanti, notifiche durata isEventoSingolo oppure uno dei due tra eventoSingolo ed eventoRipetuto verrà restituito \"Parameter missing\" <br>Se il formato della posizione non e' corretto, verrà restituito \"Wrong format for location\" <br>Se il formato della priorita non e' corretto, verrà restituito \"Wrong format for priorita\" <br>Se il formato della difficolta non e' corretto, verrà restituito \"Wrong format for difficolta\" <br>Se il formato delle impostazioni notifiche non e' corretto, verrà restituito \"Wrong format for notifiche\" <br>Se il formato della durata non e' corretto, verrà restituito \"Wrong format for durata\" <br>Se il formato delle informazioni di un evento singolo  non e' corretto, verrà restituito \"Wrong format for eventoSingolo\" <br>Se il formato delle informazioni di un evento ripetuto non e' corretto, verrà restituito \"Wrong format for eventoRipetuto\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2107,27 +2629,51 @@
                 },
                 "examples": {
                   "Errore1": {
-                    "summary": "Manca un parametro",
+                    "summary": "Manca un parametro obbligatorio",
                     "value": {
                       "error": "Parameter missing"
                     }
                   },
                   "Errore2": {
-                    "summary": "Formato del valore GMTOffset non valido",
+                    "summary": "Parametro posizione non valido",
                     "value": {
-                      "error": "Wrong format for time zone"
+                      "error": "Wrong format for location"
                     }
                   },
                   "Errore3": {
-                    "summary": "Formato colore non valido",
+                    "summary": "Parametro priorita non valido",
                     "value": {
-                      "error": "Wrong format for color"
+                      "error": "Wrong format for priorita"
                     }
                   },
                   "Errore4": {
-                    "summary": "Le impostazioni predefinite non sono valide",
+                    "summary": "Parametro difficolta non valido",
                     "value": {
-                      "error": "Wrong format impostazioni predefinite"
+                      "error": "Wrong format for difficolta"
+                    }
+                  },
+                  "Errore5": {
+                    "summary": "Parametro impostazioni notifiche non valido",
+                    "value": {
+                      "error": "Wrong format for notifiche"
+                    }
+                  },
+                  "Errore6": {
+                    "summary": "Parametro durata non valido",
+                    "value": {
+                      "error": "Wrong format for durata"
+                    }
+                  },
+                  "Errore7": {
+                    "summary": "Parametro eventoSingolo non valido",
+                    "value": {
+                      "error": "Wrong format for eventoSingolo"
+                    }
+                  },
+                  "Errore8": {
+                    "summary": "Parametro eventoRipetuto non valido",
+                    "value": {
+                      "error": "Wrong format for eventoRipetuto"
                     }
                   }
                 }
@@ -2135,7 +2681,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non possiedi il caleendario, verra restituito \"You do not own the calendar\"",
+            "description": "Se manca l'utente con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se c'è più di un utente con l'userId dato, verrà restituito \"There are too many users with that userId\" <br>Se manca un calendario con il IDCalendario oopure l'utente non possiede il calendario specificato, verrà ritornato \"There is no calendar with that ID or you do not own the calendar\" <br>Se manca l'evento con l'IDEvento oopure l'utente non possiede l'evento specificato, verrà ritornato \"You do not own the event\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2148,21 +2694,27 @@
                 },
                 "examples": {
                   "Errore1": {
-                    "summary": "Neanche un utente con l'userId specificato",
+                    "summary": "Manca l'utente specificato",
                     "value": {
                       "error": "There is no user with that userId"
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "C'è più di un utente con l'userId specificato",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
                   },
                   "Errore3": {
-                    "summary": "Non possiedi il calendario",
+                    "summary": "Non esiste il calendario indicato o l'utente che lo ha richiesto non lo e",
                     "value": {
-                      "error": "You do not own the calendar"
+                      "error": "There is no calendar with that ID or you do not"
+                    }
+                  },
+                  "Errore4": {
+                    "summary": "Non esiste l'evento o l'utente che lo ha richiesto non lo possiede",
+                    "value": {
+                      "error": "You do not own the event"
                     }
                   }
                 }
@@ -2170,7 +2722,7 @@
             }
           },
           "500": {
-            "description": "Errore di modifica nel database, verra restituito \"Not edited\"",
+            "description": "Errore di inserimento nel database, verrà restituito \"Not modified\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2178,7 +2730,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
-                      "example": "Not edited"
+                      "example": "Not modified"
                     }
                   }
                 }
@@ -2186,7 +2738,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2204,7 +2756,7 @@
         }
       },
       "delete": {
-        "description": "Elimina un calendario dato l'objectId",
+        "description": "Elimina un evento dati userId, IDCalendario",
         "parameters": [
           {
             "name": "userId",
@@ -2230,9 +2782,9 @@
             }
           },
           {
-            "name": "objectId",
+            "name": "IDEvento",
             "in": "query",
-            "description": "Id del documento all'interno del DataBase",
+            "description": "Id dell'evento all'interno del DataBase",
             "required": true,
             "schema": {
               "type": "string"
@@ -2255,7 +2807,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Calendario eliminato con successo, verra restituito \"Calendar deleted correctly\"",
+            "description": "Evento eliminato con successo, verrà restituito \"Event deleted correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2263,7 +2815,7 @@
                   "properties": {
                     "success": {
                       "type": "string",
-                      "example": "Calendar deleted correctly"
+                      "example": "Event deleted correctly"
                     }
                   }
                 }
@@ -2271,7 +2823,7 @@
             }
           },
           "400": {
-            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "description": "Manca uno o più parametri, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2287,7 +2839,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\" <br>Se non possiedi il caleendario, verra restituito \"You do not own the calendar\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\" <br>Se non possiedi l'evento, verrà restituito \"You do not own the event\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2306,15 +2858,15 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
                   },
                   "Errore3": {
-                    "summary": "Non possiedi il calendario",
+                    "summary": "Non possiedi l'evento",
                     "value": {
-                      "error": "You do not own the calendar"
+                      "error": "You do not own the event"
                     }
                   }
                 }
@@ -2322,7 +2874,7 @@
             }
           },
           "500": {
-            "description": "Errore di eliminazione nel database, verra restituito \"Calendar not deleted\"",
+            "description": "Errore di eliminazione nel database, verrà restituito \"Event not deleted\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2330,7 +2882,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
-                      "example": "Calendar not deleted"
+                      "example": "Event not deleted"
                     }
                   }
                 }
@@ -2338,7 +2890,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2386,7 +2938,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Trovato un unico account, verra restituito userId, email e username",
+            "description": "Trovato un unico account, verrà restituito userId, email e username",
             "content": {
               "application/json": {
                 "schema": {
@@ -2427,7 +2979,7 @@
             }
           },
           "400": {
-            "description": "Manca la mail o il formato non e' corretto, verra restituito \"Parameter missing or malformed\"",
+            "description": "Manca la mail o il formato non e' corretto, verrà restituito \"Parameter missing or malformed\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2443,7 +2995,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'email data, verra restituito \"There is no user with that email\" <br>Se e' stato trovato piu di un account con la stessa email, verra restituito \"There are too many users with that email\"",
+            "description": "Se non e' stato trovato neanche un account con l'email data, verrà restituito \"There is no user with that email\" <br>Se e' stato trovato più di un account con la stessa email, verrà restituito \"There are too many users with that email\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2462,7 +3014,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con la stessa email",
+                    "summary": "Più utenti con la stessa email",
                     "value": {
                       "error": "There are too many users with that email"
                     }
@@ -2472,7 +3024,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2566,7 +3118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Utente inserito con successo, verra restituito \"User inserted correctly\"",
+            "description": "Utente inserito con successo, verrà restituito \"User inserted correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2582,7 +3134,7 @@
             }
           },
           "400": {
-            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "description": "Manca uno o piu parametri, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2598,7 +3150,7 @@
             }
           },
           "409": {
-            "description": "Se e' stato trovato piu di un account con la stessa email o userId, verra restituito \"There is alrady one user with that id or email\"",
+            "description": "Se e' stato trovato piu di un account con la stessa email o userId, verrà restituito \"There is already one user with that id or email\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2614,7 +3166,7 @@
             }
           },
           "500": {
-            "description": "Errore di inserimento nel database, verra restituito \"Not inserted\"",
+            "description": "Errore di inserimento nel database, verrà restituito \"Not inserted\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2699,7 +3251,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Username aggiornato con successo, verra restituito \"User updated correctly\"",
+            "description": "Username aggiornato con successo, verrà restituito \"User updated correctly\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2715,7 +3267,7 @@
             }
           },
           "400": {
-            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
+            "description": "Manca uno o più parametri, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2731,7 +3283,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2750,7 +3302,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
@@ -2760,7 +3312,7 @@
             }
           },
           "500": {
-            "description": "Errore di modifica nel database, verra restituito \"Not edited\"",
+            "description": "Errore di modifica nel database, verrà restituito \"Not edited\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2776,130 +3328,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Generic error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Elimina un utente dato l'userId",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "description": "UserId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "examples": {
-              "Utente1": {
-                "summary": "Utente1",
-                "value": "User1"
-              },
-              "Utente2": {
-                "summary": "Utente2",
-                "value": "User2"
-              },
-              "Utente3": {
-                "summary": "Utente3",
-                "value": "User3"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Username eliminato con successo, verra restituito \"User deleted correctly\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "string",
-                      "example": "User deleted correctly"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Manca uno o piu parametri, verra restituito \"Parameter missing\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Parameter missing"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Errore1": {
-                    "summary": "Neanche un utente con l'userId specificato",
-                    "value": {
-                      "error": "There is no user with that userId"
-                    }
-                  },
-                  "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
-                    "value": {
-                      "error": "There are too many users with that userId"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Errore di eliminazione nel database, verra restituito \"User not deleted\"",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "User not deleted"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -2923,7 +3352,7 @@
         "parameters": [
           {
             "name": "userId",
-            "in": "query",
+            "in": "path",
             "description": "UserId",
             "required": true,
             "schema": {
@@ -2947,7 +3376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Trovato un unico account, verra restituito userId, email e username",
+            "description": "Trovato un unico account, verrà restituito userId, email e username",
             "content": {
               "application/json": {
                 "schema": {
@@ -2988,7 +3417,7 @@
             }
           },
           "400": {
-            "description": "Manca il parametro, verra restituito \"Parameter missing\"",
+            "description": "Manca il parametro, verrà restituito \"Parameter missing\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -3004,7 +3433,7 @@
             }
           },
           "409": {
-            "description": "Se non e' stato trovato neanche un account con l'userId dato, verra restituito \"There is no user with that userId\" <br>Se e' stato trovato piu di un account con lo stesso userId, verra restituito \"There are too many users with that userId\"",
+            "description": "Se non e' stato trovato neanche un account con l'userId dato, verrà restituito \"There is no user with that userId\" <br>Se e' stato trovato più di un account con lo stesso userId, verrà restituito \"There are too many users with that userId\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -3023,7 +3452,7 @@
                     }
                   },
                   "Errore2": {
-                    "summary": "Piu utenti con lo stesso userId",
+                    "summary": "Più utenti con lo stesso userId",
                     "value": {
                       "error": "There are too many users with that userId"
                     }
@@ -3033,7 +3462,7 @@
             }
           },
           "501": {
-            "description": "Errore generico, verra restituito \"Generic error\"",
+            "description": "Errore generico, verrà restituito \"Generic error\"",
             "content": {
               "application/json": {
                 "schema": {

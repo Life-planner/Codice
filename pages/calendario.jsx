@@ -21,6 +21,42 @@ export default withPageAuthRequired(function Calendario() {
   const [createCalendarShow, setCreateCalendarShow] = useState(false);
   const [createEventShow, setCreateEventShow] = useState(false);
   const [calendari, setCalendari] = useState([]);
+  const [eventi, setEventi] = useState({});
+  const [weekEvent, setweekEvent] = useState({0:[],1:[],2:[],3:[],4:[],5:[],6:[]})
+
+  const fetchEvento = (id) => {
+    axios
+      .get(`/api/event/${id}`, {
+        params: {
+          userId: user.sub,
+        },
+      })
+      .then((response) => {
+        setEventi((eventi) => {
+          let temp = { ...eventi };
+          temp[id] = response.data.eventi;
+          return { ...temp };
+        });
+      })
+      .catch((error) => {
+        setEventi((eventi) => {
+          let temp = { ...eventi };
+          temp[id] = [];
+          return { ...temp };
+        });
+      });
+  };
+
+  const fetchEventi = () => {
+    calendari.map((element) => {
+      fetchEvento(element._id);
+    });
+  };
+
+  useEffect(() => {
+    fetchEventi();
+  }, [calendari]);
+
 
   const { user } = useUser();
 
@@ -116,10 +152,40 @@ export default withPageAuthRequired(function Calendario() {
       });
   };
 
+  const loadEvent = () => {
+    calendari.map((elemento)=>{
+    if(elemento.deselect != true){
+      if(!eventi[elemento._id]) return;
+      eventi[elemento._id].map((evento)=>{
+        let data = new Date(evento.eventoSingolo.data);
+        if(data >=  firstDay && data < getDateOffset(+7)){
+          console.log(data);
+          setweekEvent((prev) => {
+            let temp = {...prev};
+            temp[data.getDate() - firstDay.getDate()].push(evento);
+            return {...temp}
+          })
+        }
+      })
+    }
+  })
+  }
+
+  const reset = () =>{
+    setweekEvent({0:[],1:[],2:[],3:[],4:[],5:[],6:[]})
+  }
+
+  console.log(weekEvent)
+
   useEffect(() => {
     setAccount();
     fetchCalendari();
   }, [user]);
+
+  useEffect(() => {
+    reset();
+    loadEvent();
+  }, [eventi]);
 
   const closeCalendar = () => {
     setCreateCalendarShow(false);
@@ -164,13 +230,14 @@ export default withPageAuthRequired(function Calendario() {
   };
 
   function getMonday(d) {
-    d = new Date(d);
+    d = new Date(d.toDateString());
     var day = d.getDay(),
       diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
     return new Date(d.setDate(diff));
   }
 
   const isToday = (x, y) => x.toDateString() === y.toDateString();
+
 
   return (
     <div>
