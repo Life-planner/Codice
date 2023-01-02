@@ -22,10 +22,11 @@ export default withPageAuthRequired(function Eventi() {
   const { user } = useUser();
 
   const fetchCalendari = () => {
+    console.log("refresh");
     axios
       .get(`/api/calendar/${user.sub}`)
       .then((response) => {
-        setCalendari(response.data.calendari);
+        setCalendari([...response.data.calendari]);
       })
       .catch((error) => {});
   };

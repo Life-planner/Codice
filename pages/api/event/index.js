@@ -917,13 +917,11 @@ export async function creaEvento(req, res) {
     const { userId } = req.query;
 
     let arrPartecipanti;
-
-    if (typeof partecipanti == "string") {
+    try {
       arrPartecipanti = JSON.parse(partecipanti);
-    } else {
+    } catch (error) {
       arrPartecipanti = partecipanti;
     }
-
     if (
       IDCalendario == null ||
       titolo == null ||
@@ -1175,9 +1173,9 @@ export async function modificaEvento(req, res) {
 
     let arrPartecipanti;
 
-    if (typeof partecipanti == "string") {
+    try {
       arrPartecipanti = JSON.parse(partecipanti);
-    } else {
+    } catch (error) {
       arrPartecipanti = partecipanti;
     }
 

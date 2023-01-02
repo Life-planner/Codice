@@ -16,6 +16,8 @@ export default function ModificaCalendario({
 }) {
   const { user } = useUser();
 
+  console.log(calendario);
+
   const removeFirst = (array) => {
     let [, ...temp] = array;
     return temp;
@@ -103,8 +105,10 @@ export default function ModificaCalendario({
             durata: getDurata(),
             tempAnticNotifica: getNotifca(),
             luogo: {
-              latitudine: calendario.luogo.latitudine,
-              longitudine: calendario.luogo.longitudine,
+              latitudine:
+                calendario.impostazioniPredefiniteEventi.luogo.latitudine,
+              longitudine:
+                calendario.impostazioniPredefiniteEventi.luogo.longitudine,
             },
             priorita: priorita,
             difficolta: difficolta,

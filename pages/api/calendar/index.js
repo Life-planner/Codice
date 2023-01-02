@@ -652,9 +652,9 @@ export async function creaCalendario(req, res) {
 
     let arrPartecipanti;
 
-    if (typeof partecipanti == "string") {
+    try {
       arrPartecipanti = JSON.parse(partecipanti);
-    } else {
+    } catch (error) {
       arrPartecipanti = partecipanti;
     }
 
@@ -821,9 +821,9 @@ export async function modificaCalendario(req, res) {
 
     let arrPartecipanti;
 
-    if (typeof partecipanti == "string") {
+    try {
       arrPartecipanti = JSON.parse(partecipanti);
-    } else {
+    } catch (error) {
       arrPartecipanti = partecipanti;
     }
 
