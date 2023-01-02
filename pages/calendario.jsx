@@ -219,7 +219,7 @@ export default withPageAuthRequired(function Calendario() {
   useEffect(() => {
     reset();
     loadEvent();
-  }, [eventi]);
+  }, [eventi, firstDay]);
 
   const closeCalendar = () => {
     setCreateCalendarShow(false);
