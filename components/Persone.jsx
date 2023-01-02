@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/persone.module.css";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,10 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
       .get(`/api/user/email/${email}`)
       .then(function (response) {
         setPersone([...persone, response.data.userId]);
-        addSoprannome(email);
+
+        let temp = soprannomi;
+        temp[response.data.userId] = response.data.username;
+        setSoprannomi({ ...temp });
       })
       .catch(function (error) {
         toast.error(
@@ -23,8 +26,8 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
       });
   };
 
-  const getSoprannome = (email) => {
-    return (soprannomi[email] ??= email);
+  const getSoprannome = (id) => {
+    return (soprannomi[id] ??= id);
   };
 
   const validateEmail = (email) => {
@@ -35,20 +38,28 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
       );
   };
 
-  const addSoprannome = (email) => {
-    axios
-      .get(`/api/user/email/${email}`)
+  const addSoprannome = () => {
+    persone.map((id)=>{
+      axios
+      .get(`/api/user/userId/${id}`)
       .then(function (response) {
         let temp = soprannomi;
-        console.log(JSON.stringify(temp));
-        temp[email] = response.data.username;
-        console.log(JSON.stringify(temp));
+        temp[id] = response.data.username;
         setSoprannomi({ ...temp });
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(
+          "Untente cercato non esiste, inserire un email di un utente esistente"
+        );
       });
-  };
+    })
+    
+  }
+
+  useEffect(() => {
+    addSoprannome();
+  }, [])
+  
 
   return (
     <div className={styles.container}>
@@ -57,7 +68,7 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
           <div className={styles.persone} key={persona + Math.random()}>
             {getSoprannome(persona)}
             <span
-              class="material-symbols-outlined"
+              className="material-symbols-outlined"
               style={{
                 fontSize: "1rem",
                 fontWeight: "700",
