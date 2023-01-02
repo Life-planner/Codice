@@ -24,7 +24,7 @@ export default function VoceCalendario({
         <div
           className={styles.name}
           onClick={() => {
-            openCalendario();
+            openCalendario(calendario._id);
           }}
         >
           {calendario.nome}
@@ -33,7 +33,6 @@ export default function VoceCalendario({
       {open ? (
         <div className={styles["event-wrapper"]}>
           {eventi.map((element) => {
-            console.log(element);
             return (
               <div
                 className={styles["event-container"]}

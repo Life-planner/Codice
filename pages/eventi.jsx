@@ -7,12 +7,24 @@ import styles from "../styles/eventi.module.css";
 import Menu from "../components/Menu";
 import ResizeButton from "../components/ResizeButton";
 import VoceCalendario from "../components/VoceCalendario";
+import CreateCalendar from "../components/CreateCalendar";
+import CreateEvent from "../components/CreaEvento";
+import ModificaCalendario from "../components/ModificaCalendario";
 
 export default withPageAuthRequired(function Eventi() {
   const [calendari, setCalendari] = useState([]);
   const [eventi, setEventi] = useState({});
+  const [right, setRight] = useState("empty");
+  const [calendarId, setCalendarId] = useState(-1);
 
   const { user } = useUser();
+
+  const getCalendarioId = (id) => {
+    const x = calendari.find(function (x) {
+      if (x._id == id) return true;
+    });
+    return x;
+  };
 
   const fetchCalendari = () => {
     axios
@@ -20,33 +32,80 @@ export default withPageAuthRequired(function Eventi() {
       .then((response) => {
         setCalendari(response.data.calendari);
       })
+      .catch((error) => {});
+  };
+
+  const openCalendario = (id) => {
+    setCalendarId(id);
+    setRight("modificaCalendario");
+  };
+
+  const getRight = () => {
+    if (right == "creaCalendario") {
+      return (
+        <CreateCalendar
+          close={() => {
+            setRight("empty");
+          }}
+          refreshCalendari={() => {
+            fetchCalendari();
+          }}
+        />
+      );
+    }
+    if (right == "creaEvento") {
+      return (
+        <CreateEvent
+          calendari={calendari}
+          close={() => {
+            setRight("empty");
+          }}
+          refreshEvento={(id) => fetchEvento(id)}
+        />
+      );
+    }
+    if (right == "modificaCalendario") {
+      return (
+        <ModificaCalendario
+          calendario={getCalendarioId(calendarId)}
+          close={() => {
+            setRight("empty");
+          }}
+          refreshCalendari={() => {
+            fetchCalendari();
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
+  const fetchEvento = (id) => {
+    axios
+      .get(`/api/event/${id}`, {
+        params: {
+          userId: user.sub,
+        },
+      })
+      .then((response) => {
+        setEventi((eventi) => {
+          let temp = { ...eventi };
+          temp[id] = response.data.eventi;
+          return { ...temp };
+        });
+      })
       .catch((error) => {
-        console.error(error);
+        setEventi((eventi) => {
+          let temp = { ...eventi };
+          temp[id] = [];
+          return { ...temp };
+        });
       });
   };
 
   const fetchEventi = () => {
     calendari.map((element) => {
-      axios
-        .get(`/api/event/${element._id}`, {
-          params: {
-            userId: user.sub,
-          },
-        })
-        .then((response) => {
-          setEventi((eventi) => {
-            let temp = { ...eventi };
-            temp[element._id] = response.data.eventi;
-            return { ...temp };
-          });
-        })
-        .catch((error) => {
-          setEventi((eventi) => {
-            let temp = { ...eventi };
-            temp[element._id] = [];
-            return { ...temp };
-          });
-        });
+      fetchEvento(element._id);
     });
   };
 
@@ -69,10 +128,22 @@ export default withPageAuthRequired(function Eventi() {
         <Menu selected="Eventi" />
         <div className={styles["left-tab"]}>
           <div className={styles.flex}>
-            <ResizeButton text="Crea Evento" icon="more_time" />
+            <ResizeButton
+              text="Crea Evento"
+              icon="more_time"
+              callback={() => {
+                setRight("creaEvento");
+              }}
+            />
             <ResizeButton text="Crea Evento Ripetuto" icon="update" />
           </div>
-          <ResizeButton text="Crea Calendario" icon="event_note" />
+          <ResizeButton
+            text="Crea Calendario"
+            icon="event_note"
+            callback={() => {
+              setRight("creaCalendario");
+            }}
+          />
           <div className={styles.line} />
           {calendari.map((element) => {
             return (
@@ -80,11 +151,16 @@ export default withPageAuthRequired(function Eventi() {
                 calendario={element}
                 eventi={eventi[element._id]}
                 key={"event" + element._id}
+                openCalendario={(id) => {
+                  openCalendario(id);
+                }}
               />
             );
           })}
         </div>
-        <div className={styles["right-tab"]}></div>
+        <div className={styles["right-tab"]}>
+          <div className={styles.wrapper}> {getRight()}</div>
+        </div>
       </div>
     </div>
   );

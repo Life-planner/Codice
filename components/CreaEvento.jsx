@@ -10,7 +10,14 @@ import axios from "axios";
 
 // refresh evento aggiunto da fare
 
-export default function CreateEvent({ full, close = () => {}, calendari }) {
+export default function CreateEvent({
+  full,
+  close = () => {},
+  calendari,
+  refreshEvento = (id) => {
+    id;
+  },
+}) {
   const getPrincipaleId = () => {
     const x = calendari.find(function (x) {
       if (x.nome === "Principale") return true;
@@ -70,7 +77,7 @@ export default function CreateEvent({ full, close = () => {}, calendari }) {
       })
       .then(function (response) {
         toast.success("Evento creato con successo");
-        // aggiorno eventi
+        refreshEvento(calendario);
       })
       .catch(function (error) {
         console.log(error);
