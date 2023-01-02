@@ -195,7 +195,6 @@ export default withPageAuthRequired(function Calendario() {
         eventi[elemento._id].map((evento) => {
           let data = new Date(evento.eventoSingolo.data);
           if (data >= firstDay && data < getDateOffset(+7)) {
-            console.log(data);
             setweekEvent((prev) => {
               let temp = { ...prev };
               temp[data.getDate() - firstDay.getDate()].push(evento);
@@ -572,7 +571,7 @@ export default withPageAuthRequired(function Calendario() {
             <CreateEvent
               close={() => closeEvent()}
               calendari={calendari}
-              refreshEvento={fetchEvento()}
+              refreshEvento={(id) => fetchEvento(id)}
             />
           </div>
         ) : null}
