@@ -2356,9 +2356,9 @@ export async function <span class="cstat-no" title="statement not covered" ><spa
 <span class="cstat-no" title="statement not covered" >    res.status(200).json({ success: "Calendar inserted correctly" });</span>
 <span class="cstat-no" title="statement not covered" >    return;</span>
   } catch (e) {
-<span class="cstat-no" title="statement not covered" >    console.error(e);</span>
+
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(e).message;</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
   }
 }
 &nbsp;
@@ -2501,9 +2501,8 @@ export async function modificaCalendario(req, res) {
     res.status(200).json({ success: "Calendar updated correctly" <span class="missing-if-branch" title="if path not taken" >I</span>});
 <span class="cstat-no" title="statement not covered" >    return;</span>
   } catch (e) {
-    console.error(e);
     res.<span class="cstat-no" title="statement not covered" >status(501).j</span>son({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 &nbsp;
@@ -2557,9 +2556,8 @@ export async function <span class="cstat-no" title="statement not covered" >elim
       return;
     }<span class="cstat-no" title="statement not covered" ></span>
   } catch (e) {
-    console.error(e);
     res.<span class="cstat-no" title="statement not covered" >status(5</span>01).json({ error: "Generic error" <span class="cstat-no" title="statement not covered" >});</span>
-    throw new Error(e).message;
+    return;
   }
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>

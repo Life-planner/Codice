@@ -292,9 +292,9 @@ export async function modificaUser(req, res) {
       res.status(500).json({ error: "Not edited" });
     }
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
@@ -331,8 +331,8 @@ export async function eliminaUser(req, res) {
       return;
     }
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }

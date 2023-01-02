@@ -1033,9 +1033,9 @@ export async function modificaUser(req, res) {
 <span class="cstat-no" title="statement not covered" >      res.status(500).json({ error: "Not edited" });</span>
     }
   } catch (e) {
-<span class="cstat-no" title="statement not covered" >    console.error(e);</span>
+
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(e).message;</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
   }
 }
 &nbsp;
@@ -1072,9 +1072,9 @@ export async function eliminaUser(req, res) {
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
   } catch (e) {
-<span class="cstat-no" title="statement not covered" >    console.error(e);</span>
+
 <span class="cstat-no" title="statement not covered" >    res.status(501).json({ error: "Generic error" });</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error(e).message;</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>

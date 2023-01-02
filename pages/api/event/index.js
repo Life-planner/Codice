@@ -1145,9 +1145,9 @@ export async function creaEvento(req, res) {
     }
     return;
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
@@ -1402,9 +1402,9 @@ export async function modificaEvento(req, res) {
     }
     return;
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
 
@@ -1458,8 +1458,8 @@ export async function eliminaEvento(req, res) {
       return;
     }
   } catch (e) {
-    console.error(e);
+    
     res.status(501).json({ error: "Generic error" });
-    throw new Error(e).message;
+    return;
   }
 }
