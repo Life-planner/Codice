@@ -10,21 +10,16 @@ import VoceCalendario from "../components/VoceCalendario";
 import CreateCalendar from "../components/CreateCalendar";
 import CreateEvent from "../components/CreaEvento";
 import ModificaCalendario from "../components/ModificaCalendario";
+import ModificaEvento from "../components/ModificaEvento";
 
 export default withPageAuthRequired(function Eventi() {
   const [calendari, setCalendari] = useState([]);
   const [eventi, setEventi] = useState({});
   const [right, setRight] = useState("empty");
-  const [calendarId, setCalendarId] = useState(-1);
+  const [calendario, setCalendario] = useState({});
+  const [evento, setEvento] = useState({});
 
   const { user } = useUser();
-
-  const getCalendarioId = (id) => {
-    const x = calendari.find(function (x) {
-      if (x._id == id) return true;
-    });
-    return x;
-  };
 
   const fetchCalendari = () => {
     axios
@@ -35,9 +30,14 @@ export default withPageAuthRequired(function Eventi() {
       .catch((error) => {});
   };
 
-  const openCalendario = (id) => {
-    setCalendarId(id);
+  const openCalendario = (calendario) => {
+    setCalendario({ ...calendario });
     setRight("modificaCalendario");
+  };
+
+  const openEvento = (evento) => {
+    setEvento({ ...evento });
+    setRight("modificaEvento");
   };
 
   const getRight = () => {
@@ -67,12 +67,26 @@ export default withPageAuthRequired(function Eventi() {
     if (right == "modificaCalendario") {
       return (
         <ModificaCalendario
-          calendario={getCalendarioId(calendarId)}
+          calendario={calendario}
           close={() => {
             setRight("empty");
           }}
           refreshCalendari={() => {
             fetchCalendari();
+          }}
+        />
+      );
+    }
+    if (right == "modificaEvento") {
+      return (
+        <ModificaEvento
+          evento={evento}
+          calendari={calendari}
+          close={() => {
+            setRight("empty");
+          }}
+          refreshEvento={(id) => {
+            fetchEvento(id);
           }}
         />
       );
@@ -151,8 +165,11 @@ export default withPageAuthRequired(function Eventi() {
                 calendario={element}
                 eventi={eventi[element._id]}
                 key={"event" + element._id}
-                openCalendario={(id) => {
-                  openCalendario(id);
+                openCalendario={(calendario) => {
+                  openCalendario(calendario);
+                }}
+                openEvento={(evento) => {
+                  openEvento(evento);
                 }}
               />
             );

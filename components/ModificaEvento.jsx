@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/createEvent.module.css";
 import FabButton from "./FabButton";
 import IconText from "./IconText";
@@ -10,7 +10,8 @@ import axios from "axios";
 
 // refresh evento aggiunto da fare
 
-export default function CreateEvent({
+export default function ModificaEvento({
+  evento,
   full,
   close = () => {},
   calendari,
@@ -26,17 +27,52 @@ export default function CreateEvent({
   };
   const { user } = useUser();
 
-  const [titolo, setTitolo] = useState("");
-  const [persone, setPersone] = useState([]);
-  const [data, setData] = useState("");
-  const [durata, setDurata] = useState(30);
+  const removeFirst = (array) => {
+    let [, ...temp] = array;
+    return temp;
+  };
+
+  const getNotificationReverse = (data1, data2) => {
+    let date1 = new Date(data1);
+    let date2 = new Date(data2);
+
+    return (date2 - date1) / 60000;
+  };
+
+  console.log(evento);
+
+  const [titolo, setTitolo] = useState(evento.titolo);
+  const [persone, setPersone] = useState(removeFirst(evento.partecipanti));
+  const [data, setData] = useState(evento.eventoSingolo.data);
+  const [durata, setDurata] = useState(evento.durata);
   const [durataType, setDurataType] = useState("minuti");
-  const [priorita, setPriorita] = useState(6);
-  const [difficolta, setDifficolta] = useState(6);
+  const [priorita, setPriorita] = useState(evento.priorita);
+  const [difficolta, setDifficolta] = useState(evento.difficolta);
   const [calendario, setCalendario] = useState(getPrincipaleId());
-  const [notTime, setNotTime] = useState(30);
+  const [notTime, setNotTime] = useState(
+    getNotificationReverse(evento.notifiche.data[0], evento.eventoSingolo.data)
+  );
   const [notType, setNotType] = useState("minuti");
-  const [descrizione, setDescrizione] = useState("");
+  const [descrizione, setDescrizione] = useState(evento.descrizione);
+
+  useEffect(() => {
+    setTitolo(evento.titolo);
+    setPersone(removeFirst(evento.partecipanti));
+    setData(evento.eventoSingolo.data);
+    setDurata(evento.durata);
+    setDurataType("minuti");
+    setPriorita(evento.priorita);
+    setDifficolta(evento.difficolta);
+    setCalendario(getPrincipaleId());
+    setNotTime(
+      getNotificationReverse(
+        evento.notifiche.data[0],
+        evento.eventoSingolo.data
+      )
+    );
+    setNotType("minuti");
+    setDescrizione(evento.descrizione);
+  }, [evento]);
 
   const getNotificationDate = () => {
     let date = new Date(data);
@@ -50,7 +86,6 @@ export default function CreateEvent({
   };
 
   const submit = () => {
-    console.log(getNotificationDate());
     if (titolo === "") {
       toast.error("Devi inserire il titolo!");
       return;
@@ -59,12 +94,12 @@ export default function CreateEvent({
       toast.error("Devi inserire una data!");
       return;
     }
-
     close();
     axios
-      .post("/api/event", null, {
+      .put("/api/event", null, {
         params: {
           userId: user.sub,
+          IDEvento: evento._id,
           IDCalendario: calendario,
           titolo: titolo,
           descrizione: descrizione,
@@ -75,18 +110,41 @@ export default function CreateEvent({
             titolo: titolo,
             data: [getNotificationDate()],
           }),
+          luogo: JSON.stringify({
+            latitudine: "0.000000",
+            longitudine: "0.000000",
+          }),
           durata: durata,
           isEventoSingolo: true,
           eventoSingolo: JSON.stringify({ data: data, isScadenza: true }),
         },
       })
       .then(function (response) {
-        toast.success("Evento creato con successo");
+        toast.success("Evento modificato con successo");
         refreshEvento(calendario);
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Errore nel creare l'evento");
+        toast.error("Errore nel modificare l'evento");
+      });
+  };
+
+  const elimina = () => {
+    close();
+    axios
+      .delete("/api/event", {
+        params: {
+          userId: user.sub,
+          IDEvento: evento._id,
+        },
+      })
+      .then(function (response) {
+        toast.success("Evento eliminato con successo");
+        refreshEvento(calendario);
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Errore nell eliminare l'evento");
       });
   };
 
@@ -98,7 +156,7 @@ export default function CreateEvent({
       }}
       style={full ? { width: "100%", height: "100%" } : null}
     >
-      <div className={styles.title}>Crea Evento</div>
+      <div className={styles.title}>Modifica Evento</div>
       <div className={styles.line} />
       <div className={styles.small}>
         <input
@@ -116,6 +174,9 @@ export default function CreateEvent({
           <input
             type="datetime-local"
             className={styles.input}
+            defaultValue={new Date(evento.eventoSingolo.data)
+              .toISOString()
+              .substring(0, 16)}
             onChange={(e) => {
               setData(e.target.value);
             }}
@@ -244,6 +305,7 @@ export default function CreateEvent({
         />
       </div>
       <div className={styles.buttons}>
+        <FabButton text="Elimina" icon="delete" callback={() => elimina()} />
         <FabButton text="Annulla" icon="close" callback={() => close()} />
         <FabButton text="Salva" icon="done" primary callback={() => submit()} />
       </div>

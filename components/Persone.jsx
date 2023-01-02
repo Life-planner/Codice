@@ -18,7 +18,7 @@ export default function Persone({ persone, setPersone = (data) => {} }) {
       })
       .catch(function (error) {
         toast.error(
-          "L'untente cercato non esiste, inserire un email di un utente esistente"
+          "Untente cercato non esiste, inserire un email di un utente esistente"
         );
       });
   };

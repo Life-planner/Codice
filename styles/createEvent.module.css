@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.875rem;
+  gap: 1.5rem;
   background-color: var(--base);
   border-radius: var(--borderRadius);
   padding: 1.25rem;
@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 1.875rem;
+  gap: 1.5rem;
 }
 
 .line-small {
@@ -93,7 +93,7 @@
 }
 
 .buttons {
-  margin-top: 2rem;
+  margin-top: 0.25rem;
   display: flex;
   gap: var(--bigGap);
 }

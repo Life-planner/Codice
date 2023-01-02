@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "../styles/voceCalendario.module.css";
-import IconText from "./IconText";
 
 export default function VoceCalendario({
   calendario,
@@ -24,7 +23,7 @@ export default function VoceCalendario({
         <div
           className={styles.name}
           onClick={() => {
-            openCalendario(calendario._id);
+            openCalendario(calendario);
           }}
         >
           {calendario.nome}
@@ -35,6 +34,9 @@ export default function VoceCalendario({
           {eventi.map((element) => {
             return (
               <div
+                onClick={() => {
+                  openEvento(element);
+                }}
                 className={styles["event-container"]}
                 key={"evento" + element._id}
               >
@@ -53,7 +55,7 @@ export default function VoceCalendario({
                 {element.titolo}
               </div>
             );
-          })}{" "}
+          })}
         </div>
       ) : null}
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/createCalendar.module.css";
 import FabButton from "./FabButton";
 import IconText from "./IconText";
@@ -48,6 +48,22 @@ export default function ModificaCalendario({
     calendario.impostazioniPredefiniteEventi.descrizione
   );
 
+  useEffect(() => {
+    setTitolo(calendario.nome);
+    setPersone(removeFirst(calendario.partecipanti));
+    setColor(calendario.colore);
+    setTextColor(calendario.colore);
+    setGmt(calendario.fusoOrario.GMTOffset);
+    setDurata(calendario.impostazioniPredefiniteEventi.durata);
+    setPriorita(calendario.impostazioniPredefiniteEventi.priorita);
+    setDifficolta(calendario.impostazioniPredefiniteEventi.difficolta);
+    setDurataType("minuti");
+    setNotTime(calendario.impostazioniPredefiniteEventi.tempAnticNotifica);
+    setNotType("minuti");
+    seteTitolo(calendario.impostazioniPredefiniteEventi.titolo);
+    seteDescrizione(calendario.impostazioniPredefiniteEventi.descrizione);
+  }, [calendario]);
+
   const getDurata = () => {
     let temp = durata;
     if (durataType === "ore") temp * 60;
@@ -68,27 +84,31 @@ export default function ModificaCalendario({
       return;
     }
     close();
+    console.log([user.sub, ...persone]);
     axios
       .put("/api/calendar", null, {
         params: {
           userId: user.sub,
           IDCalendario: calendario._id,
           nome: titolo,
-          fusoOrario: {
+          fusoOrario: JSON.stringify({
             GMTOffset: gmt,
-            localita: "",
-          },
+            localita: calendario.fusoOrario.localita,
+          }),
           colore: color,
-          partecipanti: [user.sub, ...persone],
-          impostazioniPredefiniteEventi: {
+          partecipanti: JSON.stringify([user.sub, ...persone]),
+          impostazioniPredefiniteEventi: JSON.stringify({
             titolo: eTitolo,
             descrizione: eDescrizione,
             durata: getDurata(),
             tempAnticNotifica: getNotifca(),
-            luogo: {},
+            luogo: {
+              latitudine: calendario.luogo.latitudine,
+              longitudine: calendario.luogo.longitudine,
+            },
             priorita: priorita,
             difficolta: difficolta,
-          },
+          }),
         },
       })
       .then(function () {
@@ -99,6 +119,26 @@ export default function ModificaCalendario({
         toast.error("Errore nel modificare il calendario");
       });
   };
+
+  const elimina = () => {
+    close();
+    axios
+      .delete("/api/calendar", {
+        params: {
+          userId: user.sub,
+          IDCalendario: calendario._id,
+        },
+      })
+      .then(function (response) {
+        toast.success("Calendario eliminato con successo");
+        refreshCalendari();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Errore nell eliminare il calendario");
+      });
+  };
+
   return (
     <div
       className={styles.container}
@@ -107,7 +147,7 @@ export default function ModificaCalendario({
       }}
       style={full ? { width: "100%", height: "100%" } : null}
     >
-      <div className={styles.title}>Crea Calendario</div>
+      <div className={styles.title}>Modifica Calendario</div>
       <div className={styles.line} />
       <div className={styles.small}>
         <input
@@ -285,6 +325,7 @@ export default function ModificaCalendario({
         <div className={styles["line-small"]} />
       </div>
       <div className={styles.buttons}>
+        <FabButton text="Elimina" icon="delete" callback={() => elimina()} />
         <FabButton text="Annulla" icon="close" callback={() => close()} />
         <FabButton text="Salva" icon="done" primary callback={() => submit()} />
       </div>
