@@ -25,7 +25,7 @@ const customJestConfig = {
         pageTitle: "PlanIt test results",
         outputPath: "./public/test-report.html",
         executionTimeWarningThreshold: 10,
-        logo: "./public/favicon.png",
+        logo: "./public/favicon.ico",
       },
     ],
   ],
