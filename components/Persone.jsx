@@ -61,7 +61,7 @@ export default function Persone({
 
   useEffect(() => {
     addSoprannome();
-  }, []);
+  }, [persone]);
 
   return (
     <div className={styles.container}>
