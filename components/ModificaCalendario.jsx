@@ -108,7 +108,6 @@ export default function ModificaCalendario({
       })
       .then(function () {
         toast.success("Calendario modificato con successo");
-        console.log("modificato");
         setTimeout(() => {
           refreshCalendari();
         }, 100);

@@ -58,7 +58,6 @@ export default function CreateEvent({
   };
 
   const submit = () => {
-    console.log(getNotificationDate());
     if (titolo === "") {
       toast.error("Devi inserire il titolo!");
       return;

@@ -15,8 +15,6 @@ export default function VisualizzaEvento({
     return temp;
   };
 
-  console.log(evento);
-
   const getNotificationReverse = (data1, data2) => {
     let date1 = new Date(data1);
     let date2 = new Date(data2);
